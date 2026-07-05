@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { registerGsap } from "@/lib/gsap/register";
 import { wrapTextWithChars } from "@/lib/text/splitChars";
 import styles from "./video-carousel.module.css";
@@ -12,7 +13,7 @@ const FADE_OUT_MULTIPLIER = 2;
 
 type HeroScrollContentProps = {
   items: readonly string[];
-  progress: number;
+  scrollProgressRef: React.RefObject<number>;
 };
 
 function pow2Out(value: number) {
@@ -65,13 +66,10 @@ function applyHeroProgress(
   });
 }
 
-export function HeroScrollContent({ items, progress }: HeroScrollContentProps) {
+export function HeroScrollContent({ items, scrollProgressRef }: HeroScrollContentProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const titleRefs = useRef<HTMLHeadingElement[]>([]);
   const charGroupsRef = useRef<HTMLSpanElement[][]>([]);
-  const progressRef = useRef(progress);
-
-  progressRef.current = progress;
 
   useEffect(() => {
     registerGsap();
@@ -85,12 +83,26 @@ export function HeroScrollContent({ items, progress }: HeroScrollContentProps) {
       gsap.set(rootRef.current, { autoAlpha: 1 });
     }
 
-    applyHeroProgress(charGroupsRef.current, progressRef.current, items.length);
-  }, [items]);
+    applyHeroProgress(
+      charGroupsRef.current,
+      scrollProgressRef.current ?? 0,
+      items.length,
+    );
 
-  useEffect(() => {
-    applyHeroProgress(charGroupsRef.current, progress, items.length);
-  }, [items.length, progress]);
+    const tick = () => {
+      applyHeroProgress(
+        charGroupsRef.current,
+        scrollProgressRef.current ?? 0,
+        items.length,
+      );
+    };
+
+    gsap.ticker.add(tick);
+
+    return () => {
+      gsap.ticker.remove(tick);
+    };
+  }, [items, scrollProgressRef]);
 
   return (
     <div ref={rootRef} className={styles.scrollContent}>

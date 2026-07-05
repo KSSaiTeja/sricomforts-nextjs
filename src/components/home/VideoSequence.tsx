@@ -6,7 +6,7 @@ import styles from "./video-carousel.module.css";
 
 type VideoSequenceProps = {
   frames: string[];
-  progress: number;
+  progress?: number;
   scrollProgressRef?: RefObject<number>;
   fitTop?: number;
   fitLeft?: number;
@@ -14,7 +14,7 @@ type VideoSequenceProps = {
 
 export function VideoSequence({
   frames,
-  progress,
+  progress = 0,
   scrollProgressRef,
   fitTop,
   fitLeft,

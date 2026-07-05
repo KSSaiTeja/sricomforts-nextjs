@@ -27,7 +27,6 @@ export type SectionIntroductionData = {
 export const sectionIntros = {
   bridge: {
     variant: "hp-si1",
-    followingLogos: true,
     title: [
       "Imagine your space as an ",
       { strong: "authorized dealer" },
@@ -45,6 +44,18 @@ export const sectionIntros = {
     label: "How it Works",
     title: "Trusted expertise that transforms your space from plan to comfort",
     buttons: [{ label: "See our approach", href: "/services/how-we-work" }],
+  },
+  productCatalog: {
+    variant: "hp-si2",
+    label: "Product Catalog",
+    title: [
+      "Explore ",
+      { strong: "Daikin systems" },
+      " designed for ",
+      { strong: "every space" },
+      " and ",
+      { strong: "scale" },
+    ],
   },
 } as const satisfies Record<string, SectionIntroductionData>;
 
@@ -125,7 +136,7 @@ export const formSection = {
     "Fill out the form, and we'll be happy to discuss how Sri Comforts can help with your next project:",
   bullets: ["Free consultation", "Site assessment call", "AMC plan review"],
   trusted: "Trusted by those who demand the best.",
-  logoStripe: `${STORYBLOK}/f/337048/1130x140/8e14227e2e/logo-stripe.png`,
+  logoStripe: "/logos/placeholder/logo-stripe.svg",
   helpOptions: [
     "Schedule a consultation with an HVAC expert",
     "Request a site assessment",
@@ -143,35 +154,38 @@ export type LogoWallItem = {
   scale?: number;
 };
 
+/** Placeholder logos from https://logoipsum.com/ — stored in public/logos/placeholder/ */
+const PLACEHOLDER_LOGO = "/logos/placeholder";
+
 export const logoWallLogos: LogoWallItem[] = [
-  { src: `${STORYBLOK}/f/337048/1280x395/5d869ff961/dsv-b-w.svg`, scale: 70 },
-  { src: `${STORYBLOK}/f/337048/170x44/9386c9fae8/lineage.svg`, scale: 85 },
-  { src: `${STORYBLOK}/f/337048/160x120/90aa0c203e/goodyear2.svg`, scale: 115 },
-  { src: `${STORYBLOK}/f/337048/160x80/22de92909e/ocean-spray-2.svg`, scale: 85 },
-  { src: `${STORYBLOK}/f/337048/2500x702/f030eafaea/culligan-water.svg`, scale: 85 },
-  { src: `${STORYBLOK}/f/337048/161x62/44ea74f049/nfi.svg`, scale: 85 },
-  { src: `${STORYBLOK}/f/337048/176x49/27affef2ea/ryder-green.svg`, scale: 85 },
-  { src: `${STORYBLOK}/f/337048/2500x2500/6c9f6434ea/hp.svg`, scale: 70 },
-  { src: `${STORYBLOK}/f/337048/1280x319/621d5efa86/tjx-b-w.svg`, scale: 100 },
-  { src: `${STORYBLOK}/f/337048/249x47/15a7349d4e/prologis.svg`, scale: 100 },
-  { src: `${STORYBLOK}/f/337048/900x500/fe6a1384ae/vince-logo-vector.png`, scale: 100 },
-  { src: `${STORYBLOK}/f/337048/1366x768/f672774b7b/untitled-design-2.svg`, scale: 85 },
-  { src: `${STORYBLOK}/f/337048/1366x768/3b2ae6c538/rac-b-w-website.svg`, scale: 175 },
-  { src: `${STORYBLOK}/f/337048/1366x768/802a86b588/marc-jacobs2.svg`, scale: 100 },
-  { src: `${STORYBLOK}/f/337048/1280x302/92b80c4809/pods-b-w-1.svg`, scale: 100 },
-  { src: `${STORYBLOK}/f/337048/1280x142/4da4eb329e/foxconn-b-w.svg`, scale: 100 },
-  { src: `${STORYBLOK}/f/337048/200x100/3cd9d313bd/nine-west-b-w-200-x-100-px-1.svg`, scale: 85 },
-  { src: `${STORYBLOK}/f/337048/3840x1181/df7256d5e0/kirkland-b-w.svg`, scale: 100 },
-  { src: `${STORYBLOK}/f/337048/869x147/26858fd378/db-schenker-2.svg`, scale: 100 },
-  { src: `${STORYBLOK}/f/337048/225x225/fc77667383/kasper-logo.png`, scale: 100 },
+  { src: `${PLACEHOLDER_LOGO}/logo-01.svg`, scale: 70 },
+  { src: `${PLACEHOLDER_LOGO}/logo-02.svg`, scale: 85 },
+  { src: `${PLACEHOLDER_LOGO}/logo-03.svg`, scale: 115 },
+  { src: `${PLACEHOLDER_LOGO}/logo-04.svg`, scale: 85 },
+  { src: `${PLACEHOLDER_LOGO}/logo-05.svg`, scale: 85 },
+  { src: `${PLACEHOLDER_LOGO}/logo-06.svg`, scale: 85 },
+  { src: `${PLACEHOLDER_LOGO}/logo-07.svg`, scale: 85 },
+  { src: `${PLACEHOLDER_LOGO}/logo-08.svg`, scale: 70 },
+  { src: `${PLACEHOLDER_LOGO}/logo-09.svg`, scale: 100 },
+  { src: `${PLACEHOLDER_LOGO}/logo-10.svg`, scale: 100 },
+  { src: `${PLACEHOLDER_LOGO}/logo-11.svg`, scale: 100 },
+  { src: `${PLACEHOLDER_LOGO}/logo-12.svg`, scale: 85 },
+  { src: `${PLACEHOLDER_LOGO}/logo-13.svg`, scale: 175 },
+  { src: `${PLACEHOLDER_LOGO}/logo-14.svg`, scale: 100 },
+  { src: `${PLACEHOLDER_LOGO}/logo-01.svg`, scale: 100 },
+  { src: `${PLACEHOLDER_LOGO}/logo-02.svg`, scale: 100 },
+  { src: `${PLACEHOLDER_LOGO}/logo-03.svg`, scale: 85 },
+  { src: `${PLACEHOLDER_LOGO}/logo-04.svg`, scale: 100 },
+  { src: `${PLACEHOLDER_LOGO}/logo-05.svg`, scale: 100 },
+  { src: `${PLACEHOLDER_LOGO}/logo-06.svg`, scale: 100 },
 ];
 
 export const logoGridLogos: LogoWallItem[] = [
-  { src: `${STORYBLOK}/f/337048/114x45/04e08dca33/8vc.svg`, scale: 70 },
-  { src: `${STORYBLOK}/f/337048/176x49/27affef2ea/ryder-green.svg`, scale: 85 },
-  { src: `${STORYBLOK}/f/337048/170x44/9386c9fae8/lineage.svg`, scale: 85 },
-  { src: `${STORYBLOK}/f/337048/249x47/15a7349d4e/prologis.svg`, scale: 85 },
-  { src: `${STORYBLOK}/f/337048/161x62/44ea74f049/nfi.svg`, scale: 85 },
+  { src: `${PLACEHOLDER_LOGO}/logo-01.svg`, scale: 70 },
+  { src: `${PLACEHOLDER_LOGO}/logo-06.svg`, scale: 85 },
+  { src: `${PLACEHOLDER_LOGO}/logo-07.svg`, scale: 85 },
+  { src: `${PLACEHOLDER_LOGO}/logo-08.svg`, scale: 85 },
+  { src: `${PLACEHOLDER_LOGO}/logo-09.svg`, scale: 85 },
 ];
 
 export const footerSection = {

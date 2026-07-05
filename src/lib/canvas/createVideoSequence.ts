@@ -1,9 +1,29 @@
 import { fitAndPosition, type FitMode } from "@/lib/canvas/fitImage";
 
-/** Aggressive batches during preloader — same-origin frames on Vercel. */
-const BATCH_SIZE = 32;
-const BATCH_DELAY_MS = 0;
+/** Steady batches — avoids saturating CPU/network while scrolling. */
+const BATCH_SIZE = 16;
+const BATCH_DELAY_MS = 20;
 const MAX_FRAME_FALLBACK = 4;
+
+let scrollActive = false;
+let scrollIdleTimer: ReturnType<typeof setTimeout> | null = null;
+let loadListenersAttached = false;
+
+function markUserScrolling() {
+  scrollActive = true;
+  if (scrollIdleTimer) clearTimeout(scrollIdleTimer);
+  scrollIdleTimer = setTimeout(() => {
+    scrollActive = false;
+    scrollIdleTimer = null;
+  }, 180);
+}
+
+function attachScrollListeners() {
+  if (loadListenersAttached || typeof window === "undefined") return;
+  loadListenersAttached = true;
+  window.addEventListener("wheel", markUserScrolling, { passive: true });
+  window.addEventListener("touchmove", markUserScrolling, { passive: true });
+}
 
 type FitPosition = { top: number; left: number };
 
@@ -30,7 +50,6 @@ type SharedState = {
   frames: string[];
   worker: Worker;
   bitmapCache: Map<string, ImageBitmap>;
-  sortedBitmaps: ImageBitmap[];
   loadStarted: boolean;
   ready: boolean;
   refCount: number;
@@ -48,14 +67,7 @@ function countDecoded(state: SharedState) {
   return count;
 }
 
-function rebuildSortedBitmaps(state: SharedState) {
-  state.sortedBitmaps = state.frames
-    .map((url) => state.bitmapCache.get(url))
-    .filter((bitmap): bitmap is ImageBitmap => Boolean(bitmap));
-}
-
 function notifyLoadProgress(state: SharedState) {
-  rebuildSortedBitmaps(state);
   const ratio = countDecoded(state) / state.frames.length;
   state.onLoad?.(ratio);
   for (const listener of state.loadListeners) {
@@ -83,7 +95,6 @@ function getOrCreateSharedState(
     frames,
     worker,
     bitmapCache: new Map(),
-    sortedBitmaps: [],
     loadStarted: false,
     ready: false,
     refCount: 1,
@@ -118,11 +129,16 @@ function getOrCreateSharedState(
 function requestSharedLoad(state: SharedState) {
   if (state.loadStarted || state.frames.length === 0) return;
   state.loadStarted = true;
+  attachScrollListeners();
 
   const remaining = state.frames.slice(1);
 
   const sendNext = () => {
     if (remaining.length === 0) return;
+    if (scrollActive) {
+      setTimeout(sendNext, 80);
+      return;
+    }
     const batch = remaining.splice(0, BATCH_SIZE);
     state.worker.postMessage({ type: "frames", payload: { frames: batch } });
     if (remaining.length > 0) {
@@ -176,11 +192,11 @@ export function getHeroFrameLoadRatio(frames: string[]) {
   return countDecoded(state) / state.frames.length;
 }
 
-/** Preload during preloader; optional gate for minimum coverage (not 100%). */
+/** Wait until enough frames for smooth hero scrubbing (during preloader). */
 export function waitForHeroFrames(
   frames: string[],
-  threshold = 0.08,
-  timeoutMs = 3_000,
+  threshold = 0.45,
+  timeoutMs = 8_000,
 ) {
   return new Promise<void>((resolve) => {
     const framesKey = frames.join("|");

@@ -18,7 +18,7 @@ export function LogoBorderCell({ children, className, style }: LogoBorderCellPro
   const borderRef = useRef<HTMLDivElement>(null);
   const gradientRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
-  const { scroll } = useSmoothScroll();
+  const { lenis } = useSmoothScroll();
 
   const updateTransform = () => {
     const wrapper = wrapperRef.current;
@@ -55,8 +55,13 @@ export function LogoBorderCell({ children, className, style }: LogoBorderCellPro
   }, []);
 
   useEffect(() => {
-    updateTransform();
-  }, [scroll]);
+    if (!lenis) return;
+    const onScroll = () => updateTransform();
+    lenis.on("scroll", onScroll);
+    return () => {
+      lenis.off("scroll", onScroll);
+    };
+  }, [lenis]);
 
   return (
     <div ref={wrapperRef} className={`border__wrapper ${className ?? ""}`} style={style}>

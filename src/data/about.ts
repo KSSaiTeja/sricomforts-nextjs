@@ -302,11 +302,11 @@ export const aboutPartnersBackingIntro = {
 
 export const aboutBrandLogos = {
   logos: [
-    { src: `${STORYBLOK}/f/337048/114x45/04e08dca33/8vc.svg`, alt: "Daikin", scale: 85 },
-    { src: `${STORYBLOK}/f/337048/176x49/27affef2ea/ryder-green.svg`, alt: "O General", scale: 85 },
-    { src: `${STORYBLOK}/f/337048/170x44/9386c9fae8/lineage.svg`, alt: "LG", scale: 85 },
-    { src: `${STORYBLOK}/f/337048/249x47/15a7349d4e/prologis.svg`, alt: "Panasonic", scale: 85 },
-    { src: `${STORYBLOK}/f/337048/161x62/44ea74f049/nfi.svg`, alt: "Sri Comforts", scale: 85 },
+    { src: "/logos/placeholder/logo-01.svg", alt: "", scale: 85 },
+    { src: "/logos/placeholder/logo-06.svg", alt: "", scale: 85 },
+    { src: "/logos/placeholder/logo-07.svg", alt: "", scale: 85 },
+    { src: "/logos/placeholder/logo-08.svg", alt: "", scale: 85 },
+    { src: "/logos/placeholder/logo-09.svg", alt: "", scale: 85 },
   ],
 } as const satisfies AboutLogoGridData;
 

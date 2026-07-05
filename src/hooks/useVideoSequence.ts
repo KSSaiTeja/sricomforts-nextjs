@@ -10,7 +10,7 @@ import {
 
 type UseVideoSequenceOptions = {
   frames: string[];
-  progress: number;
+  progress?: number;
   scrollProgressRef?: RefObject<number>;
   fitTop?: number;
   fitLeft?: number;
@@ -18,7 +18,7 @@ type UseVideoSequenceOptions = {
 
 export function useVideoSequence({
   frames,
-  progress,
+  progress = 0,
   scrollProgressRef,
   fitTop = 50,
   fitLeft = 50,
@@ -27,15 +27,8 @@ export function useVideoSequence({
   const controllerRef = useRef<VideoSequenceController | null>(null);
   const progressRef = useRef(progress);
 
-  progressRef.current = progress;
-
   const readProgress = () =>
     scrollProgressRef?.current ?? progressRef.current;
-
-  useEffect(() => {
-    progressRef.current = progress;
-    controllerRef.current?.setProgress(readProgress());
-  }, [progress, scrollProgressRef]);
 
   useEffect(() => {
     const container = containerRef.current;

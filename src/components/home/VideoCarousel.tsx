@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { usePreloader } from "@/components/preloader/PreloaderProvider";
@@ -13,13 +13,10 @@ import { VideoSequence } from "@/components/home/VideoSequence";
 import styles from "./video-carousel.module.css";
 
 export function VideoCarousel() {
-  const { isLoaded, isAnimating } = usePreloader();
-  const scrollReady = isLoaded || isAnimating;
+  const { isLoaded } = usePreloader();
   const { lenis } = useSmoothScroll();
   const isDesktop = useIsLargeViewport();
-  const [progress, setProgress] = useState(0);
   const scrollProgressRef = useRef(0);
-  const progressRafRef = useRef<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const backgroundWrapperRef = useRef<HTMLDivElement>(null);
@@ -27,7 +24,7 @@ export function VideoCarousel() {
   const frames = useMemo(() => getHeroFrameUrls(isDesktop), [isDesktop]);
 
   useEffect(() => {
-    if (!scrollReady || !lenis || !contentRef.current) return;
+    if (!isLoaded || !lenis || !contentRef.current) return;
 
     registerGsap();
 
@@ -41,12 +38,6 @@ export function VideoCarousel() {
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           scrollProgressRef.current = self.progress;
-          if (progressRafRef.current === null) {
-            progressRafRef.current = requestAnimationFrame(() => {
-              setProgress(scrollProgressRef.current);
-              progressRafRef.current = null;
-            });
-          }
         },
       }),
     );
@@ -71,12 +62,9 @@ export function VideoCarousel() {
     requestAnimationFrame(() => ScrollTrigger.refresh());
 
     return () => {
-      if (progressRafRef.current !== null) {
-        cancelAnimationFrame(progressRafRef.current);
-      }
       triggers.forEach((trigger) => trigger.kill());
     };
-  }, [scrollReady, lenis, isDesktop]);
+  }, [isLoaded, lenis, isDesktop]);
 
   return (
     <section ref={sectionRef} className={styles.videoCarousel}>
@@ -89,7 +77,6 @@ export function VideoCarousel() {
               <VideoSequence
                 key={isDesktop ? "desktop" : "mobile"}
                 frames={frames}
-                progress={progress}
                 scrollProgressRef={scrollProgressRef}
                 fitTop={50}
                 fitLeft={50}
@@ -99,7 +86,7 @@ export function VideoCarousel() {
           <div ref={contentRef} className={styles.contentSizer} />
         </div>
       </div>
-      <HeroScrollContent items={heroTitles} progress={progress} />
+      <HeroScrollContent items={heroTitles} scrollProgressRef={scrollProgressRef} />
     </section>
   );
 }
@@ -199,7 +186,7 @@ function ScrollIndicatorDesktop() {
 }
 
 function ScrollIndicatorMobile() {
-  const { scroll } = useSmoothScroll();
+  const { lenis } = useSmoothScroll();
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLSpanElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -227,13 +214,24 @@ function ScrollIndicatorMobile() {
   }, []);
 
   useEffect(() => {
-    if (!containerRef.current) return;
-    const visible = scroll <= 50;
-    gsap.to(containerRef.current, {
-      opacity: visible ? 1 : 0,
-      duration: 0.4,
-    });
-  }, [scroll]);
+    if (!lenis || !containerRef.current) return;
+
+    const onScroll = () => {
+      const visible = lenis.scroll <= 50;
+      gsap.to(containerRef.current, {
+        opacity: visible ? 1 : 0,
+        duration: 0.4,
+        overwrite: true,
+      });
+    };
+
+    lenis.on("scroll", onScroll);
+    onScroll();
+
+    return () => {
+      lenis.off("scroll", onScroll);
+    };
+  }, [lenis]);
 
   return (
     <div ref={containerRef} className={styles.scrollIndicatorMobile}>

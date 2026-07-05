@@ -15,12 +15,10 @@ import { registerGsap } from "@/lib/gsap/register";
 
 type SmoothScrollContextValue = {
   lenis: Lenis | null;
-  scroll: number;
 };
 
 const SmoothScrollContext = createContext<SmoothScrollContextValue>({
   lenis: null,
-  scroll: 0,
 });
 
 export function useSmoothScroll() {
@@ -37,19 +35,13 @@ export function SmoothScrollProvider({
   enabled = true,
 }: SmoothScrollProviderProps) {
   const lenisRef = useRef<Lenis | null>(null);
-  const [scroll, setScroll] = useState(0);
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
-    if (!enabled) {
-      setLenis(null);
-      return;
-    }
-
     registerGsap();
 
     const instance = new Lenis({
-      lerp: 0.08,
+      lerp: 0.1,
       smoothWheel: true,
       autoRaf: false,
     });
@@ -57,17 +49,13 @@ export function SmoothScrollProvider({
     lenisRef.current = instance;
     setLenis(instance);
 
-    instance.on("scroll", ({ scroll: currentScroll }: { scroll: number }) => {
-      setScroll(currentScroll);
-      ScrollTrigger.update();
-    });
+    instance.on("scroll", ScrollTrigger.update);
 
     const ticker = (time: number) => {
       lenisRef.current?.raf(time * 1000);
     };
 
     gsap.ticker.add(ticker);
-    gsap.ticker.lagSmoothing(0);
 
     ScrollTrigger.scrollerProxy(document.documentElement, {
       scrollTop(value) {
@@ -88,11 +76,11 @@ export function SmoothScrollProvider({
 
     ScrollTrigger.defaults({ scroller: document.documentElement });
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        window.setTimeout(() => ScrollTrigger.refresh(), 0);
-      });
-    });
+    if (!enabled) {
+      instance.stop();
+    }
+
+    requestAnimationFrame(() => ScrollTrigger.refresh());
 
     return () => {
       gsap.ticker.remove(ticker);
@@ -101,10 +89,24 @@ export function SmoothScrollProvider({
       setLenis(null);
       ScrollTrigger.scrollerProxy(document.documentElement, {});
     };
+    // Lenis instance lives for the full session — enabled toggles start/stop only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const instance = lenisRef.current;
+    if (!instance) return;
+
+    if (enabled) {
+      instance.start();
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+    } else {
+      instance.stop();
+    }
   }, [enabled]);
 
   return (
-    <SmoothScrollContext.Provider value={{ lenis, scroll }}>
+    <SmoothScrollContext.Provider value={{ lenis }}>
       {children}
     </SmoothScrollContext.Provider>
   );

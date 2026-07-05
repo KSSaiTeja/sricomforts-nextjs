@@ -6,7 +6,7 @@ import { AnimatedLogo, type AnimatedLogoHandle } from "@/components/preloader/An
 import { PathBackground } from "@/components/preloader/PathBackground";
 import { SvgMask, type SvgMaskHandle } from "@/components/preloader/SvgMask";
 import { registerGsap } from "@/lib/gsap/register";
-import { preloadVideoSequence } from "@/lib/canvas/createVideoSequence";
+import { preloadVideoSequence, waitForHeroFrames as waitUntilHeroFramesReady } from "@/lib/canvas/createVideoSequence";
 import { getHeroFrameUrls } from "@/data/homepage";
 import { useSvh } from "@/hooks/useSvh";
 import { createNotch, NotchDirection } from "@/types/notch";
@@ -51,10 +51,12 @@ export function AppPreloader({ onLoaded, onAnimate, waitForHeroFrames = false }:
     const topNotch = topNotches[0];
     const bottomNotch = bottomNotches[0];
 
-    if (waitForHeroFrames) {
-      preloadVideoSequence(
-        getHeroFrameUrls(window.matchMedia("(min-width: 1024px)").matches),
-      );
+    const heroFrames = waitForHeroFrames
+      ? getHeroFrameUrls(window.matchMedia("(min-width: 1024px)").matches)
+      : null;
+
+    if (heroFrames) {
+      preloadVideoSequence(heroFrames);
     }
 
     const syncMaskPaths = () => {
@@ -139,10 +141,12 @@ export function AppPreloader({ onLoaded, onAnimate, waitForHeroFrames = false }:
       timeline.call(() => {
         document.body.style.overflow = "";
         onAnimate?.();
-      }, undefined, "<");
 
-      timeline.call(() => {
-        onLoaded();
+        if (heroFrames) {
+          void waitUntilHeroFramesReady(heroFrames, 0.45, 8_000).then(onLoaded);
+        } else {
+          onLoaded();
+        }
       });
     });
 

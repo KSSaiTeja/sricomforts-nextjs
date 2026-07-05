@@ -6,6 +6,7 @@ import { LogoWall } from "@/components/home/LogoWall";
 import { SectionIntroduction } from "@/components/home/SectionIntroduction";
 import { FeaturesSteps } from "@/components/home/FeaturesSteps";
 import { LogoGrid } from "@/components/home/LogoGrid";
+import { ProductCatalog } from "@/components/home/ProductCatalog";
 import { FormReference } from "@/components/home/FormReference";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { VideoCarousel } from "@/components/home/VideoCarousel";
@@ -22,6 +23,7 @@ export function HomePage() {
         <VideoCarousel />
         <SeparatorNotch />
         <LogoWall />
+        <ProductCatalog />
         <SectionIntroduction data={sectionIntros.bridge} />
         <FeaturesSteps />
         <SectionIntroduction data={sectionIntros.industry} />
