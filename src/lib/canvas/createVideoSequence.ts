@@ -1,8 +1,8 @@
 import { fitAndPosition, type FitMode } from "@/lib/canvas/fitImage";
 
 /** Match Terminal Industries worker batch size */
-const BATCH_SIZE = 8;
-const BATCH_DELAY_MS = 50;
+const BATCH_SIZE = 16;
+const BATCH_DELAY_MS = 30;
 const MAX_FRAME_FALLBACK = 4;
 
 type FitPosition = { top: number; left: number };
@@ -29,9 +29,8 @@ export type VideoSequenceController = {
 type SharedState = {
   frames: string[];
   worker: Worker;
-  imageCache: Map<string, HTMLImageElement>;
-  sortedImages: HTMLImageElement[];
-  objectUrls: string[];
+  bitmapCache: Map<string, ImageBitmap>;
+  sortedBitmaps: ImageBitmap[];
   loadStarted: boolean;
   ready: boolean;
   refCount: number;
@@ -41,57 +40,26 @@ type SharedState = {
 
 const sharedByKey = new Map<string, SharedState>();
 
-function isImageReady(image: HTMLImageElement | undefined) {
-  return Boolean(image?.complete && image.naturalWidth > 0);
-}
-
 function countDecoded(state: SharedState) {
   let count = 0;
   for (const url of state.frames) {
-    if (isImageReady(state.imageCache.get(url))) count += 1;
+    if (state.bitmapCache.has(url)) count += 1;
   }
   return count;
 }
 
-function rebuildSortedImages(state: SharedState) {
-  state.sortedImages = state.frames
-    .map((url) => state.imageCache.get(url))
-    .filter((image): image is HTMLImageElement => isImageReady(image));
+function rebuildSortedBitmaps(state: SharedState) {
+  state.sortedBitmaps = state.frames
+    .map((url) => state.bitmapCache.get(url))
+    .filter((bitmap): bitmap is ImageBitmap => Boolean(bitmap));
 }
 
 function notifyLoadProgress(state: SharedState) {
-  rebuildSortedImages(state);
+  rebuildSortedBitmaps(state);
   const ratio = countDecoded(state) / state.frames.length;
   state.onLoad?.(ratio);
   for (const listener of state.loadListeners) {
     listener(ratio);
-  }
-}
-
-function addImageFromBlob(state: SharedState, frame: string, blob: Blob) {
-  if (state.imageCache.has(frame)) return;
-
-  const objectUrl = URL.createObjectURL(blob);
-  state.objectUrls.push(objectUrl);
-
-  const image = new Image();
-  image.decoding = "async";
-
-  const markReady = () => {
-    if (!isImageReady(image)) {
-      state.imageCache.delete(frame);
-    }
-    state.ready = true;
-    notifyLoadProgress(state);
-  };
-
-  image.onload = markReady;
-  image.onerror = markReady;
-  image.src = objectUrl;
-  state.imageCache.set(frame, image);
-
-  if (isImageReady(image)) {
-    markReady();
   }
 }
 
@@ -114,9 +82,8 @@ function getOrCreateSharedState(
   const state: SharedState = {
     frames,
     worker,
-    imageCache: new Map(),
-    sortedImages: [],
-    objectUrls: [],
+    bitmapCache: new Map(),
+    sortedBitmaps: [],
     loadStarted: false,
     ready: false,
     refCount: 1,
@@ -125,13 +92,22 @@ function getOrCreateSharedState(
   };
 
   worker.addEventListener("message", (event: MessageEvent) => {
-    const { blobs } = event.data.payload as {
-      blobs: { blob: Blob; frame: string }[];
+    if (event.data.type !== "bitmaps") return;
+
+    const { items } = event.data.payload as {
+      items: { frame: string; bitmap: ImageBitmap }[];
     };
 
-    for (const { blob, frame } of blobs) {
-      addImageFromBlob(state, frame, blob);
+    for (const { frame, bitmap } of items) {
+      if (state.bitmapCache.has(frame)) {
+        bitmap.close();
+        continue;
+      }
+      state.bitmapCache.set(frame, bitmap);
     }
+
+    state.ready = true;
+    notifyLoadProgress(state);
   });
 
   worker.postMessage({ type: "frames", payload: { frames: [frames[0]!] } });
@@ -160,20 +136,27 @@ function requestSharedLoad(state: SharedState) {
 function releaseSharedState(framesKey: string) {
   const state = sharedByKey.get(framesKey);
   if (!state) return;
+
   state.refCount = Math.max(0, state.refCount - 1);
+  if (state.refCount > 0) return;
+
+  for (const bitmap of state.bitmapCache.values()) {
+    bitmap.close();
+  }
+  state.worker.terminate();
+  sharedByKey.delete(framesKey);
 }
 
-/** Nearest loaded frame within a small window — never snaps back to frame 0 mid-scroll. */
-function resolveImage(state: SharedState, targetIndex: number) {
-  const exact = state.imageCache.get(state.frames[targetIndex]!);
-  if (isImageReady(exact)) return exact;
+function resolveBitmap(state: SharedState, targetIndex: number) {
+  const exact = state.bitmapCache.get(state.frames[targetIndex]!);
+  if (exact) return exact;
 
   for (let offset = 1; offset <= MAX_FRAME_FALLBACK; offset += 1) {
-    const forward = state.imageCache.get(state.frames[targetIndex + offset]!);
-    if (isImageReady(forward)) return forward;
+    const forward = state.bitmapCache.get(state.frames[targetIndex + offset]!);
+    if (forward) return forward;
 
-    const backward = state.imageCache.get(state.frames[targetIndex - offset]!);
-    if (isImageReady(backward)) return backward;
+    const backward = state.bitmapCache.get(state.frames[targetIndex - offset]!);
+    if (backward) return backward;
   }
 
   return null;
@@ -193,9 +176,10 @@ export function getHeroFrameLoadRatio(frames: string[]) {
   return countDecoded(state) / state.frames.length;
 }
 
+/** Preload all frames — scroll timeline always maps 0→409. */
 export function waitForHeroFrames(
   frames: string[],
-  threshold = 0.98,
+  threshold = 1,
   timeoutMs = 45_000,
 ) {
   return new Promise<void>((resolve) => {
@@ -262,19 +246,10 @@ export function createVideoSequence({
     if (!state.ready || state.frames.length === 0) return;
 
     const clamped = Math.min(1, Math.max(0, progress));
-    const allLoaded = countDecoded(state) >= state.frames.length;
-    const targetIndex = allLoaded
-      ? Math.floor(clamped * (state.frames.length - 1))
-      : Math.floor(
-          clamped *
-            Math.max(0, state.sortedImages.length - 1),
-        );
+    const targetIndex = Math.floor(clamped * (state.frames.length - 1));
+    const bitmap = resolveBitmap(state, targetIndex);
 
-    const image = allLoaded
-      ? resolveImage(state, targetIndex)
-      : state.sortedImages[targetIndex];
-
-    if (!image?.complete || image.naturalWidth === 0) return;
+    if (!bitmap) return;
     if (lastDrawnIndex === targetIndex && !force) return;
     lastDrawnIndex = targetIndex;
 
@@ -284,14 +259,14 @@ export function createVideoSequence({
 
     const fitted = fitAndPosition(
       { width: displayWidth, height: displayHeight },
-      { width: image.naturalWidth, height: image.naturalHeight },
+      { width: bitmap.width, height: bitmap.height },
       fitMode,
       `${fit.left}%`,
       `${fit.top}%`,
     );
 
     ctx.clearRect(0, 0, displayWidth, displayHeight);
-    ctx.drawImage(image, fitted.x, fitted.y, fitted.width, fitted.height);
+    ctx.drawImage(bitmap, fitted.x, fitted.y, fitted.width, fitted.height);
   };
 
   const resize = () => {

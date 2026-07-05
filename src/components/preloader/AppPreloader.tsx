@@ -54,7 +54,7 @@ export function AppPreloader({ onLoaded, onAnimate, waitForHeroFrames = false }:
     const framesReady = waitForHeroFrames
       ? loadHeroFramesUntilReady(
           getHeroFrameUrls(window.matchMedia("(min-width: 1024px)").matches),
-          0.98,
+          1,
           45_000,
         )
       : Promise.resolve();
@@ -142,8 +142,10 @@ export function AppPreloader({ onLoaded, onAnimate, waitForHeroFrames = false }:
         onAnimate?.();
       }, undefined, "<");
 
+      // Wait for all 410 frames before revealing — page mounts under preloader (no white screen).
       timeline.call(() => {
         void framesReady.then(() => {
+          document.body.style.overflow = "";
           onLoaded();
         });
       });

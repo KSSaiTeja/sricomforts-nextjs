@@ -89,7 +89,9 @@ export function SmoothScrollProvider({
     ScrollTrigger.defaults({ scroller: document.documentElement });
 
     requestAnimationFrame(() => {
-      ScrollTrigger.refresh();
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+      });
     });
 
     return () => {

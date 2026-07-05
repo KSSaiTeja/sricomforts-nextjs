@@ -6,5 +6,7 @@ import { SmoothScrollProvider } from "@/providers/SmoothScrollProvider";
 export function PreloaderGate({ children }: { children: React.ReactNode }) {
   const { isLoaded } = usePreloader();
 
-  return <SmoothScrollProvider enabled={isLoaded}>{children}</SmoothScrollProvider>;
+  return (
+    <SmoothScrollProvider enabled={isLoaded}>{children}</SmoothScrollProvider>
+  );
 }

@@ -1,8 +1,4 @@
 import { aboutSectionAnchors } from "@/data/about";
-import {
-  assetUrl,
-  heroFrameStoragePath,
-} from "@/lib/supabase/assets";
 
 /** Legacy Terminal CDN URLs — replace with assetUrl() as files move to Supabase. */
 const STORYBLOK = "https://a.storyblok.com";
@@ -234,15 +230,19 @@ export const navLinks = [
 export const HERO_DESKTOP_FRAMES = 410;
 export const HERO_MOBILE_FRAMES = 409;
 
+/** Bump when hero frames change — busts browser cache for /public/static/frames. */
+const HERO_FRAMES_VERSION =
+  process.env.NEXT_PUBLIC_HERO_FRAMES_VERSION ?? "2";
+
+/** Hero frames always load from /public (same origin as Vercel) — like Terminal Industries. */
 export function getHeroFrameUrls(isDesktop: boolean): string[] {
   const count = isDesktop ? HERO_DESKTOP_FRAMES : HERO_MOBILE_FRAMES;
+  const variant = isDesktop ? "desktop" : "mobile";
+  const prefix = isDesktop ? "hero_anim_desktop_60" : "hero_anim_mobile_60";
 
-  return Array.from({ length: count }, (_, index) =>
-    assetUrl(
-      heroFrameStoragePath(isDesktop, index),
-      isDesktop
-        ? `/static/frames/home/desktop/webp/hero_anim_desktop_60_${index}.webp`
-        : `/static/frames/home/mobile/webp/hero_anim_mobile_60_${index}.webp`,
-    ),
+  return Array.from(
+    { length: count },
+    (_, index) =>
+      `/static/frames/home/${variant}/webp/${prefix}_${index}.webp?v=${HERO_FRAMES_VERSION}`,
   );
 }

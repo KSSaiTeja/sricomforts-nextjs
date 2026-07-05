@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Local reference clone — not part of the site (937MB+)
 terminal-industries-clone/
+
+# Temp imports (YouTube downloads, PNG staging)
+.tmp/

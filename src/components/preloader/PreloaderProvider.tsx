@@ -44,6 +44,7 @@ export function PreloaderProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <PreloaderContext.Provider value={value}>
+      {children}
       {!isLoaded ? (
         <AppPreloader
           key={pathname}
@@ -52,7 +53,6 @@ export function PreloaderProvider({ children }: { children: React.ReactNode }) {
           onAnimate={handleAnimate}
         />
       ) : null}
-      <div aria-hidden={!isLoaded}>{children}</div>
     </PreloaderContext.Provider>
   );
 }
