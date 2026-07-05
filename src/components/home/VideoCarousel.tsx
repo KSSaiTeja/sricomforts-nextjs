@@ -18,6 +18,7 @@ export function VideoCarousel() {
   const isDesktop = useIsLargeViewport();
   const [progress, setProgress] = useState(0);
   const scrollProgressRef = useRef(0);
+  const progressRafRef = useRef<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const backgroundWrapperRef = useRef<HTMLDivElement>(null);
@@ -39,7 +40,12 @@ export function VideoCarousel() {
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           scrollProgressRef.current = self.progress;
-          setProgress(self.progress);
+          if (progressRafRef.current === null) {
+            progressRafRef.current = requestAnimationFrame(() => {
+              setProgress(scrollProgressRef.current);
+              progressRafRef.current = null;
+            });
+          }
         },
       }),
     );
@@ -63,7 +69,12 @@ export function VideoCarousel() {
 
     requestAnimationFrame(() => ScrollTrigger.refresh());
 
-    return () => triggers.forEach((trigger) => trigger.kill());
+    return () => {
+      if (progressRafRef.current !== null) {
+        cancelAnimationFrame(progressRafRef.current);
+      }
+      triggers.forEach((trigger) => trigger.kill());
+    };
   }, [isLoaded, lenis, isDesktop]);
 
   return (

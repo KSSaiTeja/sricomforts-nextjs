@@ -54,8 +54,8 @@ export function AppPreloader({ onLoaded, onAnimate, waitForHeroFrames = false }:
     const framesReady = waitForHeroFrames
       ? loadHeroFramesUntilReady(
           getHeroFrameUrls(window.matchMedia("(min-width: 1024px)").matches),
-          0.85,
-          25_000,
+          0.98,
+          45_000,
         )
       : Promise.resolve();
 

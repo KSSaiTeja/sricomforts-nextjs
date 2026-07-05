@@ -1,6 +1,9 @@
 import { fitAndPosition, type FitMode } from "@/lib/canvas/fitImage";
 
-const BATCH_SIZE = 32;
+/** Match Terminal Industries worker batch size */
+const BATCH_SIZE = 8;
+const BATCH_DELAY_MS = 50;
+const MAX_FRAME_FALLBACK = 4;
 
 type FitPosition = { top: number; left: number };
 
@@ -27,8 +30,8 @@ type SharedState = {
   frames: string[];
   worker: Worker;
   imageCache: Map<string, HTMLImageElement>;
+  sortedImages: HTMLImageElement[];
   objectUrls: string[];
-  decodedCount: number;
   loadStarted: boolean;
   ready: boolean;
   refCount: number;
@@ -38,16 +41,26 @@ type SharedState = {
 
 const sharedByKey = new Map<string, SharedState>();
 
+function isImageReady(image: HTMLImageElement | undefined) {
+  return Boolean(image?.complete && image.naturalWidth > 0);
+}
+
 function countDecoded(state: SharedState) {
   let count = 0;
   for (const url of state.frames) {
-    const image = state.imageCache.get(url);
-    if (image?.complete && image.naturalWidth > 0) count += 1;
+    if (isImageReady(state.imageCache.get(url))) count += 1;
   }
   return count;
 }
 
+function rebuildSortedImages(state: SharedState) {
+  state.sortedImages = state.frames
+    .map((url) => state.imageCache.get(url))
+    .filter((image): image is HTMLImageElement => isImageReady(image));
+}
+
 function notifyLoadProgress(state: SharedState) {
+  rebuildSortedImages(state);
   const ratio = countDecoded(state) / state.frames.length;
   state.onLoad?.(ratio);
   for (const listener of state.loadListeners) {
@@ -65,7 +78,9 @@ function addImageFromBlob(state: SharedState, frame: string, blob: Blob) {
   image.decoding = "async";
 
   const markReady = () => {
-    state.decodedCount = countDecoded(state);
+    if (!isImageReady(image)) {
+      state.imageCache.delete(frame);
+    }
     state.ready = true;
     notifyLoadProgress(state);
   };
@@ -75,7 +90,7 @@ function addImageFromBlob(state: SharedState, frame: string, blob: Blob) {
   image.src = objectUrl;
   state.imageCache.set(frame, image);
 
-  if (image.complete && image.naturalWidth > 0) {
+  if (isImageReady(image)) {
     markReady();
   }
 }
@@ -100,8 +115,8 @@ function getOrCreateSharedState(
     frames,
     worker,
     imageCache: new Map(),
+    sortedImages: [],
     objectUrls: [],
-    decodedCount: 0,
     loadStarted: false,
     ready: false,
     refCount: 1,
@@ -129,7 +144,6 @@ function requestSharedLoad(state: SharedState) {
   state.loadStarted = true;
 
   const remaining = state.frames.slice(1);
-  const BATCH_DELAY_MS = 50;
 
   const sendNext = () => {
     if (remaining.length === 0) return;
@@ -149,9 +163,19 @@ function releaseSharedState(framesKey: string) {
   state.refCount = Math.max(0, state.refCount - 1);
 }
 
-function getExactImage(state: SharedState, targetIndex: number) {
-  const image = state.imageCache.get(state.frames[targetIndex]!);
-  if (image?.complete && image.naturalWidth > 0) return image;
+/** Nearest loaded frame within a small window — never snaps back to frame 0 mid-scroll. */
+function resolveImage(state: SharedState, targetIndex: number) {
+  const exact = state.imageCache.get(state.frames[targetIndex]!);
+  if (isImageReady(exact)) return exact;
+
+  for (let offset = 1; offset <= MAX_FRAME_FALLBACK; offset += 1) {
+    const forward = state.imageCache.get(state.frames[targetIndex + offset]!);
+    if (isImageReady(forward)) return forward;
+
+    const backward = state.imageCache.get(state.frames[targetIndex - offset]!);
+    if (isImageReady(backward)) return backward;
+  }
+
   return null;
 }
 
@@ -171,8 +195,8 @@ export function getHeroFrameLoadRatio(frames: string[]) {
 
 export function waitForHeroFrames(
   frames: string[],
-  threshold = 0.85,
-  timeoutMs = 20_000,
+  threshold = 0.98,
+  timeoutMs = 45_000,
 ) {
   return new Promise<void>((resolve) => {
     const framesKey = frames.join("|");
@@ -225,7 +249,7 @@ export function createVideoSequence({
 
   let progress = 0;
   let fit = fitPosition;
-  let lastDrawnUrl: string | null = null;
+  let lastDrawnIndex = -1;
 
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -238,13 +262,21 @@ export function createVideoSequence({
     if (!state.ready || state.frames.length === 0) return;
 
     const clamped = Math.min(1, Math.max(0, progress));
-    const targetIndex = Math.floor(clamped * (state.frames.length - 1));
-    const image = getExactImage(state, targetIndex);
-    if (!image) return;
+    const allLoaded = countDecoded(state) >= state.frames.length;
+    const targetIndex = allLoaded
+      ? Math.floor(clamped * (state.frames.length - 1))
+      : Math.floor(
+          clamped *
+            Math.max(0, state.sortedImages.length - 1),
+        );
 
-    const frameUrl = state.frames[targetIndex]!;
-    if (lastDrawnUrl === frameUrl && !force) return;
-    lastDrawnUrl = frameUrl;
+    const image = allLoaded
+      ? resolveImage(state, targetIndex)
+      : state.sortedImages[targetIndex];
+
+    if (!image?.complete || image.naturalWidth === 0) return;
+    if (lastDrawnIndex === targetIndex && !force) return;
+    lastDrawnIndex = targetIndex;
 
     const displayWidth = canvas.offsetWidth;
     const displayHeight = canvas.offsetHeight;
@@ -276,6 +308,7 @@ export function createVideoSequence({
 
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(dpr, dpr);
+    lastDrawnIndex = -1;
     onUpdate(true);
   };
 
