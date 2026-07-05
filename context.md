@@ -1,6 +1,6 @@
-# Project Context — terminal-industries-next (Sri Comforts Rebrand)
+# Project Context — sricomforts-nextjs (Sri Comforts Rebrand)
 
-> **Last updated:** July 5, 2026  
+> **Last updated:** July 6, 2026  
 > **Purpose:** Living record of what has been built, how it was built, and what remains. Use this file at the start of every new chat to avoid re-explaining project history.
 
 ---
@@ -9,13 +9,16 @@
 
 | Field | Value |
 |---|---|
-| **Repo** | `/Users/kssaiteja/Downloads/terminal-industries-next` |
+| **Repo** | `/Users/kssaiteja/Downloads/sricomforts-nextjs` |
+| **Package name** | `terminal-industries-next` (not yet renamed — see checklist §8.4) |
 | **Client / Brand** | **Sri Comforts** (Sri Comfort Air Products & Services) — authorized Daikin HVAC partner in South India |
-| **Template source** | [Terminal Industries](https://terminal-industries.com) website (Nuxt/Vue), cloned into `terminal-industries-clone/` |
+| **Template source** | [Terminal Industries](https://terminal-industries.com) website (Nuxt/Vue). Reference clone **removed from git** in commit `d6b3d19`; may still exist locally under `terminal-industries-clone/` (gitignored) |
 | **Goal** | Pixel-perfect UI/animation replica of Terminal Industries template, re-skinned with Sri Comforts blue palette and HVAC copy |
-| **Stack** | Next.js 16.2.10 · React 19.2.4 · TypeScript · Tailwind CSS 4 · GSAP 3.15 · Lenis 1.3.25 |
+| **Current rebrand scope** | **Phase 1:** Remove Terminal/template/vendor dependencies (placeholders OK). **Phase 2 (later):** Swap placeholders for real client assets |
+| **Stack** | Next.js 16.2.10 · React 19.2.4 · TypeScript · Tailwind CSS 4 · GSAP 3.15 · Lenis 1.3.25 · Supabase JS 2.49 |
 | **Font** | Suisse Intl (Regular 400, Medium 600) via `next/font/local` |
-| **Git state** | Only **1 commit** (`Initial commit from Create Next App`). **All project work is uncommitted** (147+ source files, clone folder, assets) |
+| **Git state** | **10 commits** on `main`, synced with `origin/main`. See **§16** for full post-`context.md` commit log |
+| **Checklist** | `docs/terminal-industries-replacement-checklist.md` — Phase 1/2 tracker |
 
 ### Business context (from `docs/about-sricomforts.md`)
 
@@ -29,9 +32,11 @@
 
 ## 2. Reference Repository
 
-### `terminal-industries-clone/`
+### `terminal-industries-clone/` (local only)
 
-Local mirror of the Terminal Industries site used as the **single source of truth** for layout, DOM structure, CSS values, and GSAP animation behavior.
+> **Removed from git** in commit `d6b3d19` (Jul 5, 21:36). Still listed in `.gitignore` and `.vercelignore` if present locally (~937MB). **Never deploy.**
+
+When available locally, this folder was the **single source of truth** for layout, DOM structure, CSS values, and GSAP animation behavior.
 
 | Path | Purpose |
 |---|---|
@@ -40,6 +45,19 @@ Local mirror of the Terminal Industries site used as the **single source of trut
 | `assets/terminal-industries.com/_nuxt/` | Original CSS modules and JS bundles |
 | `structured_content.json` | Parsed page content |
 | `serve_mirror.py` / `serve.sh` | Local static server for side-by-side comparison |
+
+### Hero frame assets (self-hosted)
+
+Hero scroll canvas frames are **no longer proxied** from `terminal-industries.com`.
+
+| Detail | Value |
+|---|---|
+| **Location** | `public/static/frames/home/desktop/webp/` (410 frames) + `mobile/webp/` (409 frames) |
+| **Naming** | `hero_anim_desktop_60_{index}.webp` / `hero_anim_mobile_60_{index}.webp` |
+| **URL builder** | `getHeroFrameUrls()` in `src/data/homepage.ts` → `/static/frames/home/{variant}/webp/...?v={HERO_FRAMES_VERSION}` |
+| **Cache bust** | `NEXT_PUBLIC_HERO_FRAMES_VERSION` env (default `"2"`) |
+| **Next config** | Cache-Control headers on `/static/frames/:path*` only — **no external rewrite** |
+| **Optional CDN** | Supabase Storage via `src/lib/supabase/assets.ts` + `scripts/upload-assets-to-supabase.mjs` (disabled unless `NEXT_PUBLIC_SUPABASE_ASSETS=true`) |
 
 ### Key reference HTML files used during development
 
@@ -50,10 +68,6 @@ Local mirror of the Terminal Industries site used as the **single source of trut
 | About | About page HTML in `pages/` |
 | Solutions (template) | `pages/Terminal_for_3PLs___AI_Powered_Yard___Logistics_Solutions.html` (+ `_1.html`) |
 | Services (template) | `pages/Terminal_YOS___Yard_Operating_System_for_AI_Driven_Logistics_Automation.html` (+ `_1.html`) |
-
-### External asset proxy
-
-`next.config.ts` rewrites `/static/frames/:path*` → `https://terminal-industries.com/static/frames/:path*` so hero canvas frame sequences load from the live Terminal CDN without bundling ~1000 PNG frames locally.
 
 ---
 
@@ -117,7 +131,7 @@ All dates are from agent chat transcripts (Jul 3–5, 2026).
 |---|---|---|
 | **§5 Industry intro + LogoGrid** | `SectionIntroduction`, `LogoGrid` | "Built by the industry" typography; 5-logo grid (`.logo-grid-industry`, separate from LogoWall) |
 | **§6 Contact form** | `FormReference` | Full form builder UI: fields, dropdown, submit button, logo stripe, GSAP text reveals |
-| **Footer** | `SiteFooter`, `FooterPathBackground`, `TerminalFooterLogo` | Sticky reveal on desktop (GSAP ScrollTrigger); static on mobile; link columns; path background SVG |
+| **Footer** | `SiteFooter`, `FooterPathBackground`, `FullLogo` | Sticky reveal on desktop (GSAP ScrollTrigger); static on mobile; link columns; path background SVG |
 
 **Post-homepage polish (same day):**
 - Section heading copy disturbed → restored from `homepage.ts`
@@ -260,13 +274,122 @@ All dates are from agent chat transcripts (Jul 3–5, 2026).
 - `SiteHeader` + `SiteFooter`
 - Respects preloader gate
 
+### Phase 12 — First git commit: full site snapshot (Jul 5, 21:19) — `dcbd72d`
+
+**Commit:** `proper landing page is done` — **created `context.md`** and committed the entire built site (~147 source files).
+
+| Area | What was committed |
+|---|---|
+| **Pages** | Homepage, `/contact`, `/about`, 6× `/solutions/[slug]`, 3× `/services/[slug]`, 404 |
+| **Components** | All 73+ components (home, about, contact, solutions, services, layout, preloader, brand, shared) |
+| **Data** | `homepage.ts`, `about.ts`, `contact.ts`, `solutions.ts`, `services.ts`, `solutionImages.ts`, `serviceImages.ts` |
+| **Styles** | `tokens.css`, 30+ CSS modules imported in `globals.css` |
+| **Brand assets** | `public/logo/full-logo.svg`, `logo-icon.svg`, `logo-wordmark.svg`; favicon regenerated from icon |
+| **Fonts** | `public/fonts/SuisseIntl-*.woff2` |
+| **Docs** | `context.md`, `docs/terminal-industries-replacement-checklist.md`, `docs/about-sricomforts.md`, `docs/supabase-assets.md`, `docs/hero-video-omni-prompts.md`, proposal PDFs |
+| **Infra** | `next.config.ts` remotePatterns (Supabase, Storyblok, Unsplash) + frame cache headers; Supabase upload script; `src/lib/supabase/` |
+| **Hero frames** | Symlink `public/static/frames` → outside repo (later removed) |
+| **Clone** | Full `terminal-industries-clone/` folder still in repo at this point |
+
+### Phase 13 — Build fix (Jul 5, 21:31) — `67d52a0`
+
+**Commit:** `build issue fixed`
+
+| Change | Detail |
+|---|---|
+| **Missing deps** | Added explicit `gsap@^3.15.0` and `lenis@^1.3.25` to `package.json` (were used but not declared) |
+| **Video sequence worker** | Fixed `src/workers/video-sequence.worker.ts` — worker message handling / frame decode |
+| **Canvas pipeline** | Refactored `src/lib/canvas/createVideoSequence.ts` — preload batching, error handling |
+
+### Phase 14 — Clone removal from git (Jul 5, 21:36) — `d6b3d19`
+
+**Commit:** `html files removed`
+
+| Change | Detail |
+|---|---|
+| **Deleted** | Entire `terminal-industries-clone/` from git tracking — **2,595 files**, ~293K lines removed |
+| **Includes** | 200+ HTML pages, rendered homepage, `_nuxt` JS/CSS bundles, crawl logs, `serve_mirror.py`, Storyblok mirror assets under clone paths |
+| **Reason** | Repo size / deploy weight; clone kept locally via `.gitignore` for dev reference |
+| **Impact** | `context.md` clone-based workflow still valid if folder exists locally |
+
+### Phase 15 — Vercel deploy fix (Jul 5, 21:41) — `86525cb`
+
+**Commit:** `Fix Vercel deploy by removing broken frames symlink.`
+
+| Change | Detail |
+|---|---|
+| **Removed** | `public/static/frames` symlink (pointed outside repo → broke Vercel file upload) |
+| **Added** | `public/static/frames/.gitkeep`; `.gitignore` rules for frames; `.vercelignore` entry for clone |
+| **Note** | At this point frames intended for Supabase CDN; local hosting came in `9864197` |
+
+### Phase 16 — Hero frame glitch fixes (Jul 5, 22:06) — `895608d`
+
+**Commit:** `Fix hero frame glitches: full preload, Terminal batching, capped fallback`
+
+| File | Change |
+|---|---|
+| `createVideoSequence.ts` | Full preload strategy; Terminal-style batch loading; capped fallback frame index |
+| `AppPreloader.tsx` | Preloader timing tied to frame readiness |
+| `VideoCarousel.tsx` | Carousel/frame sync improvements |
+
+### Phase 17 — Self-hosted hero frames (Jul 5, 23:32) — `9864197`
+
+**Commit:** `Deploy hero frames from /public at 1080p60 (v3 cache bust).`
+
+| Change | Detail |
+|---|---|
+| **Frames committed** | 819 WebP files: 410 desktop + 409 mobile in `public/static/frames/home/` |
+| **Source** | Extracted from 60fps source at 1080p |
+| **`homepage.ts`** | `getHeroFrameUrls()` switched from Supabase `assetUrl()` to same-origin `/static/frames/...?v=` paths; added `HERO_FRAMES_VERSION` |
+| **Pipeline** | `createVideoSequence.ts` + `video-sequence.worker.ts` preload/worker overhaul for smooth playback |
+| **Preloader** | `AppPreloader`, `PreloaderGate`, `PreloaderProvider`, `SmoothScrollProvider` timing adjustments |
+| **Docs** | `docs/supabase-assets.md` updated; `.gitignore` frame rules |
+
+### Phase 18 — Preloader scroll unblock (Jul 5, 23:45) — `487e677`
+
+**Commit:** `Unblock scroll at preloader end; preload hero frames during loader only.`
+
+| Change | Detail |
+|---|---|
+| **New component** | `HeroPreloadStarter.tsx` — kicks off frame fetch during preloader |
+| **Strategy** | Larger preload batches; reveal when animation ends (not waiting for all 410 frames); 45% threshold |
+| **Deferred loads** | Feature video preloads deferred until after hero reveal |
+| **Lenis** | Warm/smooth-scroll handoff during preloader exit transition |
+| **Files** | `FeaturesSteps.tsx`, `VideoCarousel.tsx`, `PreloaderProvider/Gate`, `createVideoSequence.ts`, `SmoothScrollProvider.tsx` |
+
+### Phase 19 — Jitter fix + Product Catalog + logo placeholders (Jul 6, 00:04) — `794f9c8`
+
+**Commit:** `Fix jittery scroll: remove per-frame React updates and throttle frame loads.`
+
+| Area | Detail |
+|---|---|
+| **Scroll performance** | Lenis kept alive across preloader; hero canvas/text driven from refs on GSAP ticker (no per-frame React state); frame batches paused while scrolling |
+| **Product Catalog** | New homepage section: `ProductCatalog.tsx`, `product-catalog.module.css`, `src/data/productCatalog.ts` — bento grid for Daikin product lines |
+| **Logo wall/grid** | `homepage.ts`: 20 logo-wall + 5 logo-grid entries switched from Terminal Storyblok SVGs (DSV, Ryder, HP, Foxconn, 8VC, etc.) → `/logos/placeholder/logo-*.svg` |
+| **Form stripe** | `logoStripe` → `/logos/placeholder/logo-stripe.svg` |
+| **About cert grid** | `aboutBrandLogos` → placeholder SVGs (removed mislabeled Daikin/LG Storyblok assets) |
+| **Section intro** | Added `productCatalog` block to `sectionIntros`; removed `followingLogos` from bridge intro |
+| **Other** | `HeroScrollContent`, `LogoBorderCell`, `VideoCarousel`, `useVideoSequence`, `SmoothScrollProvider` refinements |
+
+### Phase 20 — Local team portraits + doc sync (Jul 6, 00:17) — `d8719f9`
+
+**Scope:** Complete Phase 1 portrait/asset wiring + documentation update.
+
+| Change | Detail |
+|---|---|
+| **`about.ts`** | All 8 executive, 2 partner, 4 advisor portraits → local `/images/team/{executive,partners,advisors}/*.webp`; `portrait()` helper no longer hits Storyblok |
+| **`homepage.ts`** | Quote testimonial → `/images/team/testimonial/quote-portrait.webp` |
+| **Assets added** | `public/images/team/` (17 WebP/JPG files), `public/logos/placeholder/` (15 SVGs), `public/assets/product-bento.png` |
+| **Checklist** | `docs/terminal-industries-replacement-checklist.md` — Phase 1/2 scope, ✅ marks for resolved items |
+| **`context.md`** | This update — §16 commit log, corrected git state, hero frame hosting, clone removal |
+
 ---
 
 ## 4. Current Route Map
 
 | Route | Status | Component entry |
 |---|---|---|
-| `/` | ✅ Complete | `src/app/page.tsx` → `HomePage` |
+| `/` | ✅ Complete | `src/app/page.tsx` → `HomePage` (+ `ProductCatalog` section since `794f9c8`) |
 | `/contact` | ✅ Complete | `src/app/contact/page.tsx` → `ContactPage` |
 | `/about` | ✅ Complete | `src/app/about/page.tsx` → `AboutPage` |
 | `/solutions/commercial` | ✅ Complete | `src/app/solutions/[slug]/page.tsx` |
@@ -313,8 +436,8 @@ src/app/
 
 | Directory | Files | Purpose |
 |---|---|---|
-| `brand/` | 8 | Logo SVGs: `TerminalLogo`, `LogoWordmark`, `LogoIcon`, `FullLogo`, `WordmarkPaths`, `wordmarkSlices.ts`, `logoDimensions.ts`, `RejouiceLogo`, `TerminalFooterLogo` |
-| `home/` | 20 | Homepage sections + 7 CSS modules |
+| `brand/` | 5 | `FullLogo`, `LogoWordmark`, `LogoIcon`, `WordmarkPaths`, `wordmarkSlices.ts`, `logoDimensions.ts` — **Terminal/Rejouice logo components deleted** |
+| `home/` | 22 | Homepage sections + CSS modules (incl. `ProductCatalog`, `product-catalog.module.css`) |
 | `layout/` | 5 | `SiteHeader`, `SiteFooter`, `NavDropdown`, `FooterPathBackground`, `site-header.module.css` |
 | `preloader/` | 7 | Full preloader animation stack + CSS module |
 | `about/` | 5 | About page sections |
@@ -388,7 +511,11 @@ All imported centrally from `globals.css`. Key files:
 public/
 ├── fonts/SuisseIntl-Regular.woff2
 ├── fonts/SuisseIntl-Medium.woff2
-├── logo/full-logo.svg, logo-icon.svg, logo-wordmark.svg, terminal-full-logo.svg
+├── logo/full-logo.svg, logo-icon.svg, logo-wordmark.svg
+├── logos/placeholder/logo-01.svg … logo-14.svg, logo-stripe.svg
+├── images/team/executive/*.webp, advisors/*.webp, partners/*.webp, testimonial/quote-portrait.webp
+├── assets/product-bento.png, sample video.mov
+├── static/frames/home/desktop/webp/ (410 frames), mobile/webp/ (409 frames)
 └── static/images/gartner.svg, linkedin.svg, x.svg, youtube.svg
 ```
 
@@ -487,17 +614,21 @@ These patterns are reused across pages — match these when building new section
 
 ## 9. Placeholder / Temporary Content
 
-These are **intentionally placeholder** — assets/copy pass planned page-by-page after all routes exist:
+**Phase 1 goal:** Remove Terminal/template/vendor ties. Placeholders are acceptable.  
+**Phase 2 (later):** Replace with real Sri Comforts client assets. See `docs/terminal-industries-replacement-checklist.md`.
 
-| Item | Current state | Planned fix |
+| Item | Phase 1 status | Phase 2 (later) |
 |---|---|---|
-| Storyblok CDN images | Used throughout (`a.storyblok.com/f/337048/...`) | Replace with Sri Comforts photography |
-| Hero canvas frames | Proxied from `terminal-industries.com/static/frames/` | Replace with HVAC-themed sequence |
-| Logo stripe in forms | Terminal Industry partner logos | Sri Comforts client/partner logos |
-| `RejouiceLogo` / `TerminalLogo` components | Terminal branding still in some SVGs | Full rebrand pass |
-| Footer copy | Adapted but some Terminal phrasing may remain | Copy review |
-| Contact datasheet PDF | Storyblok placeholder asset URL | Real Sri Comforts PDF |
-| About leader photos | Storyblok placeholder portraits | Real team photos |
+| Storyblok CDN images | 🔲 Still used in videos, feature images, contact, solutions, services, about work gallery | Local/hosted HVAC photography |
+| Hero canvas frames | ✅ Self-hosted in `public/static/frames/home/` | Optional: HVAC-themed re-render |
+| Logo wall / grid / form stripe | ✅ Local `/logos/placeholder/` SVGs | Real client/partner logos |
+| About team/partner/advisor portraits | ✅ Local `/images/team/` (Pexels placeholders) | Real team photos from client |
+| About cert logo grid | ✅ Neutral placeholder SVGs | Official Daikin/O General/LG/Panasonic badges |
+| Quote testimonial portrait | ✅ Local placeholder | Real client photo |
+| `yosSection` naming | 🔲 Internal name still references Yard OS template | Rename to Sri Comforts terminology |
+| Package name `terminal-industries-next` | 🔲 Not renamed | → `sricomforts-nextjs` |
+| Contact datasheet PDF | 🔲 Storyblok fake PDF URL | Real PDF in `/public/docs/` |
+| Solutions carousel photos | 🔲 Unsplash stock via `solutionImages.ts` | Sector project photos |
 
 ---
 
@@ -507,35 +638,40 @@ These are **intentionally placeholder** — assets/copy pass planned page-by-pag
 |---|---|---|
 | `/career` route 404s | Expected | Linked from About nav + footer |
 | `/blog/*` routes 404 | Expected | Nav links exist for structure clarity |
-| Storyblok dependency | Medium | All images break if Storyblok CDN unavailable |
-| Hero frames external CDN | Medium | Depends on `terminal-industries.com` staying up |
-| No git commits for work | High | 147 files uncommitted — recommend committing soon |
+| Storyblok dependency | Medium | Homepage videos + 3 feature images, contact, solutions, services, about work gallery still on `a.storyblok.com` |
+| Unsplash dependency | Medium | 30 carousel photos in `solutionImages.ts` |
+| Hero frame repo size | Low | ~819 WebP files in `public/static/frames/` — large but self-hosted |
+| Package name mismatch | Low | `package.json` still `terminal-industries-next`; folder is `sricomforts-nextjs` |
 | Vercel CLI not installed | Low | Needed for deploy/env pull |
 | HMR layout glitches | Low | Hard-refresh after HMR if layout looks wrong |
 | `.inner` class collision | Fixed | Always scope to `.site-header .inner` or section-specific parent |
 | LogoWall vs LogoGrid | Fixed | Never mix styles — separate CSS files |
+| Clone folder local-only | Info | Removed from git `d6b3d19`; gitignored + vercelignored |
 
 ---
 
 ## 11. Pending / Next Tasks
 
-Based on last user message (Jul 4, ~19:54): *"remaining modifications, we will do tomorrow"*
+### Phase 1 — Terminal/template removal (current)
 
-### High priority
-- [ ] Asset replacement pass (page by page): real Sri Comforts photos, logos, hero frames
-- [ ] Full branding swap: remove remaining Terminal Industries references in SVGs/copy
-- [ ] Git commit all work
+- [ ] Storyblok sweep → local placeholders: homepage videos (×6) + feature images (×3), contact banner/PDF/icons, about work gallery (×3), all solutions/services images
+- [ ] Unsplash sweep → local placeholders in `solutionImages.ts` (×30)
+- [ ] Naming cleanup: `yosSection` → Sri Comforts naming, `package.json` rename, Yard OS copy pass
+- [ ] Trim `next.config.ts` `remotePatterns` after Storyblok/Unsplash gone
+
+### Phase 2 — Real client assets (later)
+
+- [ ] Client logos, partner badges, project photography, service footage, product PDF, real testimonial
 
 ### Pages not yet built
+
 - [ ] `/career` — Careers page
 - [ ] `/blog` + `/blog/category/[slug]` — Blog listing + categories
 - [ ] Any remaining nav dropdown targets
 
-### Polish pass (user mentioned for later)
-- [ ] Header/footer logo final sizing
-- [ ] Copy review for word-breaks + GSAP animation compatibility across all pages
+### Polish / infra (later)
+
 - [ ] Production deploy setup (Vercel)
-- [ ] Replace Storyblok image URLs with local/hosted assets
 - [ ] SEO metadata per page review
 - [ ] Form submission backend (currently UI-only)
 
@@ -544,13 +680,13 @@ Based on last user message (Jul 4, ~19:54): *"remaining modifications, we will d
 ## 12. How to Run
 
 ```bash
-cd /Users/kssaiteja/Downloads/terminal-industries-next
+cd /Users/kssaiteja/Downloads/sricomforts-nextjs
 npm install
 npm run dev
 # → http://localhost:3000
 ```
 
-Compare against reference:
+Compare against reference (if clone exists locally):
 ```bash
 cd terminal-industries-clone
 python3 serve_mirror.py   # or ./serve.sh
@@ -599,11 +735,41 @@ For detailed decision history, see agent transcripts:
 
 ```
 ## Context for new chat
-- Project: terminal-industries-next (Sri Comforts rebrand)
-- Full history: see /context.md in repo root
-- Done: Homepage, /contact, /about, 6× /solutions/[slug], 3× /services/[slug], 404, preloader, blue design system
-- Reference: terminal-industries-clone/ (HTML + _nuxt CSS/JS)
-- Key files: src/components/, src/data/, src/styles/tokens.css, src/app/globals.css
-- Next: asset replacement, /career, /blog, remaining nav routes, git commit
-- Watch out: Storyblok placeholders; hero frames proxied from terminal-industries.com; all work uncommitted
+- Project: sricomforts-nextjs (Sri Comforts rebrand)
+- Full history: see /context.md in repo root (§16 = post-context.md commits)
+- Goal: Phase 1 — remove Terminal/template/vendor deps; placeholders OK
+- Done: Full site pages, hero frames self-hosted, logo placeholders, team portraits local, ProductCatalog section
+- Checklist: docs/terminal-industries-replacement-checklist.md
+- Next (Phase 1): Storyblok + Unsplash → local placeholders; yosSection/package rename
+- Later (Phase 2): Real client logos, photos, PDFs
+- Watch out: Storyblok still on videos/features/contact/solutions/services; package name still terminal-industries-next
 ```
+
+---
+
+## 16. Git Commit Log (after `context.md` creation)
+
+`context.md` was first committed in **`dcbd72d`** (`proper landing page is done`, Jul 5 21:19 IST).  
+All commits below are **after** that point, in chronological order.
+
+| # | Hash | Date (IST) | Subject | Key changes |
+|---|---|---|---|---|
+| 1 | `dcbd72d` | Jul 5 21:19 | proper landing page is done | **Created `context.md`**. Committed entire site: all pages, components, data, styles, docs, Supabase infra, clone folder, hero frames symlink |
+| 2 | `67d52a0` | Jul 5 21:31 | build issue fixed | Added `gsap` + `lenis` to package.json; fixed video-sequence worker + canvas preload |
+| 3 | `d6b3d19` | Jul 5 21:36 | html files removed | Deleted `terminal-industries-clone/` from git (2595 files, ~293K deletions) |
+| 4 | `86525cb` | Jul 5 21:41 | Fix Vercel deploy by removing broken frames symlink | Removed `public/static/frames` symlink; added `.gitkeep`, `.vercelignore`, gitignore rules |
+| 5 | `895608d` | Jul 5 22:06 | Fix hero frame glitches: full preload, Terminal batching, capped fallback | `createVideoSequence.ts` preload overhaul; `VideoCarousel`, `AppPreloader` |
+| 6 | `9864197` | Jul 5 23:32 | Deploy hero frames from /public at 1080p60 (v3 cache bust) | **819 WebP frames** committed; `getHeroFrameUrls()` → same-origin paths; worker/preloader pipeline |
+| 7 | `487e677` | Jul 5 23:45 | Unblock scroll at preloader end; preload hero frames during loader only | `HeroPreloadStarter.tsx`; reveal at animation end; defer feature video preload |
+| 8 | `794f9c8` | Jul 6 00:04 | Fix jittery scroll: remove per-frame React updates and throttle frame loads | Lenis across preloader; GSAP ticker refs; **ProductCatalog** section; logo wall/grid/stripe → placeholders; about cert grid → placeholders |
+| 9 | `d8719f9` | Jul 6 00:17 | Add local placeholder portraits and sync project documentation | `about.ts` + `homepage.ts` portrait URLs; `public/images/team/` (14 WebP), `public/logos/placeholder/` (15 SVG), `product-bento.png`; checklist Phase 1/2; **`context.md` §16 commit log** |
+
+### Commit authors
+
+All commits by **KSSaiTeja** (`saitej4865@gmail.com`). Commits `9864197`–`794f9c8` co-authored by Cursor.
+
+### Branch state
+
+- **Branch:** `main`
+- **Remote:** `origin/main` (synced as of Jul 6)
+- **Total commits:** 10 (including pending)

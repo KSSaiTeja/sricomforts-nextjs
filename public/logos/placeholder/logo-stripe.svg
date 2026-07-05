@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1130 140" width="1130" height="140" fill="none">
+  <image href="logo-01.svg" x="40" y="35" width="180" height="70" preserveAspectRatio="xMidYMid meet"/>
+  <image href="logo-02.svg" x="260" y="35" width="180" height="70" preserveAspectRatio="xMidYMid meet"/>
+  <image href="logo-03.svg" x="480" y="35" width="180" height="70" preserveAspectRatio="xMidYMid meet"/>
+  <image href="logo-04.svg" x="700" y="35" width="180" height="70" preserveAspectRatio="xMidYMid meet"/>
+  <image href="logo-05.svg" x="920" y="35" width="180" height="70" preserveAspectRatio="xMidYMid meet"/>
+</svg>

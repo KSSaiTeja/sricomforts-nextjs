@@ -1,6 +1,9 @@
 const STORYBLOK = "https://a.storyblok.com";
 const MID = "var(--color-neutral-mid)";
 
+/** Local team portraits — sourced from Pexels (free license). */
+const TEAM = "/images/team";
+
 export const aboutSectionAnchors = {
   about: "about-sri-comforts",
   team: "our-team",
@@ -8,11 +11,8 @@ export const aboutSectionAnchors = {
   awards: "awards-recognition",
 } as const;
 
-function portrait(path: string, alt: string) {
-  return {
-    src: `${STORYBLOK}/f/337048/${path}/m/985x0/filters:format(webp):quality(85)`,
-    alt,
-  };
+function portrait(src: string, alt: string) {
+  return { src, alt };
 }
 
 export type AboutTitlePart = string | { strong: string };
@@ -176,7 +176,7 @@ export const aboutExecutiveLeaders = {
     {
       name: "Srinivas Reddy",
       role: "Managing Director",
-      image: portrait("3200x3200/9b88dbf54c/darin.png", "Srinivas Reddy, Managing Director"),
+      image: portrait(`${TEAM}/executive/srinivas-reddy.webp`, "Srinivas Reddy, Managing Director"),
       bio: [
         "As Managing Director, Srinivas leads Sri Comforts with a vision to set a new standard for HVAC delivery across South India — combining authorized Daikin expertise with uncompromising service.",
         "Under his leadership, the company has expanded to eight cities while maintaining the 24-hour response promise that defines the Sri Comforts brand.",
@@ -185,7 +185,7 @@ export const aboutExecutiveLeaders = {
     {
       name: "Rajesh Kumar",
       role: "Director, Commercial Projects",
-      image: portrait("3200x3200/f8528902d5/chris.png", "Rajesh Kumar, Director of Commercial Projects"),
+      image: portrait(`${TEAM}/executive/rajesh-kumar.webp`, "Rajesh Kumar, Director of Commercial Projects"),
       bio: [
         "Rajesh oversees large-scale commercial and industrial installations — from IT parks to manufacturing plants — ensuring every project meets design specs and commissioning standards.",
         "He works closely with architects, builders, and facility teams to deliver cooling systems built for long-term performance.",
@@ -194,7 +194,7 @@ export const aboutExecutiveLeaders = {
     {
       name: "Priya Nair",
       role: "Head of VRV Solutions",
-      image: portrait("2520x2232/c81154c652/ryan5.jpeg", "Priya Nair, Head of VRV Solutions"),
+      image: portrait(`${TEAM}/executive/priya-nair.webp`, "Priya Nair, Head of VRV Solutions"),
       bio: [
         "Priya leads Sri Comforts' VRV practice — widely recognized as pioneers in Variable Refrigerant Volume systems across the region.",
         "She drives technical evaluation, system design, and deployment for high-efficiency multi-zone cooling in commercial and premium residential projects.",
@@ -203,7 +203,7 @@ export const aboutExecutiveLeaders = {
     {
       name: "Venkatesh Rao",
       role: "Head of Engineering & Design",
-      image: portrait("3200x3200/dd1a8c046d/jeff.png", "Venkatesh Rao, Head of Engineering & Design"),
+      image: portrait(`${TEAM}/executive/venkatesh-rao.webp`, "Venkatesh Rao, Head of Engineering & Design"),
       bio: [
         "Venkatesh heads the AutoCAD and MEP design team, producing detailed engineering drawings that translate complex site requirements into build-ready HVAC plans.",
         "His team ensures every installation is precisely specified before a single pipe is laid.",
@@ -212,7 +212,7 @@ export const aboutExecutiveLeaders = {
     {
       name: "Anil Sharma",
       role: "Head of Service Operations",
-      image: portrait("786x765/0b0c3301cd/ryan-clifford-4.png", "Anil Sharma, Head of Service Operations"),
+      image: portrait(`${TEAM}/executive/anil-sharma.webp`, "Anil Sharma, Head of Service Operations"),
       bio: [
         "Anil runs Sri Comforts' post-sales service organization — the team behind the company's guaranteed 24-hour response on complaints and queries.",
         "He builds the processes, spare-parts readiness, and technician training that keep critical cooling systems running without interruption.",
@@ -221,7 +221,7 @@ export const aboutExecutiveLeaders = {
     {
       name: "Meera Krishnan",
       role: "Head of Sales",
-      image: portrait("3200x3200/6ac0273b94/corbin.png", "Meera Krishnan, Head of Sales"),
+      image: portrait(`${TEAM}/executive/meera-krishnan.webp`, "Meera Krishnan, Head of Sales"),
       bio: [
         "Meera leads commercial and residential sales across Sri Comforts' eight-city footprint, matching client needs to the right Daikin and partner-brand systems.",
         "She focuses on transparent proposals, energy-efficiency outcomes, and long-term AMC relationships.",
@@ -230,7 +230,7 @@ export const aboutExecutiveLeaders = {
     {
       name: "Suresh Patel",
       role: "Head of Business Development",
-      image: portrait("3200x3200/1a0e41daa1/josh.png", "Suresh Patel, Head of Business Development"),
+      image: portrait(`${TEAM}/executive/suresh-patel.webp`, "Suresh Patel, Head of Business Development"),
       bio: [
         "Suresh identifies and develops strategic accounts in real estate, healthcare, education, and industrial sectors where reliable cooling is mission-critical.",
         "He partners with developers and facility managers from project concept through handover and beyond.",
@@ -239,7 +239,7 @@ export const aboutExecutiveLeaders = {
     {
       name: "Lakshmi Iyer",
       role: "Head of People & HR",
-      image: portrait("3200x3200/6e7b6cf7b4/tristan.png", "Lakshmi Iyer, Head of People & HR"),
+      image: portrait(`${TEAM}/executive/lakshmi-iyer.webp`, "Lakshmi Iyer, Head of People & HR"),
       bio: [
         "Lakshmi builds and supports the 230+ engineer and technician team that powers Sri Comforts' delivery and service promise.",
         "She oversees hiring, training, and the specialized team structure that keeps design, project, sales, and service operations running in sync.",
@@ -267,7 +267,7 @@ export const aboutBrandPartners = {
     {
       name: "Daikin India",
       role: "Authorized Top-Tier Dealer",
-      image: portrait("500x500/92d925461d/joe-lonsdale-bw.jpeg", "Daikin India partnership"),
+      image: portrait(`${TEAM}/partners/daikin-partner.webp`, "Daikin India partnership"),
       bio: [
         "Sri Comforts is an authorized top-tier Daikin dealer — delivering VRV, central air conditioning, ductable systems, and AHUs with factory-backed support and genuine parts.",
         "This partnership is the foundation of our technical credibility and product range across commercial, industrial, and residential segments.",
@@ -276,7 +276,7 @@ export const aboutBrandPartners = {
     {
       name: "O General",
       role: "Authorized Partner",
-      image: portrait("601x614/5ce2334068/jake-medwell-bw2.jpeg", "O General partnership"),
+      image: portrait(`${TEAM}/partners/ogeneral-partner.webp`, "O General partnership"),
       bio: [
         "As an authorized O General partner, Sri Comforts extends its portfolio with trusted split and commercial systems for clients who need proven reliability.",
         "Combined with Daikin VRV expertise, this gives customers a complete range of cooling solutions under one accountable partner.",
@@ -329,7 +329,7 @@ export const aboutAdvisors = {
     {
       name: "Dr. Ramesh Varma",
       role: "MEP & Building Services",
-      image: portrait("473x398/557030d8e3/shaleen-devgun.jpg", "Dr. Ramesh Varma, MEP advisor"),
+      image: portrait(`${TEAM}/advisors/ramesh-varma.webp`, "Dr. Ramesh Varma, MEP advisor"),
       bio: [
         "Dr. Varma advises on integrated MEP design for large commercial and mixed-use developments, ensuring HVAC systems align with architectural and structural constraints from the earliest planning stages.",
       ],
@@ -337,7 +337,7 @@ export const aboutAdvisors = {
     {
       name: "Kavitha Menon",
       role: "Pharma & Clean Room",
-      image: portrait("764x862/1b5c74bb07/andy-clarke-bw2.jpeg", "Kavitha Menon, clean room advisor"),
+      image: portrait(`${TEAM}/advisors/kavitha-menon.webp`, "Kavitha Menon, clean room advisor"),
       bio: [
         "Kavitha brings expertise in controlled environments for pharmaceutical and healthcare facilities — where precision cooling, filtration, and compliance are non-negotiable.",
       ],
@@ -345,7 +345,7 @@ export const aboutAdvisors = {
     {
       name: "Arjun Mehta",
       role: "Real Estate & IT Parks",
-      image: portrait("423x468/6de342ec68/alan-gershenhorn-bw2.jpeg", "Arjun Mehta, real estate advisor"),
+      image: portrait(`${TEAM}/advisors/arjun-mehta.webp`, "Arjun Mehta, real estate advisor"),
       bio: [
         "Arjun advises on cooling strategy for IT parks, retail developments, and premium residential projects — balancing capex, operating cost, and tenant comfort across multi-phase builds.",
       ],
@@ -353,7 +353,7 @@ export const aboutAdvisors = {
     {
       name: "Deepak Singh",
       role: "Industrial & Manufacturing",
-      image: portrait("658x522/90e8dedb1a/will-urban-bw2.jpg", "Deepak Singh, industrial advisor"),
+      image: portrait(`${TEAM}/advisors/deepak-singh.webp`, "Deepak Singh, industrial advisor"),
       bio: [
         "Deepak supports industrial and manufacturing clients where process cooling, plant ventilation, and uptime requirements demand robust system design and responsive maintenance.",
       ],

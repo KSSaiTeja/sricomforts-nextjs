@@ -124,7 +124,7 @@ export const quoteSection = {
   author: "Facilities Director",
   role: "Commercial Client",
   company: "South India",
-  image: `${STORYBLOK}/f/337048/5112x3410/74c4e40128/quote-image.jpg`,
+  image: "/images/team/testimonial/quote-portrait.webp",
 } as const;
 
 export const formSection = {
