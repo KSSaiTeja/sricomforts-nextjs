@@ -371,7 +371,7 @@ All dates are from agent chat transcripts (Jul 3–5, 2026).
 | **Section intro** | Added `productCatalog` block to `sectionIntros`; removed `followingLogos` from bridge intro |
 | **Other** | `HeroScrollContent`, `LogoBorderCell`, `VideoCarousel`, `useVideoSequence`, `SmoothScrollProvider` refinements |
 
-### Phase 20 — Local team portraits + doc sync (Jul 6, 00:17) — `d8719f9`
+### Phase 20 — Local team portraits + doc sync (Jul 6, 00:17) — `a9b80be`
 
 **Scope:** Complete Phase 1 portrait/asset wiring + documentation update.
 
@@ -762,7 +762,7 @@ All commits below are **after** that point, in chronological order.
 | 6 | `9864197` | Jul 5 23:32 | Deploy hero frames from /public at 1080p60 (v3 cache bust) | **819 WebP frames** committed; `getHeroFrameUrls()` → same-origin paths; worker/preloader pipeline |
 | 7 | `487e677` | Jul 5 23:45 | Unblock scroll at preloader end; preload hero frames during loader only | `HeroPreloadStarter.tsx`; reveal at animation end; defer feature video preload |
 | 8 | `794f9c8` | Jul 6 00:04 | Fix jittery scroll: remove per-frame React updates and throttle frame loads | Lenis across preloader; GSAP ticker refs; **ProductCatalog** section; logo wall/grid/stripe → placeholders; about cert grid → placeholders |
-| 9 | `d8719f9` | Jul 6 00:17 | Add local placeholder portraits and sync project documentation | `about.ts` + `homepage.ts` portrait URLs; `public/images/team/` (14 WebP), `public/logos/placeholder/` (15 SVG), `product-bento.png`; checklist Phase 1/2; **`context.md` §16 commit log** |
+| 9 | `a9b80be` | Jul 6 00:17 | Add local placeholder portraits and sync project documentation | `about.ts` + `homepage.ts` portrait URLs; `public/images/team/` (14 WebP), `public/logos/placeholder/` (15 SVG), `product-bento.png`; checklist Phase 1/2; **`context.md` full update** |
 
 ### Commit authors
 
