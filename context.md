@@ -17,7 +17,7 @@
 | **Current rebrand scope** | **Phase 1:** Remove Terminal/template/vendor dependencies (placeholders OK). **Phase 2 (later):** Swap placeholders for real client assets |
 | **Stack** | Next.js 16.2.10 · React 19.2.4 · TypeScript · Tailwind CSS 4 · GSAP 3.15 · Lenis 1.3.25 · Supabase JS 2.49 |
 | **Font** | Suisse Intl (Regular 400, Medium 600) via `next/font/local` |
-| **Git state** | **10 commits** on `main`, synced with `origin/main`. See **§16** for full post-`context.md` commit log |
+| **Git state** | **11 commits** on `main`, 2 ahead of `origin/main`. See **§16** for full post-`context.md` commit log |
 | **Checklist** | `docs/terminal-industries-replacement-checklist.md` — Phase 1/2 tracker |
 
 ### Business context (from `docs/about-sricomforts.md`)
@@ -763,6 +763,7 @@ All commits below are **after** that point, in chronological order.
 | 7 | `487e677` | Jul 5 23:45 | Unblock scroll at preloader end; preload hero frames during loader only | `HeroPreloadStarter.tsx`; reveal at animation end; defer feature video preload |
 | 8 | `794f9c8` | Jul 6 00:04 | Fix jittery scroll: remove per-frame React updates and throttle frame loads | Lenis across preloader; GSAP ticker refs; **ProductCatalog** section; logo wall/grid/stripe → placeholders; about cert grid → placeholders |
 | 9 | `a9b80be` | Jul 6 00:17 | Add local placeholder portraits and sync project documentation | `about.ts` + `homepage.ts` portrait URLs; `public/images/team/` (14 WebP), `public/logos/placeholder/` (15 SVG), `product-bento.png`; checklist Phase 1/2; **`context.md` full update** |
+| 10 | `a42dbb9` | Jul 6 00:18 | Correct commit hash reference in context.md | Fixed self-referential hash in §16 table (amend changed `d8719f9` → `a9b80be`) |
 
 ### Commit authors
 
@@ -771,5 +772,5 @@ All commits by **KSSaiTeja** (`saitej4865@gmail.com`). Commits `9864197`–`794f
 ### Branch state
 
 - **Branch:** `main`
-- **Remote:** `origin/main` (synced as of Jul 6)
-- **Total commits:** 10 (including pending)
+- **Remote:** `origin/main` (2 commits ahead as of Jul 6 00:18 IST)
+- **Total commits:** 11
