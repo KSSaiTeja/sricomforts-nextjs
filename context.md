@@ -764,6 +764,7 @@ All commits below are **after** that point, in chronological order.
 | 8 | `794f9c8` | Jul 6 00:04 | Fix jittery scroll: remove per-frame React updates and throttle frame loads | Lenis across preloader; GSAP ticker refs; **ProductCatalog** section; logo wall/grid/stripe → placeholders; about cert grid → placeholders |
 | 9 | `a9b80be` | Jul 6 00:17 | Add local placeholder portraits and sync project documentation | `about.ts` + `homepage.ts` portrait URLs; `public/images/team/` (14 WebP), `public/logos/placeholder/` (15 SVG), `product-bento.png`; checklist Phase 1/2; **`context.md` full update** |
 | 10 | `a42dbb9` | Jul 6 00:18 | Correct commit hash reference in context.md | Fixed self-referential hash in §16 table (amend changed `d8719f9` → `a9b80be`) |
+| 11 | `9cd2606` | Jul 6 00:18 | Document hash-fix commit in context.md §16 | Added row 10; updated total commit count to 11 |
 
 ### Commit authors
 
@@ -773,4 +774,4 @@ All commits by **KSSaiTeja** (`saitej4865@gmail.com`). Commits `9864197`–`794f
 
 - **Branch:** `main`
 - **Remote:** `origin/main` (2 commits ahead as of Jul 6 00:18 IST)
-- **Total commits:** 11
+- **Total commits:** 12 (HEAD may be 1 ahead of last documented row — run `git log` for current)
