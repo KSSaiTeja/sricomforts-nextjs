@@ -1,0 +1,28 @@
+.field-wrapper{display:flex;flex-direction:column}.label{font-weight:400;margin-bottom:.5rem;opacity:.8}.field,.label{color:var(--color-brand-ink);font-size:1rem;letter-spacing:.0225rem;line-height:1.35}.field{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:transparent;border:none;border-bottom:1px solid var(--color-brand-ink-alpha-20);border-radius:0;outline:none;padding-bottom:.5rem;transition:border-bottom-color .2s ease;width:100%}.field::-moz-placeholder{color:#05182480;font-size:inherit}.field::placeholder{color:#05182480;font-size:inherit}.field:focus,.field:focus-visible{border-bottom-color:var(--color-brand-ink);outline:none}.select-field{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%2305182480' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 4v16m0 0-6-6m6 6 6-6'/%3E%3C/svg%3E");background-position:right .5rem center;background-repeat:no-repeat;background-size:1rem;color:#05182480;cursor:pointer}.select-field.picked{color:var(--color-brand-ink)}.date-field{color:#05182480;cursor:pointer;font-family:inherit}.date-field.picked{color:var(--color-brand-ink)}.date-field::-webkit-calendar-picker-indicator{cursor:pointer;filter:invert(11%) sepia(15%) saturate(2244%) hue-rotate(135deg) brightness(94%) contrast(96%);opacity:.5}.date-field::-webkit-datetime-edit-ampm-field,.date-field::-webkit-datetime-edit-day-field,.date-field::-webkit-datetime-edit-hour-field,.date-field::-webkit-datetime-edit-minute-field,.date-field::-webkit-datetime-edit-month-field,.date-field::-webkit-datetime-edit-text,.date-field::-webkit-datetime-edit-year-field{color:inherit}.textarea{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:transparent;border:none;border-bottom:1px solid var(--color-brand-ink-alpha-20);border-radius:0;color:var(--color-brand-ink);font-family:inherit;font-size:1rem;letter-spacing:.0225rem;line-height:1.35;min-height:5rem;padding-bottom:.5rem;resize:vertical;width:100%}.textarea::-moz-placeholder{color:#05182480;font-size:inherit}.textarea::placeholder{color:#05182480;font-size:inherit}.radios{display:grid;gap:.75rem}.radios.field-error .radio-label{color:#dc2626cc}.radio-label{align-items:center;color:var(--color-brand-ink);cursor:pointer;display:flex;font-size:1rem;gap:.75rem;letter-spacing:.0225rem;line-height:1.35;opacity:.8}.radio-input{accent-color:var(--color-brand-ink);cursor:pointer;flex-shrink:0;height:1.25rem;width:1.25rem}.radio-text{flex:1}.checkbox-label{align-items:flex-start;cursor:pointer;display:flex;gap:.75rem}.checkbox-label.field-error .checkbox-text{color:#dc2626cc}.checkbox-input{accent-color:var(--color-brand-ink);cursor:pointer;flex-shrink:0;height:1.25rem;margin-top:.125rem;width:1.25rem}.checkbox-text{color:var(--color-brand-ink);flex:1;font-size:1rem;letter-spacing:.0225rem;line-height:1.35;opacity:.8}.field-error{border-bottom-color:#dc262680}.error-message{color:#dc2626cc;font-size:.875rem;line-height:1.35;margin-top:.5rem}.form-wrapper--dark .select-field {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23ffffff80' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 4v16m0 0-6-6m6 6 6-6'/%3E%3C/svg%3E");
+  color: #c2c2c2;
+  color-scheme: dark;
+}
+
+.form-wrapper--dark .select-field:focus,
+.form-wrapper--dark .select-field:focus-visible {
+  border-bottom-color: var(--color-neutral-white);
+}
+
+.form-wrapper--dark .select-field.picked {
+  color: var(--color-neutral-white);
+}
+
+.form-wrapper--dark .select-field option {
+  background-color: var(--color-neutral-white);
+  color: var(--color-brand-ink);
+}
+
+.form-wrapper--dark input:-webkit-autofill,
+.form-wrapper--dark select:-webkit-autofill,
+.form-wrapper--dark textarea:-webkit-autofill {
+  box-shadow: inset 0 0 0 1000px var(--color-brand-ink);
+  -webkit-text-fill-color: var(--color-neutral-white);
+  caret-color: var(--color-neutral-white);
+  transition: background-color 5000s ease-in-out 0s;
+}

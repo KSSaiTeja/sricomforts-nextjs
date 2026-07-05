@@ -1,0 +1,18 @@
+.about-page [id] {
+  scroll-margin-top: 6rem;
+}
+
+.about-page .content-wrapper {
+  position: relative;
+}
+
+.about-page .content__wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 1024px) {
+  .about-page .content__wrapper {
+    padding-bottom: 7.5rem;
+  }
+}

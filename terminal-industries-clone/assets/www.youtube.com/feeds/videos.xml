@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015" xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
+ <link rel="self" href="http://www.youtube.com/feeds/videos.xml?channel_id=UCW9rED7M0uyxKCOL4s9oIHA"/>
+ <id>yt:channel:W9rED7M0uyxKCOL4s9oIHA</id>
+ <yt:channelId>W9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+ <title>Terminal Industries</title>
+ <link rel="alternate" href="https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA"/>
+ <author>
+  <name>Terminal Industries</name>
+  <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+ </author>
+ <published>2025-08-19T20:10:16+00:00</published>
+ <entry>
+  <id>yt:video:Yn5-ODtXNn0</id>
+  <yt:videoId>Yn5-ODtXNn0</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>Lights Out Yard! EP4 - Lights Out, Camera, Action</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=Yn5-ODtXNn0"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-29T18:56:27+00:00</published>
+  <updated>2026-05-29T19:09:34+00:00</updated>
+  <media:group>
+   <media:title>Lights Out Yard! EP4 - Lights Out, Camera, Action</media:title>
+   <media:content url="https://www.youtube.com/v/Yn5-ODtXNn0?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i2.ytimg.com/vi/Yn5-ODtXNn0/hqdefault.jpg" width="480" height="360"/>
+   <media:description>The lights-out yard isn’t enabled by automation alone, it is made possible by a system that can truly see.  
+
+In this episode, join Terminal CMO Josh Kivenko and special guest, Terminal VP of Engineering Chris Duncan, as he lays out a bold thesis: computer vision is the fulcrum of the lights-out yard, transforming every movement, asset, and interaction into a continuous stream of real-time intelligence. From the gate to the yard to the dock, CV captures the system of record for the physical world, powering everything from automated check-ins and asset tracking to damage detection, security, and dynamic yard density optimization. This is not incremental visibility, it is a structural shift where perception drives execution, seamlessly integrating with WMS, TMS, and operational workflows to orchestrate decisions in real time. The yard of the future will replace humans with dynamic computer vision that sees, understands, and acts on its own.</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="8"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:fspcXIvdnk8</id>
+  <yt:videoId>fspcXIvdnk8</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>Why Most “AI-Native” Companies Aren’t Actually AI-Native</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=fspcXIvdnk8"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T17:29:21+00:00</published>
+  <updated>2026-06-11T17:34:45+00:00</updated>
+  <media:group>
+   <media:title>Why Most “AI-Native” Companies Aren’t Actually AI-Native</media:title>
+   <media:content url="https://www.youtube.com/v/fspcXIvdnk8?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i3.ytimg.com/vi/fspcXIvdnk8/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Many companies claim to be “AI-native,” but few are actually built with AI at the core of their operations.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries breaks down what it really means to be AI-native and why most companies fall short.
+
+True AI-native systems are designed with AI as the foundation, not as an added feature. This enables real-time decision-making, automation, and continuous optimization across operations.
+
+Many platforms label themselves as AI-driven, but rely on traditional software architectures with limited automation and heavy manual input.
+
+Terminal’s Yard Operating System (YOS) is built as an AI-native platform, using agentic AI and computer vision to automate and orchestrate yard operations in real time.
+
+AI-native systems allow logistics operators to move beyond visibility into full execution, improving efficiency, throughput, and operational control.
+
+Topics covered:
+AI-native companies, agentic AI, AI in logistics, supply chain automation, yard automation, logistics technology, AI platforms
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="10"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:TKyPcmMSJcI</id>
+  <yt:videoId>TKyPcmMSJcI</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>A Horror Story in the Yard | Logistics Delays Explained</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=TKyPcmMSJcI"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T17:22:37+00:00</published>
+  <updated>2026-06-11T17:44:27+00:00</updated>
+  <media:group>
+   <media:title>A Horror Story in the Yard | Logistics Delays Explained</media:title>
+   <media:content url="https://www.youtube.com/v/TKyPcmMSJcI?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i1.ytimg.com/vi/TKyPcmMSJcI/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Inefficiencies in yard operations can create significant delays, impacting driver time, throughput, and overall logistics performance.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries shares a real-world “horror story” from the yard, highlighting how small inefficiencies can quickly escalate into major operational challenges.
+
+From long check-in times to poor coordination and lack of visibility, these issues create bottlenecks that ripple across the entire supply chain.
+
+Terminal’s Yard Operating System (YOS) uses AI and computer vision to automate yard workflows, helping prevent these breakdowns by enabling faster check-ins, real-time visibility, and coordinated execution.
+
+By addressing these inefficiencies, operators can reduce delays, improve driver experience, and increase overall throughput.
+
+Key topics:
+yard operations delays, logistics inefficiency, yard automation, AI in logistics, supply chain bottlenecks, detention and demurrage
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="15"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:pKs2w1FKpO4</id>
+  <yt:videoId>pKs2w1FKpO4</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>Case Study: Fixing Yard Chaos for a Fortune 1000 Company</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=pKs2w1FKpO4"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T17:20:07+00:00</published>
+  <updated>2026-06-11T17:49:08+00:00</updated>
+  <media:group>
+   <media:title>Case Study: Fixing Yard Chaos for a Fortune 1000 Company</media:title>
+   <media:content url="https://www.youtube.com/v/pKs2w1FKpO4?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i1.ytimg.com/vi/pKs2w1FKpO4/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Yard inefficiencies can create constant operational disruptions, often described as “hair on fire” moments, where teams are forced to react to delays and bottlenecks in real time.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries shares a case study of how it helped a Fortune 1000 company eliminate these recurring issues in their yard operations.
+
+The facility faced challenges such as gate congestion, lack of visibility, inefficient coordination, and heavy reliance on manual processes, leading to delays and operational stress.
+
+Terminal implemented its Yard Operating System (YOS), using AI and computer vision to automate yard workflows, enable faster check-ins, and provide real-time coordination across operations.
+
+By transforming yard operations, the company reduced delays, improved throughput, and eliminated the constant need for reactive problem-solving.
+
+Topics covered:
+yard operations case study, logistics efficiency, yard automation, AI in logistics, supply chain optimization, detention and demurrage, logistics bottlenecks
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="5"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:3NCQGYyYrX0</id>
+  <yt:videoId>3NCQGYyYrX0</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>Yard Operations Are Broken | Why No One is Fixing the Problem</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=3NCQGYyYrX0"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T16:07:28+00:00</published>
+  <updated>2026-06-11T17:31:37+00:00</updated>
+  <media:group>
+   <media:title>Yard Operations Are Broken | Why No One is Fixing the Problem</media:title>
+   <media:content url="https://www.youtube.com/v/3NCQGYyYrX0?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i4.ytimg.com/vi/3NCQGYyYrX0/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Yard operations remain one of the most inefficient and overlooked parts of the supply chain, despite their significant impact on logistics performance.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries discusses why yard operations continue to be broken and why many organizations have not addressed these issues effectively.
+
+Many companies rely on outdated processes, manual coordination, and legacy systems that provide limited visibility and little execution capability.
+
+While investments are made in warehouse and transportation systems, the yard is often neglected, creating bottlenecks that impact throughput, driver time, and overall efficiency.
+
+Terminal’s Yard Operating System (YOS) uses AI and computer vision to automate yard workflows, enabling real-time execution, faster check-ins, and improved coordination.
+
+By addressing these gaps, operators can reduce delays, improve asset utilization, and unlock significant efficiency gains across their operations.
+
+Topics covered:
+yard operations inefficiency, logistics bottlenecks, yard management systems, AI in logistics, yard automation, supply chain optimization
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="7"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:pWq7i0PCBpY</id>
+  <yt:videoId>pWq7i0PCBpY</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>If It’s Not Moving, It’s Costing You Money | Supply Chain Truth</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=pWq7i0PCBpY"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T15:52:16+00:00</published>
+  <updated>2026-06-11T17:31:12+00:00</updated>
+  <media:group>
+   <media:title>If It’s Not Moving, It’s Costing You Money | Supply Chain Truth</media:title>
+   <media:content url="https://www.youtube.com/v/pWq7i0PCBpY?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i1.ytimg.com/vi/pWq7i0PCBpY/hqdefault.jpg" width="480" height="360"/>
+   <media:description>In supply chain operations, any delay in movement directly translates to lost time, reduced efficiency, and increased costs.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries explains why movement is the key driver of efficiency and how delays in the yard and across logistics operations impact overall performance.
+
+When trucks, trailers, or goods are not moving, they are consuming time and resources without generating value, creating hidden costs throughout the supply chain.
+
+Terminal’s Yard Operating System (YOS) uses AI and computer vision to keep operations moving, enabling faster check-ins, real-time coordination, and continuous execution across yard workflows.
+
+By improving flow and reducing idle time, operators can increase throughput, improve asset utilization, and reduce detention and demurrage.
+
+Topics covered:
+supply chain efficiency, logistics delays, yard operations, idle time costs, yard automation, AI in logistics, detention and demurrage
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="2"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:VX1uHG8ezb8</id>
+  <yt:videoId>VX1uHG8ezb8</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>The Lights-Out Yard | A Future with Zero Human Intervention</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=VX1uHG8ezb8"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T15:49:56+00:00</published>
+  <updated>2026-06-11T17:30:05+00:00</updated>
+  <media:group>
+   <media:title>The Lights-Out Yard | A Future with Zero Human Intervention</media:title>
+   <media:content url="https://www.youtube.com/v/VX1uHG8ezb8?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i3.ytimg.com/vi/VX1uHG8ezb8/hqdefault.jpg" width="480" height="360"/>
+   <media:description>The future of yard operations is moving toward fully automated, “lights-out” environments with minimal human intervention.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries shares its vision for the future of logistics and what a fully autonomous yard could look like.
+
+A “lights-out yard” refers to a yard operation where AI systems handle coordination, decision-making, and execution without the need for continuous human input.
+
+Advances in AI and computer vision are enabling real-time visibility, automated workflows, and continuous optimization across yard operations.
+
+Terminal’s Yard Operating System (YOS) is designed to move toward this future by enabling autonomous check-ins, real-time orchestration, and execution of yard workflows through agentic AI.
+
+A lights-out yard can increase throughput, reduce costs, improve safety, and enable 24/7 operations without operational bottlenecks.
+
+Topics covered:
+lights-out yard, future of logistics, yard automation, AI in logistics, computer vision supply chain, autonomous operations, supply chain innovation
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="3"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:-Mve6PJmaDA</id>
+  <yt:videoId>-Mve6PJmaDA</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>Terminal’s Edge | Built by Logistics Experts, Backed by NFI</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=-Mve6PJmaDA"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T15:45:02+00:00</published>
+  <updated>2026-06-11T17:28:22+00:00</updated>
+  <media:group>
+   <media:title>Terminal’s Edge | Built by Logistics Experts, Backed by NFI</media:title>
+   <media:content url="https://www.youtube.com/v/-Mve6PJmaDA?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i2.ytimg.com/vi/-Mve6PJmaDA/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Building effective logistics technology requires deep operational experience and close alignment with industry leaders.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries explains its competitive edge and how its technology is shaped by real-world logistics expertise.
+
+Terminal is built by people who understand logistics operations firsthand and is backed by strategic investors such as NFI and Prologis, bringing both operational insight and industry perspective into product development.
+
+Many software platforms are built without direct experience in day-to-day logistics operations, leading to gaps between technology and real-world needs.
+
+Terminal’s Yard Operating System (YOS) is designed with an execution-first approach, using AI and computer vision to automate and coordinate yard operations in real time.
+
+By combining technical innovation with operational expertise, Terminal delivers solutions that are practical, scalable, and aligned with the needs of modern logistics networks.
+
+Topics covered:
+logistics technology, supply chain innovation, yard automation, AI in logistics, industry expertise, logistics operations
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="2"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:1uzUPB9Q3E8</id>
+  <yt:videoId>1uzUPB9Q3E8</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>Computer Vision in Logistics | How Terminal Sees the Yard</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=1uzUPB9Q3E8"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T15:41:07+00:00</published>
+  <updated>2026-06-11T17:27:20+00:00</updated>
+  <media:group>
+   <media:title>Computer Vision in Logistics | How Terminal Sees the Yard</media:title>
+   <media:content url="https://www.youtube.com/v/1uzUPB9Q3E8?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i2.ytimg.com/vi/1uzUPB9Q3E8/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Computer vision is enabling real-time visibility and automation across logistics operations, particularly in yard environments.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries explains how its computer vision technology works and how it transforms yard operations.
+
+By using cameras and AI models, computer vision systems can capture and interpret real-world activity, such as reading container numbers, tracking trailer movement, and monitoring gate activity.
+
+Terminal’s Yard Operating System (YOS) uses computer vision as a foundation for execution, enabling automated check-ins, real-time coordination, and continuous orchestration of yard workflows.
+
+With accurate, real-time data capture, operators can reduce manual input, improve efficiency, and make faster, more informed decisions.
+
+Topics covered:
+computer vision logistics, AI in supply chain, yard automation, logistics visibility, container tracking, yard operations technology
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="0"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:GqVFqV3986M</id>
+  <yt:videoId>GqVFqV3986M</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>Backed by NFI, Prologis &amp; 8VC | Building a Leader in Yard Tech</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=GqVFqV3986M"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T15:38:22+00:00</published>
+  <updated>2026-06-11T17:40:13+00:00</updated>
+  <media:group>
+   <media:title>Backed by NFI, Prologis &amp; 8VC | Building a Leader in Yard Tech</media:title>
+   <media:content url="https://www.youtube.com/v/GqVFqV3986M?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i4.ytimg.com/vi/GqVFqV3986M/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Strategic investors play a critical role in shaping the future of logistics technology and enabling scalable innovation.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries discusses how its strategic investors, including NFI, Prologis, and 8VC, came together to help build a new category in yard operations.
+
+These partners bring deep expertise across logistics operations, real estate, and venture capital, ensuring the technology is grounded in real-world needs and positioned for long-term growth.
+
+When technology is developed alongside industry leaders, it is more likely to solve real operational challenges and deliver measurable impact.
+
+Terminal’s Yard Operating System (YOS) uses AI and computer vision to automate and orchestrate yard operations, enabling real-time execution and improved efficiency.
+
+With strong backing and operational insight, Terminal is positioned to redefine how yard operations are managed and optimized.
+
+Topics covered:
+logistics technology, yard automation, supply chain innovation, AI in logistics, strategic investors, logistics infrastructure
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="7"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:7Kyqq0O2gW0</id>
+  <yt:videoId>7Kyqq0O2gW0</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>Terminal at the Gate, Yard, and Dock | End-to-End Yard Operations</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=7Kyqq0O2gW0"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T15:35:52+00:00</published>
+  <updated>2026-06-11T17:48:04+00:00</updated>
+  <media:group>
+   <media:title>Terminal at the Gate, Yard, and Dock | End-to-End Yard Operations</media:title>
+   <media:content url="https://www.youtube.com/v/7Kyqq0O2gW0?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i4.ytimg.com/vi/7Kyqq0O2gW0/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Effective yard operations require coordination across the gate, yard, and dock to ensure smooth flow and efficient logistics performance.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries explains how its system manages operations across every stage of the yard, from gate check-in to dock execution.
+
+Many operations treat the gate, yard, and dock as separate processes, leading to inefficiencies and misalignment across workflows.
+
+Terminal’s Yard Operating System (YOS) connects these stages through AI and computer vision, enabling real-time visibility, faster check-ins, and coordinated execution across the entire yard.
+
+By managing operations end-to-end, operators can reduce delays, improve throughput, and create a more efficient and predictable flow of goods.
+
+Topics covered:
+yard operations, gate operations, dock scheduling, yard automation, AI in logistics, supply chain efficiency, logistics coordination
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="2"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:2wqY22rCX-A</id>
+  <yt:videoId>2wqY22rCX-A</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>What an End-to-End Yard Solution Looks Like | Terminal Explained</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=2wqY22rCX-A"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T15:31:51+00:00</published>
+  <updated>2026-06-11T17:42:05+00:00</updated>
+  <media:group>
+   <media:title>What an End-to-End Yard Solution Looks Like | Terminal Explained</media:title>
+   <media:content url="https://www.youtube.com/v/2wqY22rCX-A?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i3.ytimg.com/vi/2wqY22rCX-A/hqdefault.jpg" width="480" height="360"/>
+   <media:description>End-to-end yard operations require coordination across the gate, yard, and dock to ensure efficient movement and logistics performance.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries explains what it means to be an end-to-end solution in yard operations.
+
+Many systems address only one part of the yard, such as visibility or scheduling, but fail to connect workflows across the entire operation.
+
+Terminal’s Yard Operating System (YOS) provides end-to-end coverage using AI and computer vision, enabling automated check-ins, real-time visibility, and coordinated execution across all yard activities.
+
+By managing operations across the full lifecycle, operators can reduce delays, improve throughput, and create a more efficient flow of goods.
+
+Topics covered:
+yard operations, end-to-end logistics, yard automation, AI in logistics, dock scheduling, gate operations, supply chain efficiency
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="1"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:Ym8xbyB6KQE</id>
+  <yt:videoId>Ym8xbyB6KQE</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>A Yard Platform That Scales | Built for Any Operation Size</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=Ym8xbyB6KQE"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T15:29:02+00:00</published>
+  <updated>2026-06-11T17:41:23+00:00</updated>
+  <media:group>
+   <media:title>A Yard Platform That Scales | Built for Any Operation Size</media:title>
+   <media:content url="https://www.youtube.com/v/Ym8xbyB6KQE?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i2.ytimg.com/vi/Ym8xbyB6KQE/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Yard operations vary widely across facilities, requiring flexible systems that can adapt to different sizes, layouts, and operational needs.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries explains how its platform is designed to support a wide range of yard operations.
+
+Rather than a one-size-fits-all approach, modern yard technology needs to be scalable and configurable to fit different operational environments.
+
+Terminal’s Yard Operating System (YOS) uses AI and computer vision to adapt to different yard setups, enabling automated workflows, real-time visibility, and efficient coordination regardless of facility size.
+
+This flexibility allows operators to deploy a consistent system across multiple sites while tailoring it to their specific needs, improving efficiency and scalability.
+
+Yard operations, scalable logistics systems, yard automation, AI in logistics, supply chain efficiency, logistics platforms
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="4"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:PyPNJByapz8</id>
+  <yt:videoId>PyPNJByapz8</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>“Transportation Problems” Are Actually Yard Issues</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=PyPNJByapz8"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T15:26:07+00:00</published>
+  <updated>2026-06-11T17:28:17+00:00</updated>
+  <media:group>
+   <media:title>“Transportation Problems” Are Actually Yard Issues</media:title>
+   <media:content url="https://www.youtube.com/v/PyPNJByapz8?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i1.ytimg.com/vi/PyPNJByapz8/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Many delays in transportation are actually caused by inefficiencies in yard operations, rather than issues on the road.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries explains how problems often attributed to transportation are rooted in what happens inside the yard.
+
+Delays at gates, poor coordination at docks, and lack of real-time visibility can create bottlenecks that impact driver schedules and overall transportation performance.
+
+While these issues are often labeled as transportation challenges, the root cause is frequently within the yard itself.
+
+Terminal’s Yard Operating System (YOS) addresses these challenges by using AI and computer vision to automate yard workflows, improve coordination, and enable real-time execution.
+
+By fixing yard inefficiencies, operators can improve transportation performance, reduce delays, and increase overall supply chain efficiency.
+
+Topics covered:
+transportation delays, yard operations, logistics inefficiency, yard automation, AI in logistics, supply chain bottlenecks
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="8"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:Y4DlRpkXqPI</id>
+  <yt:videoId>Y4DlRpkXqPI</yt:videoId>
+  <yt:channelId>UCW9rED7M0uyxKCOL4s9oIHA</yt:channelId>
+  <title>Why YMS Data Breaks | One Missed Move Changes Everything</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=Y4DlRpkXqPI"/>
+  <author>
+   <name>Terminal Industries</name>
+   <uri>https://www.youtube.com/channel/UCW9rED7M0uyxKCOL4s9oIHA</uri>
+  </author>
+  <published>2026-05-11T15:21:17+00:00</published>
+  <updated>2026-06-11T17:46:13+00:00</updated>
+  <media:group>
+   <media:title>Why YMS Data Breaks | One Missed Move Changes Everything</media:title>
+   <media:content url="https://www.youtube.com/v/Y4DlRpkXqPI?version=3" type="application/x-shockwave-flash" width="640" height="390"/>
+   <media:thumbnail url="https://i2.ytimg.com/vi/Y4DlRpkXqPI/hqdefault.jpg" width="480" height="360"/>
+   <media:description>Traditional yard management systems (YMS) rely heavily on manual data entry, making them vulnerable to inaccuracies.
+
+In this Let’s Talk Supply Chain conversation, Terminal Industries explains one of the core limitations of YMS and how small errors can impact the entire system.
+
+If a single move is not logged correctly, the system’s data becomes inaccurate, leading to visibility gaps, miscoordination, and operational inefficiencies.
+
+In fast-paced yard environments, relying on manual input makes it difficult to maintain accurate, real-time data across operations.
+
+Terminal’s Yard Operating System (YOS) uses AI and computer vision to automatically capture real-world activity, reducing reliance on manual input and improving data accuracy.
+
+By ensuring accurate, real-time data, operators can improve coordination, reduce errors, and increase overall efficiency.
+
+Topics covered:
+yard management systems, YMS limitations, logistics data accuracy, yard automation, AI in logistics, computer vision supply chain
+
+Learn more:
+www.terminal-industries.com
+
+Yard Efficiency Calculator: www.terminal-industries.com/yard-efficiency-calculator</media:description>
+   <media:community>
+    <media:starRating count="0" average="0.00" min="1" max="5"/>
+    <media:statistics views="2"/>
+   </media:community>
+  </media:group>
+ </entry>
+</feed>

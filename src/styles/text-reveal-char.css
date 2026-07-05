@@ -1,0 +1,23 @@
+.text-reveal-char {
+  color: var(--color-neutral-soft);
+  font-weight: 450;
+}
+
+.text-reveal-char.show {
+  animation: text-reveal-char-color 0.5s forwards;
+  color: var(--color-brand-ink);
+}
+
+@keyframes text-reveal-char-color {
+  0% {
+    color: var(--color-neutral-soft);
+  }
+
+  30% {
+    color: var(--color-brand-accent);
+  }
+
+  100% {
+    color: var(--color-brand-ink);
+  }
+}

@@ -1,0 +1,214 @@
+.notch-section__wrapper {
+  position: relative;
+}
+
+.section__wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.section__wrapper.next-to-logos .section-introduction {
+  margin-top: -11.25rem;
+  min-height: 90svh;
+  min-height: calc(var(--svh, 1svh) * 90);
+  padding: 11.25rem 1.25rem;
+}
+
+.section-introduction {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  padding: 6.25rem 1.25rem;
+  text-align: center;
+}
+
+.section-introduction.last-si-hp {
+  padding: 0 !important;
+}
+
+.section-introduction .content-wrapper {
+  position: relative;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 4rem;
+  max-width: unset;
+}
+
+.section-introduction .header {
+  margin: 0 auto;
+  text-wrap: balance;
+}
+
+.section-introduction .header.spacing {
+  margin: 0 auto 2rem;
+}
+
+.section-introduction .header h2 {
+  font-weight: 400;
+}
+
+.section-introduction .header h3 {
+  font-size: 2.875rem;
+  font-weight: 400;
+  letter-spacing: -0.02875rem;
+  line-height: 1.2;
+}
+
+.section-introduction .header strong {
+  color: #eee;
+}
+
+.section-introduction .paragraphs-wrapper {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 18.75rem;
+}
+
+.section-introduction .paragraphs-wrapper p {
+  text-align: unset;
+}
+
+.section-introduction .label {
+  color: var(--color-neutral-soft);
+  margin-bottom: 1rem;
+}
+
+.section-introduction .label.label-5 {
+  font-size: 1.0625rem;
+  letter-spacing: -0.0106rem;
+  line-height: 0.95;
+}
+
+.section-introduction .buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9375rem;
+  margin: 0 auto;
+  width: calc(100% - 1.25rem);
+}
+
+.section-introduction .buttons.buttons-underlined {
+  margin-top: 0;
+}
+
+.section-introduction .button--underlined {
+  display: inline-flex;
+  height: fit-content;
+  padding: 0.75rem 0;
+  color: var(--color-brand-ink);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 1px solid currentColor;
+  transition: color 0.3s var(--ease-out);
+}
+
+.section-introduction .button--underlined:hover {
+  color: var(--color-brand-accent);
+}
+
+.animated-strong b,
+.animated-strong strong {
+  font-weight: inherit;
+}
+
+.animated-strong .--char {
+  display: inline-block;
+}
+
+.animated-strong strong .--word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .section-introduction .header h2,
+  .section-introduction .title-si {
+    font-size: min(3.125rem, 12.821vw);
+    letter-spacing: min(-0.075rem, -0.308vw);
+  }
+
+  .section-introduction .header {
+    max-width: 70%;
+  }
+
+  .section-introduction .paragraphs-wrapper:not(.multiple) {
+    max-width: 37.5rem;
+  }
+
+  .section-introduction .buttons {
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section__wrapper.next-to-logos .section-introduction {
+    margin-top: calc(-18.75rem + min(11.979vw, 306.6666666667px));
+    padding: 26.75rem 4.375rem;
+  }
+
+  .section-introduction {
+    padding: 11.25rem 4.375rem;
+  }
+
+  .section-introduction .header h2,
+  .section-introduction .title-si {
+    font-size: max(4.375rem, min(4.688vw, 120px));
+    letter-spacing: min(-0.141vw, -3.6px);
+  }
+
+  .section-introduction .label.label-5 {
+    font-size: 1.25rem;
+    letter-spacing: -0.0125rem;
+  }
+
+  .section-content {
+    margin: unset;
+  }
+
+  .section-introduction .header.spacing {
+    margin: 0 auto 3.375rem;
+  }
+
+  .section-introduction .header {
+    max-width: min(64.844vw, 1660px);
+  }
+
+  .section-introduction .paragraphs-wrapper:not(.multiple) {
+    max-width: min(31.25vw, 800px);
+  }
+
+  .section-introduction .label {
+    margin-bottom: 2rem;
+  }
+
+  .section-introduction .buttons {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: 5.625rem;
+    max-width: unset;
+    width: unset;
+  }
+
+  .section-introduction .button--underlined {
+    width: fit-content;
+  }
+}
+
+@media (max-width: 1023px) {
+  .section-introduction .header br {
+    display: none;
+  }
+}

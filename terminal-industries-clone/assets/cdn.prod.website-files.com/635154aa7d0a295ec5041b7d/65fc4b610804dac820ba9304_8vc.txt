@@ -1,0 +1,113 @@
+gsap.registerPlugin(ScrollTrigger);
+document.addEventListener('DOMContentLoaded', () => {
+    handleSplit()
+    handleGlobalAnimation()
+})
+function handleSplit() {
+    function splitText() {
+        let elements = document.querySelectorAll('[data-split]');
+
+        elements.forEach(function (element) {
+            let splitType = new SplitType(element, {
+                types: element.getAttribute('data-split-type'),
+            });
+            let type = element.getAttribute('data-split-type');
+            splitType[type].forEach((splitElement) => {
+                const wrapperDiv = document.createElement('div');
+                wrapperDiv.classList.add(type + '-' + 'wrap');
+                splitElement.parentNode.appendChild(wrapperDiv);
+                wrapperDiv.appendChild(splitElement);
+            });
+        });
+    }
+    splitText();
+}
+function handleGlobalAnimation() {
+    let splittedTexts = document.querySelectorAll('[data-split]');
+    splittedTexts.forEach((ele) => {
+        let childElement = ele.getAttribute('data-split') || '.line';
+        animateStagger(ele, childElement, '1');
+    });
+    // Animate Stagger Elements
+    let staggerElements = document.querySelectorAll('[anim-stagger]');
+    if (staggerElements.length > 0) {
+        staggerElements.forEach((element) => {
+            animateStagger(element);
+        });
+    }
+    // GSAP Stagger Animation Function
+    function animateStagger(element, children, opacityValue) {
+        if (children == null) {
+            children = element.getAttribute('anim-stagger');
+        }
+        let childrens = element.querySelectorAll(children);
+        gsap.fromTo(
+            childrens,
+            { y: element.getAttribute('from-y') || '110%', opacity: opacityValue || 0 },
+            {
+                duration: element.getAttribute('data-duration') || 1.5,
+                y: '0%',
+                opacity: 1,
+                stagger: {
+                    each: element.getAttribute('stagger-amount') || 0.25,
+                    from: element.getAttribute('stagger-from') || 'start',
+                },
+                ease: element.getAttribute('data-easing') || 'power3.out',
+                scrollTrigger: {
+                    trigger: element,
+                    start: element.getAttribute('scrollTrigger-start') || 'top 95%',
+                    markers: element.getAttribute('anim-markers') || false,
+                },
+                delay: element.getAttribute('data-delay') || 0.15,
+            }
+        );
+    }
+    function animateElement(element) {
+        let delay = element.getAttribute('data-delay');
+        let duration = element.getAttribute('data-duration');
+        let y = element.getAttribute('from-y');
+        let easing = element.getAttribute('data-easing');
+        easing = easing || 'power3.out';
+        delay = delay || 0.3;
+        duration = duration || 1.5;
+        y = y || '2.5rem';
+        gsap.fromTo(
+            element,
+            { y: y, opacity: 0, skewY: '4deg' },
+            {
+                duration: duration,
+                y: '0',
+                opacity: 1,
+                ease: easing,
+                scrollTrigger: element,
+                delay: delay,
+                clearProps: true,
+                skewY: '0deg'
+            }
+        );
+    }
+
+    document.querySelectorAll('[anim-element-intoView]').forEach((ele) => {
+        animateElement(ele);
+    });
+    
+    gsap.utils.toArray('[anim-scale-opacity]').forEach((ele) => {
+      gsap.fromTo(
+          ele,
+          { opacity: 0, scale: 1.1 },
+          {
+              duration: 2,
+              opacity: 1,
+              scale: 1,
+              delay: ele.getAttribute('data-delay') || 0,
+              scrollTrigger: {
+                  trigger: ele,
+                  markers: false,
+              },
+          }
+      );
+    });
+}
+
+
+

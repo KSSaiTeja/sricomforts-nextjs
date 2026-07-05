@@ -1,0 +1,81 @@
+:root {
+  /* Viewport */
+  --vw: 1vw;
+  --vh: 1vh;
+  --svh: 1svh;
+
+  /* Neutral palette */
+  --color-neutral-black: #000;
+  /* Blue-gray neutrals */
+  --color-neutral-charcoal: #3a4048;
+
+  /* Nav dropdown surfaces (dark navy blue) */
+  --color-surface-dropdown: #252d38;
+  --color-surface-dropdown-active: #323d4d;
+  --color-surface-dropdown-hover: #2c3644;
+  --color-neutral-mid: #7f7f7f;
+  --color-neutral-soft: #c2c2c2;
+  --color-neutral-muted: #ddd;
+  --color-neutral-off-white: #f0f0f0;
+  --color-neutral-white: #fff;
+
+  /*
+   * Sri Comforts brand palette
+   * Logo: primary #007BC0, deep #2659A6, highlight #32C4E6 (SVG components only)
+   */
+  --color-brand-primary: #007bc0;
+  --color-brand-deep: #2659a6;
+  --color-brand-ink: #051824;
+  --color-brand-ink-alpha-20: rgb(5 24 36 / 20%);
+  --color-brand-ink-alpha-15: rgb(5 24 36 / 15%);
+  --color-brand-ink-alpha-05: rgb(5 24 36 / 5%);
+
+  /*
+   * Interactive accents — blue family (not cyan/green)
+   * accent: light surfaces | accent-on-dark: nav, dropdowns, dark UI (WCAG AA)
+   */
+  --color-brand-accent: #007bc0;
+  --color-brand-accent-bright: #33b5e8;
+  --color-brand-accent-on-dark: #8dd4f7;
+  --color-brand-accent-tint: #d4eef8;
+  --color-brand-accent-alpha-80: rgb(0 123 192 / 80%);
+  --color-brand-accent-alpha-40: rgb(0 123 192 / 40%);
+  --color-brand-accent-alpha-30: rgb(0 123 192 / 30%);
+  --color-brand-accent-alpha-20: rgb(0 123 192 / 20%);
+  --color-brand-accent-alpha-12: rgb(0 123 192 / 12%);
+
+  /* Neon blue — grid lines, path followers, dark-section accents */
+  --color-brand-neon: #00d4ff;
+  --color-brand-neon-alpha-45: rgb(0 212 255 / 45%);
+  --color-brand-neon-alpha-35: rgb(0 212 255 / 35%);
+  --color-brand-neon-alpha-25: rgb(0 212 255 / 25%);
+
+  /* Secondary accent (unchanged) */
+  --color-accent-orange: #fb6b3c;
+
+  /* Semantic tokens */
+  --color-background: #ededed;
+  --color-foreground: var(--color-brand-ink);
+  --color-surface: var(--color-neutral-white);
+  --color-border-decorative: var(--color-brand-ink);
+  --color-overlay: rgb(0 0 0 / 70%);
+  --color-surface-nav-glass: rgb(0 0 0 / 40%);
+  --color-surface-nav-glass-border: rgb(255 255 255 / 10%);
+
+  /* Typography */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+
+  /* Layout (markets / solutions pages) */
+  --spacing: 1.25rem;
+  --svw: 1vw;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --spacing: min(3.646vw, 93.3333333333px);
+  }
+}

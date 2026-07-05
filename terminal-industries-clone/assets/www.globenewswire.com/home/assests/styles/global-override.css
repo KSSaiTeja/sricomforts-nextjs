@@ -1,0 +1,43 @@
+/* This file contains the global styles for the PNR article renderer. */
+#pnr-article-renderer-section h1 {
+    font-size: 39px !important;
+    font-weight: 400 !important;
+    line-height: 60px !important;
+}
+
+#pnr-article-renderer-section h2 {
+    font-size: 28px !important;
+    margin: 0 0 30px 0;
+    font-weight: normal !important;
+    line-height: 2rem !important;
+}
+
+#article-logo-carousel img {
+    margin-top: 15px;
+  }
+  
+.carousel-container {
+    min-height: fit-content !important;
+    height: 150px;
+}
+
+@-moz-document url-prefix() {
+    .carousel-container {
+        min-height: 150px !important;
+        height: auto;
+    }
+ }
+  
+ :root {
+    font-size: 16px!important;
+}
+
+.article-headline {
+  min-height: 60px;
+}
+
+@media (max-width: 767px) {
+  #navigation-article-logo {
+   object-fit: contain;
+  }
+}

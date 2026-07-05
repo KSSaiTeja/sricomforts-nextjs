@@ -1,26 +1,269 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
+@import "../styles/brand-logo.css";
+@import "../styles/site-header.css";
+@import "../styles/nav-dropdown.css";
+@import "../styles/logo-wall.css";
+@import "../styles/cross-flicker.css";
+@import "../styles/border-hover.css";
+@import "../styles/section-introduction.css";
+@import "../styles/about-section-intro.css";
+@import "../styles/about-leaders.css";
+@import "../styles/about-page.css";
+@import "../styles/background-canvas.css";
+@import "../styles/solutions-page.css";
+@import "../styles/services-page.css";
+@import "../styles/features-carousel-expandable.css";
+@import "../styles/sections-grid.css";
+@import "../styles/solutions-value.css";
+@import "../styles/features-carousel.css";
+@import "../styles/case-study.css";
+@import "../styles/features-grid.css";
+@import "../styles/text-reveal-char.css";
+@import "../styles/text-reveal.css";
+@import "../styles/padded-counter.css";
+@import "../styles/features-steps.css";
+@import "../styles/logo-grid.css";
+@import "../styles/form-reference.css";
+@import "../styles/form-builder.css";
+@import "../styles/form-field.css";
+@import "../styles/form-button.css";
+@import "../styles/promo-banner-download.css";
+@import "../styles/contact-ways.css";
+@import "../styles/path-background.css";
+@import "../styles/button-tilt.css";
+@import "../styles/site-footer.css";
+@import "../styles/not-found-page.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border: 0 solid;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.animated-strong b,
+.animated-strong strong {
+  font-weight: inherit;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  background-color: var(--color-neutral-white);
+  color: var(--color-brand-ink);
+  font-family: var(--font-primary), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100%;
+  background: var(--color-neutral-white);
+  color: var(--color-brand-ink);
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+.site-header svg {
+  max-width: none;
+}
+
+.site-header .logo-link .logo,
+.site-header .logo-link svg {
+  display: block;
+  width: 6rem;
+  height: auto;
+  max-width: none;
+  flex: none;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .site-header .logo-link .logo,
+  .site-header .logo-link svg {
+    width: 7rem;
+  }
+}
+
+.logo-grid-wrapper:not(.logo-grid-industry) .logo {
+  width: auto;
+  max-width: none;
+  color: inherit;
+}
+
+.logo-grid-wrapper:not(.logo-grid-industry) .logo > .border__wrapper {
+  position: absolute;
+  inset: 0;
+}
+
+.logo-grid-wrapper:not(.logo-grid-industry) .logo .slot__wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 10%;
+  box-sizing: border-box;
+}
+
+.logo-grid-wrapper:not(.logo-grid-industry) .logo .image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: min(98%, calc(102% * clamp(0.5, var(--logo-scale, 1), 2)));
+  height: min(100%, calc(5.4rem * clamp(0.5, var(--logo-scale, 1), 2)));
+  max-width: min(98%, calc(102% * clamp(0.5, var(--logo-scale, 1), 2)));
+  max-height: calc(5.4rem * clamp(0.5, var(--logo-scale, 1), 2));
+  overflow: hidden;
+}
+
+.logo-grid-wrapper:not(.logo-grid-industry) .logo .image img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (min-width: 1024px) {
+  .logo-grid-wrapper:not(.logo-grid-industry) .logo .slot__wrapper {
+    padding: 11%;
+  }
+
+  .logo-grid-wrapper:not(.logo-grid-industry) .logo .image {
+    width: min(98%, calc(90% * clamp(0.5, var(--logo-scale, 1), 2)));
+    max-width: min(98%, calc(90% * clamp(0.5, var(--logo-scale, 1), 2)));
+    max-height: calc(min(6rem, 46%) * clamp(0.5, var(--logo-scale, 1), 2));
+    height: min(100%, calc(min(6rem, 46%) * clamp(0.5, var(--logo-scale, 1), 2)));
+  }
+}
+
+.title-h1,
+.title-sequence {
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.title-sequence {
+  width: 90%;
+  font-style: normal;
+}
+
+.title-h1,
+.title-sequence {
+  font-size: 10.256vw;
+  letter-spacing: -0.308vw;
+}
+
+.title-si {
+  font-size: min(2.5rem, 10.256vw);
+  font-weight: 400;
+  letter-spacing: min(-0.075rem, -0.308vw);
+  line-height: 1;
+}
+
+.body-2 {
+  line-height: 1.26;
+}
+
+.body-1 {
+  font-size: min(1.4375rem, 5.897vw);
+  letter-spacing: min(-0.014375rem, -0.059vw);
+  line-height: 1.26;
+}
+
+.label-3 {
+  font-size: 0.8125rem;
+  letter-spacing: 0.18em;
+  line-height: 0.81;
+}
+
+.title-h2 {
+  font-size: min(2rem, 8.205vw);
+  letter-spacing: min(-0.039375rem, -0.164vw);
+  line-height: 1.2;
+}
+
+.title-h3 {
+  font-size: min(1.5rem, 6.154vw);
+  font-weight: 400;
+  letter-spacing: min(-0.0225rem, -0.092vw);
+  line-height: 1.46;
+}
+
+.body-4 {
+  font-size: 1.125rem;
+  letter-spacing: 0.0225rem;
+  line-height: 1.4;
+}
+
+.body-5 {
+  font-size: min(1.25rem, 5.128vw);
+  letter-spacing: min(-0.01875rem, -0.077vw);
+  line-height: 1.46;
+}
+
+.body-6 {
+  font-size: 0.8125rem;
+  letter-spacing: 0.18em;
+  line-height: 0.81;
+  text-transform: uppercase;
+}
+
+@media (min-width: 1024px) {
+  .title-h1,
+  .title-sequence {
+    width: 100%;
+    font-size: min(5.729vw, 146.67px);
+    letter-spacing: min(-0.057vw, -1.47px);
+  }
+
+  .title-si {
+    font-size: max(4.375rem, min(4.688vw, 120px));
+    letter-spacing: min(-0.141vw, -3.6px);
+  }
+
+  .body-1 {
+    font-size: min(1.198vw, 30.6666666667px);
+    letter-spacing: min(-0.012vw, -0.3066666667px);
+  }
+
+  .title-h2 {
+    font-size: min(2.396vw, 61.33px);
+    letter-spacing: min(-0.024vw, -0.613px);
+    line-height: 0.96;
+  }
+
+  .title-h3,
+  .title-h4 {
+    font-size: min(1.563vw, 40px);
+    letter-spacing: min(-0.016vw, -0.4px);
+  }
 }

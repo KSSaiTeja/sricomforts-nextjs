@@ -1,0 +1,30 @@
+.text-reveal {
+  width: 85%;
+  margin-inline: auto;
+}
+
+.text-reveal-content {
+  display: inline;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(
+    90deg,
+    var(--text-reveal-start, #ffffff) calc(var(--text-reveal-progress, 0) * 100%),
+    var(--text-reveal-end, rgba(255, 255, 255, 0.15)) calc(var(--text-reveal-progress, 0) * 100%)
+  );
+  background-repeat: no-repeat;
+}
+
+.text-reveal-content * {
+  display: inherit;
+  color: inherit;
+  background-clip: inherit;
+  -webkit-background-clip: inherit;
+}
+
+@media (min-width: 1024px) {
+  .text-reveal {
+    width: auto;
+  }
+}

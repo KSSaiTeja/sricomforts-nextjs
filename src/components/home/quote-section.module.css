@@ -1,0 +1,75 @@
+.quoteSection {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100svh;
+  height: calc(var(--svh, 1svh) * 100);
+  overflow: hidden;
+  width: 100%;
+}
+
+.imageWrapper {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  will-change: transform;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.quoteBlock {
+  position: relative;
+  z-index: 2;
+  max-width: 53.25rem;
+  margin: auto;
+  padding: 2rem 1.25rem;
+  text-align: center;
+  color: #fff;
+}
+
+.quoteText {
+  margin-bottom: 2.5rem;
+  font-size: min(2rem, 8.205vw);
+  font-weight: 450;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 450;
+  line-height: 1.2;
+}
+
+.name,
+.company {
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.role {
+  color: rgb(255 255 255 / 50%);
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+}
+
+@media (min-width: 1024px) {
+  .quoteText {
+    font-size: min(2.396vw, 61.33px);
+    letter-spacing: min(-0.024vw, -0.613px);
+  }
+}

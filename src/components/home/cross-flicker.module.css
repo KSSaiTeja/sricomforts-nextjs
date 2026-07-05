@@ -1,0 +1,25 @@
+.wrapper {
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+.vertical {
+  position: absolute;
+  top: -6px;
+  left: -1px;
+  width: 1px;
+  height: 11px;
+  transform-origin: center center;
+  background-color: #979797;
+}
+
+.horizontal {
+  position: absolute;
+  top: -1px;
+  left: -6px;
+  width: 11px;
+  height: 1px;
+  transform-origin: center center;
+  background-color: #979797;
+}

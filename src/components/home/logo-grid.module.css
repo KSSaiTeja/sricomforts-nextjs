@@ -1,0 +1,35 @@
+.logoGrid {
+  padding: 5rem 1.25rem;
+  background: var(--color-background);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  min-height: 5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  max-height: 3.5rem;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+@media (min-width: 1024px) {
+  .logoGrid {
+    padding: 6rem min(3.646vw, 93.33px);
+  }
+
+  .grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}

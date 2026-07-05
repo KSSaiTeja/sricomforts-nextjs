@@ -1,0 +1,60 @@
+.yosSection {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-brand-primary);
+  color: var(--color-neutral-white);
+}
+
+.stickyHolder {
+  height: 200svh;
+  height: calc(var(--svh, 1svh) * 200);
+}
+
+.stickyContainer {
+  position: sticky;
+  top: 0;
+  display: flex;
+  min-height: 100svh;
+  min-height: calc(var(--svh, 1svh) * 100);
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.25rem;
+  color: #fff;
+  transition: background 0.1s, color 0.1s;
+}
+
+.headingWrapper {
+  position: relative;
+  text-align: center;
+}
+
+.subTitle {
+  margin-bottom: 2rem;
+  font-size: 1.25rem;
+  letter-spacing: -0.0125rem;
+  opacity: 0.4;
+}
+
+.heading {
+  position: relative;
+  font-size: min(2.5rem, 10.256vw);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: min(-0.075rem, -0.308vw);
+}
+
+.word {
+  display: inline-block;
+}
+
+.sup {
+  font-size: 0.45em;
+  vertical-align: super;
+}
+
+@media (min-width: 1024px) {
+  .heading {
+    font-size: max(4.375rem, min(4.688vw, 120px));
+    letter-spacing: min(-0.141vw, -3.6px);
+  }
+}

@@ -1,0 +1,41 @@
+.odometer {
+  --font-size: 0.8125rem;
+  --line-height: 0.81;
+  --padding: 0.625rem;
+  --digit-height: calc(var(--padding) * 2 + var(--font-size) * var(--line-height));
+  --digit-height: round(calc(var(--padding) * 2 + var(--font-size) * var(--line-height)), 1px);
+  display: flex;
+  color: var(--color-neutral-soft);
+  font-family: var(--font-mono);
+  font-size: var(--font-size);
+  font-weight: 600;
+  letter-spacing: 0.14625rem;
+  line-height: var(--line-height);
+}
+
+.digit-column {
+  position: relative;
+  height: var(--digit-height);
+  overflow: hidden;
+}
+
+.digit-stack,
+.digit {
+  will-change: transform;
+}
+
+.digit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--digit-height);
+  text-align: center;
+}
+
+.features-steps .odometer {
+  --font-size: min(0.677vw, 17.3333333333px);
+  position: relative;
+  top: 1.28rem;
+  justify-content: flex-end;
+  margin-bottom: 1.29rem;
+}

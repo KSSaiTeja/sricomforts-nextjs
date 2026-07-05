@@ -1,0 +1,245 @@
+.solutions-page .content-wrapper {
+  position: relative;
+}
+
+.solutions-page .content__wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero canvas background */
+.solutions-page .background-canvas-wrapper {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.solutions-page .is-fullscreen.section__wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.solutions-page .is-fullscreen .section-introduction {
+  min-height: 90svh;
+  min-height: calc(var(--svh, 1svh) * 90);
+  padding: 8.75rem 1.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+.solutions-page .has-bg-path.section__wrapper {
+  position: relative;
+}
+
+.solutions-page .has-bg-path .background-wrapper {
+  height: 100%;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.solutions-page .has-bg-path .path-background {
+  height: 100%;
+}
+
+.solutions-page .has-bg-path .section-introduction {
+  padding: 6.25rem 1.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+.solutions-page .section-introduction .header strong {
+  color: #eee;
+}
+
+.solutions-page .paragraphs-wrapper.wide {
+  max-width: 55rem;
+}
+
+.solutions-page .paragraphs-wrapper.wide p {
+  color: var(--color-neutral-mid);
+}
+
+/* Sri Comforts palette on market template */
+.solutions-page .sections-grid--dark {
+  background: var(--color-brand-ink);
+  color: var(--color-neutral-white);
+}
+
+.solutions-page .sections-grid--dark .sections-grid__label {
+  color: var(--color-neutral-soft);
+}
+
+.solutions-page .sections-grid--gradient.sections-grid--dark::after {
+  background: linear-gradient(180deg, transparent 0%, var(--color-brand-neon-alpha-25));
+}
+
+.solutions-page .sections-grid--gradient.sections-grid--white::after {
+  background: linear-gradient(180deg, transparent 0%, var(--color-brand-accent-alpha-20));
+}
+
+.solutions-page .sections-grid--dark .sections-grid__container {
+  --grid-line-color: var(--color-brand-neon-alpha-35);
+}
+
+.solutions-page .sections-grid--white .sections-grid__container {
+  --grid-line-color: rgb(5 24 36 / 16%);
+}
+
+.solutions-page .case-study--dark {
+  background-color: var(--color-brand-ink);
+  color: var(--color-neutral-white);
+}
+
+.solutions-page .case-study--dark .case-study__label {
+  color: var(--color-neutral-soft);
+}
+
+.solutions-page .case-study--dark .case-study__quote-mark,
+.solutions-page .case-study--dark .case-study__stat-value,
+.solutions-page .case-study--dark .case-study__testimonial-text {
+  color: var(--color-brand-ink);
+}
+
+.solutions-page .case-study--dark .case-study__stat-label {
+  color: var(--color-brand-ink);
+  opacity: 0.8;
+}
+
+.solutions-page .case-study--dark .case-study__testimonial-background {
+  background-color: var(--color-neutral-white);
+}
+
+.path-line-follower {
+  pointer-events: none;
+}
+
+.animated-path-line {
+  pointer-events: none;
+}
+
+/* Recolor clone lime-green mesh illustrations → Sri Comforts neon blue */
+.solutions-page .solutions-value__card-media img {
+  filter: hue-rotate(98deg) saturate(1.35) brightness(1.05);
+}
+
+.solutions-page .sections-grid-variant2__item {
+  background: var(--color-neutral-white);
+}
+
+.solutions-page .sections-grid-variant2__card {
+  position: relative;
+}
+
+/* Features carousel */
+.solutions-page .features-card__wrapper .rollover__wrapper {
+  border-radius: 1.25rem;
+  filter: blur(0.5rem);
+  inset: 0;
+  opacity: 0.3;
+  overflow: hidden;
+  position: absolute;
+  transform: scale(1.2);
+  transition:
+    opacity 0.9s cubic-bezier(0.19, 1, 0.22, 1),
+    transform 1.2s cubic-bezier(0.19, 1, 0.22, 1),
+    filter 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.solutions-page .features-card__wrapper:hover .rollover__wrapper {
+  filter: blur(0);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.solutions-page .features-card__wrapper .media-el.image {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.solutions-page .features-card__wrapper .media-el.image img {
+  object-fit: cover;
+}
+
+.solutions-page .features-card__container {
+  position: relative;
+}
+
+.solutions-page .features-card__wrapper .bottom__wrapper {
+  opacity: 0;
+}
+
+.solutions-page .features-card__wrapper:hover .bottom__wrapper {
+  opacity: 1;
+}
+
+.solutions-page .carousel__wrapper {
+  cursor: grab;
+  user-select: none;
+}
+
+.solutions-page .carousel__wrapper.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.solutions-page .carousel__wrapper.is-dragging * {
+  user-select: none;
+}
+
+.solutions-page .features-card__wrapper:hover {
+  color: var(--color-neutral-white) !important;
+}
+
+/* Slider chevrons: rotate on SVG, not button */
+.solutions-page .slider-button svg {
+  transform: rotate(-45deg);
+  transform-origin: center;
+  transition: color 0.25s;
+}
+
+.solutions-page .slider-button svg.right {
+  transform: rotate(135deg);
+}
+
+.solutions-page .slider-button[disabled] svg {
+  opacity: 0.35;
+}
+
+.solutions-page .link-button {
+  --hover-bg: var(--color-brand-ink);
+  --hover-color: var(--color-brand-accent-on-dark);
+  --base-color: white;
+}
+
+.solutions-page .solutions-value__cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 1024px) {
+  .solutions-page .content__wrapper {
+    padding-bottom: 7.5rem;
+  }
+
+  .solutions-page .is-fullscreen .section-introduction,
+  .solutions-page .has-bg-path .section-introduction,
+  .solutions-page .section-introduction {
+    padding: 11.25rem 4.375rem;
+  }
+
+  .solutions-page .case-study__testimonial-background {
+    padding: 6.25rem 5rem !important;
+  }
+}

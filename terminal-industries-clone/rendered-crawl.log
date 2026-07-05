@@ -1,0 +1,817 @@
+╭──────────────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│     ╦ ╦╔═╗╔╗ ╔╦╗╦╦═╗╦═╗╔═╗╦═╗                                                │
+│     ║║║║╣ ╠╩╗║║║║╠╦╝╠╦╝║ ║╠╦╝                                                │
+│     ╚╩╝╚═╝╚═╝╩ ╩╩╩╚═╩╚═╚═╝╩╚═                                                │
+│                                                                              │
+╰─────────────────────────────────── v1.0.0 ───────────────────────────────────╯
+                                🔧 Configuration                                
+┌───────────────────┬──────────────────────────────────────────────────────────┐
+│ Start URL         │ https://terminal-industries.com/                         │
+│ Output Directory  │ /Users/kssaiteja/Downloads/skills-mcps/terminal-industr… │
+│ Recursive         │ ✗                                                        │
+│ Max Depth         │ 1                                                        │
+│ Max Pages         │ 1                                                        │
+│ Workers           │ 1                                                        │
+│ Delay (ms)        │ 2000                                                     │
+│ Include Assets    │ ✓                                                        │
+│ Same Domain Only  │ ✓                                                        │
+│ Private Networks  │ Blocked                                                  │
+│ Max Asset Size    │ 52,428,800 bytes                                         │
+│ Cookie File       │ None                                                     │
+│ Render JavaScript │ ✓                                                        │
+└───────────────────┴──────────────────────────────────────────────────────────┘
+
+🚀 Starting crawl operation...
+
+DEBUG    Using selector: KqueueSelector                    selector_events.py:64
+INFO     Starting crawl of https://terminal-industries.com/       crawler.py:239
+INFO     Config: recursive=False, max_depth=1, workers=1          crawler.py:240
+INFO     ====== WebDriver manager ======                            logger.py:11
+INFO     Get LATEST chromedriver version for google-chrome          logger.py:11
+DEBUG    Encoding detection: ascii is most likely the one.            api.py:721
+INFO     WebDriver version 150.0.7871.46 selected                   logger.py:11
+INFO     Modern chrome version                                      logger.py:11
+         https://storage.googleapis.com/chrome-for-testing-public/1             
+         50.0.7871.46/mac-arm64/chromedriver-mac-arm64.zip                      
+INFO     About to download new driver from                          logger.py:11
+         https://storage.googleapis.com/chrome-for-testing-public/1             
+         50.0.7871.46/mac-arm64/chromedriver-mac-arm64.zip                      
+INFO     Driver downloading response is 200                         logger.py:11
+INFO     Get LATEST chromedriver version for google-chrome          logger.py:11
+DEBUG    Encoding detection: ascii is most likely the one.            api.py:721
+INFO     Driver has been saved in cache                             logger.py:11
+         [/Users/kssaiteja/.wdm/drivers/chromedriver/mac-arm64/150.             
+         0.7871.46]                                                             
+ERROR    Unexpected error crawling                                crawler.py:398
+         https://terminal-industries.com/: Message: session not                 
+         created                                                                
+         from unknown error: cannot find Chrome binary; For                     
+         documentation on this error, please visit:                             
+         https://www.selenium.dev/documentation/webdriver/trouble               
+         shooting/errors#sessionnotcreatedexception                             
+         Stacktrace:                                                            
+         0   chromedriver                                                       
+         0x00000001049e1c5c chromedriver + 5938268                              
+         1   chromedriver                                                       
+         0x0000000104484554 chromedriver + 312660                               
+         2   chromedriver                                                       
+         0x00000001044b8eec chromedriver + 528108                               
+         3   chromedriver                                                       
+         0x00000001044b7ea8 chromedriver + 523944                               
+         4   chromedriver                                                       
+         0x00000001044fb228 chromedriver + 799272                               
+         5   chromedriver                                                       
+         0x00000001044fac28 chromedriver + 797736                               
+         6   chromedriver                                                       
+         0x00000001044c33b8 chromedriver + 570296                               
+         7   chromedriver                                                       
+         0x00000001049a6794 chromedriver + 5695380                              
+         8   chromedriver                                                       
+         0x00000001049aa024 chromedriver + 5709860                              
+         9   chromedriver                                                       
+         0x000000010498cc90 chromedriver + 5590160                              
+         10  chromedriver                                                       
+         0x00000001049aa8b8 chromedriver + 5712056                              
+         11  chromedriver                                                       
+         0x000000010497de60 chromedriver + 5529184                              
+         12  chromedriver                                                       
+         0x00000001049cfcdc chromedriver + 5864668                              
+         13  chromedriver                                                       
+         0x00000001049cfe3c chromedriver + 5865020                              
+         14  chromedriver                                                       
+         0x00000001049e18b4 chromedriver + 5937332                              
+         15  libsystem_pthread.dylib                                            
+         0x00000001901b5c54 _pthread_start + 132                                
+         16  libsystem_pthread.dylib                                            
+         0x00000001901b0c18 thread_start + 4                                    
+                                                                                
+         ╭───────── Traceback (most recent call last) ──────────╮               
+         │ /Users/kssaiteja/Downloads/skills-mcps/webclone/src/ │               
+         │ webclone/core/crawler.py:318 in _crawl_page          │               
+         │                                                      │               
+         │   315 │   │   │   │   rendered: dict[str, object] |  │               
+         │   316 │   │   │   │                                  │               
+         │   317 │   │   │   │   if self.config.render_js:      │               
+         │ ❱ 318 │   │   │   │   │   rendered = await asyncio.t │               
+         │   319 │   │   │   │   │   │   self.rendered_fetcher. │               
+         │   320 │   │   │   │   │   │   url,                   │               
+         │   321 │   │   │   │   │   │   cookie_file=self.confi │               
+         │                                                      │               
+         │ ╭───────────────────── locals ─────────────────────╮ │               
+         │ │       depth = 0                                  │ │               
+         │ │           e = SessionNotCreatedException()       │ │               
+         │ │       error = 'Unexpected error crawling         │ │               
+         │ │               https://terminal-industries.com/:  │ │               
+         │ │               Message: session not'+1594         │ │               
+         │ │    rendered = None                               │ │               
+         │ │        self = <webclone.core.crawler.AsyncCrawl… │ │               
+         │ │               object at 0x10a9ddcd0>             │ │               
+         │ │  start_time = 7789.972352625                     │ │               
+         │ │ status_code = 200                                │ │               
+         │ │         url = 'https://terminal-industries.com/' │ │               
+         │ ╰──────────────────────────────────────────────────╯ │               
+         │                                                      │               
+         │ /Users/kssaiteja/.local/share/uv/python/cpython-3.12 │               
+         │ .13-macos-aarch64-none/lib/python3.12/asyncio/thread │               
+         │ s.py:25 in to_thread                                 │               
+         │                                                      │               
+         │   22 │   loop = events.get_running_loop()            │               
+         │   23 │   ctx = contextvars.copy_context()            │               
+         │   24 │   func_call = functools.partial(ctx.run, func │               
+         │ ❱ 25 │   return await loop.run_in_executor(None, fun │               
+         │   26                                                 │               
+         │                                                      │               
+         │ ╭───────────────────── locals ─────────────────────╮ │               
+         │ │      args = (                                    │ │               
+         │ │             │                                    │ │               
+         │ │             'https://terminal-industries.com/',  │ │               
+         │ │             )                                    │ │               
+         │ │       ctx = <_contextvars.Context object at      │ │               
+         │ │             0x10a9e9ac0>                         │ │               
+         │ │      func = <bound method RenderedFetcher.render │ │               
+         │ │             of                                   │ │               
+         │ │             <webclone.core.rendered_fetcher.Ren… │ │               
+         │ │             object at 0x10a9de090>>              │ │               
+         │ │ func_call = functools.partial(<built-in method   │ │               
+         │ │             run of _contextvars.Context object   │ │               
+         │ │             at 0x10a9e9ac0>, <bound method       │ │               
+         │ │             RenderedFetcher.render of            │ │               
+         │ │             <webclone.core.rendered_fetcher.Ren… │ │               
+         │ │             object at 0x10a9de090>>,             │ │               
+         │ │             'https://terminal-industries.com/',  │ │               
+         │ │             cookie_file=None,                    │ │               
+         │ │             wait_for_selector=None,              │ │               
+         │ │             click_selectors=[],                  │ │               
+         │ │             allow_private_networks=False)        │ │               
+         │ │    kwargs = {                                    │ │               
+         │ │             │   'cookie_file': None,             │ │               
+         │ │             │   'wait_for_selector': None,       │ │               
+         │ │             │   'click_selectors': [],           │ │               
+         │ │             │   'allow_private_networks': False  │ │               
+         │ │             }                                    │ │               
+         │ │      loop = <_UnixSelectorEventLoop running=True │ │               
+         │ │             closed=False debug=False>            │ │               
+         │ ╰──────────────────────────────────────────────────╯ │               
+         │                                                      │               
+         │ /Users/kssaiteja/.local/share/uv/python/cpython-3.12 │               
+         │ .13-macos-aarch64-none/lib/python3.12/concurrent/fut │               
+         │ ures/thread.py:59 in run                             │               
+         │                                                      │               
+         │    56 │   │   │   return                             │               
+         │    57 │   │                                          │               
+         │    58 │   │   try:                                   │               
+         │ ❱  59 │   │   │   result = self.fn(*self.args, **sel │               
+         │    60 │   │   except BaseException as exc:           │               
+         │    61 │   │   │   self.future.set_exception(exc)     │               
+         │    62 │   │   │   # Break a reference cycle with the │               
+         │                                                      │               
+         │ ╭── locals ───╮                                      │               
+         │ │ self = None │                                      │               
+         │ ╰─────────────╯                                      │               
+         │                                                      │               
+         │ /Users/kssaiteja/Downloads/skills-mcps/webclone/src/ │               
+         │ webclone/core/rendered_fetcher.py:80 in render       │               
+         │                                                      │               
+         │    77 │   │   """Render one authorized page and retu │               
+         │    78 │   │   validate_safe_http_url(url, allow_priv │               
+         │    79 │   │                                          │               
+         │ ❱  80 │   │   with SeleniumService(self.selenium_con │               
+         │    81 │   │   │   if service.driver is None:         │               
+         │    82 │   │   │   │   raise RuntimeError("Selenium d │               
+         │    83                                                │               
+         │                                                      │               
+         │ ╭───────────────────── locals ─────────────────────╮ │               
+         │ │  allow_private_networks False                    │ │               
+         │ │                       =                          │ │               
+         │ │       click_selectors = []                       │ │               
+         │ │           cookie_file = None                     │ │               
+         │ │                  self = <webclone.core.rendered… │ │               
+         │ │                         object at 0x10a9de090>   │ │               
+         │ │                   url = 'https://terminal-indus… │ │               
+         │ │ wait_after_click_secon… 1.0                      │ │               
+         │ │                       =                          │ │               
+         │ │     wait_for_selector = None                     │ │               
+         │ ╰──────────────────────────────────────────────────╯ │               
+         │                                                      │               
+         │ /Users/kssaiteja/Downloads/skills-mcps/webclone/src/ │               
+         │ webclone/services/selenium_service.py:42 in          │               
+         │ __enter__                                            │               
+         │                                                      │               
+         │    39 │                                              │               
+         │    40 │   def __enter__(self) -> "SeleniumService":  │               
+         │    41 │   │   """Context manager entry."""           │               
+         │ ❱  42 │   │   self.start_driver()                    │               
+         │    43 │   │   return self                            │               
+         │    44 │                                              │               
+         │    45 │   def __exit__(self, exc_type, exc_val, exc_ │               
+         │       ignore[no-untyped-def]                         │               
+         │                                                      │               
+         │ ╭───────────────────── locals ─────────────────────╮ │               
+         │ │ self = <webclone.services.selenium_service.Sele… │ │               
+         │ │        object at 0x10a9dede0>                    │ │               
+         │ ╰──────────────────────────────────────────────────╯ │               
+         │                                                      │               
+         │ /Users/kssaiteja/Downloads/skills-mcps/webclone/src/ │               
+         │ webclone/services/selenium_service.py:158 in         │               
+         │ start_driver                                         │               
+         │                                                      │               
+         │   155 │   │                                          │               
+         │   156 │   │   # Initialize driver                    │               
+         │   157 │   │   service = Service(ChromeDriverManager( │               
+         │ ❱ 158 │   │   self.driver = webdriver.Chrome(service │               
+         │   159 │   │   self.driver.set_page_load_timeout(self │               
+         │   160 │   │                                          │               
+         │   161 │   │   # === CRITICAL: Mask WebDriver Propert │               
+         │                                                      │               
+         │ ╭───────────────────── locals ─────────────────────╮ │               
+         │ │ chrome_options = <selenium.webdriver.chrome.opt… │ │               
+         │ │                  object at 0x10aa189b0>          │ │               
+         │ │         height = '1080'                          │ │               
+         │ │          prefs = {                               │ │               
+         │ │                  │                               │ │               
+         │ │                  'credentials_enable_service':   │ │               
+         │ │                  False,                          │ │               
+         │ │                  │                               │ │               
+         │ │                  'profile.password_manager_enab… │ │               
+         │ │                  False,                          │ │               
+         │ │                  │                               │ │               
+         │ │                  'profile.default_content_setti… │ │               
+         │ │                  2,                              │ │               
+         │ │                  │                               │ │               
+         │ │                  'profile.managed_default_conte… │ │               
+         │ │                  1,                              │ │               
+         │ │                  │                               │ │               
+         │ │                  'devtools.preferences.currentD… │ │               
+         │ │                  '"undocked"',                   │ │               
+         │ │                  │                               │ │               
+         │ │                  'devtools.preferences.showCons… │ │               
+         │ │                  'false'                         │ │               
+         │ │                  }                               │ │               
+         │ │      proxy_env = None                            │ │               
+         │ │           self = <webclone.services.selenium_se… │ │               
+         │ │                  object at 0x10a9dede0>          │ │               
+         │ │        service = <selenium.webdriver.chrome.ser… │ │               
+         │ │                  object at 0x109598050>          │ │               
+         │ │          width = '1920'                          │ │               
+         │ ╰──────────────────────────────────────────────────╯ │               
+         │                                                      │               
+         │ /Users/kssaiteja/Downloads/skills-mcps/webclone/.ven │               
+         │ v/lib/python3.12/site-packages/selenium/webdriver/ch │               
+         │ rome/webdriver.py:45 in __init__                     │               
+         │                                                      │               
+         │   42 │   │   service = service if service else Servi │               
+         │   43 │   │   options = options if options else Optio │               
+         │   44 │   │                                           │               
+         │ ❱ 45 │   │   super().__init__(                       │               
+         │   46 │   │   │   browser_name=DesiredCapabilities.CH │               
+         │   47 │   │   │   vendor_prefix="goog",               │               
+         │   48 │   │   │   options=options,                    │               
+         │                                                      │               
+         │ ╭───────────────────── locals ─────────────────────╮ │               
+         │ │ keep_alive = True                                │ │               
+         │ │    options = <selenium.webdriver.chrome.options… │ │               
+         │ │              object at 0x10aa189b0>              │ │               
+         │ │       self = <selenium.webdriver.chrome.webdriv… │ │               
+         │ │              (session="None")>                   │ │               
+         │ │    service = <selenium.webdriver.chrome.service… │ │               
+         │ │              object at 0x109598050>              │ │               
+         │ ╰──────────────────────────────────────────────────╯ │               
+         │                                                      │               
+         │ /Users/kssaiteja/Downloads/skills-mcps/webclone/.ven │               
+         │ v/lib/python3.12/site-packages/selenium/webdriver/ch │               
+         │ romium/webdriver.py:66 in __init__                   │               
+         │                                                      │               
+         │    63 │   │   )                                      │               
+         │    64 │   │                                          │               
+         │    65 │   │   try:                                   │               
+         │ ❱  66 │   │   │   super().__init__(command_executor= │               
+         │    67 │   │   except Exception:                      │               
+         │    68 │   │   │   self.quit()                        │               
+         │    69 │   │   │   raise                              │               
+         │                                                      │               
+         │ ╭───────────────────── locals ─────────────────────╮ │               
+         │ │  browser_name = 'chrome'                         │ │               
+         │ │      executor = <selenium.webdriver.chromium.re… │ │               
+         │ │                 object at 0x10a9de7b0>           │ │               
+         │ │        finder = <selenium.webdriver.common.driv… │ │               
+         │ │                 object at 0x10a6a1400>           │ │               
+         │ │    keep_alive = True                             │ │               
+         │ │       options = <selenium.webdriver.chrome.opti… │ │               
+         │ │                 object at 0x10aa189b0>           │ │               
+         │ │          self = <selenium.webdriver.chrome.webd… │ │               
+         │ │                 (session="None")>                │ │               
+         │ │       service = <selenium.webdriver.chrome.serv… │ │               
+         │ │                 object at 0x109598050>           │ │               
+         │ │ vendor_prefix = 'goog'                           │ │               
+         │ ╰──────────────────────────────────────────────────╯ │               
+         │                                                      │               
+         │ /Users/kssaiteja/Downloads/skills-mcps/webclone/.ven │               
+         │ v/lib/python3.12/site-packages/selenium/webdriver/co │               
+         │ mmon/webdriver.py:25 in __init__                     │               
+         │                                                      │               
+         │   22 │   """Base class for local WebDrivers."""      │               
+         │   23 │                                               │               
+         │   24 │   def __init__(self, *args, **kwargs):        │               
+         │ ❱ 25 │   │   super().__init__(*args, **kwargs)       │               
+         │   26 │   │   self._is_remote = False                 │               
+         │   27 │                                               │               
+         │   28 │   def __new__(cls, *args, **kwargs):          │               
+         │                                                      │               
+         │ ╭───────────────────── locals ─────────────────────╮ │               
+         │ │   args = ()                                      │ │               
+         │ │ kwargs = {                                       │ │               
+         │ │          │   'command_executor':                 │ │               
+         │ │          <selenium.webdriver.chromium.remote_co… │ │               
+         │ │          object at 0x10a9de7b0>,                 │ │               
+         │ │          │   'options':                          │ │               
+         │ │          <selenium.webdriver.chrome.options.Opt… │ │               
+         │ │          object at 0x10aa189b0>                  │ │               
+         │ │          }                                       │ │               
+         │ │   self = <selenium.webdriver.chrome.webdriver.W… │ │               
+         │ │          (session="None")>                       │ │               
+         │ ╰──────────────────────────────────────────────────╯ │               
+         │                                                      │               
+         │ /Users/kssaiteja/Downloads/skills-mcps/webclone/.ven │               
+         │ v/lib/python3.12/site-packages/selenium/webdriver/re │               
+         │ mote/webdriver.py:300 in __init__                    │               
+         │                                                      │               
+         │    297 │   │   self._web_element_cls = web_element_c │               
+         │    298 │   │   self._authenticator_id = None         │               
+         │    299 │   │   self.start_client()                   │               
+         │ ❱  300 │   │   self.start_session(capabilities)      │               
+         │    301 │   │   self._fedcm = FedCM(self)             │               
+         │    302 │   │                                         │               
+         │    303 │   │   self._websocket_connection: WebSocket │               
+         │                                                      │               
+         │ ╭───────────────────── locals ─────────────────────╮ │               
+         │ │ _ignore_local_proxy = False                      │ │               
+         │ │        capabilities = {                          │ │               
+         │ │                       │   'browserName':         │ │               
+         │ │                       'chrome',                  │ │               
+         │ │                       │   'pageLoadStrategy':    │ │               
+         │ │                       'eager',                   │ │               
+         │ │                       │   'goog:chromeOptions':  │ │               
+         │ │                       {                          │ │               
+         │ │                       │   │   'excludeSwitches': │ │               
+         │ │                       [                          │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       'enable-logging'           │ │               
+         │ │                       │   │   ],                 │ │               
+         │ │                       │   │                      │ │               
+         │ │                       'useAutomationExtension':  │ │               
+         │ │                       False,                     │ │               
+         │ │                       │   │   'prefs': {         │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       'credentials_enable_servi… │ │               
+         │ │                       False,                     │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       'profile.password_manager… │ │               
+         │ │                       False,                     │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       'profile.default_content_… │ │               
+         │ │                       2,                         │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       'profile.managed_default_… │ │               
+         │ │                       1,                         │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       'devtools.preferences.cur… │ │               
+         │ │                       '"undocked"',              │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       'devtools.preferences.sho… │ │               
+         │ │                       'false'                    │ │               
+         │ │                       │   │   },                 │ │               
+         │ │                       │   │   'extensions': [],  │ │               
+         │ │                       │   │   'args': [          │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       '--headless=new',          │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       '--disable-gpu',           │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       '--window-size=1920,1080', │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       '--user-agent=Mozilla/5.0  │ │               
+         │ │                       (X11; Linux x86_64)        │ │               
+         │ │                       AppleWebKit/537.36 (KHTML, │ │               
+         │ │                       like Gec'+34,              │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       '--ignore-certificate-err… │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       '--ignore-ssl-errors=yes', │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       '--disable-blink-features… │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       '--disable-features=Googl… │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       '--disable-cloud-print',   │ │               
+         │ │                       │   │   │                  │ │               
+         │ │                       '--disable-sync',          │ │               
+         │ │                       │   │   │   ... +15        │ │               
+         │ │                       │   │   ]                  │ │               
+         │ │                       │   }                      │ │               
+         │ │                       }                          │ │               
+         │ │       client_config = None                       │ │               
+         │ │    command_executor = <selenium.webdriver.chrom… │ │               
+         │ │                       object at 0x10a9de7b0>     │ │               
+         │ │       file_detector = None                       │ │               
+         │ │          keep_alive = True                       │ │               
+         │ │   locator_converter = None                       │ │               
+         │ │             options = <selenium.webdriver.chrom… │ │               
+         │ │                       object at 0x10aa189b0>     │ │               
+         │ │                self = <selenium.webdriver.chrom… │ │               
+         │ │                       (session="None")>          │ │               
+         │ │     web_element_cls = None                       │ │               
+         │ ╰──────────────────────────────────────────────────╯ │               
+         │                                                      │               
+         │ /Users/kssaiteja/Downloads/skills-mcps/webclone/.ven │               
+         │ v/lib/python3.12/site-packages/selenium/webdriver/re │               
+         │ mote/webdriver.py:396 in start_session               │               
+         │                                                      │               
+         │    393 │   │   """                                   │               
+         │    394 │   │   caps = _create_caps(capabilities)     │               
+         │    395 │   │   try:                                  │               
+         │ ❱  396 │   │   │   response = self.execute(Command.N │               
+         │    397 │   │   │   self.session_id = response.get("s │               
+         │    398 │   │   │   self.caps = response.get("capabil │               
+         │    399 │   │   except Exception:                     │               
+         │                                                      │               
+         │ ╭───────────────────── locals ─────────────────────╮ │               
+         │ │ capabilities = {                                 │ │               
+         │ │                │   'browserName': 'chrome',      │ │               
+         │ │                │   'pageLoadStrategy': 'eager',  │ │               
+         │ │                │   'goog:chromeOptions': {       │ │               
+         │ │                │   │   'excludeSwitches': [      │ │               
+         │ │                │   │   │   'enable-logging'      │ │               
+         │ │                │   │   ],                        │ │               
+         │ │                │   │   'useAutomationExtension': │ │               
+         │ │                False,                            │ │               
+         │ │                │   │   'prefs': {                │ │               
+         │ │                │   │   │                         │ │               
+         │ │                'credentials_enable_service':     │ │               
+         │ │                False,                            │ │               
+         │ │                │   │   │                         │ │               
+         │ │                'profile.password_manager_enable… │ │               
+         │ │                False,                            │ │               
+         │ │                │   │   │                         │ │               
+         │ │                'profile.default_content_setting… │ │               
+         │ │                2,                                │ │               
+         │ │                │   │   │                         │ │               
+         │ │                'profile.managed_default_content… │ │               
+         │ │                1,                                │ │               
+         │ │                │   │   │                         │ │               
+         │ │                'devtools.preferences.currentDoc… │ │               
+         │ │                '"undocked"',                     │ │               
+         │ │                │   │   │                         │ │               
+         │ │                'devtools.preferences.showConsol… │ │               
+         │ │                'false'                           │ │               
+         │ │                │   │   },                        │ │               
+         │ │                │   │   'extensions': [],         │ │               
+         │ │                │   │   'args': [                 │ │               
+         │ │                │   │   │   '--headless=new',     │ │               
+         │ │                │   │   │   '--disable-gpu',      │ │               
+         │ │                │   │   │                         │ │               
+         │ │                '--window-size=1920,1080',        │ │               
+         │ │                │   │   │                         │ │               
+         │ │                '--user-agent=Mozilla/5.0 (X11;   │ │               
+         │ │                Linux x86_64) AppleWebKit/537.36  │ │               
+         │ │                (KHTML, like Gec'+34,             │ │               
+         │ │                │   │   │                         │ │               
+         │ │                '--ignore-certificate-errors',    │ │               
+         │ │                │   │   │                         │ │               
+         │ │                '--ignore-ssl-errors=yes',        │ │               
+         │ │                │   │   │                         │ │               
+         │ │                '--disable-blink-features=Automa… │ │               
+         │ │                │   │   │                         │ │               
+         │ │                '--disable-features=GoogleServic… │ │               
+         │ │                │   │   │                         │ │               
+         │ │                '--disable-cloud-print',          │ │               
+         │ │                │   │   │   '--disable-sync',     │ │               
+         │ │                │   │   │   ... +15               │ │               
+         │ │                │   │   ]                         │ │               
+         │ │                │   }                             │ │               
+         │ │                }                                 │ │               
+         │ │         caps = {                                 │ │               
+         │ │                │   'capabilities': {             │ │               
+         │ │                │   │   'firstMatch': [{}],       │ │               
+         │ │                │   │   'alwaysMatch': {          │ │               
+         │ │                │   │   │   'browserName':        │ │               
+         │ │                'chrome',                         │ │               
+         │ │                │   │   │   'pageLoadStrategy':   │ │               
+         │ │                'eager',                          │ │               
+         │ │                │   │   │   'goog:chromeOptions': │ │               
+         │ │                {                                 │ │               
+         │ │                │   │   │   │                     │ │               
+         │ │                'excludeSwitches': [              │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                'enable-logging'                  │ │               
+         │ │                │   │   │   │   ],                │ │               
+         │ │                │   │   │   │                     │ │               
+         │ │                'useAutomationExtension': False,  │ │               
+         │ │                │   │   │   │   'prefs': {        │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                'credentials_enable_service':     │ │               
+         │ │                False,                            │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                'profile.password_manager_enable… │ │               
+         │ │                False,                            │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                'profile.default_content_setting… │ │               
+         │ │                2,                                │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                'profile.managed_default_content… │ │               
+         │ │                1,                                │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                'devtools.preferences.currentDoc… │ │               
+         │ │                '"undocked"',                     │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                'devtools.preferences.showConsol… │ │               
+         │ │                'false'                           │ │               
+         │ │                │   │   │   │   },                │ │               
+         │ │                │   │   │   │   'extensions': [], │ │               
+         │ │                │   │   │   │   'args': [         │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                '--headless=new',                 │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                '--disable-gpu',                  │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                '--window-size=1920,1080',        │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                '--user-agent=Mozilla/5.0 (X11;   │ │               
+         │ │                Linux x86_64) AppleWebKit/537.36  │ │               
+         │ │                (KHTML, like Gec'+34,             │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                '--ignore-certificate-errors',    │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                '--ignore-ssl-errors=yes',        │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                '--disable-blink-features=Automa… │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                '--disable-features=GoogleServic… │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                '--disable-cloud-print',          │ │               
+         │ │                │   │   │   │   │                 │ │               
+         │ │                '--disable-sync',                 │ │               
+         │ │                │   │   │   │   │   ... +15       │ │               
+         │ │                │   │   │   │   ]                 │ │               
+         │ │                │   │   │   }                     │ │               
+         │ │                │   │   }                         │ │               
+         │ │                │   }                             │ │               
+         │ │                }                                 │ │               
+         │ │         self = <selenium.webdriver.chrome.webdr… │ │               
+         │ │                (session="None")>                 │ │               
+         │ ╰──────────────────────────────────────────────────╯ │               
+         │                                                      │               
+         │ /Users/kssaiteja/Downloads/skills-mcps/webclone/.ven │               
+         │ v/lib/python3.12/site-packages/selenium/webdriver/re │               
+         │ mote/webdriver.py:492 in execute                     │               
+         │                                                      │               
+         │    489 │   │   response = cast(RemoteConnection, sel │               
+         │        params)                                       │               
+         │    490 │   │                                         │               
+         │    491 │   │   if response:                          │               
+         │ ❱  492 │   │   │   self.error_handler.check_response │               
+         │    493 │   │   │   response["value"] = self._unwrap_ │               
+         │    494 │   │   │   return response                   │               
+         │    495 │   │   # If the server doesn't send a respon │               
+         │                                                      │               
+         │ ╭───────────────────── locals ─────────────────────╮ │               
+         │ │ driver_command = 'newSession'                    │ │               
+         │ │         params = {                               │ │               
+         │ │                  │   'capabilities': {           │ │               
+         │ │                  │   │   'firstMatch': [{}],     │ │               
+         │ │                  │   │   'alwaysMatch': {        │ │               
+         │ │                  │   │   │   'browserName':      │ │               
+         │ │                  'chrome',                       │ │               
+         │ │                  │   │   │   'pageLoadStrategy': │ │               
+         │ │                  'eager',                        │ │               
+         │ │                  │   │   │                       │ │               
+         │ │                  'goog:chromeOptions': {         │ │               
+         │ │                  │   │   │   │                   │ │               
+         │ │                  'excludeSwitches': [            │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  'enable-logging'                │ │               
+         │ │                  │   │   │   │   ],              │ │               
+         │ │                  │   │   │   │                   │ │               
+         │ │                  'useAutomationExtension':       │ │               
+         │ │                  False,                          │ │               
+         │ │                  │   │   │   │   'prefs': {      │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  'credentials_enable_service':   │ │               
+         │ │                  False,                          │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  'profile.password_manager_enab… │ │               
+         │ │                  False,                          │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  'profile.default_content_setti… │ │               
+         │ │                  2,                              │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  'profile.managed_default_conte… │ │               
+         │ │                  1,                              │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  'devtools.preferences.currentD… │ │               
+         │ │                  '"undocked"',                   │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  'devtools.preferences.showCons… │ │               
+         │ │                  'false'                         │ │               
+         │ │                  │   │   │   │   },              │ │               
+         │ │                  │   │   │   │   'extensions':   │ │               
+         │ │                  [],                             │ │               
+         │ │                  │   │   │   │   'args': [       │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  '--headless=new',               │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  '--disable-gpu',                │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  '--window-size=1920,1080',      │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  '--user-agent=Mozilla/5.0 (X11; │ │               
+         │ │                  Linux x86_64)                   │ │               
+         │ │                  AppleWebKit/537.36 (KHTML, like │ │               
+         │ │                  Gec'+34,                        │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  '--ignore-certificate-errors',  │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  '--ignore-ssl-errors=yes',      │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  '--disable-blink-features=Auto… │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  '--disable-features=GoogleServ… │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  '--disable-cloud-print',        │ │               
+         │ │                  │   │   │   │   │               │ │               
+         │ │                  '--disable-sync',               │ │               
+         │ │                  │   │   │   │   │   ... +15     │ │               
+         │ │                  │   │   │   │   ]               │ │               
+         │ │                  │   │   │   }                   │ │               
+         │ │                  │   │   }                       │ │               
+         │ │                  │   }                           │ │               
+         │ │                  }                               │ │               
+         │ │       response = {                               │ │               
+         │ │                  │   'status': 500,              │ │               
+         │ │                  │   'value':                    │ │               
+         │ │                  '{"value":{"error":"session not │ │               
+         │ │                  created","message":"session not │ │               
+         │ │                  created\\nfrom unk'+1453        │ │               
+         │ │                  }                               │ │               
+         │ │           self = <selenium.webdriver.chrome.web… │ │               
+         │ │                  (session="None")>               │ │               
+         │ ╰──────────────────────────────────────────────────╯ │               
+         │                                                      │               
+         │ /Users/kssaiteja/Downloads/skills-mcps/webclone/.ven │               
+         │ v/lib/python3.12/site-packages/selenium/webdriver/re │               
+         │ mote/errorhandler.py:232 in check_response           │               
+         │                                                      │               
+         │   229 │   │   │   elif "alert" in value:             │               
+         │   230 │   │   │   │   alert_text = value["alert"].ge │               
+         │   231 │   │   │   raise exception_class(message, scr │               
+         │ ❱ 232 │   │   raise exception_class(message, screen, │               
+         │   233                                                │               
+         │                                                      │               
+         │ ╭───────────────────── locals ─────────────────────╮ │               
+         │ │           e = <selenium.webdriver.remote.errorh… │ │               
+         │ │               object at 0x10aa1b6e0>             │ │               
+         │ │  error_code = 'SESSION_NOT_CREATED'              │ │               
+         │ │ error_codes = [                                  │ │               
+         │ │               │   'DETACHED_SHADOW_ROOT',        │ │               
+         │ │               │   'ELEMENT_CLICK_INTERCEPTED',   │ │               
+         │ │               │   'ELEMENT_IS_NOT_SELECTABLE',   │ │               
+         │ │               │   'ELEMENT_NOT_INTERACTABLE',    │ │               
+         │ │               │   'ELEMENT_NOT_VISIBLE',         │ │               
+         │ │               │                                  │ │               
+         │ │               'IME_ENGINE_ACTIVATION_FAILED',    │ │               
+         │ │               │   'IME_NOT_AVAILABLE',           │ │               
+         │ │               │   'INSECURE_CERTIFICATE',        │ │               
+         │ │               │   'INVALID_ARGUMENT',            │ │               
+         │ │               │   'INVALID_COOKIE_DOMAIN',       │ │               
+         │ │               │   ... +28                        │ │               
+         │ │               ]                                  │ │               
+         │ │  error_info = [33, 'session not created']        │ │               
+         │ │     message = 'session not created\nfrom unknown │ │               
+         │ │               error: cannot find Chrome binary'  │ │               
+         │ │    response = {                                  │ │               
+         │ │               │   'status': 500,                 │ │               
+         │ │               │   'value':                       │ │               
+         │ │               '{"value":{"error":"session not    │ │               
+         │ │               created","message":"session not    │ │               
+         │ │               created\\nfrom unk'+1453           │ │               
+         │ │               }                                  │ │               
+         │ │      screen = None                               │ │               
+         │ │        self = <selenium.webdriver.remote.errorh… │ │               
+         │ │               object at 0x10aa194f0>             │ │               
+         │ │    st_value = '0   chromedriver                  │ │               
+         │ │               0x00000001049e1c5c chromedriver +  │ │               
+         │ │               593826'+1300                       │ │               
+         │ │  stacktrace = [                                  │ │               
+         │ │               │   '0   chromedriver              │ │               
+         │ │               0x00000001049e1c5c chromedriver +  │ │               
+         │ │               593826'+1,                         │ │               
+         │ │               │   '1   chromedriver              │ │               
+         │ │               0x0000000104484554 chromedriver +  │ │               
+         │ │               312660',                           │ │               
+         │ │               │   '2   chromedriver              │ │               
+         │ │               0x00000001044b8eec chromedriver +  │ │               
+         │ │               528108',                           │ │               
+         │ │               │   '3   chromedriver              │ │               
+         │ │               0x00000001044b7ea8 chromedriver +  │ │               
+         │ │               523944',                           │ │               
+         │ │               │   '4   chromedriver              │ │               
+         │ │               0x00000001044fb228 chromedriver +  │ │               
+         │ │               799272',                           │ │               
+         │ │               │   '5   chromedriver              │ │               
+         │ │               0x00000001044fac28 chromedriver +  │ │               
+         │ │               797736',                           │ │               
+         │ │               │   '6   chromedriver              │ │               
+         │ │               0x00000001044c33b8 chromedriver +  │ │               
+         │ │               570296',                           │ │               
+         │ │               │   '7   chromedriver              │ │               
+         │ │               0x00000001049a6794 chromedriver +  │ │               
+         │ │               569538'+1,                         │ │               
+         │ │               │   '8   chromedriver              │ │               
+         │ │               0x00000001049aa024 chromedriver +  │ │               
+         │ │               570986'+1,                         │ │               
+         │ │               │   '9   chromedriver              │ │               
+         │ │               0x000000010498cc90 chromedriver +  │ │               
+         │ │               559016'+1,                         │ │               
+         │ │               │   ... +8                         │ │               
+         │ │               ]                                  │ │               
+         │ │      status = 'session not created'              │ │               
+         │ │       value = {                                  │ │               
+         │ │               │   'error': 'session not          │ │               
+         │ │               created',                          │ │               
+         │ │               │   'message': 'session not        │ │               
+         │ │               created\nfrom unknown error:       │ │               
+         │ │               cannot find Chrome binary',        │ │               
+         │ │               │   'stacktrace': '0               │ │               
+         │ │               chromedriver                       │ │               
+         │ │               0x00000001049e1c5c chromedriver +  │ │               
+         │ │               593826'+1300                       │ │               
+         │ │               }                                  │ │               
+         │ │  value_json = '{"value":{"error":"session not    │ │               
+         │ │               created","message":"session not    │ │               
+         │ │               created\\nfrom unk'+1453           │ │               
+         │ ╰──────────────────────────────────────────────────╯ │               
+         ╰──────────────────────────────────────────────────────╯               
+         SessionNotCreatedException: Message: session not created               
+         from unknown error: cannot find Chrome binary; For                     
+         documentation on this error, please visit:                             
+         https://www.selenium.dev/documentation/webdriver/trouble               
+         shooting/errors#sessionnotcreatedexception                             
+         Stacktrace:                                                            
+         0   chromedriver                                                       
+         0x00000001049e1c5c chromedriver + 5938268                              
+         1   chromedriver                                                       
+         0x0000000104484554 chromedriver + 312660                               
+         2   chromedriver                                                       
+         0x00000001044b8eec chromedriver + 528108                               
+         3   chromedriver                                                       
+         0x00000001044b7ea8 chromedriver + 523944                               
+         4   chromedriver                                                       
+         0x00000001044fb228 chromedriver + 799272                               
+         5   chromedriver                                                       
+         0x00000001044fac28 chromedriver + 797736                               
+         6   chromedriver                                                       
+         0x00000001044c33b8 chromedriver + 570296                               
+         7   chromedriver                                                       
+         0x00000001049a6794 chromedriver + 5695380                              
+         8   chromedriver                                                       
+         0x00000001049aa024 chromedriver + 5709860                              
+         9   chromedriver                                                       
+         0x000000010498cc90 chromedriver + 5590160                              
+         10  chromedriver                                                       
+         0x00000001049aa8b8 chromedriver + 5712056                              
+         11  chromedriver                                                       
+         0x000000010497de60 chromedriver + 5529184                              
+         12  chromedriver                                                       
+         0x00000001049cfcdc chromedriver + 5864668                              
+         13  chromedriver                                                       
+         0x00000001049cfe3c chromedriver + 5865020                              
+         14  chromedriver                                                       
+         0x00000001049e18b4 chromedriver + 5937332                              
+         15  libsystem_pthread.dylib                                            
+         0x00000001901b5c54 _pthread_start + 132                                
+         16  libsystem_pthread.dylib                                            
+         0x00000001901b0c18 thread_start + 4                                    
+                                                                                
+INFO     Crawl complete: 0 pages, 0 assets, 12.18s                crawler.py:286
+  Crawling... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% • Complete! 0:00:00
+
+
+📊 Crawl Results
+
+┌───────────────────┬──────────────────────────────────┐
+│ Start URL         │ https://terminal-industries.com/ │
+│ Pages Crawled     │ 0                                │
+│ Assets Downloaded │ 0                                │
+│ Total Size        │ 0.00 MB                          │
+│ Duration          │ 12.18s                           │
+│ Errors            │ 1                                │
+│ Completed         │ 2026-07-03 03:18:45              │
+└───────────────────┴──────────────────────────────────┘
+
+📄 Full report saved to: 
+/Users/kssaiteja/Downloads/skills-mcps/terminal-industries-clone/rendered-homepa
+ge/reports/crawl_result.json
+
+✨ Clone complete! Output saved to: 
+/Users/kssaiteja/Downloads/skills-mcps/terminal-industries-clone/rendered-homepa
+ge

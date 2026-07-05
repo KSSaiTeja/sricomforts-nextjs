@@ -1,0 +1,13 @@
+{
+  "start_url": "https://a.storyblok.com/f/337048/x/41cc2fcad6/dummy-01.mp4",
+  "pages_crawled": 0,
+  "assets_downloaded": 0,
+  "total_bytes": 0,
+  "duration_seconds": 6.480673124999839,
+  "pages": [],
+  "assets": [],
+  "errors": [
+    "Unexpected error crawling https://a.storyblok.com/f/337048/x/41cc2fcad6/dummy-01.mp4: 'utf-8' codec can't decode byte 0x95 in position 43: invalid start byte"
+  ],
+  "completed_at": "2026-07-03T04:04:19.520382"
+}

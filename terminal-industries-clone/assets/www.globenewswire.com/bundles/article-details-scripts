@@ -1,0 +1,399 @@
+/* Minification failed. Returning unminified contents.
+(208,33-34): run-time error JS1195: Expected expression: )
+(208,36-37): run-time error JS1195: Expected expression: >
+(210,48-49): run-time error JS1195: Expected expression: >
+(215,98-99): run-time error JS1195: Expected expression: >
+(215,130-131): run-time error JS1195: Expected expression: )
+(216,29-30): run-time error JS1002: Syntax error: }
+(234,17-18): run-time error JS1002: Syntax error: }
+(238,84-85): run-time error JS1004: Expected ';': {
+(246,9-10): run-time error JS1002: Syntax error: }
+(249,42-43): run-time error JS1195: Expected expression: )
+(249,44-45): run-time error JS1004: Expected ';': {
+(254,6-7): run-time error JS1195: Expected expression: )
+(256,17-18): run-time error JS1195: Expected expression: )
+(256,19-20): run-time error JS1004: Expected ';': {
+(262,6-7): run-time error JS1195: Expected expression: )
+(264,17-18): run-time error JS1195: Expected expression: )
+(264,19-20): run-time error JS1004: Expected ';': {
+(274,6-7): run-time error JS1195: Expected expression: )
+(279,44-45): run-time error JS1004: Expected ';': {
+(283,5-86): run-time error JS1018: 'return' statement outside of function: return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
+ */
+window.pnrQuoteGalleryCarousel = {
+    isQuoteCarouselEnabled: function () {
+        const quotePlaceholderElement = document.getElementById('quote-carousel-container');
+        return window.quoteCarouselSettings && window.quoteCarouselSettings.isEnabled && quotePlaceholderElement;
+    },
+
+    placeCarouselSection: function () {
+
+        const quoteSettings = window.quoteCarouselSettings;
+        if (!quoteSettings || !quoteSettings.isEnabled) return;
+
+        const children = document.querySelector('.main-body-container').children;
+        if (!children || !children.length) return;
+
+        //TODO: use .find or .findIndex instead of for loop?
+        let carouselPlacementIndex = 1;
+        for (let i = carouselPlacementIndex; i < children.length; i++) {
+            if (!window.pnrQuoteGalleryCarousel.isValidPlaceForCarousel(children[i])) {
+                carouselPlacementIndex++;
+            } else break;
+        }
+        if (carouselPlacementIndex === children.length) return;
+
+        const parentDoc = document.getElementsByClassName('main-body-container')[0];
+        if (!parentDoc) return;
+        const paragraphForCarouselPlacement = document.getElementsByClassName('main-body-container')[0].children[carouselPlacementIndex];
+        if (!paragraphForCarouselPlacement) return;
+
+        const carouselElement = document.createElement('div');
+        carouselElement.id = 'quote-carousel-container-body';
+        carouselElement.className = 'quote-carousel-container-body';
+
+        parentDoc.insertBefore(carouselElement, paragraphForCarouselPlacement);
+
+        window.pnrQuoteGalleryCarousel.moveItem();
+    },
+    moveItem: function () {
+        const quoteCarouselContainerBodyElement = document.getElementById('quote-carousel-container-body');
+
+        if (!quoteCarouselContainerBodyElement) {
+            moveItem();
+        }
+
+        const quoteCarouselContainerElement = document.getElementById('quote-carousel-container');
+
+        if (!quoteCarouselContainerElement) {
+            moveItem();
+        }
+
+        if (quoteCarouselContainerElement && quoteCarouselContainerBodyElement) {
+            quoteCarouselContainerBodyElement.appendChild(quoteCarouselContainerElement);
+        }
+    },
+
+    isValidPlaceForCarousel: function (element) {
+        if (!element.textContent) return false;
+        if (element.textContent.length < 225) return false;
+        if (element.tagName !== 'P') return false;
+        if (element.getAttribute('align') === 'center') return false;
+        if (element.querySelector('img') !== null) return false;
+        return true;
+    }
+
+};
+window.onload = function () {
+
+    setTimeout(function () {
+        window.GNWCore.Dialog.init("pnr-dialog-contact-form", "article-contact-by-email", {
+            openCallBackFunction: function () {
+                $("#contactBusyIndicator").hide();
+            },
+            closeCallBackFunction: function () {
+                $('#dialog-container').remove();
+            }
+        });
+
+        // quote carousel
+        try {
+            if (window.pnrQuoteGalleryCarousel.isQuoteCarouselEnabled()) {
+                window.renderQuoteCarousel(window.quoteCarouselSettings);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+
+    }, 50);
+};
+
+// Begin Article Contact Email 
+document.addEventListener('DOMContentLoaded', function () {
+
+    //render quote carousel
+    if (window.pnrQuoteGalleryCarousel.isQuoteCarouselEnabled()) {
+        window.pnrQuoteGalleryCarousel.placeCarouselSection();
+    }
+
+    $('.article-attachment').click(function (e) {
+
+        if (window.analyticsTrackingId) {
+
+            var userActivityUrl = '/activity/track?activity=attachmentview&trackingId=' + window.analyticsTrackingId + '&language=' + (pnrApplicationSettings.ArticleLanguage || 'en') + '&nocache=' + new Date().getTime();
+            $.ajax({
+                cache: false,
+                url: userActivityUrl
+            });
+        }
+
+    });
+
+    const chooseLanguageDropdown = document.querySelector('#choose_lang');
+
+    if (chooseLanguageDropdown) {
+        chooseLanguageDropdown.onchange = function () {
+            window.location = this.value;
+        };
+    }
+
+    // Wraps large tables with a scroll bar
+    // Measures table width and applies container if width > than container width
+    function sliderTable() {
+
+        var contentWidth = $('#main-body-container').width() - 15;
+
+        $('#main-body-container table').each(function () {
+            var hasPercentageValue = false;
+            var contextTableElement = $(this)[0];
+            // check if table has width in %, then skip this workflow
+            if (contextTableElement && contextTableElement.style && contextTableElement.style.width) {
+                hasPercentageValue = (contextTableElement.style.width.indexOf('%') !== -1);
+            }
+
+
+            var tableWidth = $(this).outerWidth();
+            var container = $(this).parent();
+            if (tableWidth > contentWidth) {
+                if (!container.hasClass("table-wrap")) { // Make sure there is no wrapper to avoid infinite wrappers on resize
+                    $(this).wrap('<div class="extended-table-container"><div class="table-wrap"></div></div>'); // Creates wrapper
+                    if (!hasPercentageValue) {
+
+                        $(this).css("width", contentWidth + 150 + "px");
+                    }
+                }
+            } else {
+                if (container.hasClass("table-wrap")) { // Make sure there is a wrapper to avoid unnecessary DOM rewriting
+                    $(this).unwrap(); // removes wrapper
+                    $(this).css("width", "auto");
+                }
+            }
+        });
+    };
+
+    sliderTable(); // initial call
+
+    if ($('.table-wrap') && $('.table-wrap').length > 0) {
+        let iconTitle = window.ZoomOutTitle || 'Expand';
+        $('.table-wrap').each(function () {
+            $('<button class="extended-table-zoom border-0" type="button" value="' + iconTitle + '" title="Popup ' + iconTitle + ' Table" aria-label="Popup ' + iconTitle + ' Table"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="white"><path d="M144-144v-192h72v69l117-117 51 51-117 117h69v72H144Zm480 0v-72h69L576-333l51-51 117 117v-69h72v192H624ZM333-576 216-693v69h-72v-192h192v72h-69l117 117-51 51Zm294 0-51-51 117-117h-69v-72h192v192h-72v-69L627-576Z"/></svg></button>').prependTo($(this).parent());
+        });
+    }
+
+    if ($('.extended-table-zoom') && $('.extended-table-zoom').length > 0) {
+        $('.extended-table-zoom').click(function (e) {
+            window.expandContextTable($(this).next().html());
+        });
+    }
+
+    $(window).resize(function () { // functions that run on resize can be placed in this container
+        sliderTable(); // call on resize
+    });
+
+    if ($('.article-media-attachment') && $('.article-media-attachment').length > 0) {
+
+        $('.article-media-attachment').click(function (e) {
+            e.preventDefault();
+
+            let mediaId = $(this).data('media');
+            window.renderContextMedia(mediaId);
+        });
+    }
+
+
+    // enables article body inline images zoom out view 
+    if (window.enableInlineImageZoom && $('.article-body img') && $('.article-body img').length > 0) {
+        var iconTitle = window.ZoomOutTitle || 'Expand';
+        $('.article-body img').each(function (i, o) {
+            const parentDiv = $(o).parent();
+            if (!parentDiv.hasClass("parent-ImageH") && ($('.article-body img').length - 1) !== i) {
+                $(o).wrap('<div class="parent-ImageH"></div>'); // Creates wrapper
+                $(o).after('<a href="#" class="child-IconH expand-inline-image" title="' + iconTitle + '"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="white"><path d="M144-144v-192h72v69l117-117 51 51-117 117h69v72H144Zm480 0v-72h69L576-333l51-51 117 117v-69h72v192H624ZM333-576 216-693v69h-72v-192h192v72h-69l117 117-51 51Zm294 0-51-51 117-117h-69v-72h192v192h-72v-69L627-576Z"/></svg></a>');
+            }
+        });
+
+        console.log("outside the block");
+        // dynamic alignment of the zoom-out icon
+        var listImg = document.querySelectorAll('.parent-ImageH > img');
+        if (listImg && listImg.length > 0) {
+            for (var i = 0; i < listImg.length; i++) {
+                var listDiv = document.querySelectorAll('.parent-ImageH');
+                if (listDiv && listDiv[i]) {
+
+                    if (listImg[i].clientWidth) {
+                        listDiv[i].style.maxWidth = listImg[i].clientWidth + 'px';
+                    }
+                    else {
+                        listDiv[i].style.maxWidth = "100%";
+                    }
+
+                    setTimeout(() => {
+                        const elements = document.querySelectorAll(".parent-ImageH");
+                        elements.forEach((el) => {
+                            const style = window.getComputedStyle(el);
+                            let maxWidthValue = style.maxWidth === "none" ? 0 : parseInt(style.maxWidth);
+                            if (style.maxWidth === "none" || maxWidthValue <= 50) {
+                                el.style.maxWidth = "600px";
+                                const images = el.querySelectorAll("img"); images.forEach((img) => { img.style.width = "600px"; });
+                            }
+                        });
+                    }, 2000);
+                        
+                    var dataMceStyle = listImg[i].getAttribute('data-mce-style');
+
+                    if (dataMceStyle) {
+
+                        dataMceStyle = dataMceStyle.trim().replaceAll(" ", "").toLowerCase();
+
+                        if (dataMceStyle.includes("float:left")) {
+                            listDiv[i].classList.add("float-left");
+                        } else if (dataMceStyle.includes("float:right")) {
+                            listDiv[i].classList.add("float-right");
+                        } else if (dataMceStyle.includes("display:block;margin-left:auto;margin-right:auto")) {
+                            listDiv[i].classList.add("inline-image-div-center");
+                        }
+                    }
+                }
+            }
+
+            // inject dynamic click event
+            if ($('.expand-inline-image') && $('.expand-inline-image').length > 0) {
+                $('.expand-inline-image').each(function () {
+                    $(this).click(function (e) {
+                        e.preventDefault();
+                        window.renderInlineMedia($(this).prev()[0]);
+                    });
+                });
+            }
+        }
+    }
+
+    $("#contactByEmail").click(function () {
+        $('#contact_form').show();
+        $('#contact_form_message').hide();
+        $("#contact_form #captcha a").click();
+        $("#contactBusyIndicator").hide();
+    });
+
+    $(function () {
+        $("#send_email_form").submit(requestRegisterUser);
+        $("#contactFrom").keypress(onRegisterEmailFieldChange);
+        $("#contactEmailBody").keypress(onRegisterEmailFieldChange);
+        $('#CaptchaInputText').keypress(onRegisterEmailFieldChange);
+        $("submit_btn").prop("disabled", "false");
+    });
+
+    $(function () {
+        jQuery.fn.extend({
+            disable: function (state) {
+                return this.each(function () {
+                    this.disabled = state;
+                });
+            }
+        });
+
+        $("#submit_btn").disable(false);
+    });
+
+}, false);
+
+
+function getUrlParameter(contextUrl, name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(contextUrl);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+//  Named js functions
+function onRegisterEmailFieldChange() {
+    $("#errorMessagePanel").empty().hide();
+    $("#submit_btn").disable(false);
+}
+
+function requestRegisterUser(event) {
+    event.preventDefault();
+    var postData = $("#send_email_form").serializeArray();
+    var actionUrl = $("#send_email_form").attr('action');
+    executeAjaxPost(actionUrl, postData,
+        processResult, processCaptchaError);
+}
+
+function executeAjaxPost(url, data, successHandlerFn, errorHandlerFn) {
+    errorHandlerFn = errorHandlerFn || $("#errorMessagePanel").html(message).show();;
+
+    $.ajaxSetup({
+        beforeSend: function () {
+            // show processsing gif here
+            $("#contactBusyIndicator").show();
+            $("#submit_btn").disable(true);
+        },
+        complete: function () {
+            // hide processsing gif here
+            $("#contactBusyIndicator").hide();
+        }
+    });
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        //dataType: "json",
+        contentType: "application/x-www-form-urlencoded",
+        data: data,
+        success: function (result) {
+            if (result) {
+                if (result.Success === false) {
+                    // Handled exception
+                    errorHandlerFn(result, data);
+                } else {
+                    $("#contactEmailBody").val('');
+                    successHandlerFn(result, data);
+                }
+            } else {
+                //unhandled exception occured
+                var message = window.detailResource ? window.detailResource.ResponseNull : result.Message;
+                $("#errorMessagePanel").html(message).show();
+            }
+        },
+        error: function (jsonError) {
+            //Unhandled exception
+            errorHandlerFn(jsonError.statusText, true, data);
+        }
+    });
+}
+
+function processCaptchaError(result) {
+    //handle CAPTCHA validation error
+    $("#submit_btn").disable(false);
+    if (result) {
+        if (!result.IsValidCaptcha) {
+            $("#errorMessagePanel").html(result.Message).show();
+            //set new values.
+            $('#CaptchaDeText').attr('value', result.DeText);
+            $('#CaptchaImage').attr('src', result.Image);
+        } else {
+            var errorMessage = window.detailResource ? window.detailResource.CAPTCHAFlagNotSet : result.Message;
+            $("#errorMessagePanel").html(errorMessage).show();
+        }
+    }
+}
+
+function processResult(result) {
+    $("#errorMessagePanel").hide();
+    $('#contact_form').hide();
+    $('#contact_form_message').show();
+    $('#contact_form_message').html("<div id='message'></div>");
+    $("#submit_btn").disable(false);
+
+    var successMessage = window.detailResource ? window.detailResource.EmailSendSuccessfully : result.Message;
+    $('#message').html(successMessage)
+        .hide()
+        .fadeIn(1500, function () {
+            $('#message');
+            GNWCore.Dialog.close();
+        });
+}
+// End Article Contact Email
+
+
+;

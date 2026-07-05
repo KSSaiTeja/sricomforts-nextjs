@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "supabase:upload-hero-frames": "node scripts/upload-assets-to-supabase.mjs frames/home",
+    "supabase:upload-assets": "node scripts/upload-assets-to-supabase.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
     "next": "16.2.10",
     "react": "19.2.4",
     "react-dom": "19.2.4"

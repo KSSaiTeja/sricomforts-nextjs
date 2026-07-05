@@ -1,0 +1,105 @@
+.border__wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.border__wrapper .overflow__wrapper {
+  position: relative;
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
+  overflow: clip;
+}
+
+.border-bg-v,
+.border-bg-h {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.border-bg-h::before,
+.border-bg-h::after,
+.border-bg-v::before,
+.border-bg-v::after {
+  position: absolute;
+  background: #e5e5e5;
+  content: "";
+}
+
+.border-bg-h::before,
+.border-bg-h::after {
+  width: 100%;
+  height: 1px;
+}
+
+.border-bg-h::after {
+  top: 0;
+}
+
+.border-bg-h::before {
+  bottom: 0;
+}
+
+.border-bg-v::before,
+.border-bg-v::after {
+  width: 1px;
+  height: 100%;
+}
+
+.border-bg-v::before {
+  left: 0;
+}
+
+.border-bg-v::after {
+  right: 0;
+}
+
+.border-holder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30rem;
+  height: 30rem;
+  pointer-events: none;
+}
+
+.background-holder {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: block;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  background-color: #fff;
+}
+
+.slot__wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+.background-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 30rem;
+  height: 30rem;
+  opacity: 0;
+  background-repeat: no-repeat;
+  transition: opacity 0.5s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .border-holder {
+    background: radial-gradient(circle at 50% 50%, var(--color-brand-accent), transparent 15rem);
+  }
+
+  .background-gradient {
+    background: radial-gradient(circle at 50% 50%, var(--color-brand-accent-alpha-80), transparent 15rem)
+      no-repeat;
+  }
+}

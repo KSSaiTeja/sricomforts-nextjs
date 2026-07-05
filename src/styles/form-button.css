@@ -1,0 +1,121 @@
+.label-4 {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 0.81;
+  text-transform: uppercase;
+}
+
+.form-wrapper .button {
+  background: var(--color-brand-ink-alpha-05);
+  border: none;
+  border-radius: 8px;
+  color: var(--color-brand-ink);
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  overflow: hidden;
+  padding: 1.5625rem 0;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.form-wrapper .button.input-button {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    backdrop-filter 0.25s ease;
+}
+
+.form-wrapper .button.input-button::before {
+  display: none;
+}
+
+.form-wrapper .button.input-button[disabled] {
+  cursor: not-allowed;
+}
+
+.form-wrapper--dark .button.input-button[disabled] {
+  background: rgb(255 255 255 / 12%);
+  color: rgb(255 255 255 / 40%);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.form-wrapper--dark .button.input-button:not(:disabled) {
+  -webkit-backdrop-filter: blur(5.5px);
+  backdrop-filter: blur(5.5px);
+  background: rgb(255 255 255 / 35%);
+  color: var(--color-neutral-white);
+}
+
+.form-wrapper .button:not(.button--underlined):not(.input-button):not(:disabled) {
+  width: 100%;
+}
+
+.form-wrapper .button[disabled]:not(.input-button) {
+  background-color: #e0e0e0;
+  color: #888;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+@media (min-width: 1024px) {
+  .form-wrapper .button {
+    padding: 1.5625rem 6rem;
+    white-space: nowrap;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .form-wrapper .button.input-button:hover:not(:disabled) {
+    background-color: var(--hover-bg);
+    color: var(--hover-color);
+  }
+
+  .form-wrapper--dark .button.input-button:hover:not(:disabled) {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    background-color: var(--hover-bg, var(--color-brand-accent));
+    color: var(--hover-color, var(--color-neutral-white));
+  }
+
+  .form-wrapper .button:not(.button--underlined):not(.input-button):not(:disabled) {
+    transition:
+      color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1),
+      background-color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  }
+
+  .form-wrapper .button:not(.button--underlined):not(.input-button):not(:disabled)::before {
+    background-color: var(--hover-bg);
+    content: "";
+    height: calc(100% + 2px);
+    left: -1px;
+    position: absolute;
+    top: -1px;
+    transform: translate3d(0, 100%, 0);
+    transform-origin: bottom;
+    transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    width: calc(100% + 2px);
+    will-change: transform;
+  }
+
+  .form-wrapper .button:not(.button--underlined):not(.input-button):hover:not(:disabled) {
+    background-color: transparent;
+    color: var(--hover-color) !important;
+    transition:
+      color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1),
+      background-color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) 0.2s;
+  }
+
+  .form-wrapper .button:not(.button--underlined):not(.input-button):hover:not(:disabled)::before {
+    transform: translateZ(0);
+  }
+}

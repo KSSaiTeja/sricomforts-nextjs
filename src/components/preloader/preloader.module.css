@@ -1,0 +1,162 @@
+.appLoader {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-overlay);
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  overflow: hidden;
+}
+
+.top,
+.bottom {
+  overflow: hidden;
+}
+
+.topMask,
+.bottomMask {
+  background: var(--color-background);
+  height: 50svh;
+  height: calc(var(--svh, 1svh) * 50);
+  height: round(up, 50svh, 1px);
+  height: round(up, calc(var(--svh, 1svh) * 50), 1px);
+  overflow: hidden;
+}
+
+.topMask .fullWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.bottomMask {
+  position: relative;
+}
+
+.bottomMask .fullWrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.fullWrapper {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  height: calc(var(--svh, 1svh) * 100);
+}
+
+.backgroundWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.logoWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.pathBackground {
+  width: 100%;
+  height: 100%;
+}
+
+.svgMask {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.svgMaskSvg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.svgMaskSlot,
+.svgMaskSlotSsr,
+.svgMaskSlotReady {
+  overflow: clip;
+}
+
+.animatedLogo {
+  --logo-h: clamp(1.875rem, 4.8vw, 2.6875rem);
+  --logo-icon-w: calc(var(--logo-h) * 34 / 35);
+  --logo-icon-h: var(--logo-h);
+  --logo-wordmark-w: calc(var(--logo-h) * 192 / 36);
+  --logo-wordmark-h: var(--logo-h);
+  --logo-gap: calc(var(--logo-h) * 14 / 36);
+
+  display: flex;
+  align-items: center;
+  gap: var(--logo-gap);
+  visibility: hidden;
+}
+
+.logoIcon {
+  flex: 0 0 auto;
+  width: var(--logo-icon-w);
+  height: var(--logo-icon-h);
+}
+
+.animatedLogoText {
+  display: block;
+  flex: 0 0 auto;
+  overflow: hidden;
+  width: var(--logo-wordmark-w);
+  height: var(--logo-wordmark-h);
+  line-height: 1;
+}
+
+.animatedLogoCharWrapper {
+  display: inline-block;
+  overflow: clip;
+  height: 100%;
+  vertical-align: top;
+}
+
+.animatedLogoCharWrapper + .animatedLogoCharWrapper {
+  margin-left: calc(var(--logo-h) * -0.018);
+}
+
+.animatedLogoChar,
+.animatedLogoCharWrapper {
+  display: inline-block;
+}
+
+.animatedLogoChar {
+  height: 100%;
+}
+
+.logoWordmarkSlice {
+  display: block;
+  height: 100%;
+  max-width: none;
+}
