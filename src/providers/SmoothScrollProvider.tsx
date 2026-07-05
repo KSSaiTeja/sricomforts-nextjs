@@ -90,7 +90,7 @@ export function SmoothScrollProvider({
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        ScrollTrigger.refresh();
+        window.setTimeout(() => ScrollTrigger.refresh(), 0);
       });
     });
 

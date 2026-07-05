@@ -13,7 +13,8 @@ import { VideoSequence } from "@/components/home/VideoSequence";
 import styles from "./video-carousel.module.css";
 
 export function VideoCarousel() {
-  const { isLoaded } = usePreloader();
+  const { isLoaded, isAnimating } = usePreloader();
+  const scrollReady = isLoaded || isAnimating;
   const { lenis } = useSmoothScroll();
   const isDesktop = useIsLargeViewport();
   const [progress, setProgress] = useState(0);
@@ -26,7 +27,7 @@ export function VideoCarousel() {
   const frames = useMemo(() => getHeroFrameUrls(isDesktop), [isDesktop]);
 
   useEffect(() => {
-    if (!isLoaded || !lenis || !contentRef.current) return;
+    if (!scrollReady || !lenis || !contentRef.current) return;
 
     registerGsap();
 
@@ -75,7 +76,7 @@ export function VideoCarousel() {
       }
       triggers.forEach((trigger) => trigger.kill());
     };
-  }, [isLoaded, lenis, isDesktop]);
+  }, [scrollReady, lenis, isDesktop]);
 
   return (
     <section ref={sectionRef} className={styles.videoCarousel}>

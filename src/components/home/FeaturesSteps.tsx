@@ -472,11 +472,11 @@ export function FeaturesSteps() {
                     }}
                     className="video"
                     src={item.media}
-                    preload="auto"
+                    preload={isLoaded && index === activeIndex ? "auto" : "none"}
                     muted
                     playsInline
                     loop
-                    autoPlay={index === activeIndex}
+                    autoPlay={isLoaded && index === activeIndex}
                     aria-hidden
                   />
                 </div>

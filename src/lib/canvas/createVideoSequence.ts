@@ -1,8 +1,8 @@
 import { fitAndPosition, type FitMode } from "@/lib/canvas/fitImage";
 
-/** Match Terminal Industries worker batch size */
-const BATCH_SIZE = 16;
-const BATCH_DELAY_MS = 30;
+/** Aggressive batches during preloader — same-origin frames on Vercel. */
+const BATCH_SIZE = 32;
+const BATCH_DELAY_MS = 0;
 const MAX_FRAME_FALLBACK = 4;
 
 type FitPosition = { top: number; left: number };
@@ -176,11 +176,11 @@ export function getHeroFrameLoadRatio(frames: string[]) {
   return countDecoded(state) / state.frames.length;
 }
 
-/** Preload all frames — scroll timeline always maps 0→409. */
+/** Preload during preloader; optional gate for minimum coverage (not 100%). */
 export function waitForHeroFrames(
   frames: string[],
-  threshold = 1,
-  timeoutMs = 45_000,
+  threshold = 0.08,
+  timeoutMs = 3_000,
 ) {
   return new Promise<void>((resolve) => {
     const framesKey = frames.join("|");

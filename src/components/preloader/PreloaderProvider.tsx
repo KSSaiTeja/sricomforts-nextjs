@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
 import { AppPreloader } from "@/components/preloader/AppPreloader";
+import { HeroPreloadStarter } from "@/components/preloader/HeroPreloadStarter";
 
 type PreloaderContextValue = {
   isLoaded: boolean;
@@ -44,6 +45,7 @@ export function PreloaderProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <PreloaderContext.Provider value={value}>
+      <HeroPreloadStarter />
       {children}
       {!isLoaded ? (
         <AppPreloader
