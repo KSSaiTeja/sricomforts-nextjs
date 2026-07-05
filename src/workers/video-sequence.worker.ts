@@ -8,19 +8,24 @@ type BlobsMessage = {
   payload: { blobs: { blob: Blob; frame: string }[] };
 };
 
-self.addEventListener("message", async (event: MessageEvent<FramesMessage>) => {
+let queue = Promise.resolve();
+
+self.addEventListener("message", (event: MessageEvent<FramesMessage>) => {
   if (event.data.type !== "frames") return;
 
   const { frames } = event.data.payload;
-  const blobs = await Promise.all(
-    frames.map(async (frame) => ({
-      blob: await (await fetch(frame)).blob(),
-      frame,
-    })),
-  );
 
-  const response: BlobsMessage = { type: "blobs", payload: { blobs } };
-  self.postMessage(response);
+  queue = queue.then(async () => {
+    const blobs = await Promise.all(
+      frames.map(async (frame) => ({
+        blob: await (await fetch(frame)).blob(),
+        frame,
+      })),
+    );
+
+    const response: BlobsMessage = { type: "blobs", payload: { blobs } };
+    self.postMessage(response);
+  });
 });
 
 export {};

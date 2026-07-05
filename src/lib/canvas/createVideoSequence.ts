@@ -129,11 +129,18 @@ function requestSharedLoad(state: SharedState) {
   state.loadStarted = true;
 
   const remaining = state.frames.slice(1);
+  const BATCH_DELAY_MS = 50;
 
-  while (remaining.length > 0) {
+  const sendNext = () => {
+    if (remaining.length === 0) return;
     const batch = remaining.splice(0, BATCH_SIZE);
     state.worker.postMessage({ type: "frames", payload: { frames: batch } });
-  }
+    if (remaining.length > 0) {
+      setTimeout(sendNext, BATCH_DELAY_MS);
+    }
+  };
+
+  sendNext();
 }
 
 function releaseSharedState(framesKey: string) {
@@ -142,11 +149,9 @@ function releaseSharedState(framesKey: string) {
   state.refCount = Math.max(0, state.refCount - 1);
 }
 
-function resolveImage(state: SharedState, targetIndex: number) {
-  for (let index = targetIndex; index >= 0; index -= 1) {
-    const image = state.imageCache.get(state.frames[index]!);
-    if (image?.complete && image.naturalWidth > 0) return image;
-  }
+function getExactImage(state: SharedState, targetIndex: number) {
+  const image = state.imageCache.get(state.frames[targetIndex]!);
+  if (image?.complete && image.naturalWidth > 0) return image;
   return null;
 }
 
@@ -234,15 +239,12 @@ export function createVideoSequence({
 
     const clamped = Math.min(1, Math.max(0, progress));
     const targetIndex = Math.floor(clamped * (state.frames.length - 1));
-    const image = resolveImage(state, targetIndex);
+    const image = getExactImage(state, targetIndex);
     if (!image) return;
 
     const frameUrl = state.frames[targetIndex]!;
-    const resolvedUrl =
-      state.frames.find((url) => state.imageCache.get(url) === image) ?? frameUrl;
-
-    if (lastDrawnUrl === resolvedUrl && !force) return;
-    lastDrawnUrl = resolvedUrl;
+    if (lastDrawnUrl === frameUrl && !force) return;
+    lastDrawnUrl = frameUrl;
 
     const displayWidth = canvas.offsetWidth;
     const displayHeight = canvas.offsetHeight;
