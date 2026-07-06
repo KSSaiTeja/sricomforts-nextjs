@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { registerGsap } from "@/lib/gsap/register";
-import { yosSection } from "@/data/homepage";
+import { brandDifferenceSection } from "@/data/homepage";
 import styles from "./yos-section.module.css";
 
 export function YOSSection() {
@@ -35,12 +35,12 @@ export function YOSSection() {
       <div className={styles.stickyHolder}>
         <div ref={containerRef} className={styles.stickyContainer}>
           <div className={styles.headingWrapper}>
-            <p className={styles.subTitle}>{yosSection.subtitle}</p>
-            <h2 className={styles.heading} aria-label={yosSection.heading}>
-              {yosSection.heading.split(" ").map((word, index) => (
+            <p className={styles.subTitle}>{brandDifferenceSection.subtitle}</p>
+            <h2 className={styles.heading} aria-label={brandDifferenceSection.heading}>
+              {brandDifferenceSection.heading.split(" ").map((word, index) => (
                 <span key={`${word}-${index}`} className={styles.word}>
                   {word}
-                  {index < yosSection.heading.split(" ").length - 1 ? " " : ""}
+                  {index < brandDifferenceSection.heading.split(" ").length - 1 ? " " : ""}
                 </span>
               ))}
               <span className={styles.sup}>™</span>

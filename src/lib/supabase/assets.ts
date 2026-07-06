@@ -37,8 +37,12 @@ export function assetUrl(storagePath: string, localFallback?: string) {
   return local.startsWith("/") ? local : `/${local}`;
 }
 
-export function heroFrameStoragePath(isDesktop: boolean, index: number) {
+export function heroFrameStoragePath(
+  isDesktop: boolean,
+  index: number,
+  fps = 60,
+) {
   const variant = isDesktop ? "desktop" : "mobile";
-  const prefix = isDesktop ? "hero_anim_desktop_60" : "hero_anim_mobile_60";
+  const prefix = `hero_anim_${variant}_${fps}`;
   return `frames/home/${variant}/webp/${prefix}_${index}.webp`;
 }

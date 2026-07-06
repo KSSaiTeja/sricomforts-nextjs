@@ -1,4 +1,5 @@
-const STORYBLOK = "https://a.storyblok.com";
+import { aboutWorkImage } from "@/lib/assets/localPaths";
+
 const MID = "var(--color-neutral-mid)";
 
 /** Local team portraits — sourced from Pexels (free license). */
@@ -377,7 +378,7 @@ export const aboutFeaturesGrid = {
       description:
         "Sri Comforts is not a typical AC dealer. Since 2001, we've grown into an authorized top-tier Daikin partner with 230+ engineers across eight cities — built to solve complex cooling challenges and set the standard for design, installation, and service.",
       image: {
-        src: `${STORYBLOK}/f/337048/4000x2146/a678449480/dockdoortrucks.jpg/m/1920x0/filters:format(webp):quality(85)`,
+        src: aboutWorkImage(0),
         alt: "Sri Comforts commercial HVAC project site",
       },
     },
@@ -386,7 +387,7 @@ export const aboutFeaturesGrid = {
       description:
         "Our approach follows decades of hands-on project experience. By working closely with architects, builders, and facility teams, we deliver systems that are deeply integrated and ready for operation from day one.",
       image: {
-        src: `${STORYBLOK}/f/337048/6000x4000/b07cf34a51/light.jpg/m/1920x0/filters:format(webp):quality(85)`,
+        src: aboutWorkImage(1),
         alt: "Sri Comforts HVAC system installation",
       },
     },
@@ -395,7 +396,7 @@ export const aboutFeaturesGrid = {
       description:
         "Authorized by Daikin, supported by specialized AutoCAD design teams, and backed by a 24-hour service guarantee, Sri Comforts is uniquely positioned — not as another contractor, but as the trusted standard for modern HVAC in South India.",
       image: {
-        src: `${STORYBLOK}/f/337048/5184x3888/cc766cc7f3/truck-at-night.jpg/m/1920x0/filters:format(webp):quality(85)`,
+        src: aboutWorkImage(2),
         alt: "Sri Comforts service and maintenance team",
       },
     },

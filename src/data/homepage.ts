@@ -1,7 +1,8 @@
 import { aboutSectionAnchors } from "@/data/about";
-
-/** Legacy Terminal CDN URLs — replace with assetUrl() as files move to Supabase. */
-const STORYBLOK = "https://a.storyblok.com";
+import {
+  FEATURES_STEP_VIDEOS,
+  homeFullscreenImage,
+} from "@/lib/assets/localPaths";
 
 export const heroTitles = [
   "We perfected cooling solutions for every space",
@@ -63,35 +64,38 @@ export const featuresSteps = {
   items: [
     {
       label: "Authorized HVAC solutions from design through commissioning.",
-      media: `${STORYBLOK}/f/337048/x/f0f51ea10f/vid_3-1_prerender_1.mp4`,
+      media: FEATURES_STEP_VIDEOS[0],
     },
     {
       label: "Full visibility across design, install, and service.",
-      media: `${STORYBLOK}/f/337048/x/5d1992bef6/vid_3-2_prerender_1.mp4`,
+      media: FEATURES_STEP_VIDEOS[1],
     },
     {
       label: "Managed by expert teams with AutoCAD design expertise.",
-      media: `${STORYBLOK}/f/337048/x/5c039660e1/vid_3-3_prerender_1.mp4`,
+      media: FEATURES_STEP_VIDEOS[2],
     },
     {
       label: "Configurable systems for sites across South India.",
-      media: `${STORYBLOK}/f/337048/x/daeedd63c8/vid_3-5_prerender_1.mp4`,
+      media: FEATURES_STEP_VIDEOS[3],
     },
     {
       label: "Clean rooms, cold rooms, and ventilation.",
-      media: `${STORYBLOK}/f/337048/x/cbcaf12722/hp-where-4.mp4`,
+      media: FEATURES_STEP_VIDEOS[4],
     },
     {
       label: "Service you can trust with a 24-hour response.",
-      media: `${STORYBLOK}/f/337048/x/408e8d26ba/vid_5-4_prerender_1.mp4`,
+      media: FEATURES_STEP_VIDEOS[5],
     },
   ],
 } as const;
 
-export const yosSection = {
+export const brandDifferenceSection = {
   subtitle: "That's the",
   heading: "Sri Comforts difference.",
 } as const;
+
+/** @deprecated Use `brandDifferenceSection` — kept for unused YOSSection component */
+export const yosSection = brandDifferenceSection;
 
 export const fullscreenFeatures = {
   items: [
@@ -100,21 +104,21 @@ export const fullscreenFeatures = {
       title: "A single partner for complete HVAC peace of mind",
       description:
         "From site assessment and AutoCAD design to installation and commissioning, our integrated teams deliver precision cooling tailored to your facility from day one.",
-      image: `${STORYBLOK}/f/337048/1369x1176/f88dc2dede/terminal-industries-com_-1.webp`,
+      image: homeFullscreenImage(0),
     },
     {
       preTitle: "Benefit 02",
       title: "Easy, scalable operation",
       description:
         "Sri Comforts was built for long-term reliability. Straightforward deployment, dedicated post-sales support, and AMC plans that keep your systems running with minimal disruption.",
-      image: `${STORYBLOK}/f/337048/1724x1092/2ee54cc703/security-pr-social-post-1.jpg`,
+      image: homeFullscreenImage(1),
     },
     {
       preTitle: "Benefit 03",
       title: "Rapid, repeatable ROI",
       description:
         "We know cooling runs on lean budgets, which is why we focus on energy-efficient Daikin systems, transparent pricing, and measurable savings across every project.",
-      image: `${STORYBLOK}/f/337048/1714x950/f6870930e4/lights-out-eyes-open.png`,
+      image: homeFullscreenImage(2),
     },
   ],
 } as const;
@@ -241,18 +245,32 @@ export const navLinks = [
   { label: "About", href: "/about" },
 ] as const;
 
-export const HERO_DESKTOP_FRAMES = 410;
-export const HERO_MOBILE_FRAMES = 409;
+/**
+ * Hero scroll sequence — sourced from Kling master MP4 via scripts/extract-hero-frames.mjs.
+ * Set HERO_FPS to match Kling export (3.0 → 60, 2.6 → 30). Re-count frames after export.
+ */
+/** Kling 3.0 Omni exports 24fps — set after ffprobe on hero master MP4. */
+export const HERO_FPS = 24;
+export const HERO_DURATION_SEC = 6 + 50 / 60; // 6.833…s
+
+/** Override after `node scripts/extract-hero-frames.mjs` + `ls … | wc -l`. */
+export const HERO_DESKTOP_FRAMES = 164;
+export const HERO_MOBILE_FRAMES = 164;
 
 /** Bump when hero frames change — busts browser cache for /public/static/frames. */
 const HERO_FRAMES_VERSION =
-  process.env.NEXT_PUBLIC_HERO_FRAMES_VERSION ?? "2";
+  process.env.NEXT_PUBLIC_HERO_FRAMES_VERSION ?? "4";
 
-/** Hero frames always load from /public (same origin as Vercel) — like Terminal Industries. */
+export function getHeroFramePrefix(isDesktop: boolean) {
+  const variant = isDesktop ? "desktop" : "mobile";
+  return `hero_anim_${variant}_${HERO_FPS}`;
+}
+
+/** Hero frames load from /public on the same origin as the deployed site. */
 export function getHeroFrameUrls(isDesktop: boolean): string[] {
   const count = isDesktop ? HERO_DESKTOP_FRAMES : HERO_MOBILE_FRAMES;
   const variant = isDesktop ? "desktop" : "mobile";
-  const prefix = isDesktop ? "hero_anim_desktop_60" : "hero_anim_mobile_60";
+  const prefix = getHeroFramePrefix(isDesktop);
 
   return Array.from(
     { length: count },

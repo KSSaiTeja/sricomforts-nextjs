@@ -1,4 +1,8 @@
-const STORYBLOK = "https://a.storyblok.com";
+import {
+  CONTACT_ICONS,
+  CONTACT_PRODUCT_OVERVIEW_PDF,
+  CONTACT_PROMO_OVERVIEW,
+} from "@/lib/assets/localPaths";
 
 export const promoBannerDownload = {
   eyebrow: "Download datasheet",
@@ -9,10 +13,10 @@ export const promoBannerDownload = {
   submittingLabel: "Submitting…",
   successMessage: "Thanks — your download is starting.",
   image: {
-    src: `${STORYBLOK}/f/337048/1920x1080/0ebacab5cc/the-only-yard-os-built-for-phy-ai.png/m/1920x0/filters:format(webp):quality(85)`,
+    src: CONTACT_PROMO_OVERVIEW,
     alt: "Sri Comforts HVAC solutions overview",
   },
-  assetUrl: `${STORYBLOK}/f/337048/1920x1080/0ebacab5cc/the-only-yard-os-built-for-phy-ai.png/m/1200x0/filters:format(pdf)`,
+  assetUrl: CONTACT_PRODUCT_OVERVIEW_PDF,
 } as const;
 
 export const contactWaysGrid = {
@@ -33,7 +37,7 @@ export const contactWaysCards = [
     theme: "dark" as const,
     title: "Download our product overview",
     description: undefined,
-    icon: `${STORYBLOK}/f/337048/36x36/e5ec8b10db/survey-white.svg`,
+    icon: CONTACT_ICONS.download,
     href: "/resources/product-overview",
     openInNewTab: true,
   },
@@ -43,7 +47,7 @@ export const contactWaysCards = [
     title: "Speak with our HVAC experts",
     description:
       "Get instant answers about Daikin systems, AMC plans, and project timelines — no forms required.",
-    icon: `${STORYBLOK}/f/337048/36x36/eb4e11dc02/reviews.svg`,
+    icon: CONTACT_ICONS.phone,
     phoneHref: "tel:+914027001342",
     ariaLabel: "Speak with our HVAC experts",
   },
@@ -52,7 +56,7 @@ export const contactWaysCards = [
     theme: "light" as const,
     title: "Explore AMC plans",
     description: "Review annual maintenance options tailored to your facility and uptime goals.",
-    icon: `${STORYBLOK}/f/337048/36x36/ac11d11484/calculate.svg`,
+    icon: CONTACT_ICONS.amc,
     href: "/services/amc",
     openInNewTab: false,
   },

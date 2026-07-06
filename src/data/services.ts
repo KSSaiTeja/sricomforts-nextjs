@@ -6,21 +6,10 @@ import {
   type SolutionIntroData,
   type SolutionValueData,
 } from "@/data/solutions";
-
-const STORYBLOK = "https://a.storyblok.com";
-
-function asset(path: string) {
-  return `${STORYBLOK}/f/337048/${path}/m/985x0/filters:format(webp):quality(85)`;
-}
-
-const meshPaths = [
-  "1024x1024/d8f71b1cee/mesh-1.png",
-  "1024x1024/e4d8668473/mesh-2.png",
-  "1024x1024/8f8c2641f9/mesh-3.png",
-] as const;
+import { serviceMeshImage } from "@/lib/assets/localPaths";
 
 function mesh(index: number) {
-  return asset(meshPaths[index % meshPaths.length]);
+  return serviceMeshImage(index);
 }
 
 export type ServiceIntroData = SolutionIntroData & {

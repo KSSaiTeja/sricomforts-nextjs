@@ -1,5 +1,5 @@
 {
-  "name": "terminal-industries-next",
+  "name": "sricomforts-nextjs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "supabase:upload-hero-frames": "node scripts/upload-assets-to-supabase.mjs frames/home",
-    "supabase:upload-assets": "node scripts/upload-assets-to-supabase.mjs"
+    "supabase:upload-assets": "node scripts/upload-assets-to-supabase.mjs",
+    "hero:extract-frames": "node scripts/extract-hero-frames.mjs",
+    "assets:download": "node scripts/download-kling-assets.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",

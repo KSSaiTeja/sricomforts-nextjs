@@ -3,7 +3,7 @@
 > **Purpose:** Track removal of Terminal Industries template dependencies.  
 > **Scope (current):** **Phase 1 only** — strip Terminal/template/vendor ties; neutral placeholders are fine.  
 > **Deferred:** **Phase 2** — swap placeholders for real Sri Comforts client assets (logos, photos, PDFs, etc.).  
-> **Last updated:** July 6, 2026
+> **Last updated:** July 6, 2026 — Phase 1 complete, ready to commit & deploy
 
 ---
 
@@ -15,6 +15,7 @@
 | 🔲 | Phase 1 not started — still tied to Terminal, Storyblok, or Unsplash |
 | 🔜 | Phase 2 — replace placeholder with real client asset (later) |
 | ⚠️ | Launch blocker — external vendor CDN still required at runtime |
+| — | Not applicable (no asset in template) |
 
 ---
 
@@ -33,15 +34,15 @@
 
 ---
 
-## 2. External CDN dependencies ⚠️
+## 2. External CDN dependencies
 
 | # | Item | Location | Status | Action |
 |---|------|----------|--------|--------|
-| 2.1 | Hero canvas frames (~819) | `homepage.ts` → `getHeroFrameUrls()` | ✅ | Self-hosted in `public/static/frames/home/` (local `/static/frames/...` URLs; optional Supabase CDN via `assetUrl()`) |
-| 2.2 | Storyblok CDN | All `src/data/*.ts` with `STORYBLOK` constant | ⚠️ 🔲 | ~60+ URLs on `a.storyblok.com/f/337048/...` — replace with local `/public/images/` or Sri Comforts-hosted assets |
-| 2.3 | Unsplash CDN | `solutionImages.ts` | 🔲 | 30 stock photos — replace with client photography or licensed HVAC images |
+| 2.1 | Hero canvas frames | `homepage.ts` → `getHeroFrameUrls()` | ✅ | Self-hosted desktop + mobile (`hero_anim_*_24_*`, 164 frames each) in `public/static/frames/home/` |
+| 2.2 | Storyblok CDN | `src/data/*.ts` | ✅ | Removed — all media local under `public/` via `src/lib/assets/localPaths.ts` |
+| 2.3 | Unsplash CDN | `solutionImages.ts` | ✅ | Replaced with Kling-generated local carousel images (`/images/solutions/{slug}/feat-*.webp`) |
 | 2.4 | `next.config.ts` rewrite | `/static/frames/:path*` → terminal-industries.com | ✅ | Rewrite removed — only cache headers remain for `/static/frames/:path*` |
-| 2.5 | `images.remotePatterns` | Storyblok + Unsplash | 🔲 | Trim after assets are local |
+| 2.5 | `images.remotePatterns` | Storyblok + Unsplash | ✅ | Trimmed to `*.supabase.co` only (optional CDN) |
 
 ---
 
@@ -49,13 +50,13 @@
 
 | # | Item | Current source | Status | Replace with |
 |---|------|----------------|--------|--------------|
-| 3.1 | Hero frame sequence | Terminal CDN (see 2.1) | ✅ | Self-hosted in `public/static/frames/home/` |
-| 3.2 | FeaturesSteps videos (×6) | Storyblok MP4s (yard/logistics) | 🔲 | Sri Comforts install/service footage |
-| 3.3 | Fullscreen feature images (×3) | Storyblok (includes `terminal-industries-com_-1.webp`) | 🔲 | Project / facility photography |
-| 3.4 | Quote testimonial portrait | Storyblok stock person | ✅ | Local `/images/team/testimonial/quote-portrait.webp` (placeholder portrait) |
-| 3.5 | Logo wall (×20) | Terminal client logos (DSV, Ryder, HP, Foxconn, etc.) | ✅ | Local placeholder logos in `/logos/placeholder/` (swap for real client logos when ready) |
-| 3.6 | Logo grid / industry (×5) | Wrong logos (8VC, Ryder, Lineage…) | ✅ | Local placeholder logos in `/logos/placeholder/` |
-| 3.7 | Form logo stripe | Storyblok `logo-stripe.png` | ✅ | Local `/logos/placeholder/logo-stripe.svg` |
+| 3.1 | Hero frame sequence | Local webp frames | ✅ | `public/static/frames/home/{desktop,mobile}/webp/` |
+| 3.2 | FeaturesSteps videos (×6) | Local MP4 loops | ✅ | `public/static/videos/features/step-01..06.mp4` |
+| 3.3 | Fullscreen feature images (×3) | Local webp | ✅ | `public/images/home/fullscreen-0{1,2,3}.webp` |
+| 3.4 | Quote testimonial portrait | Local placeholder | ✅ | `/images/team/testimonial/quote-portrait.webp` |
+| 3.5 | Logo wall (×20) | Local placeholders | ✅ | `/logos/placeholder/` — 🔜 real client logos |
+| 3.6 | Logo grid / industry (×5) | Local placeholders | ✅ | `/logos/placeholder/` — 🔜 real client logos |
+| 3.7 | Form logo stripe | Local SVG | ✅ | `/logos/placeholder/logo-stripe.svg` |
 
 ---
 
@@ -63,11 +64,11 @@
 
 | # | Item | Current source | Status | Replace with |
 |---|------|----------------|--------|--------------|
-| 4.1 | Leadership portraits (×8) | Terminal team photos, Sri Comforts names | ✅ | Local `/images/team/executive/*.webp` (placeholder portraits; swap for client photos when ready) |
-| 4.2 | Brand partner images (×2) | Stock B&W portraits | ✅ | Local `/images/team/partners/daikin-partner.webp` + `ogeneral-partner.webp` |
-| 4.3 | Certification logo grid (×5) | Wrong SVGs labeled Daikin/LG/etc. | ✅ | Neutral placeholders in `/logos/placeholder/` — 🔜 official brand logos in Phase 2 |
-| 4.4 | Advisor portraits (×4) | Terminal stock photos | ✅ | Local `/images/team/advisors/*.webp` (placeholder portraits) |
-| 4.5 | Our Work project images (×3) | Yard/truck/logistics photos | 🔲 | HVAC installation project photos |
+| 4.1 | Leadership portraits (×8) | Local placeholders | ✅ | `/images/team/executive/*.webp` — 🔜 real headshots |
+| 4.2 | Brand partner images (×2) | Local placeholders | ✅ | `/images/team/partners/daikin-partner.webp` + `ogeneral-partner.webp` |
+| 4.3 | Certification logo grid (×5) | Neutral placeholders | ✅ | `/logos/placeholder/` — 🔜 official brand logos |
+| 4.4 | Advisor portraits (×4) | Local placeholders | ✅ | `/images/team/advisors/*.webp` |
+| 4.5 | Our Work project images (×3) | Local Kling CGI | ✅ | `/images/about/work-0{1,2,3}.webp` — 🔜 real project photos |
 
 ---
 
@@ -75,9 +76,9 @@
 
 | # | Item | Current source | Status | Replace with |
 |---|------|----------------|--------|--------------|
-| 5.1 | Promo banner image | Storyblok “Yard OS / phy-ai” graphic | 🔲 | Sri Comforts overview visual |
-| 5.2 | Datasheet PDF URL | Storyblok placeholder (fake PDF filter) | 🔲 | Real Sri Comforts product overview PDF in `/public/docs/` |
-| 5.3 | Contact card icons (×3) | Storyblok SVGs | 🔲 | Optional — generic icons are fine if styled |
+| 5.1 | Promo banner image | Local webp | ✅ | `/images/contact/promo-overview.webp` |
+| 5.2 | Datasheet PDF URL | Local placeholder PDF | ✅ | `/docs/sri-comforts-product-overview.pdf` — 🔜 real product PDF |
+| 5.3 | Contact card icons (×3) | Local SVGs | ✅ | `/images/contact/icons/icon-{download,phone,amc}.svg` |
 
 ---
 
@@ -85,10 +86,10 @@
 
 | # | Item | Current source | Status | Replace with |
 |---|------|----------------|--------|--------------|
-| 6.1 | Dark section mesh images | Storyblok abstract/yard art | 🔲 | HVAC-relevant imagery per sector |
-| 6.2 | Feature carousel photos | Unsplash stock (×30 across 6 slugs) | 🔲 | Sector-specific Sri Comforts project photos |
-| 6.3 | Case study client logo | `placeholderLogo` Storyblok asset | 🔲 | Real client logo (with permission) |
-| 6.4 | Case study hero image | Storyblok | 🔲 | Project photo for cited case study |
+| 6.1 | Dark section mesh images | Local Kling textures | ✅ | `/images/solutions/mesh-0{1..5}.webp` |
+| 6.2 | Feature carousel photos (×30) | Local Kling CGI per slug | ✅ | `/images/solutions/{slug}/feat-0{1..5}.webp` — 🔜 real project photos |
+| 6.3 | Case study client logo | Local placeholder SVG | ✅ | `/logos/placeholder/logo-*.svg` — 🔜 real client logo |
+| 6.4 | Case study hero image | — | — | Template has no separate case-study hero image |
 
 ---
 
@@ -96,9 +97,10 @@
 
 | # | Item | Current source | Status | Replace with |
 |---|------|----------------|--------|--------------|
-| 7.1 | Dark intro background | Storyblok `digital-bridge.webp` | 🔲 | Sri Comforts service/team photo |
-| 7.2 | Process grid images (×7 paths) | Storyblok yard/logistics photos | 🔲 | Install, design, AMC, service photos |
-| 7.3 | Expandable carousel (×4 paths) | Storyblok yard/gate/dock imagery | 🔲 | Service workflow photos |
+| 7.1 | Dark intro background | Local webp | ✅ | `/images/services/dark-bridge.webp` |
+| 7.2 | Process grid images (×7 paths) | Local Kling CGI | ✅ | `/images/services/features/feat-0{1..7}.webp` |
+| 7.3 | Expandable carousel (×4 paths) | Local Kling CGI | ✅ | `/images/services/carousel/carousel-0{1..4}.webp` |
+| 7.4 | Value grid mesh textures (×3) | Local webp | ✅ | `/images/services/mesh-0{1..3}.webp` |
 
 ---
 
@@ -106,11 +108,11 @@
 
 | # | Item | Location | Status | Action |
 |---|------|----------|--------|--------|
-| 8.1 | “Terminal” in filenames | `TerminalLogo.tsx`, `TerminalFooterLogo.tsx`, `terminal-full-logo.svg` | ✅ | Deleted unused logo components + SVG |
-| 8.2 | Terminal phrasing in copy | Footer, form bullets, case studies | 🔲 | Full copy review pass |
-| 8.3 | `yosSection` naming | `homepage.ts` | 🔲 | Rename to Sri Comforts terminology (YOS = Yard Operating System from template) |
-| 8.4 | Package name | `package.json` → `terminal-industries-next` | 🔲 | Rename to `sricomforts-nextjs` or similar |
-| 8.5 | Repo folder name | `terminal-industries-next` in docs | 🔲 | Align with `sricomforts-nextjs` |
+| 8.1 | “Terminal” in filenames | Logo components + SVG | ✅ | Deleted unused logo components + SVG |
+| 8.2 | Terminal phrasing in copy | `src/` | ✅ | No Terminal/Yard OS copy in runtime source |
+| 8.3 | `yosSection` naming | `homepage.ts` | ✅ | Renamed to `brandDifferenceSection` (alias kept for unused `YOSSection`) |
+| 8.4 | Package name | `package.json` | ✅ | `sricomforts-nextjs` |
+| 8.5 | Repo folder name | Workspace | ✅ | `sricomforts-nextjs` |
 
 ---
 
@@ -119,23 +121,30 @@
 | # | Item | Location | Status | Action |
 |---|------|----------|--------|--------|
 | 9.1 | Full HTML mirror | `terminal-industries-clone/` | ✅ | In `.gitignore` and `.vercelignore` — excluded from deploy |
-| 9.2 | Clone in repo | 200+ Terminal HTML pages | ⚠️ | Do not ship to client production server |
+| 9.2 | Clone in repo | 200+ Terminal HTML pages | ✅ | Not shipped — excluded from git/deploy |
 
 ---
 
-## 10. Suggested work order
+## 10. Phase 1 status — COMPLETE ✅
 
-### Phase 1 — Terminal/template removal (current goal)
+All Phase 1 items above are done. `npm run build` passes with zero Storyblok/Unsplash runtime dependencies.
 
-1. **Storyblok sweep** — homepage videos + feature images, contact banner/PDF/icons, about work gallery, solutions, services  
-2. **Unsplash sweep** — `solutionImages.ts` carousel photos → local neutral placeholders  
-3. **Naming cleanup** — `yosSection` rename, package name, copy pass for Yard OS / Terminal phrasing  
-4. **Infrastructure** — trim `remotePatterns` once Storyblok/Unsplash are gone  
+### Deploy checklist
 
-### Phase 2 — Real Sri Comforts assets (later)
+1. **Commit** — stage `public/`, `src/`, `scripts/`, `docs/`, `package.json`, `next.config.ts` (exclude `.cursor/`)
+2. **Env** — set `NEXT_PUBLIC_HERO_FRAMES_VERSION=4` on Vercel if overriding default
+3. **Deploy** — push to remote; Vercel build should succeed
+4. **Smoke test** — `/`, `/about`, `/contact`, `/services/how-we-work`, `/solutions/commercial`
 
-1. Client logos, partner badges, project photography  
-2. Service/process footage, product PDF, real testimonial photo  
+### Optional local cleanup before commit
+
+```bash
+# Old 60fps hero frames (~410 files, not referenced by code)
+rm public/static/frames/home/desktop/webp/hero_anim_desktop_60_*.webp
+
+# Leftover PNG sources if webp exists
+rm -f public/images/home/fullscreen-0{1,2,3}.png public/images/contact/promo-overview.png
+```
 
 ---
 
@@ -150,20 +159,25 @@ Use this when ready to replace placeholders:
 - [ ] Partner badges: Daikin, O General, LG, Panasonic — partner section images done; certification grid still placeholders
 - [ ] Project photography: commercial, healthcare, IT, residential, industrial
 - [ ] Service/process photos or short MP4 clips
-- [ ] Product overview PDF
-- [x] Hero video or image sequence for homepage (optional) — self-hosted frame sequence in `public/static/frames/home/`
+- [ ] Product overview PDF (replace placeholder in `/public/docs/`)
+- [x] Hero video or image sequence for homepage — self-hosted frame sequence in `public/static/frames/home/`
 - [x] Testimonial quote + photo (if using quote section) — placeholder portrait in use
+- [x] FeaturesSteps looping videos (×6) — Kling-generated in `public/static/videos/features/`
+- [x] Solution carousel images (×30) — Kling-generated per sector
 
 ---
 
-## Hand-off for next chat
+## Asset map (quick reference)
 
-```
-## Context for new chat
-- Project: sricomforts-nextjs (Sri Comforts rebrand)
-- Goal: Phase 1 only — remove Terminal/template/vendor deps; placeholders OK
-- Done: Branding, hero frames, homepage logos/stripe/quote, about team/partner/advisor/cert grid
-- Checklist: docs/terminal-industries-replacement-checklist.md
-- Next (Phase 1): Storyblok + Unsplash → local placeholders; yosSection/package rename; copy cleanup
-- Later (Phase 2): Real client logos, photos, PDFs
-```
+| Area | Path constant / helper | On disk |
+|------|------------------------|---------|
+| Hero frames | `getHeroFrameUrls()` | `public/static/frames/home/` |
+| Feature videos | `FEATURES_STEP_VIDEOS` | `public/static/videos/features/` |
+| Solution carousels | `solutionFeatureImagePath()` | `public/images/solutions/{slug}/` |
+| Solution meshes | `solutionMeshImage()` | `public/images/solutions/mesh-*.webp` |
+| Service features | `serviceFeatureImagePath()` | `public/images/services/features/` |
+| Service carousel | `serviceCarouselImagePath()` | `public/images/services/carousel/` |
+| About work | `aboutWorkImage()` | `public/images/about/work-*.webp` |
+| Contact promo | `CONTACT_PROMO_OVERVIEW` | `public/images/contact/promo-overview.webp` |
+
+Central registry: `src/lib/assets/localPaths.ts`

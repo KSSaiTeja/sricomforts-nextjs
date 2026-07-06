@@ -1,21 +1,8 @@
 import { featureImage } from "@/data/solutionImages";
-
-const STORYBLOK = "https://a.storyblok.com";
-
-function asset(path: string) {
-  return `${STORYBLOK}/f/337048/${path}/m/985x0/filters:format(webp):quality(85)`;
-}
-
-const meshPaths = [
-  "1024x1024/d8f71b1cee/mesh-1.png",
-  "1024x1024/ed91836e67/mesh-6.png",
-  "1024x1024/d8f71b1cee/mesh-1.png",
-  "1024x1024/ed91836e67/mesh-6.png",
-  "1024x1024/d8f71b1cee/mesh-1.png",
-] as const;
+import { solutionMeshImage } from "@/lib/assets/localPaths";
 
 function mesh(index: number) {
-  return asset(meshPaths[index % meshPaths.length]);
+  return solutionMeshImage(index);
 }
 
 export type SolutionIntroData = {
@@ -85,7 +72,12 @@ export type SolutionPageData = {
   caseStudy: SolutionCaseStudyData;
 };
 
-const placeholderLogo = asset("857x234/44461853b4/ryder.png");
+/** Placeholder logos from https://logoipsum.com/ — stored in public/logos/placeholder/ */
+const PLACEHOLDER_LOGO = "/logos/placeholder";
+
+function clientLogo(index: number) {
+  return `${PLACEHOLDER_LOGO}/logo-${String(index).padStart(2, "0")}.svg`;
+}
 
 function buildCommercial(): SolutionPageData {
   return {
@@ -250,7 +242,7 @@ function buildCommercial(): SolutionPageData {
         { value: "25%", label: "Energy Savings Year One" },
       ],
       cta: { label: "View Our Work", href: "/about#our-work" },
-      logo: { src: placeholderLogo, alt: "Client logo" },
+      logo: { src: clientLogo(10), alt: "Client logo" },
     },
   };
 }
@@ -396,7 +388,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
         { value: "35%", label: "Cooling Efficiency Gain" },
       ],
       cta: { label: "View Our Work", href: "/about#our-work" },
-      logo: { src: placeholderLogo, alt: "Client logo" },
+      logo: { src: clientLogo(11), alt: "Client logo" },
     },
   }),
   "industrial-pharma": adaptPage(commercial, {
@@ -516,7 +508,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
         { value: "20%", label: "Energy Reduction" },
       ],
       cta: { label: "View Our Work", href: "/about#our-work" },
-      logo: { src: placeholderLogo, alt: "Client logo" },
+      logo: { src: clientLogo(12), alt: "Client logo" },
     },
   }),
   healthcare: adaptPage(commercial, {
@@ -636,7 +628,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
         { value: "30%", label: "Faster Service Response" },
       ],
       cta: { label: "View Our Work", href: "/about#our-work" },
-      logo: { src: placeholderLogo, alt: "Client logo" },
+      logo: { src: clientLogo(13), alt: "Client logo" },
     },
   }),
   "hospitality-retail": adaptPage(commercial, {
@@ -756,7 +748,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
         { value: "4.8★", label: "Average Review Score" },
       ],
       cta: { label: "View Our Work", href: "/about#our-work" },
-      logo: { src: placeholderLogo, alt: "Client logo" },
+      logo: { src: clientLogo(14), alt: "Client logo" },
     },
   }),
   residential: adaptPage(commercial, {
@@ -877,7 +869,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
         { value: "100%", label: "Room Comfort Coverage" },
       ],
       cta: { label: "View Our Work", href: "/about#our-work" },
-      logo: { src: placeholderLogo, alt: "Client logo" },
+      logo: { src: clientLogo(1), alt: "Client logo" },
     },
   }),
 };

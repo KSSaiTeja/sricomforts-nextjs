@@ -7,14 +7,6 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "*.supabase.co",
       },
-      {
-        protocol: "https",
-        hostname: "a.storyblok.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
     ],
   },
   async headers() {
