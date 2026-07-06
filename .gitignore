@@ -40,8 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Local reference clone — not part of the site (937MB+)
+# Local dev references — not part of the site
 terminal-industries-clone/
+website-refs/
 
 # Temp imports (YouTube downloads, PNG staging)
 .tmp/

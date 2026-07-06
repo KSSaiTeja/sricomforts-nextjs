@@ -162,7 +162,7 @@
   }
 }
 
-/* Advanced static grid (YOS / services template) */
+/* Advanced static grid (services layout) */
 .features-grid--static .feature-image {
   align-self: center;
   aspect-ratio: 390 / 610;

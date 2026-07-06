@@ -109,7 +109,7 @@
   color: var(--color-neutral-mid);
 }
 
-/* Sri Comforts palette on YOS template */
+/* Sri Comforts palette on services layout */
 .services-page .solutions-value__card-media img {
   filter: hue-rotate(98deg) saturate(1.35) brightness(1.05);
 }
@@ -175,7 +175,7 @@
   background-color: var(--color-brand-accent-tint);
 }
 
-/* Expandable carousel card hover — match YOS clone rollover */
+/* Expandable carousel card hover */
 .services-page .features-carousel-expandable-card .features-card__wrapper .rollover__wrapper {
   filter: blur(0.5rem);
   opacity: 0.3;

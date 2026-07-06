@@ -94,9 +94,6 @@ export const brandDifferenceSection = {
   heading: "Sri Comforts difference.",
 } as const;
 
-/** @deprecated Use `brandDifferenceSection` — kept for unused YOSSection component */
-export const yosSection = brandDifferenceSection;
-
 export const fullscreenFeatures = {
   items: [
     {
