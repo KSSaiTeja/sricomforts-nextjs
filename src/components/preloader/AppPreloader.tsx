@@ -6,6 +6,7 @@ import { AnimatedLogo, type AnimatedLogoHandle } from "@/components/preloader/An
 import { PathBackground } from "@/components/preloader/PathBackground";
 import { SvgMask, type SvgMaskHandle } from "@/components/preloader/SvgMask";
 import { registerGsap } from "@/lib/gsap/register";
+import { BRAND_NAME } from "@/lib/brand";
 import { preloadVideoSequence, waitForHeroFrames as waitUntilHeroFramesReady } from "@/lib/canvas/createVideoSequence";
 import { getHeroFrameUrls } from "@/data/homepage";
 import { useSvh } from "@/hooks/useSvh";
@@ -165,7 +166,7 @@ export function AppPreloader({ onLoaded, onAnimate, waitForHeroFrames = false }:
     <div
       className={styles.appLoader}
       aria-busy="true"
-      aria-label="Loading Sri Comforts"
+      aria-label={`Loading ${BRAND_NAME}`}
       role="status"
     >
       <div ref={overlayRef} className={styles.overlay} />

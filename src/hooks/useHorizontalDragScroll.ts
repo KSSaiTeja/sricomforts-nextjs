@@ -4,7 +4,11 @@ import { useEffect, type RefObject } from "react";
 
 type UseHorizontalDragScrollOptions = {
   onIndexChange?: (index: number) => void;
+  /** Snap to nearest child after drag. Default true. */
+  snap?: boolean;
 };
+
+const DRAG_THRESHOLD_PX = 6;
 
 function nearestIndex(container: HTMLElement) {
   const scrollLeft = container.scrollLeft;
@@ -25,16 +29,18 @@ function nearestIndex(container: HTMLElement) {
 
 export function useHorizontalDragScroll(
   ref: RefObject<HTMLElement | null>,
-  { onIndexChange }: UseHorizontalDragScrollOptions = {},
+  { onIndexChange, snap = true }: UseHorizontalDragScrollOptions = {},
 ) {
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
+    let tracking = false;
     let dragging = false;
     let startX = 0;
     let scrollStart = 0;
     let activePointer: number | null = null;
+    let suppressClick = false;
 
     const snapToNearest = (behavior: ScrollBehavior = "smooth") => {
       const index = nearestIndex(element);
@@ -48,41 +54,72 @@ export function useHorizontalDragScroll(
     const onPointerDown = (event: PointerEvent) => {
       if (event.button !== 0) return;
 
-      dragging = true;
+      tracking = true;
+      dragging = false;
+      suppressClick = false;
       activePointer = event.pointerId;
       startX = event.clientX;
       scrollStart = element.scrollLeft;
       element.setPointerCapture(event.pointerId);
-      element.classList.add("is-dragging");
     };
 
     const onPointerMove = (event: PointerEvent) => {
-      if (!dragging || activePointer !== event.pointerId) return;
+      if (!tracking || activePointer !== event.pointerId) return;
 
-      element.scrollLeft = scrollStart - (event.clientX - startX);
+      const deltaX = event.clientX - startX;
+
+      if (!dragging && Math.abs(deltaX) > DRAG_THRESHOLD_PX) {
+        dragging = true;
+        suppressClick = true;
+        element.classList.add("is-dragging");
+      }
+
+      if (!dragging) return;
+
+      event.preventDefault();
+      element.scrollLeft = scrollStart - deltaX;
     };
 
     const endDrag = (event: PointerEvent) => {
-      if (!dragging || activePointer !== event.pointerId) return;
+      if (!tracking || activePointer !== event.pointerId) return;
+
+      tracking = false;
+      activePointer = null;
+
+      try {
+        element.releasePointerCapture(event.pointerId);
+      } catch {
+        // Pointer may already be released.
+      }
+
+      if (dragging) {
+        element.classList.remove("is-dragging");
+        if (snap) snapToNearest();
+      }
 
       dragging = false;
-      activePointer = null;
-      element.releasePointerCapture(event.pointerId);
-      element.classList.remove("is-dragging");
-      snapToNearest();
+    };
+
+    const onClickCapture = (event: MouseEvent) => {
+      if (!suppressClick) return;
+      event.preventDefault();
+      event.stopPropagation();
+      suppressClick = false;
     };
 
     element.addEventListener("pointerdown", onPointerDown);
     element.addEventListener("pointermove", onPointerMove);
     element.addEventListener("pointerup", endDrag);
     element.addEventListener("pointercancel", endDrag);
+    element.addEventListener("click", onClickCapture, true);
 
     return () => {
       element.removeEventListener("pointerdown", onPointerDown);
       element.removeEventListener("pointermove", onPointerMove);
       element.removeEventListener("pointerup", endDrag);
       element.removeEventListener("pointercancel", endDrag);
+      element.removeEventListener("click", onClickCapture, true);
       element.classList.remove("is-dragging");
     };
-  }, [onIndexChange, ref]);
+  }, [onIndexChange, ref, snap]);
 }

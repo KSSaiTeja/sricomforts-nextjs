@@ -3,6 +3,9 @@
   --vw: 1vw;
   --vh: 1vh;
   --svh: 1svh;
+  /* One-screen section framing (useSvh() keeps --svh accurate on mobile) */
+  --section-vh: calc(var(--svh, 1svh) * 100);
+  --section-min-height: var(--section-vh);
 
   /* Neutral palette */
   --color-neutral-black: #000;
@@ -59,7 +62,8 @@
   --color-surface: var(--color-neutral-white);
   --color-border-decorative: var(--color-brand-ink);
   --color-overlay: rgb(0 0 0 / 70%);
-  --color-surface-nav-glass: rgb(0 0 0 / 40%);
+  /* Soft full-bleed nav scrim */
+  --color-surface-nav-glass: rgb(5 24 36 / 42%);
   --color-surface-nav-glass-border: rgb(255 255 255 / 10%);
 
   /* Typography */
@@ -72,10 +76,32 @@
   /* Layout (markets / solutions pages) */
   --spacing: 1.25rem;
   --svw: 1vw;
+
+  /*
+   * Section vertical rhythm (halved from original ~6.25 / 11.25 rem)
+   * Use for section-to-section padding so pages need fewer scrolls.
+   */
+  --section-pad-y: 3.125rem;
+  --section-pad-y-md: 4.375rem;
+  --section-pad-y-lg: 5.625rem;
+
+  /* Section eyebrows — brand blue on light, bright blue on dark */
+  --color-eyebrow: var(--color-brand-primary);
+  --color-eyebrow-on-dark: var(--color-brand-accent-on-dark);
 }
 
 @media (min-width: 1024px) {
   :root {
     --spacing: min(3.646vw, 93.3333333333px);
   }
+}
+
+/* One-screen section utility — pair with useSvh() for mobile browser chrome */
+.section-viewport {
+  min-height: 100svh;
+  min-height: var(--section-min-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
 }

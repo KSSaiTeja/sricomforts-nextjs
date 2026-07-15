@@ -51,7 +51,7 @@ export const navigation: NavMenuItem[] = [
         links: [
           {
             label: "AC Tonnage Calculator",
-            href: "/solutions/residential#tonnage-calculator",
+            href: "/resources/ac-tonnage-calculator",
           },
         ],
       },
@@ -78,7 +78,7 @@ export const navigation: NavMenuItem[] = [
       {
         title: "Company",
         links: [
-          { label: "About Sri Comforts", href: `/about#${aboutSectionAnchors.about}` },
+          { label: "About Sri\u00A0Comforts", href: `/about#${aboutSectionAnchors.about}` },
           { label: "Our Team", href: `/about#${aboutSectionAnchors.team}` },
           { label: "Our Work", href: `/about#${aboutSectionAnchors.work}` },
           { label: "Awards & Recognition", href: `/about#${aboutSectionAnchors.awards}` },

@@ -1,0 +1,439 @@
+.section {
+  position: relative;
+  z-index: 2;
+  overflow: clip;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100svh;
+  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+  margin-top: 0;
+  padding: clamp(1rem, 3svh, var(--section-pad-y)) 1rem 0;
+  background: var(--color-neutral-white);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(0.5rem, 1.5svh, 0.75rem);
+  flex: 1;
+  margin: 0 auto;
+  max-width: 74rem;
+  min-height: 0;
+  max-height: calc(100svh - clamp(2rem, 6svh, var(--section-pad-y)) * 2);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  grid-template-columns: 1fr;
+  perspective: 1200px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+  height: 100%;
+  padding: 1.5rem 1.25rem;
+  border-radius: 1.25rem;
+  border: none;
+  background: var(--color-background);
+  color: var(--color-brand-ink);
+  box-shadow: none;
+  text-align: center;
+  overflow: visible;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  opacity: 0;
+  cursor: default;
+  transition: box-shadow 0.35s var(--ease-out);
+}
+
+.card:hover,
+.card:focus-within {
+  box-shadow:
+    0 12px 32px rgb(5 24 36 / 8%),
+    0 2px 6px rgb(5 24 36 / 4%);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.cardMedia {
+  justify-content: flex-end;
+  align-items: stretch;
+  min-height: 13.5rem;
+  padding: 1.25rem;
+  background: var(--color-brand-ink);
+  color: var(--color-neutral-white);
+  text-align: left;
+  overflow: hidden;
+}
+
+.cardFeature {
+  text-align: left;
+  background: var(--color-brand-accent-tint);
+}
+
+.cardFeature .inner {
+  align-items: flex-start;
+  gap: 0.875rem;
+}
+
+.cardBadge {
+  background: var(--color-brand-ink);
+  color: var(--color-neutral-white);
+}
+
+.cardStrike .inner {
+  gap: 1rem;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15em;
+  margin: 0;
+  width: 100%;
+  font-size: clamp(2rem, 9vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.titleValue {
+  display: block;
+  line-height: 1;
+}
+
+.titleAccent {
+  display: block;
+  color: var(--color-brand-primary);
+  font-size: 0.42em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  text-transform: lowercase;
+}
+
+.cardBadge .titleAccent {
+  font-size: 1em;
+  text-transform: none;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.titleFeature {
+  display: block;
+  align-items: flex-start;
+  font-size: clamp(1.5rem, 6vw, 2.125rem);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.titleStrike {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--color-brand-primary);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-brand-accent-on-dark);
+}
+
+.body {
+  margin: 0;
+  max-width: 18rem;
+  width: 100%;
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  color: var(--color-neutral-charcoal);
+  overflow-wrap: break-word;
+}
+
+.cardBadge .body,
+.cardMedia .body {
+  color: rgb(255 255 255 / 75%);
+}
+
+.cardFeature .body {
+  max-width: none;
+  color: var(--color-brand-ink);
+}
+
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 78%);
+  color: var(--color-brand-ink);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.strikes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+}
+
+.strike {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  max-width: 100%;
+  padding: 0 0.15em;
+  font-size: clamp(1.125rem, 4.5vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--color-brand-ink);
+  overflow-wrap: anywhere;
+}
+
+.strike::after {
+  content: "";
+  position: absolute;
+  left: -0.1em;
+  right: -0.1em;
+  top: 52%;
+  height: 0.2em;
+  border-radius: 999px;
+  background: var(--color-brand-primary);
+  transform: rotate(-4deg);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.mediaImage {
+  object-fit: cover;
+  opacity: 0.5;
+}
+
+.mediaContent {
+  align-items: flex-start;
+  justify-content: flex-end;
+  min-height: 100%;
+  max-width: 16rem;
+  text-align: left;
+}
+
+.mediaTitle {
+  margin: 0;
+  font-size: clamp(1.375rem, 5vw, 1.875rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 480px) {
+  .section {
+    padding-inline: 1.25rem;
+  }
+
+  .card {
+    padding: 1.75rem 1.5rem;
+    border-radius: 1.5rem;
+  }
+
+  .title {
+    font-size: clamp(2.25rem, 7vw, 3rem);
+  }
+
+  .body {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.5rem, 1.5svh, 0.875rem);
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .card {
+    min-height: clamp(9rem, 22svh, 12.5rem);
+  }
+
+  .cardFeature {
+    grid-column: span 2;
+    min-height: clamp(10rem, 24svh, 13.5rem);
+  }
+
+  .cardMedia {
+    min-height: clamp(10rem, 25svh, 14rem);
+  }
+
+  .cardStrike {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-areas:
+      "years years cities cities engineers engineers"
+      "partner partner journey journey journey response"
+      "gaps gaps gaps scope scope scope";
+    gap: 0.9rem;
+  }
+
+  .card {
+    min-height: 13rem;
+    padding: 1.75rem;
+  }
+
+  .cardFeature,
+  .cardMedia,
+  .cardStrike {
+    grid-column: auto;
+  }
+
+  .card[data-area="years"] {
+    grid-area: years;
+  }
+
+  .card[data-area="cities"] {
+    grid-area: cities;
+  }
+
+  .card[data-area="engineers"] {
+    grid-area: engineers;
+  }
+
+  .card[data-area="partner"] {
+    grid-area: partner;
+  }
+
+  .card[data-area="journey"] {
+    grid-area: journey;
+    min-height: 15rem;
+  }
+
+  .card[data-area="response"] {
+    grid-area: response;
+  }
+
+  .card[data-area="gaps"] {
+    grid-area: gaps;
+  }
+
+  .card[data-area="scope"] {
+    grid-area: scope;
+    min-height: 15rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    margin-top: 0;
+    padding: clamp(1.5rem, 3svh, var(--section-pad-y-lg)) 4.375rem 0;
+  }
+
+  .grid {
+    gap: 1rem;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .card {
+    min-height: 14rem;
+    padding: 2rem 1.75rem;
+    border-radius: 1.75rem;
+  }
+
+  .card[data-area="journey"],
+  .card[data-area="scope"] {
+    min-height: 16.5rem;
+  }
+
+  .title {
+    font-size: clamp(2.5rem, 3.2vw, 3.5rem);
+  }
+
+  .titleAccent {
+    font-size: 0.38em;
+  }
+
+  .body {
+    font-size: 1rem;
+    max-width: 17rem;
+  }
+
+  .cardFeature .body {
+    max-width: 24rem;
+  }
+
+  .step {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .strike {
+    font-size: clamp(1.25rem, 1.5vw, 1.625rem);
+  }
+}
+
+@media (min-width: 1280px) {
+  .title {
+    font-size: clamp(2.75rem, 3vw, 3.75rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    opacity: 1;
+    will-change: auto;
+    transition: none;
+  }
+
+  .card:hover,
+  .card:focus-within {
+    box-shadow: 0 1px 2px rgb(5 24 36 / 4%);
+  }
+}

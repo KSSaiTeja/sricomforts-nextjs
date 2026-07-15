@@ -1,0 +1,407 @@
+/* Experience + awards — site type scale + refined layout */
+
+.root {
+  --awards-ink: var(--color-brand-ink);
+  --awards-muted: var(--color-neutral-mid);
+  --awards-line: rgb(5 24 36 / 10%);
+  --awards-surface: var(--color-neutral-off-white);
+}
+
+.accent {
+  font-style: italic;
+  font-weight: inherit;
+  color: var(--color-brand-primary);
+}
+
+.eyebrow {
+  margin: 0 0 0.85rem;
+}
+
+/* ——— Experience ——— */
+
+.experience {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100svh;
+  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse 70% 55% at 8% 30%,
+      var(--color-brand-accent-tint) 0%,
+      transparent 58%
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-neutral-white) 0%,
+      var(--color-neutral-off-white) 100%
+    );
+  padding: clamp(1rem, 3svh, var(--section-pad-y-md)) var(--spacing) clamp(1rem, 3svh, var(--section-pad-y));
+}
+
+.experienceInner {
+  margin: 0 auto;
+  max-width: 72rem;
+  display: grid;
+  gap: clamp(1.25rem, 3svh, 2.75rem);
+  align-items: center;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.yearsCard {
+  display: flex;
+  justify-content: center;
+}
+
+.yearsFrame {
+  position: relative;
+  width: min(100%, 22.5rem);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.25rem;
+  background:
+    linear-gradient(var(--awards-ink), var(--awards-ink)) top left / 70% 1px no-repeat,
+    linear-gradient(var(--awards-ink), var(--awards-ink)) top left / 1px 70% no-repeat,
+    linear-gradient(var(--awards-ink), var(--awards-ink)) bottom right / 70% 1px no-repeat,
+    linear-gradient(var(--awards-ink), var(--awards-ink)) bottom right / 1px 70% no-repeat;
+}
+
+.yearsNumber {
+  display: block;
+  font-size: clamp(4.5rem, 18svh, 10.75rem);
+  font-weight: 400;
+  line-height: 0.82;
+  letter-spacing: -0.06em;
+  color: transparent;
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.yearsLabel {
+  margin: 0.85rem 0 0;
+  color: var(--awards-ink);
+  letter-spacing: -0.01em;
+}
+
+.experienceContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.experienceTitle {
+  margin: 0;
+  font-weight: 400;
+  color: var(--awards-ink);
+  text-wrap: balance;
+}
+
+.experienceBody {
+  margin: 0;
+  max-width: 34rem;
+  color: var(--awards-muted);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 0.5rem;
+  padding: 1.35rem 0;
+  border-top: 1px solid var(--awards-line);
+  border-bottom: 1px solid var(--awards-line);
+}
+
+.stat {
+  position: relative;
+  padding-right: 1rem;
+  padding-left: 0;
+}
+
+.stat:not(:first-child) {
+  padding-left: 1rem;
+}
+
+.stat:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  right: 0;
+  width: 1px;
+  height: 80%;
+  background: var(--awards-line);
+}
+
+.statValue {
+  margin: 0 0 0.5rem;
+  font-weight: 400;
+  color: var(--awards-ink);
+  line-height: 1 !important;
+}
+
+.statLabel {
+  margin: 0;
+  color: var(--awards-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.35 !important;
+}
+
+.signature {
+  margin-top: 0.65rem;
+  padding-top: 0.25rem;
+}
+
+.signatureName {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.015em;
+  color: var(--awards-ink);
+}
+
+.signatureMeta {
+  margin: 0.4rem 0 0;
+  color: var(--awards-muted);
+  letter-spacing: 0.1em;
+}
+
+/* ——— Awards ——— */
+
+.awards {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100svh;
+  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+  background: var(--awards-surface);
+  padding: clamp(1rem, 3svh, var(--section-pad-y-md)) var(--spacing) clamp(1rem, 3svh, var(--section-pad-y-lg));
+}
+
+.awards::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 55% 40% at 50% 0%,
+    rgb(0 123 192 / 7%) 0%,
+    transparent 70%
+  );
+}
+
+.awardsInner {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  margin: 0 auto;
+  max-width: 64rem;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.awardsHeader {
+  text-align: center;
+  margin-bottom: clamp(1rem, 2.5svh, 2.75rem);
+  flex-shrink: 0;
+}
+
+.awardsLabel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  margin: 0 0 1rem;
+}
+
+.awardsLabel::before,
+.awardsLabel::after {
+  content: "";
+  width: 0.75rem;
+  height: 1px;
+  background: var(--color-brand-primary);
+}
+
+.awardsTitle {
+  margin: 0;
+  font-weight: 400;
+  color: var(--awards-ink);
+  text-wrap: balance;
+}
+
+.awardsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  flex: 1;
+  min-height: 0;
+  max-height: calc(100svh - clamp(8rem, 22svh, 14rem));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--color-neutral-white);
+  border: 1px solid var(--awards-line);
+  border-radius: 1rem;
+  box-shadow: 0 18px 48px rgb(5 24 36 / 4%);
+}
+
+.awardItem {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 1.15rem;
+  align-items: start;
+  padding: 1.75rem 1.5rem;
+  border-bottom: 1px solid var(--awards-line);
+  transition: background-color 0.3s var(--ease-out);
+}
+
+.awardItem:last-child {
+  border-bottom: 0;
+}
+
+.laurel {
+  position: relative;
+  width: 5.5rem;
+  height: 5.75rem;
+  color: var(--awards-ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.laurelSvg {
+  width: 4.75rem;
+  height: 4.75rem;
+  display: block;
+  transition: transform 0.45s var(--ease-out);
+}
+
+.laurelYear {
+  margin: 0.15rem 0 0;
+  color: var(--awards-ink);
+  letter-spacing: 0.12em;
+  line-height: 1 !important;
+}
+
+.awardCopy {
+  padding-top: 0.35rem;
+  min-width: 0;
+}
+
+.awardTitle {
+  margin: 0 0 0.55rem;
+  font-weight: 400;
+  color: var(--awards-ink);
+  font-size: 1.125rem !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.25 !important;
+}
+
+.awardDescription {
+  margin: 0;
+  color: var(--awards-muted);
+  font-size: 0.9375rem !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.5 !important;
+  max-width: 26rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .awardItem:hover {
+    background: rgb(0 123 192 / 3.5%);
+  }
+
+  .awardItem:hover .laurelSvg {
+    transform: translateY(-2px);
+  }
+}
+
+@media (min-width: 768px) {
+  .awardsGrid {
+    grid-template-columns: 1fr 1fr;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .awardItem {
+    padding: 2.25rem 2rem;
+    border-bottom: 1px solid var(--awards-line);
+  }
+
+  .awardItem:nth-child(odd) {
+    border-right: 1px solid var(--awards-line);
+  }
+
+  .awardItem:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .awardTitle {
+    font-size: 1.25rem !important;
+  }
+
+  .awardDescription {
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+}
+
+@media (min-width: 960px) {
+  .experienceInner {
+    grid-template-columns: minmax(18rem, 23rem) minmax(0, 1fr);
+    gap: clamp(2rem, 4svh, 4.5rem);
+    overflow-y: visible;
+  }
+
+  .yearsCard {
+    justify-content: flex-start;
+  }
+
+  .experienceContent {
+    gap: 1.35rem;
+  }
+
+  .stats {
+    max-width: 36rem;
+  }
+
+  .signature {
+    align-self: flex-end;
+    text-align: right;
+    margin-left: auto;
+  }
+
+  .awardsHeader {
+    margin-bottom: 3.25rem;
+  }
+
+  .awardItem {
+    padding: 2.5rem 2.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .awardItem,
+  .laurelSvg {
+    transition: none;
+  }
+
+  .awardItem:hover .laurelSvg {
+    transform: none;
+  }
+}

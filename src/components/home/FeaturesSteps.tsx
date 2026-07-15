@@ -55,7 +55,7 @@ function buildNotches(position: number, isDesktop: boolean): Notch[] {
     size: NOTCH_SIZE,
     position,
     notchWidth: 0.9,
-    radius: 20,
+    radius: 36,
   };
 
   if (isDesktop) {
@@ -224,7 +224,7 @@ export function FeaturesSteps() {
 
       const chars = wrapElementWithSplitChars(label);
       chars.forEach((char, charIndex) => {
-        char.style.setProperty("--v-delay", `${Math.round(charIndex * 0.014 * 100) / 100}s`);
+        char.style.setProperty("--v-delay", `${Math.round(charIndex * 0.018 * 100) / 100}s`);
       });
       splitRefs.current[index] = chars;
     });
@@ -283,8 +283,8 @@ export function FeaturesSteps() {
           triggers.push(
             ScrollTrigger.create({
               trigger: scrollItemsRef.current,
-              start: "top 50%",
-              end: "bottom 50%",
+              start: "top 55%",
+              end: "bottom 45%",
               scrub: 0,
               onUpdate: ({ progress }) => {
                 const positions = itemPositionsRef.current;
@@ -296,20 +296,16 @@ export function FeaturesSteps() {
                   lerp(NOTCH_SIZE / 2 + 0.1, 1 - NOTCH_SIZE / 2 - 0.1, progress),
                 );
 
-                let index = positions.findIndex((item) => item.y > scrollY + 25);
-                index = index === -1 ? positions.length - 1 : index - 1;
+                const activateLead = 10;
+                let index = positions.findIndex(
+                  (item) => item.y > scrollY + activateLead,
+                );
+                index =
+                  index === -1 ? positions.length - 1 : Math.max(0, index - 1);
                 setActiveIndex(index);
 
-                const lookahead = -50;
-                let progressIndex = positions.findIndex((item) => item.y > scrollY + lookahead);
-                progressIndex =
-                  progressIndex === -1
-                    ? positions.length - 1
-                    : progressIndex === 0
-                      ? 0
-                      : progressIndex - 1;
-
-                if (progressIndex < 1) {
+                // Pointer and text stay locked: active step is always fully highlighted.
+                if (index < 1) {
                   if (!introActiveRef.current) {
                     setCharProgress(1);
                   }
@@ -318,15 +314,7 @@ export function FeaturesSteps() {
                 }
 
                 introActiveRef.current = false;
-
-                setCharProgress(
-                  progressIndex +
-                    interpolateProgress(
-                      scrollY,
-                      positions[progressIndex].y + lookahead,
-                      positions[progressIndex].y + positions[progressIndex].h - 50,
-                    ),
-                );
+                setCharProgress(index + 1);
               },
             }),
           );

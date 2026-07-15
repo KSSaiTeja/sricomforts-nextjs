@@ -34,7 +34,7 @@ export function SiteFooter({ static: isStatic = true }: SiteFooterProps) {
       size: 0.65,
       position: 0.5,
       offset: NOTCH_OFFSET,
-      radius: 20,
+      radius: 40,
       notchWidth: 0.95,
     }),
   ]);

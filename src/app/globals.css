@@ -10,6 +10,8 @@
 @import "../styles/about-section-intro.css";
 @import "../styles/about-leaders.css";
 @import "../styles/about-page.css";
+@import "../styles/career-page.css";
+@import "../styles/blog-page.css";
 @import "../styles/background-canvas.css";
 @import "../styles/solutions-page.css";
 @import "../styles/services-page.css";
@@ -24,16 +26,22 @@
 @import "../styles/padded-counter.css";
 @import "../styles/features-steps.css";
 @import "../styles/logo-grid.css";
+@import "../styles/projects-carousel.css";
 @import "../styles/form-reference.css";
 @import "../styles/form-builder.css";
 @import "../styles/form-field.css";
 @import "../styles/form-button.css";
 @import "../styles/promo-banner-download.css";
+@import "../styles/contact-cta.css";
+@import "../styles/contact-map.css";
 @import "../styles/contact-ways.css";
 @import "../styles/path-background.css";
 @import "../styles/button-tilt.css";
 @import "../styles/site-footer.css";
 @import "../styles/not-found-page.css";
+@import "../styles/tonnage-calculator.css";
+@import "../styles/tonnage-widget.css";
+@import "../styles/chat-widget.css";
 
 *,
 *::before,
@@ -203,6 +211,20 @@ canvas {
   font-size: 0.8125rem;
   letter-spacing: 0.18em;
   line-height: 0.81;
+}
+
+/* Section eyebrows — brand blue, medium weight, open tracking */
+.label.label-5 {
+  color: var(--color-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.has-dark-theme .label.label-5,
+.is-dark .label.label-5,
+.sections-grid--dark .label.label-5,
+.case-study--dark .label.label-5 {
+  color: var(--color-eyebrow-on-dark);
 }
 
 .title-h2 {

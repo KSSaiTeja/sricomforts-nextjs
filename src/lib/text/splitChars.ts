@@ -1,5 +1,18 @@
+import { keepBrandTogether } from "@/lib/brand";
+
+/** Breaking whitespace only — excludes NBSP so "Sri Comforts" stays one word. */
+const BREAKING_WHITESPACE = /([ \t\r\n\f\v]+)/;
+
 export function splitIntoCharSpans(text: string): string[] {
   return [...text];
+}
+
+function tokenizeWords(text: string): string[] {
+  return keepBrandTogether(text).split(BREAKING_WHITESPACE);
+}
+
+function isBreakingWhitespace(token: string): boolean {
+  return /^[ \t\r\n\f\v]+$/.test(token);
 }
 
 export function wrapTextWithChars(
@@ -12,12 +25,12 @@ export function wrapTextWithChars(
   element.setAttribute("aria-label", text);
 
   const chars: HTMLSpanElement[] = [];
-  const tokens = text.split(/(\s+)/);
+  const tokens = tokenizeWords(text);
 
   for (const token of tokens) {
     if (!token) continue;
 
-    if (/^\s+$/.test(token)) {
+    if (isBreakingWhitespace(token)) {
       element.appendChild(document.createTextNode(token));
       continue;
     }
@@ -50,12 +63,12 @@ export function wrapElementWithSplitChars(
   element.textContent = "";
 
   const chars: HTMLSpanElement[] = [];
-  const tokens = text.split(/(\s+)/);
+  const tokens = tokenizeWords(text);
 
   for (const token of tokens) {
     if (!token) continue;
 
-    if (/^\s+$/.test(token)) {
+    if (isBreakingWhitespace(token)) {
       element.appendChild(document.createTextNode(token));
       continue;
     }

@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { usePreloader } from "@/components/preloader/PreloaderProvider";
 import { registerGsap } from "@/lib/gsap/register";
-import { getHeroFrameUrls, heroTitles } from "@/data/homepage";
+import { getHeroFrameUrls, heroTitles, HERO_FRAMES_VERSION } from "@/data/homepage";
 import { useIsLargeViewport } from "@/hooks/useMediaQuery";
 import { useSmoothScroll } from "@/providers/SmoothScrollProvider";
 import { HeroScrollContent } from "@/components/home/HeroScrollContent";
@@ -75,7 +75,7 @@ export function VideoCarousel() {
           <div className={styles.videoSequenceBackground}>
             <div ref={backgroundWrapperRef} className={styles.sequenceBackgroundWrapper}>
               <VideoSequence
-                key={isDesktop ? "desktop" : "mobile"}
+                key={isDesktop ? `desktop-${HERO_FRAMES_VERSION}` : `mobile-${HERO_FRAMES_VERSION}`}
                 frames={frames}
                 scrollProgressRef={scrollProgressRef}
                 fitTop={50}

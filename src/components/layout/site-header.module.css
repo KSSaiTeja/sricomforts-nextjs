@@ -1,6 +1,6 @@
 .siteHeader {
   position: fixed;
-  inset: 1.5625rem 0 auto;
+  inset: 0 0 auto;
   z-index: 10;
   width: 100%;
   color: var(--color-neutral-white);
@@ -8,12 +8,12 @@
 }
 
 .container {
-  padding: 0 1.25rem;
+  padding: 0;
 }
 
 @media (min-width: 1024px) {
   .container {
-    padding: 0 min(3.646vw, 93.33px);
+    padding: 0;
   }
 }
 
@@ -25,14 +25,13 @@
 .inner {
   display: grid;
   grid-template-areas: "a b c";
-  grid-template-columns: auto 1fr auto;
-  gap: 1.25rem;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 1rem;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 1.625rem;
-  border-radius: 8px;
-  background-color: rgb(0 0 0 / 30%);
-  backdrop-filter: blur(30px);
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border-radius: 0;
+  background: transparent;
   pointer-events: auto;
 }
 

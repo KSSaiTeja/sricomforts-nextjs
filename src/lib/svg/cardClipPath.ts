@@ -43,6 +43,8 @@ function buildNotchPoints({
     return [left, innerLeft, innerRight, right];
   }
 
+  // Continuous S-curve shoulders via cubic Bézier (smoother than a quadratic through the vertex).
+  const handle = r * 0.65;
   const curve = (
     point: [number, number],
     from: [number, number],
@@ -50,14 +52,20 @@ function buildNotchPoints({
   ) => {
     const start: [number, number] = [point[0] - r * from[0], point[1] - r * from[1]];
     const end: [number, number] = [point[0] + r * to[0], point[1] + r * to[1]];
+    const c1: [number, number] = [start[0] + handle * from[0], start[1] + handle * from[1]];
+    const c2: [number, number] = [end[0] - handle * to[0], end[1] - handle * to[1]];
     const points: [number, number][] = [];
 
     for (let index = 0; index <= samples; index += 1) {
       const t = index / samples;
-      const inverse = 1 - t;
+      const inv = 1 - t;
+      const a = inv * inv * inv;
+      const b = 3 * inv * inv * t;
+      const c = 3 * inv * t * t;
+      const d = t * t * t;
       points.push([
-        inverse * inverse * start[0] + 2 * inverse * t * point[0] + t * t * end[0],
-        inverse * inverse * start[1] + 2 * inverse * t * point[1] + t * t * end[1],
+        a * start[0] + b * c1[0] + c * c2[0] + d * end[0],
+        a * start[1] + b * c1[1] + c * c2[1] + d * end[1],
       ]);
     }
 
@@ -101,8 +109,8 @@ export function buildCardClipPath({
   halfWidth = 48,
   depth = 16,
   slope = 8,
-  radius = 0,
-  samples = 4,
+  radius = 12,
+  samples = 6,
 }: CardNotchConfig): string {
   const position = Math.min(100, Math.max(0, positionPercent));
   const points = buildNotchPoints({

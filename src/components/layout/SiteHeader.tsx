@@ -34,6 +34,7 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
   const cancelCloseDropdown = useCallback(() => {
     if (closeDropdownTimerRef.current) {
@@ -69,6 +70,26 @@ export function SiteHeader() {
     };
   }, [cancelCloseDropdown]);
 
+  useEffect(() => {
+    const threshold = 24;
+    let frame = 0;
+
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        setScrolled(window.scrollY > threshold);
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
     setMobileExpanded(null);
@@ -101,94 +122,90 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="site-header">
-        <div className="site-container">
-          <div className="site-grid">
-            <div className="inner" ref={innerRef}>
-              <Link href="/" className="logo-link brand-logo-highlight" aria-label="Go to homepage">
-                <FullLogo className="logo" priority />
+      <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
+        <div className="inner" ref={innerRef}>
+          <Link href="/" className="logo-link brand-logo-highlight" aria-label="Go to homepage">
+            <FullLogo className="logo" priority />
+          </Link>
+
+          <nav className="nav font-nav" aria-label="Primary">
+            <ul>
+              {navigation.map((item) =>
+                item.href ? (
+                  <li key={item.label}>
+                    <Link href={item.href}>{item.label}</Link>
+                  </li>
+                ) : (
+                  <li
+                    key={item.label}
+                    onMouseEnter={() => openDropdownMenu(item.label)}
+                    onMouseLeave={scheduleCloseDropdown}
+                  >
+                    <nav className="navigation-menu-root" aria-label="Main">
+                      <div className="navigation-menu-anchor">
+                        <ul>
+                          <li>
+                            <NavDropdownTrigger
+                              label={item.label}
+                              isOpen={openDropdown === item.label}
+                              controlsId={`nav-panel-${item.label}`}
+                            />
+                          </li>
+                        </ul>
+                      </div>
+                    </nav>
+                  </li>
+                ),
+              )}
+            </ul>
+            <ul className="nav-hidden-seo" aria-hidden="true">
+              {navigation.flatMap((item) =>
+                item.sections?.flatMap((section) =>
+                  section.links.map((link) => (
+                    <li key={`${item.label}-${section.title}-${link.href}-${link.label}`}>
+                      <Link href={link.href} tabIndex={-1}>
+                        {link.label}
+                      </Link>
+                    </li>
+                  )),
+                ) ?? [],
+              )}
+            </ul>
+          </nav>
+
+          <div className="header-actions">
+            <div className="header-cta">
+              <Link href={siteContact.phoneHref} className="cta-button cta-button--secondary">
+                <span className="link-active">CALL US</span>
               </Link>
-
-              <nav className="nav font-nav" aria-label="Primary">
-                <ul>
-                  {navigation.map((item) =>
-                    item.href ? (
-                      <li key={item.label}>
-                        <Link href={item.href}>{item.label}</Link>
-                      </li>
-                    ) : (
-                      <li
-                        key={item.label}
-                        onMouseEnter={() => openDropdownMenu(item.label)}
-                        onMouseLeave={scheduleCloseDropdown}
-                      >
-                        <nav className="navigation-menu-root" aria-label="Main">
-                          <div className="navigation-menu-anchor">
-                            <ul>
-                              <li>
-                                <NavDropdownTrigger
-                                  label={item.label}
-                                  isOpen={openDropdown === item.label}
-                                  controlsId={`nav-panel-${item.label}`}
-                                />
-                              </li>
-                            </ul>
-                          </div>
-                        </nav>
-                      </li>
-                    ),
-                  )}
-                </ul>
-                <ul className="nav-hidden-seo" aria-hidden="true">
-                  {navigation.flatMap((item) =>
-                    item.sections?.flatMap((section) =>
-                      section.links.map((link) => (
-                        <li key={`${item.label}-${section.title}-${link.href}-${link.label}`}>
-                          <Link href={link.href} tabIndex={-1}>
-                            {link.label}
-                          </Link>
-                        </li>
-                      )),
-                    ) ?? [],
-                  )}
-                </ul>
-              </nav>
-
-              <div className="header-actions">
-                <div className="header-cta">
-                  <Link href={siteContact.phoneHref} className="cta-button cta-button--secondary">
-                    <span className="link-active">CALL US</span>
-                  </Link>
-                  <Link href={siteContact.contactHref} className="cta-button cta-button--primary">
-                    <span className="link-active">CONTACT</span>
-                  </Link>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                className={`toggle-mobile-menu-button${menuOpen ? " active" : ""}`}
-                aria-label="Toggle menu"
-                aria-expanded={menuOpen}
-                aria-haspopup="true"
-                aria-controls="mobile-menu"
-                onClick={toggleMenu}
-              >
-                <span className="wrapper">
-                  <span className="hl --1 t" />
-                  <span className="hl --2 t" />
-                  <span className="cl --1 t">
-                    <span className="cli --g t" />
-                    <span className="cli t" />
-                  </span>
-                  <span className="cl --2 t">
-                    <span className="cli --g t" />
-                    <span className="cli t" />
-                  </span>
-                </span>
-              </button>
+              <Link href={siteContact.contactHref} className="cta-button cta-button--primary">
+                <span className="link-active">CONTACT</span>
+              </Link>
             </div>
           </div>
+
+          <button
+            type="button"
+            className={`toggle-mobile-menu-button${menuOpen ? " active" : ""}`}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            aria-haspopup="true"
+            aria-controls="mobile-menu"
+            onClick={toggleMenu}
+          >
+            <span className="wrapper">
+              <span className="hl --1 t" />
+              <span className="hl --2 t" />
+              <span className="cl --1 t">
+                <span className="cli --g t" />
+                <span className="cli t" />
+              </span>
+              <span className="cl --2 t">
+                <span className="cli --g t" />
+                <span className="cli t" />
+              </span>
+            </span>
+          </button>
         </div>
       </header>
 

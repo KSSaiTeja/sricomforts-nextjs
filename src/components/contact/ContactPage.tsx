@@ -1,6 +1,7 @@
 "use client";
 
 import { FormReference } from "@/components/home/FormReference";
+import { ContactMap } from "@/components/contact/ContactMap";
 import { ContactWaysGrid } from "@/components/contact/ContactWaysGrid";
 import { PromoBannerDownload } from "@/components/contact/PromoBannerDownload";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -15,6 +16,7 @@ export function ContactPage() {
       <SiteHeader />
       <main id="app-content">
         <FormReference paddingTop="header" />
+        <ContactMap />
         <PromoBannerDownload />
         <ContactWaysGrid />
       </main>

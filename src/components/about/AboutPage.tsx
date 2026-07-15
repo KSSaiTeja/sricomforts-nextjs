@@ -1,9 +1,15 @@
 "use client";
 
+import { AboutHero } from "@/components/about/AboutHero";
 import { AboutSectionIntro } from "@/components/about/AboutSectionIntro";
 import { AboutFeaturesGrid } from "@/components/about/AboutFeaturesGrid";
 import { AboutLeaders } from "@/components/about/AboutLeaders";
 import { AboutLogoGrid } from "@/components/about/AboutLogoGrid";
+import { AboutStoryValues } from "@/components/about/AboutStoryValues";
+import { ContactCta } from "@/components/shared/ContactCta";
+import { StatsBento } from "@/components/home/StatsBento";
+import { AwardsAchievements } from "@/components/shared/AwardsAchievements";
+import { TestimonialsSection } from "@/components/shared/TestimonialsSection";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import {
@@ -13,11 +19,11 @@ import {
   aboutBrandPartners,
   aboutExecutiveLeaders,
   aboutFeaturesGrid,
+  aboutHero,
   aboutLeadersIntro,
   aboutPartnersBackingIntro,
   aboutPartnersIntro,
   aboutSectionAnchors,
-  aboutSectionIntro,
   aboutStoryValues,
   aboutTeamCta,
 } from "@/data/about";
@@ -34,9 +40,10 @@ export function AboutPage() {
       <main>
         <div className="content-wrapper">
           <div className="content__wrapper">
-            <AboutSectionIntro data={aboutSectionIntro} />
+            <AboutHero data={aboutHero} />
             <AboutFeaturesGrid data={aboutFeaturesGrid} id={aboutSectionAnchors.work} />
-            <AboutSectionIntro data={aboutStoryValues} />
+            <AboutStoryValues data={aboutStoryValues} />
+            <StatsBento />
             <AboutSectionIntro data={aboutLeadersIntro} />
             <AboutLeaders data={aboutExecutiveLeaders} />
             <AboutSectionIntro data={aboutPartnersIntro} />
@@ -47,6 +54,9 @@ export function AboutPage() {
             <AboutLeaders data={aboutAdvisors} />
             <AboutSectionIntro data={aboutTeamCta} />
           </div>
+          <TestimonialsSection />
+          <AwardsAchievements id={aboutSectionAnchors.awards} />
+          <ContactCta />
           <SiteFooter static />
         </div>
       </main>

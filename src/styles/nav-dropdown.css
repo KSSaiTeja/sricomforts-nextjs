@@ -23,18 +23,22 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  min-height: 25rem;
-  padding-top: 0.625rem;
+  min-height: 22rem;
+  padding-top: 0.5rem;
   pointer-events: auto;
 }
 
 .nav-dropdown-content {
   position: relative;
   width: 100%;
-  min-height: 25rem;
+  min-height: 22rem;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 12px;
+  border: 1px solid rgb(255 255 255 / 10%);
   background-color: var(--color-surface-dropdown);
+  box-shadow:
+    0 20px 48px rgb(0 0 0 / 35%),
+    0 0 0 1px rgb(0 0 0 / 15%);
   pointer-events: auto;
   scroll-behavior: smooth;
   transform-origin: top center;
@@ -47,8 +51,9 @@
 
 .dropdown-inner {
   display: grid;
-  grid-template-columns: 21.5625rem 1fr;
-  min-height: 25rem;
+  grid-template-columns: 15rem 1fr;
+  min-height: 22rem;
+  padding-inline: 0;
 }
 
 .dropdown-tabs {

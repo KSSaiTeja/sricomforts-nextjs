@@ -102,4 +102,9 @@
     background: radial-gradient(circle at 50% 50%, var(--color-brand-accent-alpha-80), transparent 15rem)
       no-repeat;
   }
+
+  /* Soft accent bloom only while hovering the cell contents */
+  .slot__wrapper:hover + .background-gradient {
+    opacity: 0.2;
+  }
 }

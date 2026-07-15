@@ -26,14 +26,14 @@ export function SolutionsCaseStudy({ data }: SolutionsCaseStudyProps) {
           size: 0.3,
           offset: NOTCH_OFFSET,
           notchWidth: 0.9,
-          radius: 8,
+          radius: 32,
         }),
         createNotch(NotchDirection.top, {
           position: 0.7,
           size: 0.3,
           offset: NOTCH_OFFSET,
           notchWidth: 0.9,
-          radius: 8,
+          radius: 32,
         }),
       ];
     }
@@ -44,7 +44,7 @@ export function SolutionsCaseStudy({ data }: SolutionsCaseStudyProps) {
         size: 0.6,
         offset: NOTCH_OFFSET,
         notchWidth: 0.8,
-        radius: 8,
+        radius: 32,
       }),
     ];
   }, [isDesktop]);

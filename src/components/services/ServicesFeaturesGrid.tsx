@@ -36,7 +36,7 @@ function buildFeatureNotches(index: number, isDesktop: boolean): Notch[] {
         position: index % 2 === 1 ? 0.2 : 0.8,
         size: 0.5,
         notchWidth: 0.9,
-        radius: 8,
+        radius: 32,
       }),
     ];
   }
@@ -47,7 +47,7 @@ function buildFeatureNotches(index: number, isDesktop: boolean): Notch[] {
       offset: 0,
       size: 0.8,
       notchWidth: 0.82,
-      radius: 15,
+      radius: 32,
       position: index % 2 === 1 ? 0.3 : 0.7,
     }),
   ];

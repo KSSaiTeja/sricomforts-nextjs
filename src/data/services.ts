@@ -87,15 +87,15 @@ function buildHowWeWork(): ServicePageData {
   return {
     slug,
     meta: {
-      title: "How We Work | Sri Comforts HVAC Process",
+      title: "How We Work | Sri\u00A0Comforts HVAC Process",
       description:
-        "Discover Sri Comforts' end-to-end HVAC process — from site survey and Daikin system design to precision installation, commissioning, and ongoing AMC across South India.",
+        "Discover Sri\u00A0Comforts' end-to-end HVAC process — from site survey and system design to precision installation, commissioning, and ongoing AMC across South India.",
     },
     hero: {
       label: "How We Work",
       title: "The Only End-to-End HVAC Partner Built for South India's Climate",
       paragraphs: [
-        "From first site survey to final commissioning and beyond, Sri Comforts delivers a unified process where design, installation, and service teams work as one — transforming how your building stays cool, efficient, and reliable.",
+        "From first site survey to final commissioning and beyond, Sri\u00A0Comforts delivers a unified process where design, installation, and service teams work as one — transforming how your building stays cool, efficient, and reliable.",
       ],
       fullscreen: true,
     },
@@ -103,13 +103,13 @@ function buildHowWeWork(): ServicePageData {
       label: "",
       title: "A Seamless Bridge from Assessment to Occupied Comfort",
       paragraphs: [
-        "Sri Comforts is built to close the gaps between HVAC design, installation, and maintenance. Our process begins with load calculation and AutoCAD layout, then carries through Daikin-authorized installation, commissioning, and proactive AMC — so every zone performs from day one.",
+        "Sri\u00A0Comforts closes the gaps between HVAC design, installation, and maintenance. Load calculation and AutoCAD layout first — then precision install, commissioning, and proactive AMC so every zone performs from day one.",
       ],
       theme: "dark",
     },
     breakdownIntro: {
       label: "",
-      title: "Breaking Down the Sri Comforts Service Process",
+      title: "Breaking Down the Sri\u00A0Comforts Service Process",
     },
     featuresGrid: {
       items: [
@@ -126,9 +126,9 @@ function buildHowWeWork(): ServicePageData {
         },
         {
           label: "System Design",
-          title: "Designed with Daikin Precision",
+          title: "Engineered With Precision",
           description:
-            "Authorized Daikin VRF and split specifications, duct layouts, and electrical load plans — engineered for your building's unique zones and peak demands.",
+            "VRF and split specifications, duct layouts, and electrical load plans — engineered for your building's unique zones and peak demands.",
           image: {
             src: serviceFeatureImage(slug, 1),
             alt: "HVAC system design",
@@ -139,7 +139,7 @@ function buildHowWeWork(): ServicePageData {
           label: "Modular Delivery",
           title: "Configured For Your Timeline",
           description:
-            "Most contractors install how they always have. Sri Comforts phases work around your occupancy — coordinating risers, plant rooms, and tenant fit-outs without disruption.",
+            "Most contractors install how they always have. Sri\u00A0Comforts phases work around your occupancy — coordinating risers, plant rooms, and tenant fit-outs without disruption.",
           image: {
             src: serviceFeatureImage(slug, 2),
             alt: "Modular HVAC delivery",
@@ -183,7 +183,7 @@ function buildHowWeWork(): ServicePageData {
           label: "Lifecycle Services",
           title: "Go Beyond Standard Warranties",
           description:
-            "Retrofit planning, energy audits, expansion readiness, and refrigerant compliance — Sri Comforts extends support where typical contractors stop at handover.",
+            "Retrofit planning, energy audits, expansion readiness, and refrigerant compliance — Sri\u00A0Comforts extends support where typical contractors stop at handover.",
           image: {
             src: serviceFeatureImage(slug, 6),
             alt: "Lifecycle HVAC services",
@@ -195,13 +195,13 @@ function buildHowWeWork(): ServicePageData {
     platformCarousel: {
       label: "Process",
       title: "One Integrated Process, Infinite Comfort Possibilities",
-      copy: "From survey to service, Sri Comforts is designed to eliminate rework, optimize technician productivity, and deliver maximum visibility of every system across your portfolio.",
+      copy: "From survey to service, Sri\u00A0Comforts is designed to eliminate rework, optimize technician productivity, and deliver maximum visibility of every system across your portfolio.",
       items: [
         {
           tabLabel: "Survey & Assessment",
           title: "Survey and Specify With Confidence",
           description:
-            "Our team conducts heat load calculations, site surveys, and stakeholder workshops before a single unit is specified — ensuring Daikin systems are right-sized for your building and budget.",
+            "Our team conducts heat load calculations, site surveys, and stakeholder workshops before a single unit is specified — ensuring systems are right-sized for your building and budget.",
           image: { src: serviceCarouselImage(slug, 0), alt: "HVAC assessment" },
           ...surfaces[0],
         },
@@ -236,7 +236,7 @@ function buildHowWeWork(): ServicePageData {
       cards: [
         {
           title: "Maximum system reliability",
-          copy: "Sri Comforts delivers verified commissioning and proactive AMC to keep your operations comfortable and equipment performing at peak efficiency.",
+          copy: "Sri\u00A0Comforts delivers verified commissioning and proactive AMC to keep your operations comfortable and equipment performing at peak efficiency.",
           image: { src: mesh(0), alt: "System reliability" },
         },
         {
@@ -246,7 +246,7 @@ function buildHowWeWork(): ServicePageData {
         },
         {
           title: "Affordable, rapid ROI",
-          copy: "Right-sized Daikin systems and energy-efficient design help you avoid overspend on capacity — delivering measurable savings from the first cooling season.",
+          copy: "Right-sized systems and energy-efficient design help you avoid overspend on capacity — delivering measurable savings from the first cooling season.",
           image: { src: mesh(2), alt: "Rapid ROI" },
         },
       ],
@@ -263,15 +263,15 @@ function buildAmc(): ServicePageData {
     ...base,
     slug,
     meta: {
-      title: "AMC Plans | Sri Comforts Annual Maintenance",
+      title: "AMC Plans | Sri\u00A0Comforts Annual Maintenance",
       description:
-        "Protect your HVAC investment with Sri Comforts AMC plans — scheduled preventive maintenance, priority breakdown response, and Daikin-authorized spare parts across South India.",
+        "Protect your HVAC investment with Sri\u00A0Comforts AMC plans — scheduled preventive maintenance, priority breakdown response, and genuine spare parts across South India.",
     },
     hero: {
       label: "AMC Plans",
       title: "The Proactive Maintenance Partner Your HVAC Systems Deserve",
       paragraphs: [
-        "Stop waiting for breakdowns to discover problems. Sri Comforts AMC plans deliver scheduled inspections, priority response, and documented service history — keeping Daikin systems efficient year after year.",
+        "Stop waiting for breakdowns to discover problems. Sri\u00A0Comforts AMC plans deliver scheduled inspections, priority response, and documented service history — keeping systems efficient year after year.",
       ],
       fullscreen: true,
     },
@@ -279,13 +279,13 @@ function buildAmc(): ServicePageData {
       label: "",
       title: "From Reactive Fixes to Predictable Performance",
       paragraphs: [
-        "Most building owners only call when something fails. Sri Comforts AMC inverts that model — preventive maintenance aligned to manufacturer guidelines, seasonal tune-ups before peak load, and a dedicated service desk that knows your equipment history.",
+        "Most building owners only call when something fails. Sri\u00A0Comforts AMC inverts that model — preventive maintenance aligned to manufacturer guidelines, seasonal tune-ups before peak load, and a dedicated service desk that knows your equipment history.",
       ],
       theme: "dark",
     },
     breakdownIntro: {
       label: "",
-      title: "Breaking Down Sri Comforts AMC Coverage",
+      title: "Breaking Down Sri\u00A0Comforts AMC Coverage",
     },
     featuresGrid: {
       items: [
@@ -307,10 +307,10 @@ function buildAmc(): ServicePageData {
         },
         {
           label: "Genuine Parts",
-          title: "Daikin-Authorized Components",
+          title: "Genuine Authorized Components",
           description:
-            "Every replacement part is sourced through authorized Daikin channels — protecting warranty coverage and ensuring compatibility with your installed systems.",
-          image: { src: serviceFeatureImage(slug, 2), alt: "Genuine Daikin parts" },
+            "Every replacement part is sourced through authorized channels — protecting warranty coverage and ensuring compatibility with your installed systems.",
+          image: { src: serviceFeatureImage(slug, 2), alt: "Genuine HVAC parts" },
           cta: { label: "Learn More", href: "/contact" },
         },
         {
@@ -350,7 +350,7 @@ function buildAmc(): ServicePageData {
     platformCarousel: {
       label: "Coverage",
       title: "One AMC Platform, Complete Equipment Protection",
-      copy: "From split units to central plant, Sri Comforts AMC is designed to maintain performance, reduce emergency calls, and extend equipment life across your entire portfolio.",
+      copy: "From split units to central plant, Sri\u00A0Comforts AMC is designed to maintain performance, reduce emergency calls, and extend equipment life across your entire portfolio.",
       items: [
         {
           tabLabel: "Inspection",
@@ -372,7 +372,7 @@ function buildAmc(): ServicePageData {
           tabLabel: "Parts & Repair",
           title: "Authorized Repairs Done Right",
           description:
-            "Genuine Daikin components, proper refrigerant handling, and post-repair performance verification — protecting warranty and restoring comfort fast.",
+            "Genuine authorized components, proper refrigerant handling, and post-repair performance verification — protecting warranty and restoring comfort fast.",
           image: { src: serviceCarouselImage(slug, 2), alt: "Parts and repair" },
           ...surfaces[2],
         },
@@ -418,15 +418,15 @@ function buildServiceRequest(): ServicePageData {
     ...base,
     slug,
     meta: {
-      title: "Service Request | Sri Comforts",
+      title: "Service Request | Sri\u00A0Comforts",
       description:
-        "Request HVAC service from Sri Comforts — breakdown support, maintenance visits, and emergency cooling assistance across Hyderabad, Bengaluru, and Chennai.",
+        "Request HVAC service from Sri\u00A0Comforts — breakdown support, maintenance visits, and emergency cooling assistance across Hyderabad, Bengaluru, and Chennai.",
     },
     hero: {
       label: "Service Request",
       title: "Fast, Reliable HVAC Service When You Need It Most",
       paragraphs: [
-        "Whether it's an emergency breakdown, a scheduled maintenance visit, or a performance concern — Sri Comforts connects you to factory-trained technicians with the parts and history to fix it right the first time.",
+        "Whether it's an emergency breakdown, a scheduled maintenance visit, or a performance concern — Sri\u00A0Comforts connects you to factory-trained technicians with the parts and history to fix it right the first time.",
       ],
       fullscreen: true,
     },
@@ -434,13 +434,13 @@ function buildServiceRequest(): ServicePageData {
       label: "",
       title: "From Call to Comfort — Without the Runaround",
       paragraphs: [
-        "Service requests shouldn't disappear into a black hole. Sri Comforts routes every call through our dedicated service desk — matching urgency to response, dispatching authorized technicians, and closing the loop with documented outcomes.",
+        "Service requests shouldn't disappear into a black hole. Sri\u00A0Comforts routes every call through our dedicated service desk — matching urgency to response, dispatching authorized technicians, and closing the loop with documented outcomes.",
       ],
       theme: "dark",
     },
     breakdownIntro: {
       label: "",
-      title: "How Sri Comforts Handles Your Service Request",
+      title: "How Sri\u00A0Comforts Handles Your Service Request",
     },
     featuresGrid: {
       items: [
@@ -478,7 +478,7 @@ function buildServiceRequest(): ServicePageData {
         },
         {
           label: "Genuine Repairs",
-          title: "Daikin-Authorized Workmanship",
+          title: "Factory-Standard Workmanship",
           description:
             "Every repair uses authorized parts and follows manufacturer procedures — protecting warranties and ensuring the fix lasts beyond the next heat wave.",
           image: { src: serviceFeatureImage(slug, 4), alt: "Genuine repairs" },
@@ -505,7 +505,7 @@ function buildServiceRequest(): ServicePageData {
     platformCarousel: {
       label: "Support",
       title: "One Service Desk, Every Type of Request",
-      copy: "From routine tune-ups to emergency breakdowns, Sri Comforts routes, dispatches, and documents every service interaction — giving you visibility from first call to resolved ticket.",
+      copy: "From routine tune-ups to emergency breakdowns, Sri\u00A0Comforts routes, dispatches, and documents every service interaction — giving you visibility from first call to resolved ticket.",
       items: [
         {
           tabLabel: "Breakdown",

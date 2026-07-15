@@ -83,15 +83,15 @@ function buildCommercial(): SolutionPageData {
   return {
     slug: "commercial",
     meta: {
-      title: "Commercial HVAC Solutions | Sri Comforts",
+      title: "Commercial HVAC Solutions | Sri\u00A0Comforts",
       description:
-        "Precision cooling for offices, retail parks, and commercial campuses — design, install, and AMC from South India's authorized Daikin partner.",
+        "Precision cooling for offices, retail parks, and commercial campuses — design, install, and AMC from South India's HVAC leaders since 2001.",
     },
     hero: {
       label: "Commercial HVAC",
       title: "The Hidden Cost of Poor Climate Control: Why Your Building Needs a Modern HVAC Partner",
       paragraphs: [
-        "Stop losing productivity to uneven cooling, rising energy bills, and reactive breakdowns. Sri Comforts transforms your commercial HVAC into a strategic asset — enabling predictable comfort, lower operating costs, and tenant satisfaction.",
+        "Stop losing productivity to uneven cooling, rising energy bills, and reactive breakdowns. Sri\u00A0Comforts transforms your commercial HVAC into a strategic asset — enabling predictable comfort, lower operating costs, and tenant satisfaction.",
       ],
       fullscreen: true,
     },
@@ -137,7 +137,7 @@ function buildCommercial(): SolutionPageData {
       cards: [
         {
           title: "Lower Operating Costs",
-          copy: "Right-sized Daikin systems, efficient duct design, and proactive AMC reduce energy waste and extend equipment life across your portfolio.",
+          copy: "Right-sized systems, efficient duct design, and proactive AMC reduce energy waste and extend equipment life across your portfolio.",
           image: { src: mesh(0), alt: "Lower operating costs" },
         },
         {
@@ -163,12 +163,12 @@ function buildCommercial(): SolutionPageData {
       ],
     },
     features: {
-      title: "Sri Comforts Solutions That Drive Results for Commercial Operations",
+      title: "Sri\u00A0Comforts Solutions That Drive Results for Commercial Operations",
       items: [
         {
           title: "VRF System Design",
           description:
-            "AutoCAD-based layouts and authorized Daikin VRF specifications tailored to your floor plate, occupancy, and budget from day one.",
+            "AutoCAD-based layouts and VRF specifications tailored to your floor plate, occupancy, and budget from day one.",
           image: { src: featureImage("commercial", 0), alt: "VRF system design" },
           metrics: [{ value: "30%↓", label: "in Energy Waste" }],
         },
@@ -219,7 +219,7 @@ function buildCommercial(): SolutionPageData {
         {
           title: "Energy Audit & Upgrade",
           description:
-            "Identify inefficiencies, right-size equipment, and qualify for lower operating costs with Daikin high-efficiency systems.",
+            "Identify inefficiencies, right-size equipment, and qualify for lower operating costs with high-efficiency systems.",
           image: { src: mesh(2), alt: "Energy audit and upgrade" },
         },
         {
@@ -234,7 +234,7 @@ function buildCommercial(): SolutionPageData {
       label: "Case Study",
       title: "Leading commercial tower reduces cooling downtime",
       description:
-        "Legacy chillers and reactive maintenance led to frequent comfort complaints and emergency costs. Sri Comforts deployed a phased VRF upgrade with structured AMC, cutting breakdowns and stabilizing temperatures across 12 floors.",
+        "Legacy chillers and reactive maintenance led to frequent comfort complaints and emergency costs. Sri\u00A0Comforts deployed a phased VRF upgrade with structured AMC, cutting breakdowns and stabilizing temperatures across 12 floors.",
       quote:
         "We have not seen this kind of consistency from an HVAC partner before — this is a significant milestone in how we manage comfort across our campus.",
       stats: [
@@ -268,7 +268,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
   "it-services": adaptPage(commercial, {
     slug: "it-services",
     meta: {
-      title: "IT Services HVAC Solutions | Sri Comforts",
+      title: "IT Services HVAC Solutions | Sri\u00A0Comforts",
       description:
         "Mission-critical cooling for data centers, server rooms, and tech campuses — precision HVAC from design through 24/7 support.",
     },
@@ -276,7 +276,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
       label: "IT Services HVAC",
       title: "When Downtime Isn't an Option: Precision Cooling for Technology Infrastructure",
       paragraphs: [
-        "Server rooms and data halls cannot tolerate temperature drift. Sri Comforts delivers precision HVAC engineered for uptime, redundancy, and the unique heat loads of modern IT environments.",
+        "Server rooms and data halls cannot tolerate temperature drift. Sri\u00A0Comforts delivers precision HVAC engineered for uptime, redundancy, and the unique heat loads of modern IT environments.",
       ],
       fullscreen: true,
     },
@@ -380,9 +380,9 @@ export const solutionPages: Record<string, SolutionPageData> = {
       label: "Case Study",
       title: "Tech campus stabilizes server room temperatures",
       description:
-        "Inconsistent precision cooling caused alarm trips and emergency call-outs. Sri Comforts redesigned airflow, deployed redundant units, and instituted 24-hour AMC — restoring stable operations.",
+        "Inconsistent precision cooling caused alarm trips and emergency call-outs. Sri\u00A0Comforts redesigned airflow, deployed redundant units, and instituted 24-hour AMC — restoring stable operations.",
       quote:
-        "Precision cooling stability changed how we operate our server halls — Sri Comforts delivered exactly what our uptime requirements demanded.",
+        "Precision cooling stability changed how we operate our server halls — Sri\u00A0Comforts delivered exactly what our uptime requirements demanded.",
       stats: [
         { value: "Zero", label: "Unplanned Outages (12 mo)" },
         { value: "35%", label: "Cooling Efficiency Gain" },
@@ -394,7 +394,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
   "industrial-pharma": adaptPage(commercial, {
     slug: "industrial-pharma",
     meta: {
-      title: "Industrial & Pharma HVAC | Sri Comforts",
+      title: "Industrial & Pharma HVAC | Sri\u00A0Comforts",
       description:
         "Validated cooling for clean rooms, cold storage, and industrial plants — compliant HVAC design and service across South India.",
     },
@@ -402,7 +402,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
       label: "Industrial & Pharma",
       title: "Compliance-Grade Climate Control for Regulated Environments",
       paragraphs: [
-        "Pharma and industrial facilities demand validated systems, documented maintenance, and zero tolerance for contamination risk. Sri Comforts delivers HVAC that meets regulatory rigor and operational reality.",
+        "Pharma and industrial facilities demand validated systems, documented maintenance, and zero tolerance for contamination risk. Sri\u00A0Comforts delivers HVAC that meets regulatory rigor and operational reality.",
       ],
       fullscreen: true,
     },
@@ -500,7 +500,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
       label: "Case Study",
       title: "Pharma facility passes audit with upgraded HVAC",
       description:
-        "Aging clean room units risked non-compliance during annual inspections. Sri Comforts executed a validated retrofit with full documentation — passing audit on first review.",
+        "Aging clean room units risked non-compliance during annual inspections. Sri\u00A0Comforts executed a validated retrofit with full documentation — passing audit on first review.",
       quote:
         "Audit-ready documentation and validated commissioning gave our QA team confidence from day one of the retrofit.",
       stats: [
@@ -514,15 +514,15 @@ export const solutionPages: Record<string, SolutionPageData> = {
   healthcare: adaptPage(commercial, {
     slug: "healthcare",
     meta: {
-      title: "Healthcare HVAC Solutions | Sri Comforts",
+      title: "Healthcare HVAC Solutions | Sri\u00A0Comforts",
       description:
-        "Infection-aware HVAC for hospitals, clinics, and labs — reliable comfort and air quality from South India's Daikin experts.",
+        "Infection-aware HVAC for hospitals, clinics, and labs — reliable comfort and air quality from South India's cooling experts.",
     },
     hero: {
       label: "Healthcare HVAC",
       title: "Patient Safety Starts with Air: Why Healthcare Needs Specialized HVAC",
       paragraphs: [
-        "Hospitals and clinics require infection control, reliable redundancy, and quiet comfort. Sri Comforts designs healthcare HVAC that supports clinical outcomes and staff productivity.",
+        "Hospitals and clinics require infection control, reliable redundancy, and quiet comfort. Sri\u00A0Comforts designs healthcare HVAC that supports clinical outcomes and staff productivity.",
       ],
       fullscreen: true,
     },
@@ -579,7 +579,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
         },
         {
           title: "Energy-Efficient Upgrades",
-          description: "Daikin systems that cut utility costs without compromising clinical air quality standards.",
+          description: "High-efficiency systems that cut utility costs without compromising clinical air quality standards.",
           image: { src: featureImage("healthcare", 3), alt: "Energy upgrades" },
         },
         {
@@ -620,7 +620,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
       label: "Case Study",
       title: "Hospital reduces OT temperature excursions",
       description:
-        "Unreliable legacy units caused OT delays and staff concern. Sri Comforts installed redundant precision cooling with structured maintenance — stabilizing conditions across critical zones.",
+        "Unreliable legacy units caused OT delays and staff concern. Sri\u00A0Comforts installed redundant precision cooling with structured maintenance — stabilizing conditions across critical zones.",
       quote:
         "Critical zones finally hold temperature — our clinical teams can focus on patients, not HVAC alarms.",
       stats: [
@@ -634,7 +634,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
   "hospitality-retail": adaptPage(commercial, {
     slug: "hospitality-retail",
     meta: {
-      title: "Hospitality & Retail HVAC | Sri Comforts",
+      title: "Hospitality & Retail HVAC | Sri\u00A0Comforts",
       description:
         "Guest-first cooling for hotels, restaurants, and retail — quiet, efficient HVAC that protects your brand experience.",
     },
@@ -642,7 +642,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
       label: "Hospitality & Retail",
       title: "Guest Experience Hinges on Comfort: Modern HVAC for Hospitality & Retail",
       paragraphs: [
-        "A single hot lobby or stuffy dining room can undo a five-star review. Sri Comforts delivers hospitality HVAC that stays invisible to guests while keeping operations efficient.",
+        "A single hot lobby or stuffy dining room can undo a five-star review. Sri\u00A0Comforts delivers hospitality HVAC that stays invisible to guests while keeping operations efficient.",
       ],
       fullscreen: true,
     },
@@ -683,7 +683,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
       items: [
         {
           title: "Quiet VRF Systems",
-          description: "Low-noise Daikin units for guest rooms, suites, and premium retail floors.",
+          description: "Low-noise VRF units for guest rooms, suites, and premium retail floors.",
           image: { src: featureImage("hospitality-retail", 0), alt: "Quiet VRF" },
         },
         {
@@ -740,7 +740,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
       label: "Case Study",
       title: "Hotel group cuts guest comfort complaints",
       description:
-        "Inconsistent room temperatures drove negative reviews across a three-property portfolio. Sri Comforts standardized VRF installs and AMC — improving ratings within two seasons.",
+        "Inconsistent room temperatures drove negative reviews across a three-property portfolio. Sri\u00A0Comforts standardized VRF installs and AMC — improving ratings within two seasons.",
       quote:
         "Guest reviews turned around once room temperatures stabilized — invisible comfort is exactly what hospitality needs.",
       stats: [
@@ -754,15 +754,15 @@ export const solutionPages: Record<string, SolutionPageData> = {
   residential: adaptPage(commercial, {
     slug: "residential",
     meta: {
-      title: "Residential HVAC Solutions | Sri Comforts",
+      title: "Residential HVAC Solutions | Sri\u00A0Comforts",
       description:
-        "Authorized Daikin cooling for homes, villas, and apartments — right-sized systems, expert install, and reliable AMC.",
+        "Expert cooling for homes, villas, and apartments — right-sized systems, precise install, and reliable AMC.",
     },
     hero: {
       label: "Residential",
-      title: "Home Comfort Done Right: Authorized Daikin Cooling for South India",
+      title: "Home Comfort Done Right: Expert Cooling for South India",
       paragraphs: [
-        "The wrong tonnage wastes money; poor install shortens equipment life. Sri Comforts helps homeowners choose, install, and maintain Daikin systems built for local climate and lasting comfort.",
+        "The wrong tonnage wastes money; poor install shortens equipment life. Sri\u00A0Comforts helps homeowners choose, install, and maintain systems built for local climate and lasting comfort.",
       ],
       fullscreen: true,
     },
@@ -795,7 +795,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
     },
     solutionIntro: {
       label: "The Solution",
-      title: "Authorized Daikin Comfort for Your Home",
+      title: "Sri\u00A0Comforts Home Comfort You Can Trust",
       hasBgPath: true,
     },
     features: {
@@ -809,7 +809,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
         },
         {
           title: "Authorized Installation",
-          description: "Factory-trained technicians follow Daikin standards for charge, vacuum, and commissioning.",
+          description: "Factory-trained technicians follow manufacturer standards for charge, vacuum, and commissioning.",
           image: { src: featureImage("residential", 1), alt: "Authorized installation" },
         },
         {
@@ -825,7 +825,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
         },
         {
           title: "Upgrade Guidance",
-          description: "Honest advice on when to repair versus replace — with transparent Daikin pricing.",
+          description: "Honest advice on when to repair versus replace — with transparent pricing.",
           image: { src: featureImage("residential", 4), alt: "Upgrade guidance" },
         },
       ],
@@ -861,7 +861,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
       label: "Case Study",
       title: "Villa owner cuts electricity bills with right-sized VRF",
       description:
-        "Oversized splits cycled constantly and never dehumidified properly. Sri Comforts resized with Daikin VRF and seasonal AMC — delivering even comfort at lower monthly cost.",
+        "Oversized splits cycled constantly and never dehumidified properly. Sri\u00A0Comforts resized with VRF and seasonal AMC — delivering even comfort at lower monthly cost.",
       quote:
         "Right-sized VRF finally gave us even comfort in every room — and the bills dropped noticeably the first summer.",
       stats: [

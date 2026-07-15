@@ -3,7 +3,7 @@
     color: var(--color-neutral-muted);
   }
 
-  30% {
+  28% {
     color: var(--color-brand-accent);
   }
 
@@ -38,7 +38,7 @@
   width: 100%;
   font-weight: 450;
   line-height: 1.2;
-  row-gap: 1.375rem;
+  row-gap: 0.875rem;
 }
 
 .features-steps .scroll-items {
@@ -192,7 +192,7 @@
 .features-steps .counter__wrapper__mobile {
   display: flex;
   column-gap: 1.125rem;
-  margin-top: 2rem;
+  margin-top: 0.75rem;
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   font-weight: 600;
@@ -210,16 +210,26 @@
 }
 
 @media (max-width: 1023px) {
+  .features-steps {
+    min-height: 100svh;
+    min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+    overflow: clip;
+  }
+
   .features-steps .inner {
-    padding-bottom: max(8rem, 15vw);
+    min-height: 100svh;
+    min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+    padding-bottom: clamp(0.75rem, 2svh, 1.5rem);
+    justify-content: space-between;
   }
 
   .features-steps .content {
     padding: 0 5.128vw;
+    flex-shrink: 0;
   }
 
   .features-steps .scroll-items {
-    gap: 1.5rem 0;
+    gap: 0.875rem 0;
     margin: 0 -5.128vw;
   }
 
@@ -233,7 +243,7 @@
 
   .features-steps .scroll-item {
     flex: 0 0 85%;
-    padding-right: 1.875rem;
+    padding-right: 1.5rem;
     scroll-snap-align: start;
     text-wrap: wrap;
   }
@@ -243,8 +253,20 @@
   }
 
   .features-steps .svg-mask {
-    max-height: 60%;
+    aspect-ratio: 400 / 400;
+    max-height: min(42svh, 46%);
     width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .features-steps .buttons {
+    right: 1rem;
+    bottom: 1.25rem;
+  }
+
+  .features-steps .button {
+    width: 3.25rem;
   }
 
   .features-steps .split__wrapper {
@@ -252,15 +274,17 @@
   }
 
   .features-steps .scroll-item .split__wrapper .split-chars {
-    transition: color 0.5s 0s;
+    transition: color 0.35s ease-out;
   }
 
   .features-steps .scroll-item.show .split__wrapper .split-chars {
     animation-delay: var(--v-delay, 0s);
-    animation-duration: 0.5s;
+    animation-duration: 0.55s;
+    animation-fill-mode: forwards;
     animation-name: features-step-color-transition;
+    animation-timing-function: ease-out;
     color: var(--color-brand-ink);
-    transition: color 0s var(--v-delay, 0s);
+    transition: none;
   }
 
   .features-steps .odometer {
@@ -270,28 +294,31 @@
 
 @media (min-width: 1024px) {
   .features-steps {
-    padding-top: 3rem;
-    padding-bottom: max(8rem, 15vw);
+    padding-top: 2rem;
+    padding-bottom: max(3rem, 5.5vw);
   }
 
   .features-steps .inner {
     --grid-size: 12;
     --grid-gutter: min(1.042vw, 26.6666666667px);
     --grid-margin: min(3.646vw, 93.3333333333px);
+    --features-media-inset: 3.25rem;
     display: grid;
     grid-template-columns: repeat(var(--grid-size), 1fr);
     grid-template-areas: "a a a a a . b b b b b b";
     column-gap: var(--grid-gutter);
-    row-gap: 3.75rem;
+    row-gap: 2.5rem;
     margin-inline: var(--grid-margin);
+    min-height: 100svh;
+    min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
   }
 
   .features-steps .content {
     grid-area: a;
     grid-template-columns: subgrid;
     align-self: center;
-    margin-top: 15rem;
-    margin-bottom: 15rem;
+    margin-top: min(7.5rem, 12svh);
+    margin-bottom: min(7.5rem, 12svh);
     font-size: min(2.396vw, 61.3333333333px);
     letter-spacing: min(-0.024vw, -0.6133333333px);
   }
@@ -314,7 +341,7 @@
 
   .features-steps .scroll-items-list {
     flex-direction: column;
-    gap: 21.5rem;
+    gap: min(9.5rem, 16svh);
     position: relative;
     overflow: visible;
     padding: 0;
@@ -326,12 +353,13 @@
   }
 
   .features-steps .split__wrapper .split-chars {
-    transition: color 0.4s;
+    transition: color 0.35s ease-out;
   }
 
   .features-steps .split__wrapper .split-chars.show {
-    animation: features-step-color-transition 0.5s;
+    animation: features-step-color-transition 0.55s ease-out forwards;
     color: var(--color-brand-ink);
+    transition: none;
   }
 
   .features-steps .scrollbar,
@@ -344,11 +372,12 @@
     aspect-ratio: unset;
     align-self: start;
     position: sticky;
-    top: 2.1875rem;
-    width: calc(100% + 2.1875rem);
-    height: calc(100svh - 4.375rem);
-    height: calc(var(--svh, 1svh) * 100 - 4.375rem);
-    min-height: calc(var(--svh, 1svh) * 100 - 4.375rem);
+    top: var(--features-media-inset);
+    width: calc(100% + var(--features-media-inset));
+    height: calc(100svh - var(--features-media-inset) * 2);
+    height: calc(var(--svh, 1svh) * 100 - var(--features-media-inset) * 2);
+    max-height: calc(var(--svh, 1svh) * 100 - var(--features-media-inset) * 2);
+    min-height: 0;
     overflow: visible;
   }
 

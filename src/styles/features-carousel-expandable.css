@@ -1,9 +1,12 @@
 .features-carousel-expandable-section {
   display: flex;
   flex-direction: column;
-  padding-top: 4rem;
-  padding-bottom: 7.5rem;
-  row-gap: 3rem;
+  justify-content: center;
+  min-height: 100svh;
+  min-height: calc(var(--svh, 1svh) * 100);
+  padding-top: clamp(1.25rem, 4vw, 2rem);
+  padding-bottom: clamp(1.25rem, 4vw, var(--section-pad-y-md));
+  row-gap: clamp(1rem, 2.5vw, 1.5rem);
 }
 
 .features-carousel-expandable-section .grid__wrapper {
@@ -26,14 +29,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.875rem;
-  margin-bottom: 3rem;
+  gap: clamp(0.625rem, 2vw, 0.875rem);
+  margin-bottom: clamp(1.5rem, 4vw, 3rem);
   text-align: center;
   width: 100%;
 }
 
 .features-carousel-expandable-section .header-section .label {
-  color: var(--color-neutral-soft);
+  color: var(--color-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.04em;
   margin-bottom: 0;
 }
 
@@ -461,7 +466,8 @@
 .features-carousel-expandable-card .top__wrapper .card-label {
   display: block;
   margin: 0;
-  opacity: 0.6;
+  color: var(--color-eyebrow);
+  opacity: 1;
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   font-weight: 600;
@@ -519,9 +525,9 @@
 
 @media (min-width: 1024px) {
   .features-carousel-expandable-section {
-    padding-top: 5.125rem;
-    padding-bottom: 5.875rem;
-    row-gap: 3.875rem;
+    padding-top: 2.5625rem;
+    padding-bottom: 2.9375rem;
+    row-gap: 1.9375rem;
   }
 
   .features-carousel-expandable-section .grid__wrapper {

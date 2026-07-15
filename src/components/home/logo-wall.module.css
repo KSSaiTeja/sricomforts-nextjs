@@ -1,322 +1,223 @@
-.logoGridWrapper {
+/* Marquee motion + cell width matching the previous 2/10 grid.
+   Logo artwork size still comes from globals.css under .logo-grid-wrapper. */
+
+/* Break out of the 12-col inset grid — edge-to-edge viewport */
+.fullBleed {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100svh;
+  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  --grid-margin: 0;
+  --grid-gutter: 0;
+}
+
+.fullBleed .window {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  grid-column: unset;
+}
+
+.window {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+}
+
+.viewport {
   position: relative;
-  z-index: 0;
-  overflow: clip;
-  display: grid;
-  grid-template-columns: repeat(var(--grid-size, 2), 1fr);
-  column-gap: var(--grid-gutter, 0);
-  padding-inline: var(--grid-margin);
-  --grid-size: 2;
-  --grid-gutter: 2.564vw;
-  --grid-margin: 5.128vw;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
 }
 
-.ptSm {
-  padding-top: 1.5rem;
+.rows {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: clamp(0.5rem, 2.5svh, 2rem) 0;
 }
 
-.pbSm {
-  padding-bottom: 1.5rem;
+.marquee {
+  width: 100%;
+  overflow: hidden;
 }
 
-.ptLg {
-  padding-top: 3.75rem;
+.track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
 }
 
-.pbLg {
-  padding-bottom: 3.75rem;
+.trackLeft {
+  animation: logo-marquee-left var(--lw-marquee-duration, 40s) linear infinite;
 }
 
-.intro {
-  position: absolute;
-  top: 2.5rem;
-  right: 0;
-  left: 0;
-  z-index: 2;
-  padding-inline: 1.25rem;
-  text-align: center;
-  text-wrap: balance;
+.trackRight {
+  animation: logo-marquee-right var(--lw-marquee-duration, 40s) linear infinite;
 }
 
-.hasIntro .gridWindow {
-  padding-top: calc(var(--lw-intro-h, 7rem) + 3.25rem);
+.group {
+  display: flex;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* Critical: each sequence must not shrink, so -50% lands on the seam */
+  width: max-content;
 }
 
-.hasIntro .logo .verticalTop {
+/*
+  Must beat globals `.logo-grid-wrapper:not(.logo-grid-industry) .logo { width: auto }`
+  or cells collapse (absolute border wrappers contribute no size).
+*/
+:global(.logo-grid-wrapper):not(:global(.logo-grid-industry)) .viewport .logo {
+  position: relative;
+  flex: 0 0 auto;
+  /* ~3 cells across on mobile; cap cell size so two rows fit one viewport */
+  width: min(calc((100vw - 2 * 5.128vw) / 3), calc(var(--svh, 1svh) * 20));
+  aspect-ratio: 1;
+  height: auto;
+  max-width: none;
+}
+
+/* Hide shared left crosses between adjacent cells */
+.group .logo + .logo :global(.top-left),
+.group .logo + .logo :global(.bottom-left) {
   display: none;
 }
 
-.gridWindow {
-  position: relative;
-  grid-column: 1 / span 2;
+/* Hide shared top crosses on the second row */
+.rows .marquee + .marquee :global(.top-left),
+.rows .marquee + .marquee :global(.top-right) {
+  display: none;
 }
 
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: start;
-  padding: 3.5rem 0;
-}
-
-.logo {
-  position: relative;
-  flex: 0 0 50%;
-  aspect-ratio: 1;
-}
-
-.logoSwap {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: clip;
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  --logo-scale: 1;
-  max-height: calc(4.5rem * clamp(0.5, var(--logo-scale), 2));
-  max-width: min(95%, 85% * clamp(0.5, var(--logo-scale), 2));
-}
-
-.image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-}
-
-.logo .slot__wrapper {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-
-.logo .slot__wrapper:hover + .background-gradient {
-  opacity: 0.08;
-}
-
-.crossWrapper {
+/* White blur fades ≈ two logo columns */
+.fade {
   position: absolute;
-  z-index: 2;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  width: 25%;
   pointer-events: none;
 }
 
-.crossesWrapper {
+.fade::before {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-}
-
-.topLeft {
-  top: 1px;
-  left: 1px;
-}
-
-.topRight {
-  top: 1px;
-  right: -1px;
-}
-
-.bottomLeft {
-  bottom: 0;
-  left: 1px;
-}
-
-.bottomRight {
-  right: 0;
-  bottom: 0;
-}
-
-.visualDivider {
-  position: absolute;
-  padding: 1px;
-  pointer-events: none;
-  background: #fff;
-}
-
-.visualDivider::after {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
   content: "";
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
-.horizontal {
-  top: 0;
-  display: none;
-  width: min(7.292vw, 186.67px);
-  height: calc(100% + 1px);
-  background: linear-gradient(90deg, #fff0, #e5e5e5);
-  transform: translateX(-100%);
-}
-
-.verticalTop,
-.verticalBottom {
+.fadeLeft {
   left: 0;
-  display: none;
-  width: calc(100% + 1px);
-  height: min(11.979vw, 306.67px);
-  background: linear-gradient(180deg, #fff0, #e5e5e5);
-  transform: translateY(-100%);
+  background: linear-gradient(
+    90deg,
+    #fff 0%,
+    rgb(255 255 255 / 88%) 28%,
+    rgb(255 255 255 / 40%) 62%,
+    transparent 100%
+  );
 }
 
-.verticalTop {
-  top: 1px;
+.fadeLeft::before {
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 100%);
 }
 
-.verticalBottom {
-  bottom: 0;
+.fadeRight {
+  right: 0;
+  background: linear-gradient(
+    270deg,
+    #fff 0%,
+    rgb(255 255 255 / 88%) 28%,
+    rgb(255 255 255 / 40%) 62%,
+    transparent 100%
+  );
+}
+
+.fadeRight::before {
+  -webkit-mask-image: linear-gradient(270deg, #000 0%, #000 40%, transparent 100%);
+  mask-image: linear-gradient(270deg, #000 0%, #000 40%, transparent 100%);
+}
+
+@keyframes logo-marquee-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes logo-marquee-right {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 @media (min-width: 1024px) {
-  .logoGridWrapper {
-    --grid-size: 12;
-    --grid-gutter: min(1.042vw, 26.67px);
-    --grid-margin: min(3.646vw, 93.33px);
+  .rows {
+    padding: 2.25rem 0;
   }
 
-  .ptSm {
-    padding-top: 2.5rem;
+  /* Match previous desktop cell: 10% of the logo window (10 across). */
+  :global(.logo-grid-wrapper):not(:global(.logo-grid-industry)) .viewport .logo {
+    width: calc(
+      (100vw - 2 * min(3.646vw, 93.33px) - 11 * min(1.042vw, 26.67px)) * 10 / 12 / 10
+    );
   }
 
-  .pbSm {
-    padding-bottom: 2.5rem;
-  }
-
-  .ptLg {
-    padding-top: 5.625rem;
-  }
-
-  .pbLg {
-    padding-bottom: 5.625rem;
-  }
-
-  .intro {
-    top: min(3.125vw, 80px);
-    padding-inline: 4.375rem;
-  }
-
-  .hasIntro .gridWindow {
-    padding-top: calc(var(--lw-intro-h, 10rem) + min(3.854vw, 98.67px));
-  }
-
-  .gridWindow {
-    grid-column: 2 / span 10;
-  }
-
-  .grid {
-    justify-content: center;
-    padding: 4.5rem 0;
-    column-gap: 0;
-  }
-
-  .logo {
-    flex-basis: 10%;
-  }
-
-  .logo:nth-child(10n + 2) .bottomLeft,
-  .logo:nth-child(10n + 2) .topLeft,
-  .logo:nth-child(10n + 3) .bottomLeft,
-  .logo:nth-child(10n + 3) .topLeft,
-  .logo:nth-child(10n + 4) .bottomLeft,
-  .logo:nth-child(10n + 4) .topLeft,
-  .logo:nth-child(10n + 5) .bottomLeft,
-  .logo:nth-child(10n + 5) .topLeft,
-  .logo:nth-child(10n + 6) .bottomLeft,
-  .logo:nth-child(10n + 6) .topLeft,
-  .logo:nth-child(10n + 7) .bottomLeft,
-  .logo:nth-child(10n + 7) .topLeft,
-  .logo:nth-child(10n + 8) .bottomLeft,
-  .logo:nth-child(10n + 8) .topLeft,
-  .logo:nth-child(10n + 9) .bottomLeft,
-  .logo:nth-child(10n + 9) .topLeft,
-  .logo:nth-child(10n + 10) .bottomLeft,
-  .logo:nth-child(10n + 10) .topLeft,
-  .logo:nth-child(n + 11) .topLeft,
-  .logo:nth-child(n + 11) .topRight {
-    display: none;
-  }
-
-  .logo:first-child .verticalTop,
-  .logo:nth-child(2) .verticalTop,
-  .logo:nth-child(3) .verticalTop,
-  .logo:nth-child(4) .verticalTop,
-  .logo:nth-child(5) .verticalTop,
-  .logo:nth-child(6) .verticalTop,
-  .logo:nth-child(7) .verticalTop,
-  .logo:nth-child(8) .verticalTop,
-  .logo:nth-child(9) .verticalTop,
-  .logo:nth-child(10) .verticalTop {
-    display: block;
-  }
-
-  .logo:last-child .verticalBottom,
-  .logo:nth-last-child(2) .verticalBottom,
-  .logo:nth-last-child(3) .verticalBottom,
-  .logo:nth-last-child(4) .verticalBottom,
-  .logo:nth-last-child(5) .verticalBottom,
-  .logo:nth-last-child(6) .verticalBottom,
-  .logo:nth-last-child(7) .verticalBottom,
-  .logo:nth-last-child(8) .verticalBottom,
-  .logo:nth-last-child(9) .verticalBottom,
-  .logo:nth-last-child(10) .verticalBottom {
-    display: block;
-    background: linear-gradient(0deg, #fff0, #e5e5e5);
-    transform: translateY(100%);
-  }
-
-  .logo:nth-child(10n + 1) .horizontal {
-    display: block;
-    left: 1px;
-  }
-
-  .logo:last-child .horizontal,
-  .logo:nth-child(10n + 10) .horizontal {
-    display: block;
-    right: 0;
-    background: linear-gradient(-90deg, #fff0, #e5e5e5);
-    transform: translateX(100%);
-  }
-}
-
-@media (max-width: 1023px) {
-  .logo:nth-child(2n + 2) .bottomLeft,
-  .logo:nth-child(2n + 2) .topLeft,
-  .logo:nth-child(n + 3) .topLeft,
-  .logo:nth-child(n + 3) .topRight {
-    display: none;
-  }
-
-  .logo:first-child .verticalTop,
-  .logo:nth-child(2) .verticalTop {
-    display: block;
-  }
-
-  .logo:last-child .verticalBottom,
-  .logo:nth-last-child(2) .verticalBottom {
-    display: block;
-    background: linear-gradient(0deg, #fff0, #e5e5e5);
-    transform: translateY(100%);
-  }
-
-  .logo:nth-child(odd) .horizontal {
-    display: block;
-    left: 1px;
-  }
-
-  .logo:nth-child(2n + 2) .horizontal {
-    display: block;
-    right: 0;
-    background: linear-gradient(-90deg, #fff0, #e5e5e5);
-    transform: translateX(100%);
+  .fade {
+    width: 20%;
   }
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .logo .border-holder {
-    background: radial-gradient(circle at 50% 50%, var(--color-brand-accent-alpha-40), transparent 8rem);
+  :global(.logo-grid-wrapper):not(:global(.logo-grid-industry))
+    .viewport
+    .logo
+    :global(.border-holder) {
+    background: radial-gradient(
+      circle at 50% 50%,
+      var(--color-brand-accent-alpha-40),
+      transparent 8rem
+    );
+  }
+
+  .viewport:hover .trackLeft,
+  .viewport:hover .trackRight {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trackLeft,
+  .trackRight {
+    animation: none;
+  }
+
+  .trackRight {
+    transform: translate3d(-50%, 0, 0);
   }
 }

@@ -38,7 +38,7 @@ export function NotchSection({ top = false, bottom = false, children }: NotchSec
           size: 0.65,
           position: 0.5,
           offset: edgeOffset * (top?.from ?? -1),
-          radius: 20,
+          radius: 40,
           notchWidth: 0.95,
         }),
       );
@@ -50,7 +50,7 @@ export function NotchSection({ top = false, bottom = false, children }: NotchSec
           size: 0.65,
           position: 0.5,
           offset: edgeOffset * (bottom?.from ?? -1),
-          radius: 20,
+          radius: 40,
           notchWidth: 0.95,
         }),
       );

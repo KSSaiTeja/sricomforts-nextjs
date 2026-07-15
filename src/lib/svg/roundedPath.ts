@@ -6,6 +6,15 @@ export type PathPoint = {
 
 const format = (value: number) => Math.round(value * 100) / 100;
 
+/** Handle length factor for a circular arc cubic approximation (90°). */
+const CIRCULAR_KAPPA = 0.5522847498;
+
+/**
+ * Slightly above circular so notch shoulders read as continuous S-curves
+ * (closer to squircle / continuous-curvature corners) instead of hard arcs.
+ */
+const SMOOTH_KAPPA = CIRCULAR_KAPPA * 1.18;
+
 const subtract = (a: PathPoint, b: PathPoint) => ({ x: a.x - b.x, y: a.y - b.y });
 const add = (a: PathPoint, b: PathPoint) => ({ x: a.x + b.x, y: a.y + b.y });
 const scale = (point: PathPoint, factor: number) => ({
@@ -20,16 +29,23 @@ const normalize = (point: PathPoint) => {
 
 const distance = (a: PathPoint, b: PathPoint) => Math.hypot(b.x - a.x, b.y - a.y);
 
-const cornerArc = (
+type CornerCurve = {
+  startPoint: PathPoint;
+  endPoint: PathPoint;
+  control1: PathPoint;
+  control2: PathPoint;
+  isTooLarge: boolean;
+};
+
+const cornerCurve = (
   current: PathPoint,
   previous: PathPoint,
   next: PathPoint,
-  bounds?: { width: number; height: number },
-) => {
-  const toPrevious = normalize(subtract(current, previous));
-  const toNext = normalize(subtract(next, current));
-  const dot = -(toPrevious.x * toNext.x + toPrevious.y * toNext.y);
-  const angle = Math.acos(Math.min(Math.max(dot, -1), 1)) / 2;
+): CornerCurve => {
+  const travelIn = normalize(subtract(current, previous));
+  const travelOut = normalize(subtract(next, current));
+  const dot = -(travelIn.x * travelOut.x + travelIn.y * travelOut.y);
+  const halfAngle = Math.acos(Math.min(Math.max(dot, -1), 1)) / 2;
   const prevDistance = distance(previous, current);
   const nextDistance = distance(current, next);
   const maxRadius = Math.min(prevDistance, nextDistance) / 2;
@@ -37,34 +53,44 @@ const cornerArc = (
   let radius = current.radius || 0;
   if (radius > maxRadius) radius = maxRadius;
 
-  const tangent = radius * Math.tan(angle);
-  const startPoint = add(current, scale(toPrevious, radius));
-  const endPoint = add(current, scale(toNext, radius));
-  const sweepFlag = toPrevious.x * toNext.y - toPrevious.y * toNext.x < 0 ? 0 : 1;
+  // Tangent points sit on the incoming / outgoing edges (not past the vertex).
+  const startPoint = subtract(current, scale(travelIn, radius));
+  const endPoint = add(current, scale(travelOut, radius));
 
-  if (bounds) {
-    startPoint.x = clamp(startPoint.x, 0, bounds.width);
-    startPoint.y = clamp(startPoint.y, 0, bounds.height);
-    endPoint.x = clamp(endPoint.x, 0, bounds.width);
-    endPoint.y = clamp(endPoint.y, 0, bounds.height);
-  }
+  const turningAngle = Math.PI - 2 * halfAngle;
+  const tanQuarter = Math.tan(turningAngle / 4);
+  const isTooLarge = !Number.isFinite(tanQuarter) || Math.abs(tanQuarter) > 10;
+
+  // Scale kappa by turn so non-90° corners stay smooth and tangent-continuous.
+  const handle =
+    radius * SMOOTH_KAPPA * (turningAngle > 0 ? tanQuarter / Math.tan(Math.PI / 8) : 1);
 
   return {
     startPoint,
     endPoint,
-    actualRadius: tangent,
-    sweepFlag,
-    isTooLarge: tangent >= 1000,
+    control1: add(startPoint, scale(travelIn, handle)),
+    control2: subtract(endPoint, scale(travelOut, handle)),
+    isTooLarge,
   };
 };
 
-function clamp(value: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, value));
+function appendCorner(path: string, curve: CornerCurve, includeLineToStart: boolean) {
+  const start = `L ${format(curve.startPoint.x)},${format(curve.startPoint.y)}`;
+  if (curve.isTooLarge) {
+    return (
+      path +
+      (includeLineToStart ? start : "") +
+      ` L ${format(curve.endPoint.x)},${format(curve.endPoint.y)}`
+    );
+  }
+
+  const cubic = ` C ${format(curve.control1.x)},${format(curve.control1.y)} ${format(curve.control2.x)},${format(curve.control2.y)} ${format(curve.endPoint.x)},${format(curve.endPoint.y)}`;
+  return path + (includeLineToStart ? start : "") + cubic;
 }
 
 export function pathFromPoints(
   points: PathPoint[],
-  bounds?: { width: number; height: number },
+  _bounds?: { width: number; height: number },
 ): string {
   if (points.length < 2) return "";
 
@@ -73,11 +99,9 @@ export function pathFromPoints(
   let path = "";
 
   if (first.radius && points.length > 2) {
-    const arc = cornerArc(first, last, points[1], bounds);
-    path = `M ${format(arc.startPoint.x)},${format(arc.startPoint.y)}`;
-    path += arc.isTooLarge
-      ? ` L ${format(arc.endPoint.x)},${format(arc.endPoint.y)}`
-      : ` A ${format(arc.actualRadius)},${format(arc.actualRadius)} 0 0 ${arc.sweepFlag} ${format(arc.endPoint.x)},${format(arc.endPoint.y)}`;
+    const curve = cornerCurve(first, last, points[1]);
+    path = `M ${format(curve.startPoint.x)},${format(curve.startPoint.y)}`;
+    path = appendCorner(path, curve, false);
   } else {
     path = `M ${format(first.x)},${format(first.y)}`;
   }
@@ -88,11 +112,8 @@ export function pathFromPoints(
     if (point.radius) {
       const previous = points[index - 1];
       const next = index === points.length - 1 ? points[0] : points[index + 1];
-      const arc = cornerArc(point, previous, next, bounds);
-
-      path += arc.isTooLarge
-        ? ` L ${format(arc.startPoint.x)},${format(arc.startPoint.y)}`
-        : ` L ${format(arc.startPoint.x)},${format(arc.startPoint.y)} A ${format(arc.actualRadius)},${format(arc.actualRadius)} 0 0 ${arc.sweepFlag} ${format(arc.endPoint.x)},${format(arc.endPoint.y)}`;
+      const curve = cornerCurve(point, previous, next);
+      path = appendCorner(path, curve, true);
     } else {
       path += ` L ${format(point.x)},${format(point.y)}`;
     }

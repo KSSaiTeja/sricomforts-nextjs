@@ -9,6 +9,7 @@ import {
   WORDMARK_VIEWBOX,
 } from "@/components/brand/wordmarkSlices";
 import { registerGsap } from "@/lib/gsap/register";
+import { BRAND_NAME } from "@/lib/brand";
 import styles from "./preloader.module.css";
 
 export type AnimatedLogoHandle = {
@@ -98,7 +99,7 @@ export const AnimatedLogo = forwardRef<AnimatedLogoHandle>(function AnimatedLogo
   }));
 
   return (
-    <div ref={rootRef} className={styles.animatedLogo} aria-label="Sri Comforts">
+    <div ref={rootRef} className={styles.animatedLogo} aria-label={BRAND_NAME}>
       <LogoIcon ref={iconRef} className={styles.logoIcon} />
       <div ref={textRef} className={styles.animatedLogoText}>
         {WORDMARK_SLICES.map((slice, index) => {

@@ -17,9 +17,9 @@
 }
 
 .not-found-page .is-fullscreen .section-introduction {
-  min-height: 90svh;
-  min-height: calc(var(--svh, 1svh) * 90);
-  padding: 8.75rem 1.25rem;
+  min-height: 100svh;
+  min-height: var(--section-min-height);
+  padding: clamp(1.25rem, 4svh, var(--section-pad-y-md)) 1.25rem;
   position: relative;
   z-index: 2;
 }
@@ -93,7 +93,7 @@
 
 @media (min-width: 1024px) {
   .not-found-page .is-fullscreen .section-introduction {
-    padding: 11.25rem 4.375rem;
+    padding: clamp(1.5rem, 5svh, var(--section-pad-y-lg)) 4.375rem;
   }
 
   .not-found-page .section-introduction .paragraphs-wrapper {

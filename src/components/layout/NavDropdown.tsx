@@ -127,11 +127,17 @@ export function NavDropdownPanel({
       if (!anchor) return;
 
       const rect = anchor.getBoundingClientRect();
+      // Centered panel — not full viewport width
+      const gutter = 24;
+      const maxWidth = 56 * 16; // 56rem
+      const width = Math.min(maxWidth, window.innerWidth - gutter * 2);
+      const left = Math.max(gutter, (window.innerWidth - width) / 2);
+
       setPanelStyle({
         position: "fixed",
         top: rect.bottom,
-        left: rect.left,
-        width: rect.width,
+        left,
+        width,
       });
     };
 

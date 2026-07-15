@@ -1,0 +1,341 @@
+/* Tall scroll runway: video finishes expanding before the next About sections enter */
+.track {
+  position: relative;
+  background: var(--color-neutral-white);
+}
+
+.sticky {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100svh;
+  min-height: calc(var(--svh, 1svh) * 100);
+  background: var(--color-neutral-white);
+  color: var(--color-brand-ink);
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  color: rgb(5 24 36 / 12%);
+  mask-image: linear-gradient(transparent 0%, black 12%);
+}
+
+.background::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: min(12rem, 22vh);
+  background: linear-gradient(transparent, var(--color-neutral-white));
+  pointer-events: none;
+}
+
+.ringsLandscape,
+.ringsPortrait {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -48%);
+  width: min(112vw, 68rem);
+  height: auto;
+  max-width: none;
+}
+
+.ringsPortrait {
+  display: none;
+}
+
+.ringDot {
+  fill: var(--color-brand-primary);
+  opacity: 0.22;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: inherit;
+  height: 100%;
+  padding:
+    max(7.5rem, 18svh)
+    var(--spacing)
+    max(3.5rem, 10svh);
+  pointer-events: none;
+}
+
+.content {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: clamp(1rem, 2.5vh, 1.75rem);
+  width: min(100%, 56rem);
+  text-align: center;
+  pointer-events: auto;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  min-height: 2.25rem;
+  padding: 0.55rem 1.15rem;
+  border: 0.5px solid rgb(5 24 36 / 18%);
+  border-radius: 999px;
+  background: rgb(5 24 36 / 3%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--color-brand-ink);
+  font-family: var(--font-primary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.heading {
+  display: grid;
+  justify-items: center;
+  gap: clamp(0.35rem, 1.2vh, 0.75rem);
+  margin: 0;
+  width: 100%;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.titleMobile,
+.titleLead,
+.titleInline {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: clamp(2.75rem, 11vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-transform: capitalize;
+  color: var(--color-brand-ink);
+  text-wrap: balance;
+}
+
+.titleLead {
+  display: none;
+}
+
+.titleInline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(0.75rem, 2vw, 2.5rem);
+  width: 100%;
+}
+
+.titleMid {
+  display: none;
+  font-weight: 500;
+}
+
+.highlight {
+  display: none;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--color-brand-primary);
+}
+
+.body {
+  margin: 0 auto;
+  max-width: 34rem;
+  color: var(--color-neutral-mid);
+  text-wrap: pretty;
+}
+
+/* Placeholder that holds the "In [video] Excellence" gap on desktop */
+.videoSlot {
+  display: block;
+  width: min(100%, 28rem);
+  margin-top: 0.75rem;
+  aspect-ratio: 4 / 3;
+  border-radius: 1.25rem;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+/* Absolute video frame — scrubbed from slot → fullscreen inside sticky panel */
+.videoFrame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  overflow: hidden;
+  background: var(--color-brand-ink);
+  box-shadow: 0 18px 40px rgb(5 24 36 / 14%);
+  /* Mobile: sit in normal document flow under content via grid override below */
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--color-brand-ink);
+}
+
+@media (min-width: 1024px) {
+  /* ~2.2 viewports of scroll so enlarge completes before Features Grid */
+  .track {
+    height: 220vh;
+  }
+
+  .sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    height: calc(var(--svh, 1svh) * 100);
+    min-height: 0;
+  }
+
+  .ringsLandscape {
+    width: min(120vw, 78rem);
+  }
+
+  .container {
+    padding:
+      max(9rem, 22svh)
+      4.375rem
+      max(5rem, 16svh);
+  }
+
+  .content {
+    gap: clamp(1.15rem, 2.2vh, 1.65rem);
+    width: min(100%, 64rem);
+  }
+
+  .tag {
+    min-height: 2.5rem;
+    padding: 0.65rem 1.35rem;
+    font-size: 0.875rem;
+  }
+
+  .titleMobile {
+    display: none;
+  }
+
+  .titleLead {
+    display: block;
+    font-size: clamp(4.5rem, 10vw, 7.25rem);
+  }
+
+  .titleInline {
+    font-size: clamp(4.5rem, 10vw, 7.25rem);
+  }
+
+  .titleMid,
+  .highlight {
+    display: inline;
+  }
+
+  .body {
+    max-width: 36rem;
+    font-size: 1.0625rem;
+  }
+
+  .videoSlot {
+    width: clamp(12rem, 18vw, 16.5rem);
+    margin-top: 0;
+    aspect-ratio: 16 / 9;
+    border-radius: 1.125rem;
+  }
+
+  .videoFrame {
+    /* Sized/positioned by GSAP from slot → full sticky panel */
+    width: clamp(12rem, 18vw, 16.5rem);
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 1.125rem;
+    will-change: transform, width, height, border-radius;
+  }
+}
+
+@media (max-width: 1023px) {
+  .track {
+    height: auto;
+  }
+
+  .ringsLandscape {
+    display: none;
+  }
+
+  .ringsPortrait {
+    display: block;
+    width: min(140vw, 48rem);
+    transform: translate(-50%, -52%);
+  }
+
+  .titleInline .titleMid,
+  .titleInline .highlight {
+    display: none;
+  }
+
+  .sticky {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100svh;
+    height: var(--section-min-height);
+    max-height: var(--section-min-height);
+    min-height: 100svh;
+    min-height: var(--section-min-height);
+    overflow: hidden;
+  }
+
+  .container {
+    flex: 0 1 auto;
+    min-height: 0;
+    height: auto;
+    padding:
+      clamp(4.5rem, 11svh, 6.5rem)
+      var(--spacing)
+      clamp(0.75rem, 2svh, 1.5rem);
+  }
+
+  .content {
+    gap: clamp(0.5rem, 1.5svh, 1rem);
+  }
+
+  /* Mobile: video lives in normal flow under copy (Eat Naked portrait) */
+  .videoSlot {
+    display: none;
+  }
+
+  .videoFrame {
+    position: relative;
+    inset: auto;
+    z-index: 2;
+    flex: 1 1 auto;
+    width: min(100% - 2 * var(--spacing), 22rem);
+    max-height: clamp(10rem, 30svh, 18rem);
+    min-height: 0;
+    margin: 0 auto clamp(1rem, 3svh, 2rem);
+    aspect-ratio: 0.93;
+    border-radius: 1.25rem;
+    transform: none !important;
+  }
+}

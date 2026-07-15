@@ -70,22 +70,34 @@ export type AboutFeaturesGridData = {
   items: AboutFeatureItem[];
 };
 
-export const aboutSectionIntro = {
-  label: "About Sri Comforts",
-  title: "A new standard in cooling excellence",
-  variant: "about-si1",
-  fullscreen: true,
+export type AboutHeroData = {
+  sectionId: string;
+  tag: string;
+  titleLead: string;
+  titleMid: string;
+  titleHighlight: string;
+  body: string;
+  media: {
+    src: string;
+    poster: string;
+    alt: string;
+  };
+};
+
+/** Dark action-style hero — Eat Naked “Our Family” layout, Sri Comforts voice. */
+export const aboutHero = {
   sectionId: aboutSectionAnchors.about,
-  labelId: "about-section-label",
-  paragraphs: [
-    [
-      {
-        text: "Sri Comforts is a different kind of HVAC partner. Since 2001, we've grown into an authorized top-tier Daikin dealer — turning complex cooling challenges into reliable comfort across commercial, industrial, and residential spaces in South India.",
-        color: "var(--color-neutral-mid)",
-      },
-    ],
-  ],
-} as const satisfies AboutSectionIntroData;
+  tag: "About Sri\u00A0Comforts",
+  titleLead: "Cooling",
+  titleMid: "In",
+  titleHighlight: "Excellence",
+  body: "Sri\u00A0Comforts delivers advanced HVAC & R solutions across South India. Since 2001, we've led design, installation, and service for commercial, industrial, and residential spaces — with a 24-hour service promise.",
+  media: {
+    src: "/assets/about-us.mp4",
+    poster: aboutWorkImage(0),
+    alt: "Sri\u00A0Comforts team and projects in action",
+  },
+} as const satisfies AboutHeroData;
 
 export const aboutLeadersIntro = {
   label: "Our Team",
@@ -101,7 +113,7 @@ export const aboutLeadersIntro = {
   paragraphs: [
     [
       {
-        text: "Sri Comforts leaders drive towards a combined mission with extreme ownership, smart execution, and passionate innovation.",
+        text: "Sri\u00A0Comforts leaders drive towards a combined mission with extreme ownership, smart execution, and passionate innovation.",
         color: "var(--color-neutral-mid)",
       },
       {
@@ -113,64 +125,55 @@ export const aboutLeadersIntro = {
   ],
 } as const satisfies AboutSectionIntroData;
 
+export type AboutStoryValueItem = {
+  title: string;
+  description: string;
+};
+
+export type AboutStoryValuesData = {
+  label: string;
+  title: string;
+  titleAccent: string;
+  lead: string;
+  paragraphs: string[];
+  valuesLabel: string;
+  values: AboutStoryValueItem[];
+};
+
 export const aboutStoryValues = {
-  hideLabel: true,
-  title: "Our story, our values",
-  variant: "about-si1",
-  fullscreen: false,
-  paragraphsMultiple: true,
+  label: "Our Story",
+  title: "Built for comfort.",
+  titleAccent: "Driven by craft.",
+  lead: "Since 2001, Sri\u00A0Comforts has grown from a single-city team into South India's trusted HVAC leader — serving IT parks, hospitals, pharma plants, luxury residences, and commercial developments across eight cities with 230+ engineers and technicians.",
   paragraphs: [
-    [
-      { text: "Since 2001, ", color: MID },
-      {
-        text: "Sri Comforts has grown from a single-city dealer into South India's trusted HVAC partner",
-        color: MID,
-        strong: true,
-      },
-      {
-        text: " — serving IT parks, hospitals, pharma plants, luxury residences, and commercial developments across eight cities with 230+ engineers and technicians.",
-        color: MID,
-      },
-    ],
-    [],
-    [{ text: "Sri Comforts is reinventing how cooling gets delivered.", color: MID, strong: true }],
-    [],
-    [
-      { text: "We are building on a ", color: MID },
-      {
-        text: "design-first, service-backed model",
-        color: MID,
-        strong: true,
-      },
-      {
-        text: " — authorized by Daikin, powered by dedicated AutoCAD teams, and committed to a 24-hour response guarantee on every service call.",
-        color: MID,
-      },
-    ],
-    [
-      { text: "From ", color: MID },
-      { text: "VRV and central air conditioning", color: MID, strong: true },
-      { text: " to ", color: MID },
-      { text: "clean rooms, cold rooms, and basement ventilation", color: MID, strong: true },
-      {
-        text: ", Sri Comforts delivers systems that are deeply integrated, energy-efficient, and ready for operation from day one.",
-        color: MID,
-        breakBefore: false,
-      },
-    ],
-    [
-      {
-        text: "With partnerships across Daikin, O General, LG, and Panasonic, Sri Comforts is ",
-        color: MID,
-      },
-      {
-        text: "setting the standard for modern HVAC in South India.",
-        color: MID,
-        strong: true,
-      },
-    ],
+    "We are reinventing how cooling gets delivered — on a design-first, service-backed model powered by dedicated AutoCAD teams, award-winning project delivery, and a 24-hour response guarantee on every service call.",
+    "From VRV and central air conditioning to clean rooms, cold rooms, and basement ventilation, we deliver systems that are deeply integrated, energy-efficient, and ready for operation from day one.",
+    "With deep market experience and partnerships across Daikin, O General, LG, and Panasonic, Sri\u00A0Comforts is setting the standard for modern HVAC in South India.",
   ],
-} as const satisfies AboutSectionIntroData;
+  valuesLabel: "Our Values",
+  values: [
+    {
+      title: "Design-first delivery",
+      description:
+        "Every project starts with precise engineering drawings and site-fit planning before a single pipe is laid.",
+    },
+    {
+      title: "Service without pause",
+      description:
+        "A guaranteed 24-hour response on every complaint and query — uptime is part of the promise.",
+    },
+    {
+      title: "Integrated systems",
+      description:
+        "VRV, central air, clean rooms, cold rooms, and ventilation — built to work as one from day one.",
+    },
+    {
+      title: "Partnership depth",
+      description:
+        "Authorized with leading brands, accountable end to end — from specification through service life.",
+    },
+  ],
+} as const satisfies AboutStoryValuesData;
 
 export const aboutExecutiveLeaders = {
   items: [
@@ -179,8 +182,8 @@ export const aboutExecutiveLeaders = {
       role: "Managing Director",
       image: portrait(`${TEAM}/executive/srinivas-reddy.webp`, "Srinivas Reddy, Managing Director"),
       bio: [
-        "As Managing Director, Srinivas leads Sri Comforts with a vision to set a new standard for HVAC delivery across South India — combining authorized Daikin expertise with uncompromising service.",
-        "Under his leadership, the company has expanded to eight cities while maintaining the 24-hour response promise that defines the Sri Comforts brand.",
+        "As Managing Director, Srinivas leads Sri\u00A0Comforts with a vision to set the standard for HVAC delivery across South India — combining deep project expertise with uncompromising service.",
+        "Under his leadership, the company has expanded to eight cities while maintaining the 24-hour response promise that defines the Sri\u00A0Comforts brand.",
       ],
     },
     {
@@ -197,7 +200,7 @@ export const aboutExecutiveLeaders = {
       role: "Head of VRV Solutions",
       image: portrait(`${TEAM}/executive/priya-nair.webp`, "Priya Nair, Head of VRV Solutions"),
       bio: [
-        "Priya leads Sri Comforts' VRV practice — widely recognized as pioneers in Variable Refrigerant Volume systems across the region.",
+        "Priya leads Sri\u00A0Comforts' VRV practice — widely recognized as pioneers in Variable Refrigerant Volume systems across the region.",
         "She drives technical evaluation, system design, and deployment for high-efficiency multi-zone cooling in commercial and premium residential projects.",
       ],
     },
@@ -215,7 +218,7 @@ export const aboutExecutiveLeaders = {
       role: "Head of Service Operations",
       image: portrait(`${TEAM}/executive/anil-sharma.webp`, "Anil Sharma, Head of Service Operations"),
       bio: [
-        "Anil runs Sri Comforts' post-sales service organization — the team behind the company's guaranteed 24-hour response on complaints and queries.",
+        "Anil runs Sri\u00A0Comforts' post-sales service organization — the team behind the company's guaranteed 24-hour response on complaints and queries.",
         "He builds the processes, spare-parts readiness, and technician training that keep critical cooling systems running without interruption.",
       ],
     },
@@ -224,7 +227,7 @@ export const aboutExecutiveLeaders = {
       role: "Head of Sales",
       image: portrait(`${TEAM}/executive/meera-krishnan.webp`, "Meera Krishnan, Head of Sales"),
       bio: [
-        "Meera leads commercial and residential sales across Sri Comforts' eight-city footprint, matching client needs to the right Daikin and partner-brand systems.",
+        "Meera leads commercial and residential sales across Sri\u00A0Comforts' eight-city footprint, matching client needs to the right systems for every application.",
         "She focuses on transparent proposals, energy-efficiency outcomes, and long-term AMC relationships.",
       ],
     },
@@ -242,7 +245,7 @@ export const aboutExecutiveLeaders = {
       role: "Head of People & HR",
       image: portrait(`${TEAM}/executive/lakshmi-iyer.webp`, "Lakshmi Iyer, Head of People & HR"),
       bio: [
-        "Lakshmi builds and supports the 230+ engineer and technician team that powers Sri Comforts' delivery and service promise.",
+        "Lakshmi builds and supports the 230+ engineer and technician team that powers Sri\u00A0Comforts' delivery and service promise.",
         "She oversees hiring, training, and the specialized team structure that keeps design, project, sales, and service operations running in sync.",
       ],
     },
@@ -251,12 +254,12 @@ export const aboutExecutiveLeaders = {
 
 export const aboutPartnersIntro = {
   label: "Our Brand Partners",
-  title: "Backed by decades of HVAC expertise",
+  title: "Trusted brands. Sri\u00A0Comforts delivery.",
   variant: "",
   paragraphs: [
     [
       {
-        text: "Our leadership, brand partners, and advisors share a commitment to raising the standard for cooling in South India. They see us solving problems that matter — and delivering systems that perform from day one.",
+        text: "We work with leading HVAC brands — and bring 25+ years of design, install, and service experience to every project. The partnership matters; the delivery is ours.",
         color: MID,
       },
     ],
@@ -270,8 +273,8 @@ export const aboutBrandPartners = {
       role: "Authorized Top-Tier Dealer",
       image: portrait(`${TEAM}/partners/daikin-partner.webp`, "Daikin India partnership"),
       bio: [
-        "Sri Comforts is an authorized top-tier Daikin dealer — delivering VRV, central air conditioning, ductable systems, and AHUs with factory-backed support and genuine parts.",
-        "This partnership is the foundation of our technical credibility and product range across commercial, industrial, and residential segments.",
+        "An authorized Daikin dealer since 2001 — giving Sri\u00A0Comforts access to VRV, central air, ductable systems, and AHUs with factory-backed support.",
+        "We bring the experience: design teams, project delivery, and a 24-hour service promise that turn products into lasting comfort.",
       ],
     },
     {
@@ -279,8 +282,8 @@ export const aboutBrandPartners = {
       role: "Authorized Partner",
       image: portrait(`${TEAM}/partners/ogeneral-partner.webp`, "O General partnership"),
       bio: [
-        "As an authorized O General partner, Sri Comforts extends its portfolio with trusted split and commercial systems for clients who need proven reliability.",
-        "Combined with Daikin VRV expertise, this gives customers a complete range of cooling solutions under one accountable partner.",
+        "As an authorized O General partner, Sri\u00A0Comforts extends its portfolio with trusted split and commercial systems.",
+        "One accountable partner — the right product mix, with Sri\u00A0Comforts owning design through service.",
       ],
     },
   ],
@@ -289,12 +292,11 @@ export const aboutBrandPartners = {
 export const aboutPartnersBackingIntro = {
   hideLabel: true,
   title: "Partnerships that perform",
-  sectionId: aboutSectionAnchors.awards,
   variant: "",
   paragraphs: [
     [
       {
-        text: "Trusted by leading brands and built on authorized partnerships — Sri Comforts carries Daikin, O General, LG, and Panasonic to deliver the right system for every application.",
+        text: "Trusted brands and deep market experience — Sri\u00A0Comforts carries Daikin, O General, LG, and Panasonic, then delivers the design, install, and service that set us apart.",
         color: MID,
       },
     ],
@@ -318,7 +320,7 @@ export const aboutAdvisoryIntro = {
   paragraphs: [
     [
       {
-        text: "Our advisors bring deep expertise in MEP design, controlled environments, and large-scale commercial development — helping Sri Comforts turn complex cooling challenges into reliable, scalable solutions.",
+        text: "Our advisors bring deep expertise in MEP design, controlled environments, and large-scale commercial development — helping Sri\u00A0Comforts turn complex cooling challenges into reliable, scalable solutions.",
         color: MID,
       },
     ],
@@ -376,10 +378,10 @@ export const aboutFeaturesGrid = {
     {
       title: "Built on expertise, trusted across South India",
       description:
-        "Sri Comforts is not a typical AC dealer. Since 2001, we've grown into an authorized top-tier Daikin partner with 230+ engineers across eight cities — built to solve complex cooling challenges and set the standard for design, installation, and service.",
+        "Sri\u00A0Comforts is not a typical AC contractor. Since 2001, we've delivered complex HVAC across eight cities with 230+ engineers — from government and hospital projects to premium residences.",
       image: {
         src: aboutWorkImage(0),
-        alt: "Sri Comforts commercial HVAC project site",
+        alt: "Sri\u00A0Comforts commercial HVAC project site",
       },
     },
     {
@@ -388,16 +390,16 @@ export const aboutFeaturesGrid = {
         "Our approach follows decades of hands-on project experience. By working closely with architects, builders, and facility teams, we deliver systems that are deeply integrated and ready for operation from day one.",
       image: {
         src: aboutWorkImage(1),
-        alt: "Sri Comforts HVAC system installation",
+        alt: "Sri\u00A0Comforts HVAC system installation",
       },
     },
     {
       title: "Positioned as the standard",
       description:
-        "Authorized by Daikin, supported by specialized AutoCAD design teams, and backed by a 24-hour service guarantee, Sri Comforts is uniquely positioned — not as another contractor, but as the trusted standard for modern HVAC in South India.",
+        "Award-winning sales and service, specialized AutoCAD design teams, and a 24-hour response guarantee — Sri\u00A0Comforts is the trusted standard for modern HVAC in South India.",
       image: {
         src: aboutWorkImage(2),
-        alt: "Sri Comforts service and maintenance team",
+        alt: "Sri\u00A0Comforts service and maintenance team",
       },
     },
   ],

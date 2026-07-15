@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Ensure KB markdown ships with the chat route on Vercel
+  outputFileTracingIncludes: {
+    "/api/chat": ["./docs/chatbase-kb/**/*"],
+  },
   images: {
     remotePatterns: [
       {
@@ -16,7 +20,8 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            // Dev + post-replace: never pin frames forever. Version query still used.
+            value: "public, max-age=0, must-revalidate",
           },
         ],
       },

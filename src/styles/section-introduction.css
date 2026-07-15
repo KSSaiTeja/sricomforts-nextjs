@@ -1,5 +1,26 @@
 .notch-section__wrapper {
   position: relative;
+  min-height: 100svh;
+  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+}
+
+.notch-section__wrapper > .svg-mask,
+.notch-section__wrapper > .svg-mask > .slot {
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+}
+
+.notch-section__wrapper .section__wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.notch-section__wrapper .section-introduction {
+  flex: 1;
+  min-height: 100%;
 }
 
 .section__wrapper {
@@ -8,10 +29,10 @@
 }
 
 .section__wrapper.next-to-logos .section-introduction {
-  margin-top: -11.25rem;
-  min-height: 90svh;
-  min-height: calc(var(--svh, 1svh) * 90);
-  padding: 11.25rem 1.25rem;
+  margin-top: calc(var(--section-pad-y-lg) * -1);
+  min-height: 100svh;
+  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+  padding: var(--section-pad-y-lg) 1.25rem;
 }
 
 .section-introduction {
@@ -21,7 +42,9 @@
   flex-direction: column;
   justify-content: center;
   justify-items: center;
-  padding: 6.25rem 1.25rem;
+  min-height: 100svh;
+  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+  padding: var(--section-pad-y) 1.25rem;
   text-align: center;
 }
 
@@ -38,7 +61,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 4rem;
+  margin: 0 auto 2rem;
   max-width: unset;
 }
 
@@ -77,14 +100,15 @@
 }
 
 .section-introduction .label {
-  color: var(--color-neutral-soft);
+  color: var(--color-eyebrow);
+  font-weight: 500;
   margin-bottom: 1rem;
 }
 
 .section-introduction .label.label-5 {
   font-size: 1.0625rem;
-  letter-spacing: -0.0106rem;
-  line-height: 0.95;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
 }
 
 .section-introduction .buttons {
@@ -154,12 +178,12 @@
 
 @media (min-width: 1024px) {
   .section__wrapper.next-to-logos .section-introduction {
-    margin-top: calc(-18.75rem + min(11.979vw, 306.6666666667px));
-    padding: 26.75rem 4.375rem;
+    margin-top: calc(-9.375rem + min(5.99vw, 153.3333333333px));
+    padding: 13.375rem 4.375rem;
   }
 
   .section-introduction {
-    padding: 11.25rem 4.375rem;
+    padding: var(--section-pad-y-lg) 4.375rem;
   }
 
   .section-introduction .header h2,
@@ -169,8 +193,8 @@
   }
 
   .section-introduction .label.label-5 {
-    font-size: 1.25rem;
-    letter-spacing: -0.0125rem;
+    font-size: 1.125rem;
+    letter-spacing: 0.06em;
   }
 
   .section-content {
@@ -208,6 +232,18 @@
 }
 
 @media (max-width: 1023px) {
+  .section-introduction {
+    padding: clamp(1.25rem, 4svh, var(--section-pad-y)) 1.25rem;
+  }
+
+  .section__wrapper.next-to-logos .section-introduction {
+    padding: clamp(1.5rem, 5svh, var(--section-pad-y-lg)) 1.25rem;
+  }
+
+  .section-introduction .header h3 {
+    font-size: clamp(1.75rem, 6.5vw, 2.875rem);
+  }
+
   .section-introduction .header br {
     display: none;
   }

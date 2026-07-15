@@ -4,16 +4,15 @@
  */
 .brand-logo-highlight {
   align-items: center;
-  background: rgb(255 255 255 / 94%);
-  border-radius: 8px;
+  background: rgb(255 255 255 / 96%);
+  border-radius: 10px;
   box-shadow:
-    0 0 0 1px rgb(255 255 255 / 40%),
-    0 4px 18px rgb(0 0 0 / 22%),
-    0 0 28px rgb(50 196 230 / 14%);
+    0 0 0 1px rgb(255 255 255 / 45%),
+    0 6px 20px rgb(0 0 0 / 18%);
   display: inline-flex;
   justify-content: center;
   line-height: 0;
-  padding: 0.4375rem 0.6875rem;
+  padding: 0.4rem 0.8rem;
 }
 
 .brand-logo-highlight img,

@@ -19,6 +19,8 @@
 
 .services-page .is-fullscreen.section__wrapper,
 .services-page .has-dark-theme.section__wrapper {
+  min-height: 100svh;
+  min-height: calc(var(--svh, 1svh) * 100);
   position: relative;
   z-index: 1;
 }
@@ -64,7 +66,7 @@
 }
 
 .services-page .has-dark-theme .section-introduction .label {
-  color: #c2c2c2;
+  color: var(--color-eyebrow-on-dark);
 }
 
 .services-page .has-dark-theme .section-introduction .header h3 {
@@ -81,18 +83,18 @@
 }
 
 .services-page .is-fullscreen .section-introduction {
-  min-height: 90svh;
-  min-height: calc(var(--svh, 1svh) * 90);
-  padding: 8.75rem 1.25rem;
+  min-height: 100svh;
+  min-height: var(--section-min-height);
+  padding: clamp(1.25rem, 4vw, var(--section-pad-y-md)) 1.25rem;
   position: relative;
   z-index: 2;
 }
 
 .services-page .is-dark .section-introduction,
 .services-page .has-dark-theme .section-introduction {
-  min-height: 90svh;
-  min-height: calc(var(--svh, 1svh) * 90);
-  padding: 8.75rem 1.25rem;
+  min-height: 100svh;
+  min-height: var(--section-min-height);
+  padding: clamp(1.25rem, 4vw, var(--section-pad-y-md)) 1.25rem;
   position: relative;
   z-index: 2;
 }
@@ -109,14 +111,14 @@
   color: var(--color-neutral-mid);
 }
 
-/* Sri Comforts palette on services layout */
+/* Mesh assets are already brand blue — do not hue-rotate (that turns them pink) */
 .services-page .solutions-value__card-media img {
-  filter: hue-rotate(98deg) saturate(1.35) brightness(1.05);
+  filter: none;
 }
 
 .services-page .features-grid {
-  padding-top: 6.25rem;
-  padding-bottom: 6.25rem;
+  padding-top: var(--section-pad-y);
+  padding-bottom: var(--section-pad-y);
 }
 
 .services-page .features-grid .feature-image .svg-mask {
@@ -192,13 +194,13 @@
 
 @media (min-width: 1024px) {
   .services-page .content__wrapper {
-    padding-bottom: 7.5rem;
+    padding-bottom: var(--section-pad-y-md);
   }
 
   .services-page .is-fullscreen .section-introduction,
   .services-page .has-dark-theme .section-introduction,
   .services-page .section-introduction {
-    padding: 11.25rem 4.375rem;
+    padding: var(--section-pad-y-lg) 4.375rem;
   }
 }
 

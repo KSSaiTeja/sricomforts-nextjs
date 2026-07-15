@@ -1,0 +1,42 @@
+.contact-cta__panel {
+  display: flex;
+  align-items: center;
+  min-height: 18rem;
+}
+
+.contact-cta__panel-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.contact-cta__panel-title {
+  color: var(--color-neutral-white);
+  font-weight: 500;
+  margin: 0;
+}
+
+.contact-cta__panel-body {
+  color: rgb(255 255 255 / 72%);
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.contact-cta__button {
+  display: inline-flex !important;
+  text-decoration: none;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .contact-cta__panel {
+    min-height: 22rem;
+  }
+
+  .contact-cta__panel-body {
+    font-size: 1.25rem;
+  }
+}

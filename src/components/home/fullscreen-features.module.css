@@ -58,7 +58,7 @@
 .bottomLayout {
   display: grid;
   gap: 1.5rem;
-  padding: 3.25rem 1.25rem 8.125rem;
+  padding: 1.625rem 1.25rem 4.0625rem;
   pointer-events: none;
 }
 

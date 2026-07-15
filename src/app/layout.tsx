@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { PreloaderGate } from "@/components/preloader/PreloaderGate";
 import { PreloaderProvider } from "@/components/preloader/PreloaderProvider";
+import { TonnageCalculatorWidget } from "@/components/calculator/TonnageCalculatorWidget";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 import "./globals.css";
 
 const suisseIntl = localFont({
@@ -22,9 +24,9 @@ const suisseIntl = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Sri Comforts | Authorized Daikin Partner | HVAC Solutions in South India",
+  title: "Sri\u00A0Comforts | HVAC Leaders Since 2001 | South India",
   description:
-    "Sri Comforts — 25+ years of trusted HVAC design, installation, and service across South India. Authorized Daikin dealer for commercial, industrial, and residential cooling.",
+    "Sri\u00A0Comforts — 25+ years of HVAC design, installation, and service across South India. Proven project experience, award-winning delivery, and a 24-hour service promise.",
 };
 
 export default function RootLayout({
@@ -36,7 +38,11 @@ export default function RootLayout({
     <html lang="en" className={`${suisseIntl.variable} lenis lenis-smooth h-full`}>
       <body className="min-h-full antialiased">
         <PreloaderProvider>
-          <PreloaderGate>{children}</PreloaderGate>
+          <PreloaderGate>
+            {children}
+            <TonnageCalculatorWidget />
+            <ChatWidget />
+          </PreloaderGate>
         </PreloaderProvider>
       </body>
     </html>

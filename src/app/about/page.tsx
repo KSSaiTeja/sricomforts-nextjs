@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { AboutPage } from "@/components/about/AboutPage";
 
 export const metadata: Metadata = {
-  title: "About | Sri Comforts",
+  title: "About | Sri\u00A0Comforts",
   description:
-    "Learn about Sri Comforts — South India's authorized Daikin partner delivering HVAC design, installation, and service since 2001.",
+    "Learn about Sri\u00A0Comforts — South India's HVAC leaders since 2001. Design, installation, and 24-hour service across eight cities.",
 };
 
 export default function Page() {

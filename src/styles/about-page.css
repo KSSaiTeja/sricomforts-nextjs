@@ -11,8 +11,115 @@
   z-index: 1;
 }
 
+/* —— One-viewport section framing —— */
+.about-page .section-introduction {
+  min-height: 100svh;
+  min-height: var(--section-min-height);
+  padding-block: clamp(2rem, 6svh, var(--section-pad-y-md));
+  padding-inline: clamp(1rem, 4vw, 1.25rem);
+}
+
+.about-page .section-introduction .section-content {
+  margin-bottom: clamp(0.75rem, 2svh, 2rem);
+}
+
+.about-page .section-introduction .header.spacing {
+  margin-bottom: clamp(1rem, 3svh, 2rem);
+}
+
+.about-page .section-introduction .buttons {
+  margin-top: clamp(1.25rem, 4svh, 5.625rem);
+}
+
+.about-page .features-grid {
+  padding-top: 0;
+  padding-bottom: 0;
+  gap: 0;
+}
+
+.about-page .features-grid .feature {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100svh;
+  min-height: var(--section-min-height);
+}
+
+.about-page .features-grid .feature-image {
+  flex-shrink: 1;
+  max-height: clamp(12rem, 36svh, 22rem);
+  min-height: 0;
+}
+
+.about-page .features-grid .feature-content-inner {
+  gap: clamp(0.75rem, 2svh, 2rem);
+  padding: clamp(1.25rem, 3.5svh, 4rem) clamp(1rem, 5vw, 5.128vw)
+    clamp(1rem, 2.5svh, 3.75rem);
+}
+
+.about-page section[aria-label*="at a glance"] {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100svh;
+  min-height: var(--section-min-height);
+  padding-block: clamp(1.5rem, 5svh, var(--section-pad-y-md));
+  padding-inline: clamp(1rem, 4vw, 1.25rem);
+}
+
+.about-page section[aria-label*="at a glance"] > div {
+  margin-block: auto;
+}
+
+.about-page section.logo-grid-wrapper.logo-grid-industry {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100svh;
+  min-height: var(--section-min-height);
+}
+
+.about-page section.logo-grid-wrapper.logo-grid-industry .logo-grid {
+  padding-block: clamp(1.5rem, 5svh, var(--section-pad-y-lg));
+}
+
 @media (min-width: 1024px) {
   .about-page .content__wrapper {
-    padding-bottom: 7.5rem;
+    padding-bottom: var(--section-pad-y-md);
+  }
+
+  .about-page .section-introduction {
+    padding-block: clamp(2.5rem, 8svh, var(--section-pad-y-lg));
+    padding-inline: 4.375rem;
+  }
+
+  .about-page .features-grid {
+    padding-inline: min(3.646vw, 93.3333333333px);
+  }
+
+  .about-page .features-grid .feature {
+    display: grid;
+    align-content: center;
+  }
+
+  .about-page .features-grid .feature-image {
+    max-height: min(72svh, calc(var(--svh, 1svh) * 72));
+  }
+
+  .about-page .features-grid .feature-content-inner {
+    gap: clamp(1.25rem, 2.5svh, 2.85rem);
+    padding: 0;
+  }
+
+  .about-page section[aria-label*="at a glance"] {
+    padding-block: clamp(2rem, 7svh, var(--section-pad-y-lg));
+    padding-inline: 4.375rem;
+  }
+
+  .about-page section.logo-grid-wrapper.logo-grid-industry .logo-grid {
+    padding-block: clamp(2rem, 8svh, calc(var(--svh, 1svh) * 11));
   }
 }
