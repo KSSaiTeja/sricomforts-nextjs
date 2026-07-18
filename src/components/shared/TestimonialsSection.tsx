@@ -302,13 +302,17 @@ export function TestimonialsSection({
       <div className={styles.inner}>
         <header className={styles.header}>
           <p className={`${styles.label} label label-5`}>{testimonialsSection.label}</p>
-          <h2 id="testimonials-heading" className={`${styles.title} title-h2`}>
+          <h2
+            id="testimonials-heading"
+            className={`${styles.title} title-h2`}
+            data-motion-title
+          >
             {testimonialsSection.title}
           </h2>
           <p className={styles.subtitle}>{testimonialsSection.subtitle}</p>
         </header>
 
-        <div className={styles.stage}>
+        <div className={styles.stage} data-motion-item>
           <div className={styles.railShell}>
             <div
               ref={railRef}
@@ -412,7 +416,7 @@ export function TestimonialsSection({
           </article>
         </div>
 
-        <div className={styles.nav} aria-hidden="true">
+        <div className={styles.nav} aria-hidden="true" data-motion-item>
           {items.map((item, index) => (
             <button
               key={item.id}
@@ -424,7 +428,7 @@ export function TestimonialsSection({
           ))}
         </div>
 
-        <div className={styles.cta}>
+        <div className={styles.cta} data-motion-item>
           <p className={styles.ctaPrompt}>{testimonialsSection.ctaPrompt}</p>
           <a className={styles.ctaButton} href={testimonialsSection.ctaHref}>
             {testimonialsSection.ctaLabel}

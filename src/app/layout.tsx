@@ -4,6 +4,7 @@ import { PreloaderGate } from "@/components/preloader/PreloaderGate";
 import { PreloaderProvider } from "@/components/preloader/PreloaderProvider";
 import { TonnageCalculatorWidget } from "@/components/calculator/TonnageCalculatorWidget";
 import { ChatWidget } from "@/components/chat/ChatWidget";
+import { SiteMotion } from "@/components/motion/SiteMotion";
 import "./globals.css";
 
 const suisseIntl = localFont({
@@ -40,6 +41,7 @@ export default function RootLayout({
         <PreloaderProvider>
           <PreloaderGate>
             {children}
+            <SiteMotion />
             <TonnageCalculatorWidget />
             <ChatWidget />
           </PreloaderGate>

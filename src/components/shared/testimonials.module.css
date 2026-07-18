@@ -27,7 +27,7 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: clamp(1.25rem, 3svh, 2.5rem);
+  gap: clamp(0.875rem, 2svh, 1.5rem);
   justify-content: center;
 }
 
@@ -41,7 +41,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin: 0 0 1rem;
+  margin: 0 0 0.625rem;
   color: var(--color-eyebrow);
   font-weight: 500;
   letter-spacing: 0.08em;
@@ -59,7 +59,8 @@
 }
 
 .title {
-  margin: 0 0 1rem;
+  margin: 0 0 0.625rem;
+  font-family: var(--font-primary), ui-sans-serif, system-ui, sans-serif;
   font-weight: 400;
   color: var(--color-brand-ink);
   text-wrap: balance;
@@ -78,7 +79,7 @@
 .stage {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.875rem, 2.5svh, 1.5rem);
+  gap: clamp(0.75rem, 1.75svh, 1.25rem);
   align-items: stretch;
   width: 100%;
   max-width: 56rem;
@@ -303,7 +304,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.625rem;
   text-align: center;
   padding-top: 0.5rem;
 }
@@ -410,7 +411,7 @@
   }
 
   .inner {
-    gap: 2.5rem;
+    gap: clamp(1rem, 2svh, 1.5rem);
   }
 
   .title {
@@ -488,7 +489,7 @@
   }
 
   .card {
-    padding: 2rem 2.25rem 1.75rem;
+    padding: 1.5rem 1.75rem 1.375rem;
     min-height: 0;
     height: auto;
     max-width: 100%;

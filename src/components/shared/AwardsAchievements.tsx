@@ -50,7 +50,7 @@ function LaurelBadge({ year }: { year: string }) {
 
 function AwardRow({ item }: { item: AwardItem }) {
   return (
-    <article className={styles.awardItem}>
+    <article className={styles.awardItem} data-motion-item>
       <LaurelBadge year={item.year} />
       <div className={styles.awardCopy}>
         <h3 className={`title-h3 ${styles.awardTitle}`}>{item.title}</h3>
@@ -72,7 +72,7 @@ export function AwardsAchievements({ id }: AwardsAchievementsProps) {
         aria-labelledby="experience-section-title"
       >
         <div className={styles.experienceInner}>
-          <div className={styles.yearsCard}>
+          <div className={styles.yearsCard} data-motion-item>
             <div className={styles.yearsFrame}>
               <span
                 className={styles.yearsNumber}
@@ -91,15 +91,16 @@ export function AwardsAchievements({ id }: AwardsAchievementsProps) {
             <h2
               id="experience-section-title"
               className={`title-h2 ${styles.experienceTitle}`}
+              data-motion-title
             >
               {experienceSection.titleLead}{" "}
               <em className={styles.accent}>{experienceSection.titleAccent}</em>
             </h2>
-            <p className={`body-4 ${styles.experienceBody}`}>
+            <p className={`body-4 ${styles.experienceBody}`} data-motion-item>
               {experienceSection.body}
             </p>
 
-            <div className={styles.stats} role="list">
+            <div className={styles.stats} role="list" data-motion-item>
               {experienceSection.stats.map((stat) => (
                 <div key={stat.label} className={styles.stat} role="listitem">
                   <p className={`title-h3 ${styles.statValue}`}>{stat.value}</p>
@@ -108,7 +109,7 @@ export function AwardsAchievements({ id }: AwardsAchievementsProps) {
               ))}
             </div>
 
-            <div className={styles.signature}>
+            <div className={styles.signature} data-motion-item>
               <p className={styles.signatureName}>
                 {experienceSection.signatureName}
               </p>
@@ -132,6 +133,7 @@ export function AwardsAchievements({ id }: AwardsAchievementsProps) {
             <h2
               id="awards-section-title"
               className={`title-h2 ${styles.awardsTitle}`}
+              data-motion-title
             >
               {awardsSection.titleLead}{" "}
               <em className={styles.accent}>{awardsSection.titleAccent}</em>{" "}

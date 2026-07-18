@@ -81,6 +81,33 @@ body {
   color: var(--color-brand-ink);
 }
 
+.site-motion-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  pointer-events: none;
+}
+
+.site-scroll-progress {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: var(--color-brand-accent-bright);
+  box-shadow: 0 0 10px var(--color-brand-accent-alpha-40);
+  transform-origin: left center;
+}
+
+.motion-word {
+  display: inline-block;
+  white-space: nowrap;
+  perspective: 700px;
+}
+
+.motion-char {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -116,6 +143,16 @@ canvas {
   .site-header .logo-link .logo,
   .site-header .logo-link svg {
     width: 7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-scroll-progress {
+    display: none;
+  }
+
+  .motion-char {
+    will-change: auto;
   }
 }
 

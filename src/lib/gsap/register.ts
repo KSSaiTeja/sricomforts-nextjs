@@ -2,6 +2,7 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { Flip } from "gsap/Flip";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 
 let pluginsRegistered = false;
 
@@ -9,7 +10,7 @@ export function registerGsap() {
   if (typeof window === "undefined") return gsap;
 
   if (!pluginsRegistered) {
-    gsap.registerPlugin(CustomEase, ScrollTrigger, Flip);
+    gsap.registerPlugin(CustomEase, ScrollTrigger, Flip, SplitText);
     gsap.ticker.lagSmoothing(0);
     pluginsRegistered = true;
   }
