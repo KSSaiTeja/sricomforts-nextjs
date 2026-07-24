@@ -1,10 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import { FullLogo } from "@/components/brand/FullLogo";
 import { NavDropdownPanel, NavDropdownTrigger } from "@/components/layout/NavDropdown";
+import { usePreloader } from "@/components/preloader/PreloaderProvider";
 import { navigation, siteContact } from "@/data/navigation";
+import { registerGsap } from "@/lib/gsap/register";
 
 function DrawerChevron({ className }: { className?: string }) {
   return (
@@ -29,12 +33,21 @@ function DrawerChevron({ className }: { className?: string }) {
 }
 
 export function SiteHeader() {
+  const pathname = usePathname();
+  const { isLoaded, isAnimating } = usePreloader();
+  const isHome = pathname === "/";
+  const headerRef = useRef<HTMLElement>(null);
+  const logoRef = useRef<HTMLAnchorElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const actionsRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const closeDropdownTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [introReady, setIntroReady] = useState(!isHome);
 
   const cancelCloseDropdown = useCallback(() => {
     if (closeDropdownTimerRef.current) {
@@ -90,6 +103,87 @@ export function SiteHeader() {
     };
   }, []);
 
+  useEffect(() => {
+    const header = headerRef.current;
+    const logo = logoRef.current;
+    const nav = navRef.current;
+    const actions = actionsRef.current;
+    const toggle = toggleRef.current;
+    if (!header || !logo || !actions) return;
+
+    registerGsap();
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reveal = isAnimating || isLoaded;
+    const rightGroup = [actions, toggle].filter(Boolean);
+
+    if (!isHome) {
+      gsap.set([header, logo, nav, ...rightGroup].filter(Boolean), {
+        clearProps: "all",
+        autoAlpha: 1,
+        x: 0,
+        y: 0,
+      });
+      setIntroReady(true);
+      return;
+    }
+
+    if (!reveal) {
+      gsap.set(header, { y: -56, autoAlpha: 0 });
+      gsap.set(logo, { x: -40, autoAlpha: 0 });
+      gsap.set(rightGroup, { x: 40, autoAlpha: 0 });
+      if (nav) gsap.set(nav, { autoAlpha: 0 });
+      setIntroReady(false);
+      return;
+    }
+
+    if (reducedMotion) {
+      gsap.set([header, logo, nav, ...rightGroup].filter(Boolean), {
+        clearProps: "transform,opacity,visibility",
+        autoAlpha: 1,
+        x: 0,
+        y: 0,
+      });
+      setIntroReady(true);
+      return;
+    }
+
+    const timeline = gsap.timeline({
+      defaults: { ease: "power3.out" },
+      onComplete: () => setIntroReady(true),
+    });
+
+    timeline.fromTo(
+      header,
+      { y: -56, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 0.85 },
+    );
+    timeline.fromTo(
+      logo,
+      { x: -40, autoAlpha: 0 },
+      { x: 0, autoAlpha: 1, duration: 0.75 },
+      "-=0.55",
+    );
+    timeline.fromTo(
+      rightGroup,
+      { x: 40, autoAlpha: 0 },
+      { x: 0, autoAlpha: 1, duration: 0.75 },
+      "<",
+    );
+    if (nav) {
+      timeline.fromTo(
+        nav,
+        { autoAlpha: 0, y: -8 },
+        { autoAlpha: 1, y: 0, duration: 0.55 },
+        "-=0.45",
+      );
+    }
+
+    return () => {
+      timeline.kill();
+    };
+  }, [isHome, isAnimating, isLoaded]);
+
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
     setMobileExpanded(null);
@@ -122,13 +216,21 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
+      <header
+        ref={headerRef}
+        className={`site-header${scrolled ? " is-scrolled" : ""}${introReady ? " is-intro-ready" : ""}`}
+      >
         <div className="inner" ref={innerRef}>
-          <Link href="/" className="logo-link brand-logo-highlight" aria-label="Go to homepage">
+          <Link
+            ref={logoRef}
+            href="/"
+            className="logo-link brand-logo-highlight"
+            aria-label="Go to homepage"
+          >
             <FullLogo className="logo" priority />
           </Link>
 
-          <nav className="nav font-nav" aria-label="Primary">
+          <nav ref={navRef} className="nav font-nav" aria-label="Primary">
             <ul>
               {navigation.map((item) =>
                 item.href ? (
@@ -173,7 +275,7 @@ export function SiteHeader() {
             </ul>
           </nav>
 
-          <div className="header-actions">
+          <div ref={actionsRef} className="header-actions">
             <div className="header-cta">
               <Link href={siteContact.phoneHref} className="cta-button cta-button--secondary">
                 <span className="link-active">CALL US</span>
@@ -185,6 +287,7 @@ export function SiteHeader() {
           </div>
 
           <button
+            ref={toggleRef}
             type="button"
             className={`toggle-mobile-menu-button${menuOpen ? " active" : ""}`}
             aria-label="Toggle menu"

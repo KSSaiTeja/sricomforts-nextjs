@@ -7,11 +7,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100svh;
-  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+  min-height: 0;
+  height: auto;
   box-sizing: border-box;
   overflow: hidden;
-  padding: clamp(1rem, 3svh, var(--section-pad-y)) 1.25rem clamp(1rem, 3svh, var(--section-pad-y-md));
+  padding: var(--section-band-pad-y) var(--page-gutter-inline);
   background:
     radial-gradient(ellipse 80% 60% at 12% 40%, var(--color-brand-accent-tint) 0%, transparent 55%),
     radial-gradient(ellipse 70% 50% at 88% 70%, rgb(0 123 192 / 8%) 0%, transparent 50%),
@@ -21,14 +21,13 @@
 .inner {
   position: relative;
   z-index: 1;
-  flex: 1;
   margin: 0 auto;
   max-width: 72rem;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: clamp(0.875rem, 2svh, 1.5rem);
-  justify-content: center;
+  gap: var(--section-stack-gap-md);
+  justify-content: flex-start;
 }
 
 .header {
@@ -41,7 +40,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin: 0 0 0.625rem;
+  margin: 0 0 var(--section-stack-gap);
   color: var(--color-eyebrow);
   font-weight: 500;
   letter-spacing: 0.08em;
@@ -59,7 +58,7 @@
 }
 
 .title {
-  margin: 0 0 0.625rem;
+  margin: 0 0 var(--section-stack-gap);
   font-family: var(--font-primary), ui-sans-serif, system-ui, sans-serif;
   font-weight: 400;
   color: var(--color-brand-ink);
@@ -79,14 +78,13 @@
 .stage {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.75rem, 1.75svh, 1.25rem);
+  gap: var(--section-stack-gap-md);
   align-items: stretch;
   width: 100%;
   max-width: 56rem;
   margin-inline: auto;
   min-height: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: visible;
 }
 
 .railShell {
@@ -146,7 +144,8 @@
   transition:
     box-shadow 0.5s var(--ease-out),
     filter 0.55s var(--ease-out),
-    opacity 0.45s var(--ease-out);
+    opacity 0.45s var(--ease-out),
+    transform 0.55s var(--ease-out);
 }
 
 .thumb:focus-visible {
@@ -406,12 +405,11 @@
     --rail-width: 7.5rem;
     --thumb-size: 6.25rem;
     --rail-fade: 22%;
-    padding: clamp(1.25rem, 3svh, var(--section-pad-y-md)) min(3.646vw, 93.3333333333px)
-      clamp(1.25rem, 3svh, var(--section-pad-y-lg));
+    padding: var(--section-band-pad-y) min(3.646vw, 93.3333333333px);
   }
 
   .inner {
-    gap: clamp(1rem, 2svh, 1.5rem);
+    gap: var(--section-stack-gap-md);
   }
 
   .title {
@@ -427,7 +425,7 @@
   .stage {
     display: grid;
     grid-template-columns: var(--rail-width) minmax(0, 1fr);
-    gap: 1.75rem;
+    gap: var(--section-stack-gap-lg);
     align-items: start;
     max-width: 52rem;
     overflow-y: visible;

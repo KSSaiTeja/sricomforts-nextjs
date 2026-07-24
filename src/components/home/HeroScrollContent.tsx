@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { usePreloader } from "@/components/preloader/PreloaderProvider";
 import { registerGsap } from "@/lib/gsap/register";
 import { wrapTextWithChars } from "@/lib/text/splitChars";
 import styles from "./video-carousel.module.css";
@@ -99,11 +100,15 @@ function applyHeroProgress(
 }
 
 export function HeroScrollContent({ items, scrollProgressRef }: HeroScrollContentProps) {
+  const { isAnimating, isLoaded } = usePreloader();
+  const ready = isAnimating || isLoaded;
   const rootRef = useRef<HTMLDivElement>(null);
   const titleRefs = useRef<HTMLHeadingElement[]>([]);
   const charGroupsRef = useRef<HTMLSpanElement[][]>([]);
 
   useEffect(() => {
+    if (!ready) return;
+
     registerGsap();
 
     charGroupsRef.current = titleRefs.current.map((title) => {
@@ -111,42 +116,62 @@ export function HeroScrollContent({ items, scrollProgressRef }: HeroScrollConten
       return wrapTextWithChars(title, "--char");
     });
 
-    if (rootRef.current) {
-      gsap.set(rootRef.current, { autoAlpha: 1 });
+    const root = rootRef.current;
+    if (root) {
+      root.classList.add(styles.isReady);
+      gsap.set(root, { autoAlpha: 1 });
     }
 
-    // Soft white entrance for line 1 only — blue accent waits for scroll.
     let introDone = false;
     charGroupsRef.current.forEach((group, groupIndex) => {
       if (groupIndex !== 0) setInactive(group);
     });
+
     const firstChars = charGroupsRef.current[0] ?? [];
     firstChars.forEach((char) => {
       char.style.color = WHITE;
     });
 
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const introTween =
       firstChars.length > 0
-        ? gsap.fromTo(
-            firstChars,
-            { opacity: 0 },
-            {
-              opacity: 1,
-              duration: 0.9,
-              stagger: 0.012,
-              ease: "power2.out",
-              onComplete: () => {
-                introDone = true;
+        ? reducedMotion
+          ? (() => {
+              showFirstLineWhite(charGroupsRef.current);
+              introDone = true;
+              return null;
+            })()
+          : gsap.fromTo(
+              firstChars,
+              {
+                opacity: 0,
+                yPercent: 68,
+                rotateX: -28,
+                filter: "blur(6px)",
               },
-            },
-          )
+              {
+                opacity: 1,
+                yPercent: 0,
+                rotateX: 0,
+                filter: "blur(0px)",
+                duration: 0.85,
+                stagger: { each: 0.016, from: "start" },
+                ease: "power3.out",
+                transformOrigin: "50% 100%",
+                onComplete: () => {
+                  introDone = true;
+                  showFirstLineWhite(charGroupsRef.current);
+                },
+              },
+            )
         : null;
 
-    if (!introTween) introDone = true;
+    if (!introTween && firstChars.length === 0) introDone = true;
 
     const tick = () => {
       const scroll = scrollProgressRef.current ?? 0;
-      // Don't overwrite the white entrance; hand off as soon as the user scrolls.
+      // Don't overwrite the entrance; hand off as soon as the user scrolls.
       if (!introDone && scroll <= REST_HOLD) return;
       introDone = true;
       applyHeroProgress(charGroupsRef.current, scroll, items.length);
@@ -158,8 +183,9 @@ export function HeroScrollContent({ items, scrollProgressRef }: HeroScrollConten
       introTween?.kill();
       gsap.ticker.remove(tick);
       gsap.killTweensOf(firstChars);
+      root?.classList.remove(styles.isReady);
     };
-  }, [items, scrollProgressRef]);
+  }, [ready, items, scrollProgressRef]);
 
   return (
     <div ref={rootRef} className={styles.scrollContent}>

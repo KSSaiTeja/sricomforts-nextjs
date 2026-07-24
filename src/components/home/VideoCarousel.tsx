@@ -67,7 +67,11 @@ export function VideoCarousel() {
   }, [isLoaded, lenis, isDesktop]);
 
   return (
-    <section ref={sectionRef} className={styles.videoCarousel}>
+    <section
+      ref={sectionRef}
+      className={styles.videoCarousel}
+      data-motion-ignore
+    >
       <div className={styles.wrapper}>
         <div className={styles.videoSequenceScroll}>
           {!isDesktop ? <ScrollIndicatorMobile /> : null}

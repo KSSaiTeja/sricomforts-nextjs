@@ -9,26 +9,36 @@
 .about-page .content__wrapper {
   position: relative;
   z-index: 1;
+  overflow-x: clip;
 }
 
-/* —— One-viewport section framing —— */
+/* Band intros by default — only fullscreen wrappers fill the viewport */
 .about-page .section-introduction {
+  min-height: 0;
+  padding-block: var(--section-band-pad-y);
+  padding-inline: var(--page-gutter-inline);
+}
+
+.about-page .section__wrapper.is-fullscreen .section-introduction {
   min-height: 100svh;
   min-height: var(--section-min-height);
-  padding-block: clamp(2rem, 6svh, var(--section-pad-y-md));
-  padding-inline: clamp(1rem, 4vw, 1.25rem);
+  padding-block: clamp(1.25rem, 3.5svh, var(--section-pad-y-md));
 }
 
 .about-page .section-introduction .section-content {
-  margin-bottom: clamp(0.75rem, 2svh, 2rem);
+  margin-bottom: var(--section-stack-gap);
 }
 
 .about-page .section-introduction .header.spacing {
-  margin-bottom: clamp(1rem, 3svh, 2rem);
+  margin-bottom: var(--section-stack-gap-md);
+}
+
+.about-page .section-introduction .label {
+  margin-bottom: var(--section-stack-gap);
 }
 
 .about-page .section-introduction .buttons {
-  margin-top: clamp(1.25rem, 4svh, 5.625rem);
+  margin-top: var(--section-stack-gap-lg);
 }
 
 .about-page .features-grid {
@@ -41,9 +51,10 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  min-height: 100svh;
-  min-height: var(--section-min-height);
+  justify-content: flex-start;
+  min-height: 0;
+  height: auto;
+  padding-block: var(--section-band-pad-y);
 }
 
 .about-page .features-grid .feature-image {
@@ -53,9 +64,9 @@
 }
 
 .about-page .features-grid .feature-content-inner {
-  gap: clamp(0.75rem, 2svh, 2rem);
-  padding: clamp(1.25rem, 3.5svh, 4rem) clamp(1rem, 5vw, 5.128vw)
-    clamp(1rem, 2.5svh, 3.75rem);
+  gap: var(--section-stack-gap-md);
+  padding: clamp(1rem, 2.5svh, 1.75rem) clamp(1rem, 5vw, 5.128vw)
+    clamp(0.875rem, 2svh, 1.5rem);
 }
 
 .about-page section[aria-label*="at a glance"] {
@@ -63,14 +74,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100svh;
-  min-height: var(--section-min-height);
-  padding-block: clamp(1.5rem, 5svh, var(--section-pad-y-md));
-  padding-inline: clamp(1rem, 4vw, 1.25rem);
+  min-height: 0;
+  height: auto;
+  padding-block: var(--section-band-pad-y);
+  padding-inline: var(--page-gutter-inline);
 }
 
 .about-page section[aria-label*="at a glance"] > div {
-  margin-block: auto;
+  margin-block: 0;
 }
 
 .about-page section.logo-grid-wrapper.logo-grid-industry {
@@ -78,12 +89,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100svh;
-  min-height: var(--section-min-height);
+  min-height: 0;
+  height: auto;
 }
 
 .about-page section.logo-grid-wrapper.logo-grid-industry .logo-grid {
-  padding-block: clamp(1.5rem, 5svh, var(--section-pad-y-lg));
+  padding-block: var(--section-band-pad-y);
 }
 
 @media (min-width: 1024px) {
@@ -92,8 +103,13 @@
   }
 
   .about-page .section-introduction {
-    padding-block: clamp(2.5rem, 8svh, var(--section-pad-y-lg));
-    padding-inline: 4.375rem;
+    padding-block: var(--section-band-pad-y);
+    padding-inline: var(--page-gutter-inline);
+  }
+
+  .about-page .section__wrapper.is-fullscreen .section-introduction {
+    padding-block: clamp(1.5rem, 4svh, var(--section-pad-y-lg));
+    padding-inline: var(--page-gutter-inline);
   }
 
   .about-page .features-grid {
@@ -106,20 +122,20 @@
   }
 
   .about-page .features-grid .feature-image {
-    max-height: min(72svh, calc(var(--svh, 1svh) * 72));
+    max-height: min(42svh, calc(var(--svh, 1svh) * 42));
   }
 
   .about-page .features-grid .feature-content-inner {
-    gap: clamp(1.25rem, 2.5svh, 2.85rem);
+    gap: var(--section-stack-gap-lg);
     padding: 0;
   }
 
   .about-page section[aria-label*="at a glance"] {
-    padding-block: clamp(2rem, 7svh, var(--section-pad-y-lg));
-    padding-inline: 4.375rem;
+    padding-block: var(--section-band-pad-y);
+    padding-inline: var(--page-gutter-inline);
   }
 
   .about-page section.logo-grid-wrapper.logo-grid-industry .logo-grid {
-    padding-block: clamp(2rem, 8svh, calc(var(--svh, 1svh) * 11));
+    padding-block: var(--section-band-pad-y);
   }
 }

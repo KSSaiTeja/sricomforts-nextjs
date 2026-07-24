@@ -1,11 +1,11 @@
 .contact-ways-grid {
-  min-height: 100svh;
-  min-height: var(--section-min-height);
+  min-height: 0;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
-  padding: clamp(1.25rem, 4svh, 1.5rem) 1.25rem;
+  padding: var(--section-band-pad-y) var(--page-gutter-inline);
 }
 
 .contact-ways-grid__inner {
@@ -15,7 +15,7 @@
 }
 
 .contact-ways-grid__header {
-  margin-bottom: clamp(1.25rem, 4svh, 2rem);
+  margin-bottom: var(--section-stack-gap-lg);
   text-align: center;
 }
 
@@ -32,10 +32,11 @@
 .contact-ways-grid__header h3 {
   color: var(--color-brand-ink);
   font-weight: 400;
-  font-size: 2.25rem;
-  letter-spacing: -0.46px;
-  line-height: 1.2;
-  margin: 1.5rem 0 0;
+  font-size: clamp(1.75rem, 6vw, 2.25rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: var(--section-stack-gap-md) 0 0;
+  text-wrap: balance;
 }
 
 .contact-ways-grid__cards {
@@ -46,6 +47,7 @@
 
 .contact-ways-card-link {
   color: inherit;
+  container: contact-card / inline-size;
   display: block;
   text-decoration: none;
 }
@@ -54,6 +56,7 @@
   background: transparent;
   border: 0;
   color: inherit;
+  container: contact-card / inline-size;
   cursor: pointer;
   display: block;
   font: inherit;
@@ -70,8 +73,9 @@
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-  padding: 1.75rem;
+  padding: clamp(1.25rem, 4cqi, 1.75rem);
   position: relative;
+  min-width: 0;
 }
 
 .contact-ways-card.is-theme-dark {
@@ -259,12 +263,12 @@
 
 @media (min-width: 768px) {
   .contact-ways-grid {
-    padding-block: clamp(1.5rem, 5svh, var(--section-pad-y));
-    padding-inline: 1.25rem;
+    padding-block: var(--section-band-pad-y);
+    padding-inline: var(--page-gutter-inline);
   }
 
   .contact-ways-grid__header {
-    margin-bottom: clamp(2rem, 5svh, 3.75rem);
+    margin-bottom: var(--section-stack-gap-lg);
   }
 
   .contact-ways-grid__header h2,
@@ -309,8 +313,8 @@
 
 @media (min-width: 1024px) {
   .contact-ways-grid {
-    padding-left: 4.375rem;
-    padding-right: 4.375rem;
+    padding-left: var(--page-gutter-inline);
+    padding-right: var(--page-gutter-inline);
   }
 
   .contact-ways-grid__header h2,
@@ -371,5 +375,18 @@
     background: var(--color-neutral-white);
     border-color: var(--color-neutral-white);
     color: var(--color-brand-ink);
+  }
+}
+
+/* Component-level responsiveness (Responsive Design skill) */
+@supports (container-type: inline-size) {
+  @container contact-card (min-width: 28rem) {
+    .contact-ways-card__title {
+      font-size: clamp(1.375rem, 4cqi, 1.75rem);
+    }
+
+    .contact-ways-card__description {
+      font-size: clamp(1rem, 2.8cqi, 1.25rem);
+    }
   }
 }

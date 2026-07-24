@@ -60,7 +60,11 @@ export function TonnageCalculatorWidget() {
 
   return (
     <div className="tonnage-widget">
-      <Link href={CALCULATOR_HREF} className="tonnage-widget__fab">
+      <Link
+        href={CALCULATOR_HREF}
+        className="tonnage-widget__fab"
+        aria-label="AC tonnage quick estimate calculator"
+      >
         <span className="tonnage-widget__fab-glyph">
           <AcTonnageIcon />
         </span>

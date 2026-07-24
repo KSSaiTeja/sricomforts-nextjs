@@ -18,7 +18,10 @@ import {
 } from "@/data/testimonials";
 import styles from "./testimonials.module.css";
 
+/** Idle hold before advancing one step. */
 const AUTOPLAY_MS = 5000;
+/** One-step upward glide when the timer fires. */
+const STEP_DURATION = 1.15;
 const LOOP_COPIES = 3;
 
 type TestimonialsSectionProps = {
@@ -94,41 +97,64 @@ export function TestimonialsSection({
     [count, middleStart],
   );
 
-  const centerTrack = useCallback((index: number, animate: boolean) => {
-    registerGsap();
+  const syncRailHeight = useCallback(() => {
     const rail = railRef.current;
-    const track = trackRef.current;
-    const thumb = thumbsRef.current[index];
-    if (!rail || !track || !thumb) return;
+    const card = cardRef.current;
+    if (!rail || !card) return;
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-    const target = isDesktop
-      ? {
-          y: rail.clientHeight / 2 - (thumb.offsetTop + thumb.offsetHeight / 2),
-          x: 0,
-        }
-      : {
-          x: rail.clientWidth / 2 - (thumb.offsetLeft + thumb.offsetWidth / 2),
-          y: 0,
-        };
-
-    try {
-      gsap.killTweensOf(track);
-      if (!animate || reduceMotion) {
-        gsap.set(track, target);
-        return;
-      }
-      gsap.to(track, {
-        ...target,
-        duration: 0.9,
-        ease: "power3.out",
-        overwrite: "auto",
-      });
-    } catch {
-      gsap.set(track, target);
+    if (isDesktop) {
+      const height = Math.round(card.getBoundingClientRect().height);
+      rail.style.height = `${height}px`;
+      rail.style.maxHeight = `${height}px`;
+    } else {
+      rail.style.height = "";
+      rail.style.maxHeight = "";
     }
   }, []);
+
+  const centerTrack = useCallback(
+    (index: number, animate: boolean) => {
+      registerGsap();
+      syncRailHeight();
+
+      const rail = railRef.current;
+      const track = trackRef.current;
+      const thumb = thumbsRef.current[index];
+      if (!rail || !track || !thumb) return;
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+      const target = isDesktop
+        ? {
+            y: rail.clientHeight / 2 - (thumb.offsetTop + thumb.offsetHeight / 2),
+            x: 0,
+          }
+        : {
+            x: rail.clientWidth / 2 - (thumb.offsetLeft + thumb.offsetWidth / 2),
+            y: 0,
+          };
+
+      try {
+        gsap.killTweensOf(track);
+        if (!animate || reduceMotion) {
+          gsap.set(track, target);
+          return;
+        }
+        /* Smooth one-step glide — eases in/out so it doesn’t jerk */
+        gsap.to(track, {
+          ...target,
+          duration: STEP_DURATION,
+          ease: "power2.inOut",
+          overwrite: "auto",
+          force3D: true,
+        });
+      } catch {
+        gsap.set(track, target);
+      }
+    },
+    [syncRailHeight],
+  );
 
   const goToSource = useCallback(
     (sourceIndex: number) => {
@@ -138,6 +164,7 @@ export function TestimonialsSection({
       let delta = sourceIndex - currentSource;
       if (delta > count / 2) delta -= count;
       if (delta < -count / 2) delta += count;
+      if (delta === 0) return;
       setLoopIndex(current + delta);
     },
     [count],
@@ -151,22 +178,17 @@ export function TestimonialsSection({
     setLoopIndex((current) => current - 1);
   }, []);
 
-  /* Keep rail height locked to the quote card — images only fill card height */
+  /* Keep rail height locked to the quote card */
   useLayoutEffect(() => {
     const rail = railRef.current;
     const card = cardRef.current;
     if (!rail || !card || typeof ResizeObserver === "undefined") return;
 
     const sync = () => {
-      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-      if (isDesktop) {
-        const height = Math.round(card.getBoundingClientRect().height);
-        rail.style.height = `${height}px`;
-        rail.style.maxHeight = `${height}px`;
-      } else {
-        rail.style.height = "";
-        rail.style.maxHeight = "";
-      }
+      syncRailHeight();
+      const track = trackRef.current;
+      /* Don’t snap over an in-flight step glide */
+      if (track && gsap.isTweening(track)) return;
       centerTrack(loopIndexRef.current, false);
     };
 
@@ -180,9 +202,9 @@ export function TestimonialsSection({
       rail.style.height = "";
       rail.style.maxHeight = "";
     };
-  }, [centerTrack, active?.id]);
+  }, [centerTrack, syncRailHeight]);
 
-  /* Slide track + seamless wrap */
+  /* One-step slide + seamless wrap after the glide settles */
   useLayoutEffect(() => {
     if (isJumpingRef.current) {
       isJumpingRef.current = false;
@@ -197,7 +219,7 @@ export function TestimonialsSection({
       const wrapped = normalizeLoopIndex(loopIndex);
       if (wrapped === loopIndex) return;
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const delay = reduceMotion ? 0 : 920;
+      const delay = reduceMotion ? 0 : Math.round(STEP_DURATION * 1000) + 20;
       const timer = window.setTimeout(() => {
         isJumpingRef.current = true;
         setLoopIndex(wrapped);
@@ -206,7 +228,7 @@ export function TestimonialsSection({
     }
   }, [loopIndex, centerTrack, count, normalizeLoopIndex]);
 
-  /* Quote content entrance */
+  /* Quote content entrance — once per step */
   useLayoutEffect(() => {
     registerGsap();
     const targets = [headlineRef.current, bodyRef.current, authorRef.current].filter(
@@ -248,7 +270,7 @@ export function TestimonialsSection({
     }
   }, [activeSourceIndex]);
 
-  /* Autoplay: timer is source of truth; progress bar is visual only */
+  /* Autoplay: hold 5s, then advance one step (not continuous motion) */
   useEffect(() => {
     registerGsap();
     progressTweenRef.current?.kill();

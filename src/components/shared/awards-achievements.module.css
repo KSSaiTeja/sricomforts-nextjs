@@ -25,8 +25,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100svh;
-  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+  min-height: 0;
+  height: auto;
   overflow: hidden;
   background:
     radial-gradient(
@@ -39,19 +39,17 @@
       var(--color-neutral-white) 0%,
       var(--color-neutral-off-white) 100%
     );
-  padding: clamp(1rem, 3svh, var(--section-pad-y-md)) var(--spacing) clamp(1rem, 3svh, var(--section-pad-y));
+  padding: var(--section-band-pad-y) var(--spacing);
 }
 
 .experienceInner {
   margin: 0 auto;
   max-width: 72rem;
   display: grid;
-  gap: clamp(1rem, 2svh, 2rem);
+  gap: var(--section-stack-gap-md);
   align-items: center;
-  flex: 1;
   min-height: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: visible;
 }
 
 .yearsCard {
@@ -77,7 +75,7 @@
 
 .yearsNumber {
   display: block;
-  font-size: clamp(4.5rem, 18svh, 10.75rem);
+  font-size: clamp(4rem, 12vw, 8.5rem);
   font-weight: 400;
   line-height: 0.82;
   letter-spacing: -0.06em;
@@ -116,32 +114,53 @@
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
   margin-top: 0.5rem;
-  padding: 1.35rem 0;
+  padding: 1rem 0;
   border-top: 1px solid var(--awards-line);
   border-bottom: 1px solid var(--awards-line);
 }
 
 .stat {
   position: relative;
-  padding-right: 1rem;
-  padding-left: 0;
+  padding: 0.35rem 0;
 }
 
 .stat:not(:first-child) {
-  padding-left: 1rem;
+  padding-left: 0;
 }
 
 .stat:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 10%;
-  right: 0;
-  width: 1px;
-  height: 80%;
-  background: var(--awards-line);
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    padding: 1.35rem 0;
+  }
+
+  .stat {
+    padding-right: 1rem;
+    padding-left: 0;
+  }
+
+  .stat:not(:first-child) {
+    padding-left: 1rem;
+  }
+
+  .stat:not(:last-child)::after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 10%;
+    right: 0;
+    width: 1px;
+    height: 80%;
+    background: var(--awards-line);
+  }
 }
 
 .statValue {
@@ -186,10 +205,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100svh;
-  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+  min-height: 0;
+  height: auto;
   background: var(--awards-surface);
-  padding: clamp(1rem, 3svh, var(--section-pad-y-md)) var(--spacing) clamp(1rem, 3svh, var(--section-pad-y-lg));
+  padding: var(--section-band-pad-y) var(--spacing);
 }
 
 .awards::before {
@@ -207,18 +226,18 @@
 .awardsInner {
   position: relative;
   z-index: 1;
-  flex: 1;
   margin: 0 auto;
   max-width: 64rem;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  gap: var(--section-stack-gap-lg);
 }
 
 .awardsHeader {
   text-align: center;
-  margin-bottom: clamp(0.875rem, 2svh, 1.75rem);
+  margin-bottom: 0;
   flex-shrink: 0;
 }
 
@@ -227,7 +246,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
-  margin: 0 0 1rem;
+  margin: 0 0 var(--section-stack-gap);
 }
 
 .awardsLabel::before,
@@ -247,14 +266,13 @@
 }
 
 .awardsGrid {
+  container: awards / inline-size;
   display: grid;
   grid-template-columns: 1fr;
   gap: 0;
-  flex: 1;
   min-height: 0;
-  max-height: calc(100svh - clamp(8rem, 22svh, 14rem));
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  max-height: none;
+  overflow: visible;
   background: var(--color-neutral-white);
   border: 1px solid var(--awards-line);
   border-radius: 1rem;
@@ -263,10 +281,10 @@
 
 .awardItem {
   display: grid;
-  grid-template-columns: 5.5rem 1fr;
-  gap: 1.15rem;
+  grid-template-columns: minmax(4.25rem, 5.5rem) minmax(0, 1fr);
+  gap: clamp(0.75rem, 3vw, 1.15rem);
   align-items: start;
-  padding: 1.25rem 1.375rem;
+  padding: 1.15rem 1.1rem;
   border-bottom: 1px solid var(--awards-line);
   transition: background-color 0.3s var(--ease-out);
 }
@@ -366,7 +384,7 @@
 @media (min-width: 960px) {
   .experienceInner {
     grid-template-columns: minmax(18rem, 23rem) minmax(0, 1fr);
-    gap: clamp(1.5rem, 3svh, 3rem);
+    gap: var(--section-stack-gap-lg);
     overflow-y: visible;
   }
 
@@ -389,7 +407,7 @@
   }
 
   .awardsHeader {
-    margin-bottom: 1.75rem;
+    margin-bottom: 0;
   }
 
   .awardItem {
@@ -405,5 +423,21 @@
 
   .awardItem:hover .laurelSvg {
     transform: none;
+  }
+}
+
+@supports (container-type: inline-size) {
+  @container awards (min-width: 40rem) {
+    .awardsGrid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .awardItem:nth-child(odd) {
+      border-right: 1px solid var(--awards-line);
+    }
+
+    .awardItem:nth-last-child(-n + 2) {
+      border-bottom: 0;
+    }
   }
 }

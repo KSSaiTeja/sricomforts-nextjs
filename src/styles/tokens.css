@@ -77,23 +77,88 @@
   --spacing: 1.25rem;
   --svw: 1vw;
 
+  /*
+   * Responsive page shell — use across sections for consistent edge rhythm.
+   * Safe-area aware so notched phones don't clip fixed chrome.
+   */
+  --page-gutter: max(1rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+  --page-gutter-inline: clamp(1rem, 4.2vw, 1.5rem);
+  --page-gutter-block-safe: env(safe-area-inset-bottom, 0px);
+  --container-max: 90rem;
+  --container-prose: 42rem;
+
+  /* Breakpoint tokens (mobile-first) — documentation + JS parity */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1536px;
+
+  /* Fluid type scale (Utopia-style clamp) */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+  --text-3xl: clamp(1.875rem, 1.4rem + 2.375vw, 2.5rem);
+  --text-4xl: clamp(2.25rem, 1.5rem + 3.75vw, 3.5rem);
+
+  /* Fluid spacing scale */
+  --space-xs: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
+  --space-sm: clamp(0.75rem, 0.6rem + 0.75vw, 1rem);
+  --space-md: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+  --space-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+  --space-xl: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+
+  /* Touch target floor (WCAG / skill guidance) */
+  --touch-min: 2.75rem;
+
   /* Compact one-screen rhythm shared by all page sections. */
-  --section-pad-y: 2rem;
-  --section-pad-y-md: 2.75rem;
-  --section-pad-y-lg: 3.5rem;
+  --section-pad-y: 1.25rem;
+  --section-pad-y-md: 1.75rem;
+  --section-pad-y-lg: 2.25rem;
+  /* Short “band” sections — natural height, uniform air */
+  --section-band-pad-y: clamp(1.75rem, 4.5svh, 2.75rem);
+  /* Title → content / header → body stack inside a section */
+  --section-stack-gap: 0.75rem;
+  --section-stack-gap-md: 1rem;
+  --section-stack-gap-lg: 1.25rem;
 
   /* Section eyebrows — brand blue on light, bright blue on dark */
   --color-eyebrow: var(--color-brand-primary);
   --color-eyebrow-on-dark: var(--color-brand-accent-on-dark);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 640px) {
   :root {
-    --spacing: min(3.646vw, 93.3333333333px);
+    --page-gutter-inline: clamp(1.25rem, 3.5vw, 1.75rem);
+    --section-band-pad-y: clamp(2rem, 4.5svh, 3rem);
   }
 }
 
-/* One-screen section utility — pair with useSvh() for mobile browser chrome */
+@media (min-width: 768px) {
+  :root {
+    --spacing: clamp(1.5rem, 3.2vw, 2.5rem);
+    --page-gutter-inline: clamp(1.5rem, 3.2vw, 2.5rem);
+    --section-stack-gap: 0.875rem;
+    --section-stack-gap-md: 1.125rem;
+    --section-stack-gap-lg: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --spacing: min(3.646vw, 93.3333333333px);
+    --page-gutter-inline: min(3.646vw, 93.3333333333px);
+    --section-band-pad-y: clamp(2.25rem, 5svh, 3.5rem);
+    --section-stack-gap: 1rem;
+    --section-stack-gap-md: 1.25rem;
+    --section-stack-gap-lg: 1.75rem;
+  }
+}
+
+/* Full-viewport stage — pair with useSvh() for mobile browser chrome */
 .section-viewport {
   min-height: 100svh;
   min-height: var(--section-min-height);
@@ -101,4 +166,15 @@
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
+}
+
+/* Short content band — no forced empty viewport */
+.section-band {
+  min-height: 0;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-block: var(--section-band-pad-y);
 }

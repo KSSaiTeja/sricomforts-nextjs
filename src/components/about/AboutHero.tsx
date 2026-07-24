@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { type AboutHeroData } from "@/data/about";
@@ -104,7 +104,7 @@ export function AboutHero({ data }: AboutHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const fullTitle = `${data.titleLead} ${data.titleMid} ${data.titleHighlight}`;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const track = trackRef.current;
     const sticky = stickyRef.current;
     const content = contentRef.current;
@@ -154,13 +154,11 @@ export function AboutHero({ data }: AboutHeroProps) {
     });
 
     let pinTrigger: ScrollTrigger | null = null;
-    let introTween: gsap.core.Tween | null = null;
 
     const teardown = () => {
       pinTrigger?.kill();
       pinTrigger = null;
-      introTween?.kill();
-      introTween = null;
+      frame.dataset.ready = "false";
       gsap.set(frame, { clearProps: "all" });
       gsap.set(content, { clearProps: "opacity,visibility" });
       setPlaying(false);
@@ -169,33 +167,19 @@ export function AboutHero({ data }: AboutHeroProps) {
     const setup = () => {
       teardown();
 
-      const children = Array.from(content.children);
-
-      if (!reduceMotion) {
-        introTween = gsap.from(children, {
-          autoAlpha: 0,
-          y: 24,
-          stagger: 0.07,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: content,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
-
       /* Mobile: in-flow large video, autoplay — no pin enlarge */
       if (!desktopQuery.matches) {
-        gsap.set(frame, { clearProps: "all", autoAlpha: 1 });
+        gsap.set(frame, { clearProps: "all" });
+        frame.dataset.ready = "true";
         setPlaying(true);
         return;
       }
 
+      /* Resting state = screenshot composition (image sits in the title line).
+         Scroll is the only motion: frame expands to fill the sticky panel. */
       const start = readMetrics(slot, sticky);
       applyFrame(start);
-      gsap.set(frame, { autoAlpha: 1 });
+      frame.dataset.ready = "true";
       setPlaying(false);
 
       if (reduceMotion) {
@@ -240,7 +224,6 @@ export function AboutHero({ data }: AboutHeroProps) {
     };
 
     const ctx = gsap.context(() => {
-      gsap.set(frame, { autoAlpha: 0 });
       setup();
     }, track);
 
@@ -272,6 +255,7 @@ export function AboutHero({ data }: AboutHeroProps) {
         id={data.sectionId}
         className={styles.sticky}
         aria-labelledby="about-hero-title"
+        data-motion-ignore
       >
         <HeroRings />
 
@@ -293,8 +277,17 @@ export function AboutHero({ data }: AboutHeroProps) {
 
               <span className={styles.titleInline} aria-hidden="true">
                 <span className={styles.titleMid}>{data.titleMid}</span>
-                {/* Layout placeholder — real video frame overlays this on desktop */}
-                <div ref={slotRef} className={styles.videoSlot} />
+                {/* In-flow poster keeps the screenshot composition from first paint;
+                    absolute video frame overlays + expands on scroll. */}
+                <div ref={slotRef} className={styles.videoSlot}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className={styles.slotPoster}
+                    src={data.media.poster}
+                    alt=""
+                    decoding="async"
+                  />
+                </div>
                 <em className={styles.highlight}>{data.titleHighlight}</em>
               </span>
             </h2>
@@ -307,6 +300,7 @@ export function AboutHero({ data }: AboutHeroProps) {
           ref={frameRef}
           className={styles.videoFrame}
           data-playing="false"
+          data-ready="false"
         >
           <video
             ref={videoRef}

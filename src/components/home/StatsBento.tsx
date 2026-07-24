@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { statsBento, type StatsBentoItem } from "@/data/homepage";
@@ -10,84 +9,33 @@ import styles from "./stats-bento.module.css";
 
 function cardClassName(item: StatsBentoItem) {
   const classes = [styles.card];
-
-  if (item.variant === "feature") classes.push(styles.cardFeature);
-  if (item.variant === "badge") classes.push(styles.cardBadge);
-  if (item.variant === "strike") classes.push(styles.cardStrike);
-  if (item.variant === "media") classes.push(styles.cardMedia);
-
+  if (item.tone === "ink") classes.push(styles.cardInk);
+  if (item.tone === "tint") classes.push(styles.cardTint);
   return classes.join(" ");
 }
 
 function StatCard({ item }: { item: StatsBentoItem }) {
-  if (item.variant === "badge") {
-    return (
-      <div className={styles.inner}>
-        <p className={styles.eyebrow}>{item.eyebrow}</p>
-        <p className={styles.title}>
-          <span className={styles.titleAccent}>{item.title}</span>
-        </p>
-        <p className={styles.body}>{item.body}</p>
-      </div>
-    );
-  }
+  const steps = "steps" in item ? item.steps : undefined;
+  const accent = "accent" in item ? item.accent : undefined;
+  const eyebrow = "eyebrow" in item ? item.eyebrow : undefined;
 
-  if (item.variant === "feature") {
-    return (
-      <div className={styles.inner}>
-        <p className={`${styles.title} ${styles.titleFeature}`}>{item.title}</p>
-        <p className={styles.body}>{item.body}</p>
+  return (
+    <div className={styles.inner}>
+      {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
+      <p className={styles.title}>
+        <span className={styles.titleValue}>{item.title}</span>
+        {accent ? <span className={styles.titleAccent}>{accent}</span> : null}
+      </p>
+      <p className={styles.body}>{item.body}</p>
+      {steps ? (
         <ul className={styles.steps} aria-label="Delivery steps">
-          {item.steps.map((step) => (
+          {steps.map((step) => (
             <li key={step} className={styles.step}>
               {step}
             </li>
           ))}
         </ul>
-      </div>
-    );
-  }
-
-  if (item.variant === "strike") {
-    return (
-      <div className={styles.inner}>
-        <p className={`${styles.title} ${styles.titleStrike}`}>{item.title}</p>
-        <ul className={styles.strikes}>
-          {item.strikes.map((strike) => (
-            <li key={strike} className={styles.strike}>
-              {strike}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-
-  if (item.variant === "media") {
-    return (
-      <>
-        <Image
-          src={item.image}
-          alt=""
-          fill
-          className={styles.mediaImage}
-          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 40vw"
-        />
-        <div className={`${styles.inner} ${styles.mediaContent}`}>
-          <p className={styles.mediaTitle}>{item.title}</p>
-          <p className={styles.body}>{item.body}</p>
-        </div>
-      </>
-    );
-  }
-
-  return (
-    <div className={styles.inner}>
-      <p className={styles.title}>
-        <span className={styles.titleValue}>{item.title}</span>
-        {item.accent ? <span className={styles.titleAccent}>{item.accent}</span> : null}
-      </p>
-      <p className={styles.body}>{item.body}</p>
+      ) : null}
     </div>
   );
 }
@@ -117,12 +65,12 @@ function getGatherOffset(
   }
 
   const distance =
-    Math.max(240, Math.min(560, length * 1.45 + 180)) * viewportScale;
+    Math.max(180, Math.min(420, length * 1.35 + 140)) * viewportScale;
 
   return {
     x: dx * distance,
     y: dy * distance,
-    rotation: dx * -5 + dy * 2.5,
+    rotation: dx * -4 + dy * 2,
   };
 }
 
@@ -158,10 +106,10 @@ export function StatsBento() {
       const px = (event.clientX - rect.left) / rect.width - 0.5;
       const py = (event.clientY - rect.top) / rect.height - 0.5;
       gsap.to(card, {
-        y: -6,
-        scale: 1.025,
-        rotateY: px * 6,
-        rotateX: py * -6,
+        y: -4,
+        scale: 1.02,
+        rotateY: px * 5,
+        rotateX: py * -5,
         transformPerspective: 1000,
         duration: 0.4,
         ease: "power2.out",
@@ -199,7 +147,7 @@ export function StatsBento() {
           autoAlpha: 0,
           x: offset.x,
           y: offset.y,
-          scale: 0.78,
+          scale: 0.86,
           rotate: offset.rotation,
           transformOrigin: "50% 50%",
         });
@@ -214,15 +162,7 @@ export function StatsBento() {
         onComplete: enableInteraction,
       });
 
-      const order = cards
-        .map((card, index) => ({ card, index, from: card.dataset.from }))
-        .sort((a, b) => {
-          const aCenter = a.from === "center" ? 1 : 0;
-          const bCenter = b.from === "center" ? 1 : 0;
-          return aCenter - bCenter;
-        });
-
-      order.forEach(({ card }, orderIndex) => {
+      cards.forEach((card, index) => {
         timeline.to(
           card,
           {
@@ -231,33 +171,12 @@ export function StatsBento() {
             y: 0,
             scale: 1,
             rotate: 0,
-            duration: 1.4,
+            duration: 1.1,
             ease: "expo.out",
           },
-          orderIndex * 0.06,
+          index * 0.05,
         );
       });
-
-      timeline.to(
-        cards,
-        {
-          y: -5,
-          duration: 0.32,
-          ease: "power2.out",
-          stagger: { each: 0.028, from: "center" },
-        },
-        "-=0.5",
-      );
-      timeline.to(
-        cards,
-        {
-          y: 0,
-          duration: 0.6,
-          ease: "power3.out",
-          stagger: { each: 0.028, from: "center" },
-        },
-        "-=0.12",
-      );
     }, section);
 
     return () => {
@@ -283,7 +202,6 @@ export function StatsBento() {
               cardRefs.current[index] = element;
             }}
             className={cardClassName(item)}
-            data-area={item.area}
             data-from={item.from}
           >
             <StatCard item={item} />

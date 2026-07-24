@@ -17,7 +17,7 @@ section.logo-grid-wrapper.logo-grid-industry .logo-grid {
   display: flex;
   flex-wrap: wrap;
   grid-column: 1 / span 2;
-  padding: var(--section-pad-y-lg) 0;
+  padding: var(--section-band-pad-y) 0;
 }
 
 section.logo-grid-wrapper.logo-grid-industry .logo {

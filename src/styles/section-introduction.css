@@ -1,5 +1,9 @@
 .notch-section__wrapper {
   position: relative;
+  min-height: 0;
+}
+
+.notch-section__wrapper:has(.is-fullscreen) {
   min-height: 100svh;
   min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
 }
@@ -15,10 +19,11 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  min-height: 100%;
+  min-height: 0;
 }
 
-.notch-section__wrapper .section-introduction {
+.notch-section__wrapper:has(.is-fullscreen) .section__wrapper,
+.notch-section__wrapper:has(.is-fullscreen) .section-introduction {
   flex: 1;
   min-height: 100%;
 }
@@ -28,11 +33,11 @@
   z-index: 1;
 }
 
+/* Default intros are short bands — no empty full-viewport void */
 .section__wrapper.next-to-logos .section-introduction {
   margin-top: calc(var(--section-pad-y-lg) * -1);
-  min-height: 100svh;
-  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
-  padding: var(--section-pad-y-lg) 1.25rem;
+  min-height: 0;
+  padding: var(--section-band-pad-y) var(--page-gutter-inline);
 }
 
 .section-introduction {
@@ -42,10 +47,11 @@
   flex-direction: column;
   justify-content: center;
   justify-items: center;
-  min-height: 100svh;
-  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
-  padding: var(--section-pad-y) 1.25rem;
+  min-height: 0;
+  height: auto;
+  padding: var(--section-band-pad-y) var(--page-gutter-inline);
   text-align: center;
+  box-sizing: border-box;
 }
 
 .section-introduction.last-si-hp {
@@ -61,7 +67,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 2rem;
+  margin: 0 auto var(--section-stack-gap);
   max-width: unset;
 }
 
@@ -71,7 +77,7 @@
 }
 
 .section-introduction .header.spacing {
-  margin: 0 auto 2rem;
+  margin: 0 auto var(--section-stack-gap);
 }
 
 .section-introduction .header h2 {
@@ -102,7 +108,7 @@
 .section-introduction .label {
   color: var(--color-eyebrow);
   font-weight: 500;
-  margin-bottom: 1rem;
+  margin-bottom: var(--section-stack-gap);
 }
 
 .section-introduction .label.label-5 {
@@ -178,18 +184,18 @@
 
 @media (min-width: 1024px) {
   .section__wrapper.next-to-logos .section-introduction {
-    margin-top: calc(-9.375rem + min(5.99vw, 153.3333333333px));
-    padding: 13.375rem 4.375rem;
+    margin-top: calc(var(--section-pad-y-lg) * -1);
+    padding: var(--section-band-pad-y) var(--page-gutter-inline);
   }
 
   .section-introduction {
-    padding: var(--section-pad-y-lg) 4.375rem;
+    padding: var(--section-band-pad-y) var(--page-gutter-inline);
   }
 
   .section-introduction .header h2,
   .section-introduction .title-si {
-    font-size: max(4.375rem, min(4.688vw, 120px));
-    letter-spacing: min(-0.141vw, -3.6px);
+    font-size: max(3.5rem, min(4.2vw, 96px));
+    letter-spacing: min(-0.12vw, -2.8px);
   }
 
   .section-introduction .label.label-5 {
@@ -202,7 +208,7 @@
   }
 
   .section-introduction .header.spacing {
-    margin: 0 auto 3.375rem;
+    margin: 0 auto var(--section-stack-gap-lg);
   }
 
   .section-introduction .header {
@@ -214,14 +220,14 @@
   }
 
   .section-introduction .label {
-    margin-bottom: 2rem;
+    margin-bottom: var(--section-stack-gap-md);
   }
 
   .section-introduction .buttons {
     flex-direction: row;
     justify-content: center;
-    gap: 1.25rem;
-    margin-top: 5.625rem;
+    gap: 1rem;
+    margin-top: var(--section-stack-gap-lg);
     max-width: unset;
     width: unset;
   }
@@ -233,11 +239,16 @@
 
 @media (max-width: 1023px) {
   .section-introduction {
-    padding: clamp(1.25rem, 4svh, var(--section-pad-y)) 1.25rem;
+    padding: var(--section-band-pad-y) var(--page-gutter-inline);
   }
 
   .section__wrapper.next-to-logos .section-introduction {
-    padding: clamp(1.5rem, 5svh, var(--section-pad-y-lg)) 1.25rem;
+    padding: var(--section-band-pad-y) var(--page-gutter-inline);
+  }
+
+  .section-introduction .header {
+    max-width: 100%;
+    width: 100%;
   }
 
   .section-introduction .header h3 {
@@ -246,5 +257,14 @@
 
   .section-introduction .header br {
     display: none;
+  }
+
+  .section-introduction .buttons {
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .section-introduction .button--underlined {
+    width: 100%;
   }
 }

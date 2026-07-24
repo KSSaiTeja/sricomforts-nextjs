@@ -6,12 +6,12 @@
   --projects-rail-height: clamp(12rem, 38svh, 26rem);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: clamp(0.75rem, 2.5svh, 1.25rem);
-  min-height: 100svh;
-  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
-  padding-top: clamp(1rem, 3svh, var(--section-pad-y));
-  padding-bottom: clamp(1rem, 3svh, var(--section-pad-y-md));
+  justify-content: flex-start;
+  gap: var(--section-stack-gap-md);
+  min-height: 0;
+  height: auto;
+  padding-top: var(--section-band-pad-y);
+  padding-bottom: var(--section-band-pad-y);
   position: relative;
   z-index: 1;
 }
@@ -24,10 +24,12 @@
 }
 
 .projects-carousel__caption {
-  color: var(--color-neutral-muted, rgb(5 24 36 / 55%));
-  letter-spacing: 0.04em;
+  color: var(--color-brand-ink);
+  font-weight: 600;
+  letter-spacing: 0.06em;
   margin: 0;
   text-transform: uppercase;
+  opacity: 1;
 }
 
 .projects-carousel__arrows {
@@ -167,7 +169,7 @@
     );
     --projects-gap: 0.875rem;
     --projects-rail-height: clamp(16rem, 42svh, 28rem);
-    gap: clamp(1rem, 2.5svh, 1.5rem);
+    gap: var(--section-stack-gap-md);
   }
 
   .projects-carousel__title {
@@ -183,8 +185,8 @@
     );
     --projects-gap: 1.125rem;
     --projects-rail-height: clamp(18rem, 45svh, 32.5rem);
-    gap: clamp(1.25rem, 2.5svh, 1.75rem);
-    padding-bottom: clamp(1.5rem, 3svh, var(--section-pad-y-lg));
+    gap: var(--section-stack-gap-md);
+    padding-bottom: var(--section-band-pad-y);
   }
 
   .projects-carousel__toolbar {

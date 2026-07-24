@@ -142,3 +142,30 @@
     padding-block: clamp(2rem, 5svh, 3.5rem) !important;
   }
 }
+
+
+/* Responsive Design skill overrides */
+.tonnage-calculator {
+  padding-inline: var(--page-gutter-inline);
+  width: 100%;
+  max-width: min(120rem, 100%);
+  box-sizing: border-box;
+}
+
+.tonnage-calculator__results-content {
+  padding-inline: var(--page-gutter-inline);
+}
+
+@media (max-width: 1279px) {
+  .tonnage-calculator__results-notch {
+    margin-left: calc(var(--page-gutter-inline) * -1);
+    margin-right: calc(var(--page-gutter-inline) * -1);
+    width: calc(100% + var(--page-gutter-inline) * 2);
+  }
+}
+
+@media (min-width: 1440px) {
+  .tonnage-calculator {
+    padding-inline: var(--page-gutter-inline);
+  }
+}

@@ -1,9 +1,11 @@
 /* Corner launcher — links to the AC tonnage calculator page */
 
 .tonnage-widget {
+  --tonnage-fab-size: 3.25rem;
+
   position: fixed;
-  right: 1.25rem;
-  bottom: 5.75rem;
+  right: max(1.25rem, env(safe-area-inset-right, 0px));
+  bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px));
   z-index: 90;
   pointer-events: none;
 }
@@ -14,6 +16,7 @@
   align-items: center;
   gap: 0.75rem;
   margin: 0;
+  max-width: min(18rem, calc(100vw - 2.5rem));
   padding: 0.625rem 0.875rem 0.625rem 0.625rem;
   border: 1px solid var(--color-surface-nav-glass-border);
   border-radius: 0.75rem;
@@ -100,15 +103,51 @@
   color: var(--color-neutral-white);
 }
 
-@media (max-width: 639px) {
+/*
+ * Phones: icon-only FAB above the chat button.
+ * Full-width bar was covering the hero headline.
+ */
+@media (max-width: 767px) {
   .tonnage-widget {
-    right: 0.875rem;
-    bottom: 5rem;
-    left: 0.875rem;
+    right: max(0.75rem, env(safe-area-inset-right, 0px));
+    left: auto;
+    /* Stack above the chat FAB — keep hero copy clear */
+    bottom: calc(
+      max(0.75rem, env(safe-area-inset-bottom, 0px)) + var(--tonnage-fab-size) +
+        0.75rem
+    );
   }
 
   .tonnage-widget__fab {
-    width: 100%;
+    width: var(--tonnage-fab-size);
+    height: var(--tonnage-fab-size);
+    max-width: none;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+    border-radius: 999px;
+  }
+
+  .tonnage-widget__fab-glyph {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 999px;
+  }
+
+  .tonnage-widget__fab-text,
+  .tonnage-widget__fab-arrow {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tonnage-widget {
+    right: max(1rem, env(safe-area-inset-right, 0px));
+    bottom: calc(6.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .tonnage-widget__fab {
+    max-width: 14.5rem;
   }
 }
 

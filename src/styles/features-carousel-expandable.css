@@ -1,12 +1,12 @@
 .features-carousel-expandable-section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  min-height: 100svh;
-  min-height: calc(var(--svh, 1svh) * 100);
-  padding-top: clamp(1.25rem, 4vw, 2rem);
-  padding-bottom: clamp(1.25rem, 4vw, var(--section-pad-y-md));
-  row-gap: clamp(1rem, 2.5vw, 1.5rem);
+  justify-content: flex-start;
+  min-height: 0;
+  height: auto;
+  padding-top: var(--section-band-pad-y);
+  padding-bottom: var(--section-band-pad-y);
+  row-gap: var(--section-stack-gap-md);
 }
 
 .features-carousel-expandable-section .grid__wrapper {
@@ -29,8 +29,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(0.625rem, 2vw, 0.875rem);
-  margin-bottom: clamp(1.5rem, 4vw, 3rem);
+  gap: var(--section-stack-gap);
+  margin-bottom: var(--section-stack-gap-lg);
   text-align: center;
   width: 100%;
 }
@@ -525,9 +525,9 @@
 
 @media (min-width: 1024px) {
   .features-carousel-expandable-section {
-    padding-top: 2.5625rem;
-    padding-bottom: 2.9375rem;
-    row-gap: 1.9375rem;
+    padding-top: var(--section-band-pad-y);
+    padding-bottom: var(--section-band-pad-y);
+    row-gap: var(--section-stack-gap-lg);
   }
 
   .features-carousel-expandable-section .grid__wrapper {
@@ -541,7 +541,7 @@
   }
 
   .features-carousel-expandable-section .header-section {
-    gap: 1.5rem;
+    gap: var(--section-stack-gap-md);
   }
 
   .features-carousel-expandable-section .header-section .header {
@@ -553,7 +553,7 @@
   }
 
   .features-carousel-expandable {
-    gap: 3rem;
+    gap: var(--section-stack-gap-lg);
   }
 
   .features-carousel-expandable .tabs-wrapper {

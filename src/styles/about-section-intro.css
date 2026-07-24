@@ -6,7 +6,7 @@
 .section__wrapper.is-fullscreen .section-introduction {
   min-height: 100svh;
   min-height: var(--section-min-height);
-  padding: clamp(2rem, 6svh, var(--section-pad-y-md)) 1.25rem;
+  padding: clamp(1.25rem, 3.5svh, var(--section-pad-y-md)) var(--page-gutter-inline);
 }
 
 .section-introduction.si-big .header h2,
@@ -34,7 +34,7 @@
 
 @media (min-width: 1024px) {
   .section__wrapper.is-fullscreen .section-introduction {
-    padding: clamp(2.5rem, 8svh, var(--section-pad-y-lg)) 4.375rem;
+    padding: clamp(1.5rem, 4svh, var(--section-pad-y-lg)) var(--page-gutter-inline);
   }
 
   .section-introduction .paragraphs-wrapper.multiple {

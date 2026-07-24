@@ -12,8 +12,10 @@
   grid-template-columns: repeat(var(--grid-size, 2), 1fr);
   column-gap: var(--grid-gutter, 2.564vw);
   margin-inline: var(--grid-margin, 0);
-  min-height: 100svh;
-  min-height: calc(var(--svh, 1svh) * 100);
+  min-height: 0;
+  height: auto;
+  padding-block: var(--section-band-pad-y);
+  box-sizing: border-box;
   --grid-size: 2;
   --grid-gutter: 2.564vw;
   --grid-margin: 0;
@@ -28,8 +30,8 @@
 .feature-content-inner {
   display: flex;
   flex-direction: column;
-  gap: 2rem 0;
-  padding: 4rem 5.128vw 3.75rem;
+  gap: var(--section-stack-gap-md);
+  padding: var(--section-stack-gap-lg) 5.128vw;
 }
 
 .feature-title {
@@ -55,7 +57,8 @@
 .feature-image {
   position: relative;
   grid-area: a;
-  aspect-ratio: 390 / 610;
+  aspect-ratio: 390 / 520;
+  max-height: min(52svh, 28rem);
   overflow: hidden;
   will-change: transform;
 }
@@ -103,15 +106,15 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: clamp(0.75rem, 2.5vw, 1.5rem);
+    gap: var(--section-stack-gap-md);
     justify-content: center;
-    padding-block: clamp(1.25rem, 4vw, 2rem);
+    padding-block: clamp(1rem, 3vw, var(--section-pad-y-md));
   }
 
   .feature-image {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     aspect-ratio: auto;
-    max-height: min(48svh, calc(var(--svh, 1svh) * 48));
+    max-height: min(36svh, calc(var(--svh, 1svh) * 36));
     min-height: 0;
     width: 100%;
   }
@@ -123,8 +126,8 @@
   }
 
   .feature-content-inner {
-    gap: clamp(0.75rem, 2vw, 1.25rem);
-    padding: clamp(0.75rem, 3vw, 1.5rem) 5.128vw;
+    gap: var(--section-stack-gap-md);
+    padding: clamp(0.75rem, 2.5vw, 1.25rem) 5.128vw;
   }
 }
 
@@ -147,7 +150,7 @@
   }
 
   .feature-content-inner {
-    gap: 2.85rem 4.375rem;
+    gap: var(--section-stack-gap-lg) 2rem;
     padding: 0;
   }
 
@@ -167,6 +170,7 @@
   .feature-image {
     width: calc(100% + 5.128vw);
     aspect-ratio: 960 / 870;
+    max-height: none;
   }
 
   .feature:nth-of-type(odd) .feature-image {
@@ -199,7 +203,8 @@
 /* Advanced static grid (services layout) */
 .features-grid--static .feature-image {
   align-self: center;
-  aspect-ratio: 390 / 610;
+  aspect-ratio: 390 / 520;
+  max-height: min(48svh, 26rem);
   width: 100%;
   overflow: hidden;
 }
@@ -268,11 +273,11 @@
 }
 
 .feature-content-inner--advanced {
-  gap: 1.5rem;
+  gap: var(--section-stack-gap-md);
 }
 
 .feature-content-inner--advanced p {
-  margin: 0 0 1.5rem;
+  margin: 0 0 var(--section-stack-gap-md);
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.35;

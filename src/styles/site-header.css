@@ -48,12 +48,18 @@
   height: 7.5rem;
   z-index: 0;
   pointer-events: none;
+  opacity: 0;
   background: linear-gradient(
     180deg,
     rgb(5 24 36 / 82%) 0%,
     rgb(5 24 36 / 48%) 52%,
     rgb(5 24 36 / 0%) 100%
   );
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-header.is-intro-ready::before {
+  opacity: 1;
 }
 
 .site-header .inner {
@@ -85,7 +91,7 @@
 
 /* Scrolled: only the nav content row squeezes */
 .site-header.is-scrolled .inner {
-  width: calc(100% - 3rem);
+  width: calc(100% - min(1.5rem, 4vw));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -186,11 +192,31 @@
   .site-header .inner {
     grid-template-areas: "a c";
     grid-template-columns: 1fr auto;
-    padding: 0.875rem 1.25rem;
+    padding:
+      max(0.75rem, env(safe-area-inset-top, 0px))
+      max(1rem, env(safe-area-inset-right, 0px))
+      0.75rem
+      max(1rem, env(safe-area-inset-left, 0px));
+  }
+
+  .site-header.is-scrolled .inner {
+    width: calc(100% - 1rem);
   }
 
   .site-header::before {
-    height: 5.5rem;
+    height: calc(5.5rem + env(safe-area-inset-top, 0px));
+  }
+
+  .site-header .toggle-mobile-menu-button {
+    width: var(--touch-min);
+    height: var(--touch-min);
+    display: grid;
+    place-items: center;
+  }
+
+  .site-header .toggle-mobile-menu-button .wrapper {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
 

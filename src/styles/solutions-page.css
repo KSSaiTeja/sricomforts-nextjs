@@ -27,7 +27,7 @@
 .solutions-page .is-fullscreen .section-introduction {
   min-height: 100svh;
   min-height: calc(var(--svh, 1svh) * 100);
-  padding: clamp(1.25rem, 4vw, var(--section-pad-y-md)) 1.25rem;
+  padding: clamp(1.25rem, 4vw, var(--section-pad-y-md)) var(--page-gutter-inline);
   position: relative;
   z-index: 2;
 }
@@ -55,7 +55,7 @@
 .solutions-page .has-bg-path .section-introduction {
   min-height: 100svh;
   min-height: calc(var(--svh, 1svh) * 100);
-  padding: clamp(1.25rem, 4vw, var(--section-pad-y)) 1.25rem;
+  padding: clamp(1.25rem, 4vw, var(--section-pad-y)) var(--page-gutter-inline);
   position: relative;
   z-index: 2;
 }
@@ -135,15 +135,90 @@
   filter: none;
 }
 
-.solutions-page .sections-grid-variant2__item {
-  background: var(--color-neutral-white);
-}
-
 .solutions-page .sections-grid-variant2__card {
   position: relative;
 }
 
-/* Features carousel */
+/* Compact section rhythm — less empty pad inside full-viewport sections */
+.solutions-page .section-introduction .label {
+  margin-bottom: var(--section-stack-gap);
+}
+
+.solutions-page .section-introduction .header.spacing {
+  margin-bottom: var(--section-stack-gap-md);
+}
+
+.solutions-page .section-introduction .buttons {
+  margin-top: var(--section-stack-gap-lg);
+}
+
+.solutions-page .is-fullscreen .section-introduction,
+.solutions-page .has-bg-path .section-introduction {
+  padding: clamp(1rem, 3vw, var(--section-pad-y-md)) var(--page-gutter-inline);
+}
+
+.solutions-page .sections-grid {
+  padding-block: clamp(1rem, 3vw, var(--section-pad-y-md));
+}
+
+.solutions-page .sections-grid__header {
+  margin-bottom: var(--section-stack-gap-lg);
+}
+
+.solutions-page .sections-grid-variant2__grid-wrapper {
+  gap: var(--section-stack-gap);
+  padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 3vw, 1.35rem);
+}
+
+.solutions-page .sections-grid-variant2__item {
+  aspect-ratio: 16 / 10;
+  background: var(--color-neutral-white);
+  gap: var(--section-stack-gap);
+  padding: clamp(1.15rem, 2.5vw, 1.5rem);
+}
+
+.solutions-page .solutions-value {
+  padding-block: clamp(1rem, 3vw, var(--section-pad-y-md));
+}
+
+.solutions-page .solutions-value__card-media {
+  max-width: 8.5rem;
+}
+
+.solutions-page .solutions-value__card-inner {
+  gap: clamp(0.875rem, 2vw, 1.25rem);
+  padding: clamp(1.25rem, 3.5vw, 1.75rem);
+}
+
+.solutions-page .features-carousel-section {
+  padding-top: clamp(1rem, 3vw, var(--section-pad-y-md));
+  padding-bottom: clamp(1rem, 3vw, var(--section-pad-y-md));
+  row-gap: clamp(0.875rem, 2vw, 1.5rem);
+}
+
+.solutions-page .case-study__inner {
+  padding-block: clamp(1rem, 3vw, 1.75rem);
+}
+
+.solutions-page .case-study__media {
+  aspect-ratio: 16 / 10;
+  max-height: min(42svh, 22rem);
+}
+
+/* Features carousel — match services card proportions (350/438 → 0.8) */
+.solutions-page .carousel__wrapper {
+  --slider-card-width: calc(var(--svw) * 100 - var(--spacing) * 2);
+  cursor: grab;
+  user-select: none;
+}
+
+.solutions-page .card-content__wrapper {
+  aspect-ratio: 350 / 438;
+  height: auto;
+  max-height: min(48svh, calc(var(--svh, 1svh) * 48));
+  padding: 1.25rem;
+}
+
 .solutions-page .features-card__wrapper .rollover__wrapper {
   border-radius: 1.25rem;
   filter: blur(0.5rem);
@@ -186,11 +261,6 @@
   opacity: 1;
 }
 
-.solutions-page .carousel__wrapper {
-  cursor: grab;
-  user-select: none;
-}
-
 .solutions-page .carousel__wrapper.is-dragging {
   cursor: grabbing;
   scroll-snap-type: none;
@@ -228,24 +298,98 @@
 .solutions-page .solutions-value__cards-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: clamp(1rem, 2.5vw, 1.25rem);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+@media (min-width: 768px) {
+  .solutions-page .carousel__wrapper {
+    --slider-card-width: 21.875rem;
+  }
+
+  .solutions-page .card-content__wrapper {
+    max-height: none;
+  }
+
+  .solutions-page .case-study__media {
+    max-height: min(46svh, 26rem);
+  }
+}
+
 @media (min-width: 1024px) {
   .solutions-page .content__wrapper {
-    padding-bottom: var(--section-pad-y-md);
+    padding-bottom: var(--section-pad-y);
   }
 
   .solutions-page .is-fullscreen .section-introduction,
   .solutions-page .has-bg-path .section-introduction,
   .solutions-page .section-introduction {
-    padding: var(--section-pad-y-lg) 4.375rem;
+    padding: var(--section-pad-y-md) var(--page-gutter-inline);
+  }
+
+  .solutions-page .section-introduction .header.spacing {
+    margin-bottom: var(--section-stack-gap-md);
+  }
+
+  .solutions-page .section-introduction .label {
+    margin-bottom: var(--section-stack-gap);
+  }
+
+  .solutions-page .section-introduction .buttons {
+    margin-top: var(--section-stack-gap-lg);
+  }
+
+  .solutions-page .sections-grid-variant2__item {
+    gap: var(--section-stack-gap);
+    padding: 1.5rem 1.75rem;
+  }
+
+  .solutions-page .solutions-value__card-media {
+    max-width: 12rem;
+  }
+
+  .solutions-page .solutions-value__card-inner {
+    padding: 2.5rem 2.75rem;
+  }
+
+  .solutions-page .solutions-value__cards-list {
+    gap: 2rem;
+  }
+
+  /* Match services expandable card size (same width + 0.8 ratio) */
+  .solutions-page .carousel__wrapper {
+    --slider-card-width: 28rem;
+  }
+
+  .solutions-page .card-content__wrapper {
+    aspect-ratio: 0.8;
+    max-height: none;
+    padding: 0;
+  }
+
+  .solutions-page .card-content__wrapper .top__wrapper {
+    padding: 2.5rem 3rem 0 2.5rem;
+    row-gap: 1rem;
+  }
+
+  .solutions-page .card-content__wrapper .top__wrapper h2 {
+    font-size: 2.25rem;
+    letter-spacing: -0.0225rem;
+    line-height: 1.05;
+    max-width: 22rem;
+  }
+
+  .solutions-page .card-content__wrapper .bottom__wrapper {
+    padding: 2.5rem 2rem 2rem 2.5rem;
+  }
+
+  .solutions-page .case-study__media {
+    max-height: min(52svh, 28rem);
   }
 
   .solutions-page .case-study__testimonial-background {
-    padding: 1.75rem 2rem !important;
+    padding: 1.5rem 1.75rem !important;
   }
 }

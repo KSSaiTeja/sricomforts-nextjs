@@ -21,7 +21,7 @@
   gap: 1rem;
   justify-content: flex-end;
   min-height: calc(var(--section-min-height) - clamp(11rem, 26svh, 14rem));
-  padding-inline: 1rem;
+  padding-inline: var(--page-gutter-inline);
   padding-bottom: clamp(1rem, 3svh, 2rem);
 }
 
@@ -31,16 +31,17 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: clamp(2rem, 5svh, 3rem);
-  padding-inline: 1rem;
+  padding-inline: var(--page-gutter-inline);
 }
 
 .blog-listing__title {
   color: var(--color-brand-ink);
-  font-size: 2.875rem;
+  font-size: clamp(2rem, 9vw, 2.875rem);
   font-weight: 450;
-  letter-spacing: -0.02875rem;
+  letter-spacing: -0.03em;
   line-height: 0.95;
   margin: 0;
+  text-wrap: balance;
 }
 
 .blog-breadcrumbs__list {
@@ -97,7 +98,7 @@
   height: 3rem;
   justify-content: center;
   min-height: 0;
-  padding: 0 1.25rem;
+  padding: 0 var(--page-gutter-inline);
   transition:
     color 0.25s ease,
     border-color 0.25s ease,
@@ -226,7 +227,7 @@
   height: 100%;
   letter-spacing: 0.09375rem;
   margin-left: -1px;
-  padding: 0 1.25rem;
+  padding: 0 var(--page-gutter-inline);
   text-transform: uppercase;
   transition:
     background 0.25s ease,
@@ -495,7 +496,7 @@
 .blog-article {
   margin: 0 auto;
   max-width: 48rem;
-  padding: clamp(5rem, 14svh, 8rem) 1.25rem clamp(2rem, 4svh, 3rem);
+  padding: clamp(5rem, 14svh, 8rem) var(--page-gutter-inline) clamp(2rem, 4svh, 3rem);
 }
 
 .blog-article__category {
@@ -587,7 +588,7 @@
 
 @media (min-width: 1024px) {
   .blog-article {
-    padding: clamp(6rem, 14svh, 10rem) 1.25rem clamp(2.5rem, 5svh, 4rem);
+    padding: clamp(6rem, 14svh, 10rem) var(--page-gutter-inline) clamp(2.5rem, 5svh, 4rem);
   }
 
   .blog-article__hero {

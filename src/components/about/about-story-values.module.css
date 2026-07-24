@@ -4,9 +4,9 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  min-height: 100svh;
-  min-height: var(--section-min-height);
+  justify-content: flex-start;
+  min-height: 0;
+  height: auto;
   background:
     radial-gradient(
       ellipse 55% 50% at 92% 18%,
@@ -18,13 +18,12 @@
       var(--color-neutral-white) 0%,
       var(--color-neutral-off-white) 100%
     );
-  padding: clamp(1.25rem, 4svh, var(--section-pad-y-md)) var(--spacing)
-    clamp(1rem, 3svh, var(--section-pad-y));
+  padding: var(--section-band-pad-y) var(--spacing);
 }
 
 .inner {
   display: grid;
-  gap: clamp(1rem, 2.5svh, 2.75rem);
+  gap: var(--section-stack-gap-lg);
   margin: 0 auto;
   max-width: 74rem;
   width: 100%;
@@ -37,11 +36,11 @@
 }
 
 .label {
-  margin: 0 0 0.85rem;
+  margin: 0 0 var(--section-stack-gap);
 }
 
 .header {
-  margin: 0 0 clamp(0.75rem, 2svh, 1.25rem);
+  margin: 0 0 var(--section-stack-gap);
 }
 
 .title {
@@ -55,7 +54,7 @@
 }
 
 .lead {
-  margin: 0 0 clamp(0.75rem, 2svh, 1.25rem);
+  margin: 0 0 var(--section-stack-gap);
   color: var(--color-neutral-mid);
   text-wrap: pretty;
 }
@@ -63,7 +62,7 @@
 .paragraphs {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.65rem, 1.5svh, 1rem);
+  gap: var(--section-stack-gap);
 }
 
 .paragraph {
@@ -151,6 +150,6 @@
   }
 
   .section {
-    padding-inline: 4.375rem;
+    padding-inline: var(--page-gutter-inline);
   }
 }

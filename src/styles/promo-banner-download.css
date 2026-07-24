@@ -1,11 +1,12 @@
 .promo-banner-card {
-  min-height: 100svh;
-  min-height: var(--section-min-height);
+  min-height: 0;
+  height: auto;
+  padding-block: var(--section-band-pad-y);
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
-  padding: clamp(1.25rem, 4svh, 1.5rem) 1.25rem;
+  padding: clamp(1.25rem, 4svh, 1.5rem) var(--page-gutter-inline);
 }
 
 .promo-banner-card__inner {

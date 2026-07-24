@@ -63,6 +63,7 @@ html {
   font-family: var(--font-primary), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 html.lenis,
@@ -77,8 +78,20 @@ html.lenis body {
 body {
   margin: 0;
   min-height: 100%;
+  min-width: 0;
+  width: 100%;
+  overflow-x: clip;
   background: var(--color-neutral-white);
   color: var(--color-brand-ink);
+}
+
+/* Shared content shell — keeps section edges aligned site-wide */
+.page-shell {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter-inline);
+  box-sizing: border-box;
 }
 
 .site-motion-layer {
@@ -118,10 +131,22 @@ body {
 }
 
 img,
-svg,
 video,
 canvas {
   display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Defensive: prevent accidental horizontal scroll from nested transforms */
+main,
+.page-shell {
+  min-width: 0;
   max-width: 100%;
 }
 
@@ -223,15 +248,16 @@ canvas {
 
 .title-h1,
 .title-sequence {
-  font-size: 10.256vw;
-  letter-spacing: -0.308vw;
+  font-size: clamp(2.25rem, 10.256vw, 3.75rem);
+  letter-spacing: -0.03em;
 }
 
 .title-si {
-  font-size: min(2.5rem, 10.256vw);
+  font-size: clamp(2rem, 8.5vw, 2.75rem);
   font-weight: 400;
-  letter-spacing: min(-0.075rem, -0.308vw);
-  line-height: 1;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  text-wrap: balance;
 }
 
 .body-2 {
@@ -239,9 +265,9 @@ canvas {
 }
 
 .body-1 {
-  font-size: min(1.4375rem, 5.897vw);
-  letter-spacing: min(-0.014375rem, -0.059vw);
-  line-height: 1.26;
+  font-size: clamp(1.0625rem, 4.2vw, 1.375rem);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
 }
 
 .label-3 {
@@ -265,28 +291,30 @@ canvas {
 }
 
 .title-h2 {
-  font-size: min(2rem, 8.205vw);
-  letter-spacing: min(-0.039375rem, -0.164vw);
-  line-height: 1.2;
+  font-size: clamp(1.5rem, 6.5vw, 2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-wrap: balance;
 }
 
 .title-h3 {
-  font-size: min(1.5rem, 6.154vw);
+  font-size: clamp(1.25rem, 4.5vw, 1.5rem);
   font-weight: 400;
-  letter-spacing: min(-0.0225rem, -0.092vw);
-  line-height: 1.46;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  text-wrap: balance;
 }
 
 .body-4 {
-  font-size: 1.125rem;
-  letter-spacing: 0.0225rem;
-  line-height: 1.4;
+  font-size: clamp(1rem, 3.2vw, 1.125rem);
+  letter-spacing: 0.01em;
+  line-height: 1.45;
 }
 
 .body-5 {
-  font-size: min(1.25rem, 5.128vw);
-  letter-spacing: min(-0.01875rem, -0.077vw);
-  line-height: 1.46;
+  font-size: clamp(1.0625rem, 3.8vw, 1.25rem);
+  letter-spacing: -0.01em;
+  line-height: 1.45;
 }
 
 .body-6 {
@@ -294,6 +322,31 @@ canvas {
   letter-spacing: 0.18em;
   line-height: 0.81;
   text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .title-h1,
+  .title-sequence {
+    font-size: clamp(3.25rem, 7.5vw, 5rem);
+    letter-spacing: -0.035em;
+  }
+
+  .title-si {
+    font-size: clamp(2.75rem, 5.5vw, 3.75rem);
+  }
+
+  .title-h2 {
+    font-size: clamp(1.875rem, 3.8vw, 2.5rem);
+  }
+
+  .title-h3,
+  .title-h4 {
+    font-size: clamp(1.375rem, 2.6vw, 1.75rem);
+  }
+
+  .body-1 {
+    font-size: clamp(1.1875rem, 2.4vw, 1.5rem);
+  }
 }
 
 @media (min-width: 1024px) {
@@ -305,8 +358,8 @@ canvas {
   }
 
   .title-si {
-    font-size: max(4.375rem, min(4.688vw, 120px));
-    letter-spacing: min(-0.141vw, -3.6px);
+    font-size: max(3.75rem, min(4.2vw, 108px));
+    letter-spacing: min(-0.12vw, -2.8px);
   }
 
   .body-1 {

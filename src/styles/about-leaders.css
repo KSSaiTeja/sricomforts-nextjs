@@ -2,13 +2,14 @@
   display: grid;
   grid-template-columns: repeat(var(--grid-size, 2), 1fr);
   column-gap: var(--grid-gutter, 2.564vw);
-  padding: clamp(1.5rem, 4svh, 2.65625rem) 0;
+  padding: var(--section-band-pad-y) 0;
   padding-inline: var(--grid-margin, 5.128vw);
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
   box-sizing: border-box;
-  min-height: 100svh;
-  min-height: var(--section-min-height);
-  align-content: center;
+  min-height: 0;
+  height: auto;
+  align-content: start;
   --grid-size: 2;
   --grid-gutter: 2.564vw;
   --grid-margin: 5.128vw;
@@ -19,12 +20,8 @@
   flex-wrap: wrap;
   grid-column: 1 / span 2;
   padding: 0;
-  max-height: calc(100svh - clamp(3rem, 8svh, 6rem));
-  max-height: calc(var(--section-min-height) - clamp(3rem, 8svh, 6rem));
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-color: rgb(0 0 0 / 20%) transparent;
-  scrollbar-width: thin;
+  max-height: none;
+  overflow: visible;
 }
 
 .about-leaders--center {
@@ -223,13 +220,15 @@
     --grid-size: 12;
     --grid-gutter: min(1.042vw, 26.6666666667px);
     --grid-margin: min(3.646vw, 93.3333333333px);
-    padding: clamp(2rem, 6svh, 4.6875rem) 0;
+    padding: var(--section-band-pad-y) 0;
     padding-inline: var(--grid-margin);
   }
 
   .about-leaders {
     grid-column: 2 / span 10;
     padding: 0;
+    max-height: none;
+    overflow: visible;
   }
 
   .leader {

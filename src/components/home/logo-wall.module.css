@@ -6,8 +6,9 @@
   display: flex !important;
   flex-direction: column;
   justify-content: center;
-  min-height: 100svh;
-  min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+  min-height: 0;
+  height: auto;
+  padding-block: var(--section-band-pad-y);
   padding-left: 0 !important;
   padding-right: 0 !important;
   --grid-margin: 0;
@@ -50,7 +51,7 @@
   flex-direction: column;
   align-items: stretch;
   gap: 0;
-  padding: clamp(0.5rem, 2.5svh, 2rem) 0;
+  padding: clamp(0.35rem, 1.75svh, 1.25rem) 0;
 }
 
 .marquee {

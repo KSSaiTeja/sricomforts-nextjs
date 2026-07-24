@@ -8,8 +8,8 @@
   --chat-text: #1a1d21;
 
   position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem;
+  right: max(0.875rem, env(safe-area-inset-right, 0px));
+  bottom: max(0.875rem, env(safe-area-inset-bottom, 0px));
   z-index: 95;
   display: flex;
   flex-direction: column;
@@ -398,14 +398,14 @@
 
 @media (max-width: 639px) {
   .chat-widget {
-    right: 0.875rem;
+    right: max(0.75rem, env(safe-area-inset-right, 0px));
     left: auto;
-    bottom: 0.875rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
   }
 
   .chat-widget__panel {
     width: min(100vw - 1.25rem, 22.5rem);
-    height: min(72svh, 36rem);
+    height: min(68svh, calc(100svh - 7rem - env(safe-area-inset-bottom, 0px)));
   }
 
   .chat-widget__fab-label {
