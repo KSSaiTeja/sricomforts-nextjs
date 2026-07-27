@@ -1,6 +1,5 @@
 "use client";
 
-import { ContactCta } from "@/components/shared/ContactCta";
 import { BlogListing } from "@/components/blog/BlogListing";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -27,7 +26,6 @@ export function BlogPage({ initialCategory, title }: BlogPageProps) {
               title={title}
             />
           </div>
-          <ContactCta />
           <SiteFooter static />
         </div>
       </main>

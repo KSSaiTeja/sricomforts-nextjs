@@ -23,7 +23,5 @@ export const VARIANT2_BORDER_PATHS = [
 ] as const;
 
 export const FEATURE_CARD_COLORS = [
-  { color: "var(--color-brand-ink)", backgroundColor: "var(--color-brand-accent-bright)" },
-  { color: "var(--color-brand-ink)", backgroundColor: "var(--color-neutral-soft)" },
   { color: "var(--color-neutral-white)", backgroundColor: "var(--color-brand-ink)" },
 ] as const;

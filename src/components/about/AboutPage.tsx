@@ -6,7 +6,6 @@ import { AboutFeaturesGrid } from "@/components/about/AboutFeaturesGrid";
 import { AboutLeaders } from "@/components/about/AboutLeaders";
 import { AboutLogoGrid } from "@/components/about/AboutLogoGrid";
 import { AboutStoryValues } from "@/components/about/AboutStoryValues";
-import { ContactCta } from "@/components/shared/ContactCta";
 import { StatsBento } from "@/components/home/StatsBento";
 import { AwardsAchievements } from "@/components/shared/AwardsAchievements";
 import { TestimonialsSection } from "@/components/shared/TestimonialsSection";
@@ -56,7 +55,6 @@ export function AboutPage() {
           </div>
           <TestimonialsSection />
           <AwardsAchievements id={aboutSectionAnchors.awards} />
-          <ContactCta />
           <SiteFooter static />
         </div>
       </main>

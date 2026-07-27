@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { AboutSectionIntro } from "@/components/about/AboutSectionIntro";
 import { CrossFlicker } from "@/components/home/CrossFlicker";
-import { ContactCta } from "@/components/shared/ContactCta";
 import { LogoBorderCell } from "@/components/home/LogoBorderCell";
 import { NotchSection } from "@/components/home/NotchSection";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -183,7 +182,6 @@ export function CareerPage() {
             <AboutSectionIntro data={careerCultureIntro} />
             <JobBoard />
           </div>
-          <ContactCta />
           <SiteFooter static />
         </div>
       </main>

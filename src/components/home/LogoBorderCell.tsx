@@ -55,11 +55,18 @@ export function LogoBorderCell({ children, className, style }: LogoBorderCellPro
   }, []);
 
   useEffect(() => {
-    if (!lenis) return;
     const onScroll = () => updateTransform();
-    lenis.on("scroll", onScroll);
+
+    if (lenis) {
+      lenis.on("scroll", onScroll);
+      return () => {
+        lenis.off("scroll", onScroll);
+      };
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      lenis.off("scroll", onScroll);
+      window.removeEventListener("scroll", onScroll);
     };
   }, [lenis]);
 

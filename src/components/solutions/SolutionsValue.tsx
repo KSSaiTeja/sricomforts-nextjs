@@ -70,8 +70,6 @@ export function SolutionsValue({ data }: SolutionsValueProps) {
               </strong>
             </h2>
           </header>
-          <p className="body-2" aria-hidden />
-          <p className="body-2" aria-hidden />
         </div>
 
         <div className="solutions-value__cards">

@@ -1,10 +1,12 @@
 "use client";
 
+import { useCallback, useRef, useState } from "react";
 import {
   awardsSection,
   experienceSection,
   type AwardItem,
 } from "@/data/awards";
+import { useHorizontalDragScroll } from "@/hooks/useHorizontalDragScroll";
 import styles from "./awards-achievements.module.css";
 
 function LaurelBadge({ year }: { year: string }) {
@@ -48,10 +50,15 @@ function LaurelBadge({ year }: { year: string }) {
   );
 }
 
-function AwardRow({ item }: { item: AwardItem }) {
+function AwardCard({ item, index }: { item: AwardItem; index: number }) {
+  const order = String(index + 1).padStart(2, "0");
+
   return (
-    <article className={styles.awardItem} data-motion-item>
-      <LaurelBadge year={item.year} />
+    <article className={styles.awardCard} data-motion-item>
+      <div className={styles.awardCardTop}>
+        <span className={`label-5 ${styles.awardIndex}`}>{order}</span>
+        <LaurelBadge year={item.year} />
+      </div>
       <div className={styles.awardCopy}>
         <h3 className={`title-h3 ${styles.awardTitle}`}>{item.title}</h3>
         <p className={`body-4 ${styles.awardDescription}`}>{item.description}</p>
@@ -60,11 +67,73 @@ function AwardRow({ item }: { item: AwardItem }) {
   );
 }
 
+function ChevronIcon({ direction }: { direction: "prev" | "next" }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="13"
+      fill="none"
+      viewBox="0 0 12 13"
+      className={direction === "next" ? "right" : undefined}
+      aria-hidden
+    >
+      <path
+        stroke="currentColor"
+        strokeLinecap="square"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="m10.997 2.004-9.849-.142v9.85"
+      />
+    </svg>
+  );
+}
+
 type AwardsAchievementsProps = {
   id?: string;
 };
 
 export function AwardsAchievements({ id }: AwardsAchievementsProps) {
+  const listRef = useRef<HTMLUListElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const scrollToIndex = useCallback((index: number) => {
+    const list = listRef.current;
+    if (!list) return;
+
+    const count = list.children.length;
+    if (count === 0) return;
+
+    const clamped = ((index % count) + count) % count;
+    const child = list.children[clamped] as HTMLElement | undefined;
+    if (!child) return;
+
+    list.scrollTo({ left: child.offsetLeft, behavior: "smooth" });
+    setActiveIndex(clamped);
+  }, []);
+
+  const onScroll = useCallback(() => {
+    const list = listRef.current;
+    if (!list || list.classList.contains("is-dragging")) return;
+
+    const scrollLeft = list.scrollLeft;
+    let nearest = 0;
+    let distance = Infinity;
+
+    Array.from(list.children).forEach((child, index) => {
+      const element = child as HTMLElement;
+      const nextDistance = Math.abs(element.offsetLeft - scrollLeft);
+      if (nextDistance < distance) {
+        nearest = index;
+        distance = nextDistance;
+      }
+    });
+
+    setActiveIndex(nearest);
+  }, []);
+
+  useHorizontalDragScroll(listRef, { onIndexChange: setActiveIndex });
+
   return (
     <div id={id} className={styles.root}>
       <section
@@ -124,27 +193,58 @@ export function AwardsAchievements({ id }: AwardsAchievementsProps) {
       <section
         className={styles.awards}
         aria-labelledby="awards-section-title"
+        aria-roledescription="carousel"
       >
         <div className={styles.awardsInner}>
           <header className={styles.awardsHeader}>
-            <p className={`label label-5 ${styles.awardsLabel}`}>
-              {awardsSection.label}
-            </p>
-            <h2
-              id="awards-section-title"
-              className={`title-h2 ${styles.awardsTitle}`}
-              data-motion-title
-            >
-              {awardsSection.titleLead}{" "}
-              <em className={styles.accent}>{awardsSection.titleAccent}</em>{" "}
-              {awardsSection.titleTrail}
-            </h2>
+            <div className={styles.awardsHeaderCopy}>
+              <p className={`label label-5 ${styles.awardsLabel}`}>
+                {awardsSection.label}
+              </p>
+              <h2
+                id="awards-section-title"
+                className={`title-h2 ${styles.awardsTitle}`}
+                data-motion-title
+              >
+                {awardsSection.titleLead}{" "}
+                <em className={styles.accent}>{awardsSection.titleAccent}</em>{" "}
+                {awardsSection.titleTrail}
+              </h2>
+            </div>
+
+            <div className={`slider-button__wrapper ${styles.awardsArrows}`}>
+              <button
+                type="button"
+                className="slider-button"
+                aria-label="Previous award"
+                onClick={() => scrollToIndex(activeIndex - 1)}
+              >
+                <ChevronIcon direction="prev" />
+              </button>
+              <button
+                type="button"
+                className="slider-button right"
+                aria-label="Next award"
+                onClick={() => scrollToIndex(activeIndex + 1)}
+              >
+                <ChevronIcon direction="next" />
+              </button>
+            </div>
           </header>
 
-          <div className={styles.awardsGrid}>
-            {awardsSection.items.map((item) => (
-              <AwardRow key={item.id} item={item} />
-            ))}
+          <div className={styles.awardsViewport}>
+            <ul
+              ref={listRef}
+              className={`${styles.awardsTrack} no-scrollbar`}
+              tabIndex={0}
+              onScroll={onScroll}
+            >
+              {awardsSection.items.map((item, index) => (
+                <li key={item.id} className={styles.awardsSlide}>
+                  <AwardCard item={item} index={index} />
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

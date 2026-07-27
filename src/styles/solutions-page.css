@@ -33,8 +33,8 @@
 }
 
 .solutions-page .has-bg-path.section__wrapper {
-  min-height: 100svh;
-  min-height: calc(var(--svh, 1svh) * 100);
+  min-height: 0;
+  height: auto;
   position: relative;
 }
 
@@ -53,11 +53,14 @@
 }
 
 .solutions-page .has-bg-path .section-introduction {
-  min-height: 100svh;
-  min-height: calc(var(--svh, 1svh) * 100);
-  padding: clamp(1.25rem, 4vw, var(--section-pad-y)) var(--page-gutter-inline);
+  min-height: 0;
+  height: auto;
+  padding: clamp(2.5rem, 6svh, 4rem) var(--page-gutter-inline);
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .solutions-page .section-introduction .header strong {
@@ -154,15 +157,31 @@
 
 .solutions-page .is-fullscreen .section-introduction,
 .solutions-page .has-bg-path .section-introduction {
-  padding: clamp(1rem, 3vw, var(--section-pad-y-md)) var(--page-gutter-inline);
+  padding: clamp(2.5rem, 6svh, 4rem) var(--page-gutter-inline);
+}
+
+.solutions-page .has-bg-path .section-introduction .header.spacing {
+  margin-bottom: var(--section-stack-gap);
 }
 
 .solutions-page .sections-grid {
   padding-block: clamp(1rem, 3vw, var(--section-pad-y-md));
 }
 
+.solutions-page .sections-grid--dark {
+  padding-block: clamp(2.75rem, 7svh, 4.25rem) clamp(1.5rem, 3.5svh, 2.5rem);
+}
+
 .solutions-page .sections-grid__header {
-  margin-bottom: var(--section-stack-gap-lg);
+  margin-bottom: var(--section-stack-gap-md);
+}
+
+.solutions-page .solutions-value {
+  padding-block: clamp(1rem, 2.5svh, 1.75rem);
+}
+
+.solutions-page .solutions-value__content {
+  margin-bottom: 0;
 }
 
 .solutions-page .sections-grid-variant2__grid-wrapper {
@@ -324,9 +343,13 @@
   }
 
   .solutions-page .is-fullscreen .section-introduction,
-  .solutions-page .has-bg-path .section-introduction,
   .solutions-page .section-introduction {
     padding: var(--section-pad-y-md) var(--page-gutter-inline);
+  }
+
+  .solutions-page .has-bg-path .section-introduction {
+    min-height: 0;
+    padding: clamp(3rem, 7svh, 5rem) var(--page-gutter-inline);
   }
 
   .solutions-page .section-introduction .header.spacing {

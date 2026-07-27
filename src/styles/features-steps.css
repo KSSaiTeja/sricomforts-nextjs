@@ -303,6 +303,9 @@
     --grid-gutter: min(1.042vw, 26.6666666667px);
     --grid-margin: min(3.646vw, 93.3333333333px);
     --features-media-inset: 3.25rem;
+    /* Must stay non-transformed so sticky media/header work */
+    position: relative;
+    top: auto;
     display: grid;
     grid-template-columns: repeat(var(--grid-size), 1fr);
     grid-template-areas: "a a a a a . b b b b b b";
@@ -311,12 +314,14 @@
     margin-inline: var(--grid-margin);
     min-height: 100svh;
     min-height: var(--section-min-height, calc(var(--svh, 1svh) * 100));
+    align-items: start;
   }
 
   .features-steps .content {
     grid-area: a;
     grid-template-columns: subgrid;
-    align-self: center;
+    align-self: start;
+    /* Top/bottom breathing room so sticky media holds through all steps */
     margin-top: min(7.5rem, 12svh);
     margin-bottom: min(7.5rem, 12svh);
     font-size: min(2.396vw, 61.3333333333px);
@@ -341,19 +346,22 @@
 
   .features-steps .scroll-items-list {
     flex-direction: column;
-    gap: min(9.5rem, 16svh);
+    /* Large per-step runway: media stays sticky until last line finishes */
+    gap: clamp(10rem, 18svh, 21.5rem);
     position: relative;
     overflow: visible;
-    padding: 0;
+    padding: 0 0 min(50svh, 28rem);
   }
 
   .features-steps .scroll-item {
     flex: none;
     padding-right: 0;
+    min-height: 0;
   }
 
   .features-steps .split__wrapper .split-chars {
-    transition: color 0.35s ease-out;
+    color: var(--color-neutral-muted);
+    transition: none;
   }
 
   .features-steps .split__wrapper .split-chars.show {
@@ -377,8 +385,9 @@
     height: calc(100svh - var(--features-media-inset) * 2);
     height: calc(var(--svh, 1svh) * 100 - var(--features-media-inset) * 2);
     max-height: calc(var(--svh, 1svh) * 100 - var(--features-media-inset) * 2);
-    min-height: 0;
+    min-height: calc(var(--svh, 1svh) * 100 - var(--features-media-inset) * 2);
     overflow: visible;
+    z-index: 1;
   }
 
   .features-steps .svg-mask .slot {

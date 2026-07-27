@@ -29,7 +29,9 @@ export function useMediaQuery(query: string, initial = false) {
 }
 
 export function useIsLargeViewport() {
-  return useMediaQuery(`(min-width: ${breakpoints.lg}px)`, true);
+  // Mobile-first — never assume desktop before the query resolves.
+  // (Previously defaulted to `true`, which remounted the hero on phones and reset scroll.)
+  return useMediaQuery(`(min-width: ${breakpoints.lg}px)`, false);
 }
 
 export function useBreakpoint() {

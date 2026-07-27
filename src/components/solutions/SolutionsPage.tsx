@@ -6,11 +6,9 @@ import { SolutionsSectionsGrid } from "@/components/solutions/SolutionsSectionsG
 import { SolutionsValue } from "@/components/solutions/SolutionsValue";
 import { SolutionsFeaturesCarousel } from "@/components/solutions/SolutionsFeaturesCarousel";
 import { SolutionsCaseStudy } from "@/components/solutions/SolutionsCaseStudy";
-import { ContactCta } from "@/components/shared/ContactCta";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { TestimonialsSection } from "@/components/shared/TestimonialsSection";
-import { AwardsAchievements } from "@/components/shared/AwardsAchievements";
 import { type SolutionPageData } from "@/data/solutions";
 import { useSvh } from "@/hooks/useSvh";
 
@@ -51,9 +49,7 @@ export function SolutionsPage({ data }: SolutionsPageProps) {
             </NotchSection>
 
             <TestimonialsSection />
-            <AwardsAchievements />
           </div>
-          <ContactCta />
           <SiteFooter static />
         </div>
       </main>

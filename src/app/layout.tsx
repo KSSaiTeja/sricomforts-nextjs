@@ -36,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${suisseIntl.variable} lenis lenis-smooth h-full`}>
+    <html lang="en" className={`${suisseIntl.variable} h-full`}>
       <body className="min-h-full antialiased">
         <PreloaderProvider>
           <PreloaderGate>

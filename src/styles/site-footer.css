@@ -450,3 +450,22 @@
     gap: 1.5rem 1rem;
   }
 }
+
+/* Static footer (homepage): tighten the join with the contact pre-footer */
+.site-footer.footer__height-holder.--static .footer {
+  padding-top: clamp(3.25rem, 10vw, 5.5rem);
+}
+
+@media (min-width: 1024px) {
+  .site-footer.footer__height-holder.--static .footer {
+    padding-top: clamp(4.5rem, 7vw, 7rem);
+  }
+
+  .site-footer.footer__height-holder.--static .content-wrapper {
+    padding-top: clamp(2.5rem, 4.5vw, 4.5rem);
+  }
+
+  .site-footer.footer__height-holder.--static .footer-title {
+    margin-bottom: clamp(2rem, 3.5vw, 3.5rem);
+  }
+}

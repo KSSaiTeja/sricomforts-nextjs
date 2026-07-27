@@ -61,7 +61,7 @@ export const productCatalogItems: ProductCatalogItem[] = [
     ],
     isNewLaunch: true,
     imageAlt: "VRV IV+ system",
-    href: "/",
+    href: "/contact",
   },
   {
     id: "split-inverter",
@@ -76,7 +76,7 @@ export const productCatalogItems: ProductCatalogItem[] = [
     ],
     isNewLaunch: true,
     imageAlt: "Split inverter unit",
-    href: "/",
+    href: "/solutions/residential",
   },
   {
     id: "cassette-round-flow",
@@ -90,7 +90,7 @@ export const productCatalogItems: ProductCatalogItem[] = [
       { label: "Panel", value: "Flush fit" },
     ],
     imageAlt: "Round flow cassette unit",
-    href: "/",
+    href: "/solutions/commercial",
   },
   {
     id: "vrv-s-series",
@@ -105,7 +105,7 @@ export const productCatalogItems: ProductCatalogItem[] = [
     ],
     isNewLaunch: true,
     imageAlt: "VRV S series system",
-    href: "/",
+    href: "/solutions/commercial",
   },
   {
     id: "ducted-concealed",
@@ -119,7 +119,7 @@ export const productCatalogItems: ProductCatalogItem[] = [
       { label: "Control", value: "Zone ready" },
     ],
     imageAlt: "Ducted concealed system",
-    href: "/",
+    href: "/solutions/residential",
   },
   {
     id: "air-cooled-chiller",
@@ -133,7 +133,7 @@ export const productCatalogItems: ProductCatalogItem[] = [
       { label: "Plant", value: "Modular" },
     ],
     imageAlt: "Air-cooled chiller",
-    href: "/",
+    href: "/solutions/industrial-pharma",
   },
   {
     id: "fresh-air-handler",
@@ -148,7 +148,7 @@ export const productCatalogItems: ProductCatalogItem[] = [
     ],
     isNewLaunch: true,
     imageAlt: "Fresh air handling unit",
-    href: "/",
+    href: "/solutions/commercial",
   },
   {
     id: "floor-standing",
@@ -162,7 +162,7 @@ export const productCatalogItems: ProductCatalogItem[] = [
       { label: "Duty", value: "Retail / hall" },
     ],
     imageAlt: "Floor standing unit",
-    href: "/",
+    href: "/solutions/commercial",
   },
 ];
 

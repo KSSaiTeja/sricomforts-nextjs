@@ -62,20 +62,20 @@ type ServiceSlug = "how-we-work" | "amc" | "service-request";
 function carouselSurfaces() {
   return [
     {
-      backgroundColor: "var(--color-brand-accent-bright)",
-      color: "var(--color-brand-ink)",
-    },
-    {
-      backgroundColor: "var(--color-neutral-soft)",
-      color: "var(--color-brand-ink)",
+      backgroundColor: "var(--color-brand-ink)",
+      color: "var(--color-neutral-white)",
     },
     {
       backgroundColor: "var(--color-brand-ink)",
       color: "var(--color-neutral-white)",
     },
     {
-      backgroundColor: "var(--color-brand-neon)",
-      color: "var(--color-brand-ink)",
+      backgroundColor: "var(--color-brand-ink)",
+      color: "var(--color-neutral-white)",
+    },
+    {
+      backgroundColor: "var(--color-brand-ink)",
+      color: "var(--color-neutral-white)",
     },
   ] as const;
 }

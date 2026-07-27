@@ -126,7 +126,7 @@ function nearestSnapIndex(scrollLeft: number, snapPoints: number[]) {
 
 export function FeaturesSteps() {
   const { isLoaded } = usePreloader();
-  const { lenis } = useSmoothScroll();
+  const { ready: scrollReady } = useSmoothScroll();
   const isDesktop = useIsLargeViewport();
   const innerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -140,11 +140,10 @@ export function FeaturesSteps() {
   const itemPositionsRef = useRef<ItemPosition[]>([]);
   const snapPointsRef = useRef<number[]>([]);
   const odometerTweenRef = useRef<gsap.core.Tween | null>(null);
-  const introActiveRef = useRef(false);
   const odometerProgressRef = useRef({ value: 0 });
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [charProgress, setCharProgress] = useState(0);
+  const charProgressRef = useRef(0);
   const [odometerProgress, setOdometerProgress] = useState(0);
   const [notchPosition, setNotchPosition] = useState(notchPositionForIndex(0));
   const notchPositionRef = useRef(notchPositionForIndex(0));
@@ -233,27 +232,35 @@ export function FeaturesSteps() {
     requestAnimationFrame(() => ScrollTrigger.refresh());
   }, [measureItemPositions]);
 
-  useEffect(() => {
-    updateDesktopChars(splitRefs.current, charProgress);
-  }, [charProgress]);
+  const applyCharProgress = useCallback((progress: number) => {
+    charProgressRef.current = progress;
+    updateDesktopChars(splitRefs.current, progress);
+  }, []);
 
   useEffect(() => {
-    if (!isLoaded || !lenis) return;
+    updateDesktopChars(splitRefs.current, charProgressRef.current);
+  }, []);
+
+  useEffect(() => {
+    if (!isLoaded || !scrollReady) return;
 
     registerGsap();
     measureItemPositions();
 
+    const mm = gsap.matchMedia();
+    const triggers: ScrollTrigger[] = [];
+    let refreshTimer = 0;
+
     const resizeObserver = new ResizeObserver(() => {
       measureItemPositions();
-      ScrollTrigger.refresh();
+      // Debounce — mobile chrome / soft keyboard resize storms reset scroll feel.
+      window.clearTimeout(refreshTimer);
+      refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 120);
     });
 
     if (listRef.current) resizeObserver.observe(listRef.current);
     if (scrollItemsRef.current) resizeObserver.observe(scrollItemsRef.current);
     if (innerRef.current) resizeObserver.observe(innerRef.current);
-
-    const mm = gsap.matchMedia();
-    const triggers: ScrollTrigger[] = [];
 
     mm.add(
       {
@@ -273,6 +280,11 @@ export function FeaturesSteps() {
               scrub: true,
               onUpdate: ({ progress }) => {
                 if (!headerRef.current) return;
+                // Clear transform when done — leftover translateY(0) breaks sticky.
+                if (progress >= 1) {
+                  headerRef.current.style.transform = "";
+                  return;
+                }
                 headerRef.current.style.transform = `translateY(${lerp(-10, 0, easePow2Out(progress))}rem)`;
               },
             }),
@@ -280,6 +292,9 @@ export function FeaturesSteps() {
         }
 
         if (scrollItemsRef.current && listRef.current) {
+          // One scrub across the list: active step + char reveal share the same
+          // lead so odometer, notch, video, and blue gradient stay locked.
+          // Previous steps remain fully lit while the sticky media holds.
           triggers.push(
             ScrollTrigger.create({
               trigger: scrollItemsRef.current,
@@ -296,47 +311,42 @@ export function FeaturesSteps() {
                   lerp(NOTCH_SIZE / 2 + 0.1, 1 - NOTCH_SIZE / 2 - 0.1, progress),
                 );
 
-                const activateLead = 10;
-                let index = positions.findIndex(
-                  (item) => item.y > scrollY + activateLead,
-                );
+                const lead = 40;
+                let index = positions.findIndex((item) => item.y > scrollY + lead);
                 index =
                   index === -1 ? positions.length - 1 : Math.max(0, index - 1);
                 setActiveIndex(index);
 
-                // Pointer and text stay locked: active step is always fully highlighted.
-                if (index < 1) {
-                  if (!introActiveRef.current) {
-                    setCharProgress(1);
-                  }
-                  introActiveRef.current = true;
+                const item = positions[index];
+                const itemProgress = interpolateProgress(
+                  scrollY,
+                  item.y - lead,
+                  item.y + item.h - lead,
+                );
+                const nextProgress = index + itemProgress;
+
+                // Don't wipe the entrance reveal until the list scrub moves.
+                if (progress <= 0 && nextProgress < charProgressRef.current) {
                   return;
                 }
 
-                introActiveRef.current = false;
-                setCharProgress(index + 1);
+                applyCharProgress(nextProgress);
               },
             }),
           );
         }
 
         if (innerRef.current) {
+          // Entrance: scrub first line while the section rises into view.
           triggers.push(
             ScrollTrigger.create({
               trigger: innerRef.current,
               start: "top bottom",
-              end: "top 30%",
+              end: "top 35%",
               scrub: 0,
               onUpdate: ({ progress }) => {
-                if (progress === 1) {
-                  if (introActiveRef.current) {
-                    introActiveRef.current = false;
-                  }
-                  return;
-                }
-
-                introActiveRef.current = true;
-                setCharProgress(progress);
+                if (charProgressRef.current > 1) return;
+                applyCharProgress(Math.min(1, progress));
               },
             }),
           );
@@ -372,7 +382,7 @@ export function FeaturesSteps() {
       ScrollTrigger.refresh();
     });
 
-    const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 150);
+    refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 150);
 
     return () => {
       window.clearTimeout(refreshTimer);
@@ -381,11 +391,12 @@ export function FeaturesSteps() {
       triggers.forEach((trigger) => trigger.kill());
       odometerTweenRef.current?.kill();
     };
-  }, [isLoaded, lenis, measureItemPositions, updateNotchPosition]);
+  }, [applyCharProgress, isLoaded, scrollReady, measureItemPositions, updateNotchPosition]);
 
   return (
     <section
       className="features-steps"
+      data-motion-ignore
       style={{ "--314863dd": ITEM_COUNT, "--current-item": activeIndex } as CSSProperties}
     >
       <div

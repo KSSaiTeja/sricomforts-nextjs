@@ -21,6 +21,7 @@ import {
 import { sectionIntros, type TitlePart } from "@/data/homepage";
 import { useAnimatedStrong } from "@/hooks/useAnimatedStrong";
 import { useHorizontalDragScroll } from "@/hooks/useHorizontalDragScroll";
+import { useIsLargeViewport } from "@/hooks/useMediaQuery";
 import styles from "@/components/home/product-catalog.module.css";
 
 const intro = sectionIntros.productCatalog;
@@ -52,10 +53,14 @@ export function ProductCatalog() {
   const [activeId, setActiveId] = useState(productCatalogItems[0]?.id ?? "");
   const activeIndexButtonRef = useRef<HTMLButtonElement | null>(null);
   const indexListRef = useRef<HTMLUListElement | null>(null);
+  const isDesktop = useIsLargeViewport();
   const { headerRef, sectionRef } =
     useAnimatedStrong<HTMLHeadingElement, HTMLElement>();
 
-  useHorizontalDragScroll(indexListRef, { snap: false });
+  useHorizontalDragScroll(indexListRef, {
+    snap: false,
+    enabled: !isDesktop,
+  });
 
   const visibleProducts = useMemo(
     () => filterProductCatalogItems(productCatalogItems, activeFilter),
@@ -81,11 +86,17 @@ export function ProductCatalog() {
   }, [activeId, visibleProducts]);
 
   useEffect(() => {
-    activeIndexButtonRef.current?.scrollIntoView({
-      behavior: "smooth",
-      inline: "nearest",
-      block: "nearest",
-    });
+    const list = indexListRef.current;
+    const button = activeIndexButtonRef.current;
+    if (!list || !button) return;
+
+    // Scroll only the index rail — never the page (scrollIntoView jumps mobile).
+    const listRect = list.getBoundingClientRect();
+    const buttonRect = button.getBoundingClientRect();
+    const nextLeft =
+      list.scrollLeft + (buttonRect.left - listRect.left) - (listRect.width - buttonRect.width) / 2;
+
+    list.scrollTo({ left: Math.max(0, nextLeft), behavior: "smooth" });
   }, [activeId]);
 
   const selectByOffset = useCallback(
@@ -237,14 +248,16 @@ export function ProductCatalog() {
               </div>
 
               <div className={styles.stageVisual}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className={styles.stageImage}
-                  src={PRODUCT_BENTO_IMAGE}
-                  alt={activeProduct.imageAlt}
-                  loading="lazy"
-                  decoding="async"
-                />
+                <Link href={activeProduct.href} className={styles.stageVisualLink}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className={styles.stageImage}
+                    src={PRODUCT_BENTO_IMAGE}
+                    alt={activeProduct.imageAlt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </Link>
               </div>
 
               <div className={styles.stageCopy}>

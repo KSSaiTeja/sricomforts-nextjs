@@ -7,35 +7,16 @@ import { BRAND_NAME } from "@/lib/brand";
 import { registerGsap } from "@/lib/gsap/register";
 import styles from "./stats-bento.module.css";
 
-function cardClassName(item: StatsBentoItem) {
-  const classes = [styles.card];
-  if (item.tone === "ink") classes.push(styles.cardInk);
-  if (item.tone === "tint") classes.push(styles.cardTint);
-  return classes.join(" ");
-}
-
 function StatCard({ item }: { item: StatsBentoItem }) {
-  const steps = "steps" in item ? item.steps : undefined;
   const accent = "accent" in item ? item.accent : undefined;
-  const eyebrow = "eyebrow" in item ? item.eyebrow : undefined;
 
   return (
     <div className={styles.inner}>
-      {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
       <p className={styles.title}>
         <span className={styles.titleValue}>{item.title}</span>
         {accent ? <span className={styles.titleAccent}>{accent}</span> : null}
       </p>
       <p className={styles.body}>{item.body}</p>
-      {steps ? (
-        <ul className={styles.steps} aria-label="Delivery steps">
-          {steps.map((step) => (
-            <li key={step} className={styles.step}>
-              {step}
-            </li>
-          ))}
-        </ul>
-      ) : null}
     </div>
   );
 }
@@ -201,7 +182,7 @@ export function StatsBento() {
             ref={(element) => {
               cardRefs.current[index] = element;
             }}
-            className={cardClassName(item)}
+            className={styles.card}
             data-from={item.from}
           >
             <StatCard item={item} />

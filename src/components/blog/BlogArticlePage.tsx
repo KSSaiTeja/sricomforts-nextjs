@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ContactCta } from "@/components/shared/ContactCta";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import {
@@ -83,7 +82,6 @@ export function BlogArticlePage({ post }: BlogArticlePageProps) {
               </Link>
             </article>
           </div>
-          <ContactCta />
           <SiteFooter static />
         </div>
       </main>

@@ -54,12 +54,13 @@
   justify-content: flex-start;
   min-height: 0;
   height: auto;
-  padding-block: var(--section-band-pad-y);
+  padding-block: clamp(1.25rem, 3svh, 2rem);
 }
 
 .about-page .features-grid .feature-image {
   flex-shrink: 1;
-  max-height: clamp(12rem, 36svh, 22rem);
+  aspect-ratio: 350 / 438;
+  max-height: min(48svh, calc(var(--svh, 1svh) * 48));
   min-height: 0;
 }
 
@@ -122,7 +123,8 @@
   }
 
   .about-page .features-grid .feature-image {
-    max-height: min(42svh, calc(var(--svh, 1svh) * 42));
+    aspect-ratio: 350 / 438;
+    max-height: min(48svh, calc(var(--svh, 1svh) * 48));
   }
 
   .about-page .features-grid .feature-content-inner {

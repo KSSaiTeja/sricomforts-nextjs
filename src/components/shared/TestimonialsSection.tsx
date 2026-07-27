@@ -125,13 +125,16 @@ export function TestimonialsSection({
 
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+      // Desktop: vertically center the active thumb in the quote-height rail.
+      // Mobile: pin the active thumb to the leading edge (first-card position),
+      // not the middle of a 3-card strip.
       const target = isDesktop
         ? {
             y: rail.clientHeight / 2 - (thumb.offsetTop + thumb.offsetHeight / 2),
             x: 0,
           }
         : {
-            x: rail.clientWidth / 2 - (thumb.offsetLeft + thumb.offsetWidth / 2),
+            x: -thumb.offsetLeft,
             y: 0,
           };
 

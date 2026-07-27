@@ -6,10 +6,10 @@ import { useSmoothScroll } from "@/providers/SmoothScrollProvider";
 const HEADER_OFFSET = -96;
 
 export function useHashScroll(enabled = true) {
-  const { lenis } = useSmoothScroll();
+  const { lenis, ready } = useSmoothScroll();
 
   useEffect(() => {
-    if (!enabled || !lenis) return;
+    if (!enabled || !ready) return;
 
     const scrollToHash = (hash: string, immediate = false) => {
       const id = hash.replace(/^#/, "");
@@ -18,7 +18,13 @@ export function useHashScroll(enabled = true) {
       const attempt = (tries = 0) => {
         const target = document.getElementById(id);
         if (target) {
-          lenis.scrollTo(target, { offset: HEADER_OFFSET, immediate });
+          if (lenis) {
+            lenis.scrollTo(target, { offset: HEADER_OFFSET, immediate });
+          } else {
+            const top =
+              target.getBoundingClientRect().top + window.scrollY + HEADER_OFFSET;
+            window.scrollTo({ top, behavior: immediate ? "auto" : "smooth" });
+          }
           return;
         }
 
@@ -41,5 +47,5 @@ export function useHashScroll(enabled = true) {
     return () => {
       window.removeEventListener("hashchange", onHashChange);
     };
-  }, [enabled, lenis]);
+  }, [enabled, lenis, ready]);
 }

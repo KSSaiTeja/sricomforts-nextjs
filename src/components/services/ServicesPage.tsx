@@ -1,7 +1,6 @@
 "use client";
 
 import { NotchSection } from "@/components/home/NotchSection";
-import { ContactCta } from "@/components/shared/ContactCta";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ServicesFeaturesCarouselExpandable } from "@/components/services/ServicesFeaturesCarouselExpandable";
@@ -9,7 +8,6 @@ import { ServicesFeaturesGrid } from "@/components/services/ServicesFeaturesGrid
 import { ServicesSectionIntro } from "@/components/services/ServicesSectionIntro";
 import { SolutionsValue } from "@/components/solutions/SolutionsValue";
 import { TestimonialsSection } from "@/components/shared/TestimonialsSection";
-import { AwardsAchievements } from "@/components/shared/AwardsAchievements";
 import { type ServicePageData } from "@/data/services";
 import { useSvh } from "@/hooks/useSvh";
 
@@ -42,9 +40,7 @@ export function ServicesPage({ data }: ServicesPageProps) {
             <ServicesFeaturesCarouselExpandable data={data.platformCarousel} />
             <SolutionsValue data={data.value} />
             <TestimonialsSection />
-            <AwardsAchievements />
           </div>
-          <ContactCta />
           <SiteFooter static />
         </div>
       </main>

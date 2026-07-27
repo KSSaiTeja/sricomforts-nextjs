@@ -14,7 +14,7 @@ import styles from "./video-carousel.module.css";
 
 export function VideoCarousel() {
   const { isLoaded } = usePreloader();
-  const { lenis } = useSmoothScroll();
+  const { ready: scrollReady } = useSmoothScroll();
   const isDesktop = useIsLargeViewport();
   const scrollProgressRef = useRef(0);
   const sectionRef = useRef<HTMLElement>(null);
@@ -24,7 +24,7 @@ export function VideoCarousel() {
   const frames = useMemo(() => getHeroFrameUrls(isDesktop), [isDesktop]);
 
   useEffect(() => {
-    if (!isLoaded || !lenis || !contentRef.current) return;
+    if (!isLoaded || !scrollReady || !contentRef.current) return;
 
     registerGsap();
 
@@ -64,7 +64,7 @@ export function VideoCarousel() {
     return () => {
       triggers.forEach((trigger) => trigger.kill());
     };
-  }, [isLoaded, lenis, isDesktop]);
+  }, [isLoaded, scrollReady, isDesktop]);
 
   return (
     <section
@@ -218,10 +218,11 @@ function ScrollIndicatorMobile() {
   }, []);
 
   useEffect(() => {
-    if (!lenis || !containerRef.current) return;
+    if (!containerRef.current) return;
 
     const onScroll = () => {
-      const visible = lenis.scroll <= 50;
+      const scrollY = lenis?.scroll ?? window.scrollY;
+      const visible = scrollY <= 50;
       gsap.to(containerRef.current, {
         opacity: visible ? 1 : 0,
         duration: 0.4,
@@ -229,11 +230,18 @@ function ScrollIndicatorMobile() {
       });
     };
 
-    lenis.on("scroll", onScroll);
-    onScroll();
+    if (lenis) {
+      lenis.on("scroll", onScroll);
+      onScroll();
+      return () => {
+        lenis.off("scroll", onScroll);
+      };
+    }
 
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => {
-      lenis.off("scroll", onScroll);
+      window.removeEventListener("scroll", onScroll);
     };
   }, [lenis]);
 

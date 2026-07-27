@@ -52,6 +52,9 @@ export function SiteMotion() {
 
       registerGsap();
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+      const isNarrow = window.matchMedia("(max-width: 1023px)").matches;
+      const lightMotion = isCoarsePointer || isNarrow;
       const sections = gsap.utils.toArray<HTMLElement>(SECTION_SELECTOR);
       const animatedTitles = new Set<HTMLElement>();
 
@@ -69,65 +72,109 @@ export function SiteMotion() {
           return;
         }
 
+        const viewportHeight = window.innerHeight || 1;
+        const sectionTop = section.getBoundingClientRect().top;
+        // Above-the-fold sections (e.g. blog) should animate on open, not wait for scroll.
+        const sectionInView = sectionTop < viewportHeight * 0.92;
+
         if (title && !animatedTitles.has(title)) {
           animatedTitles.add(title);
-          SplitText.create(title, {
-            type: "words,chars",
-            aria: "auto",
-            wordsClass: "motion-word",
-            charsClass: "motion-char",
-            onSplit(self) {
-              return gsap.fromTo(
-                self.chars,
-                {
-                  autoAlpha: 0,
-                  yPercent: 72,
-                  rotateX: -38,
-                  filter: "blur(8px)",
-                },
-                {
-                  autoAlpha: 1,
-                  yPercent: 0,
-                  rotateX: 0,
-                  filter: "blur(0px)",
-                  duration: 0.72,
-                  stagger: { each: 0.018, from: "start" },
-                  ease: "power3.out",
-                  clearProps: "transform,filter,opacity,visibility",
-                  scrollTrigger: {
-                    trigger: title,
-                    start: "clamp(top 88%)",
-                    once: true,
-                    refreshPriority: index,
+          const titleInView =
+            sectionInView || title.getBoundingClientRect().top < viewportHeight * 0.92;
+
+          // Mobile: skip SplitText/blur — cheaper fade only so scroll stays smooth.
+          if (lightMotion) {
+            gsap.fromTo(
+              title,
+              { autoAlpha: 0, y: 18 },
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.55,
+                ease: "power2.out",
+                delay: titleInView ? 0.04 : 0,
+                clearProps: "transform,opacity,visibility",
+                ...(titleInView
+                  ? {}
+                  : {
+                      scrollTrigger: {
+                        trigger: title,
+                        start: "clamp(top 90%)",
+                        once: true,
+                        refreshPriority: index,
+                      },
+                    }),
+              },
+            );
+          } else {
+            SplitText.create(title, {
+              type: "words,chars",
+              aria: "auto",
+              wordsClass: "motion-word",
+              charsClass: "motion-char",
+              onSplit(self) {
+                return gsap.fromTo(
+                  self.chars,
+                  {
+                    autoAlpha: 0,
+                    yPercent: 72,
+                    rotateX: -38,
+                    filter: "blur(8px)",
                   },
-                },
-              );
-            },
-          });
+                  {
+                    autoAlpha: 1,
+                    yPercent: 0,
+                    rotateX: 0,
+                    filter: "blur(0px)",
+                    duration: 0.72,
+                    stagger: { each: 0.018, from: "start" },
+                    ease: "power3.out",
+                    delay: titleInView ? 0.04 : 0,
+                    clearProps: "transform,filter,opacity,visibility",
+                    ...(titleInView
+                      ? {}
+                      : {
+                          scrollTrigger: {
+                            trigger: title,
+                            start: "clamp(top 88%)",
+                            once: true,
+                            refreshPriority: index,
+                          },
+                        }),
+                  },
+                );
+              },
+            });
+          }
         }
 
         if (items.length) {
           gsap.fromTo(
             items,
-            {
-              autoAlpha: 0,
-              y: 28,
-              filter: "blur(7px)",
-            },
+            lightMotion
+              ? { autoAlpha: 0, y: 16 }
+              : { autoAlpha: 0, y: 28, filter: "blur(7px)" },
             {
               autoAlpha: 1,
               y: 0,
-              filter: "blur(0px)",
-              duration: 0.78,
-              stagger: 0.075,
+              ...(lightMotion ? {} : { filter: "blur(0px)" }),
+              duration: lightMotion ? 0.55 : 0.78,
+              stagger: lightMotion ? 0.04 : 0.075,
               ease: "power3.out",
-              clearProps: "transform,filter,opacity,visibility",
-              scrollTrigger: {
-                trigger: section,
-                start: "clamp(top 84%)",
-                once: true,
-                refreshPriority: index,
-              },
+              delay: sectionInView ? 0.08 : 0,
+              clearProps: lightMotion
+                ? "transform,opacity,visibility"
+                : "transform,filter,opacity,visibility",
+              ...(sectionInView
+                ? {}
+                : {
+                    scrollTrigger: {
+                      trigger: section,
+                      start: "clamp(top 84%)",
+                      once: true,
+                      refreshPriority: index,
+                    },
+                  }),
             },
           );
         }

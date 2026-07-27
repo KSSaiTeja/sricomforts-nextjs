@@ -26,7 +26,7 @@ export const experienceSection = {
   stats: [
     { value: "230+", label: "Engineers & technicians" },
     { value: "9", label: "Cities with local teams" },
-    { value: "24hr", label: "Service promise" },
+    { value: "24 hr", label: "Service promise" },
   ] satisfies AchievementStat[],
   signatureName: "Srinivas Reddy",
   signatureRole: "Managing Director",

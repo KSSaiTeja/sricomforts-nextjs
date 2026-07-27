@@ -148,6 +148,7 @@ export function TonnageCalculator() {
   const [roof, setRoof] = useState<RoofType>(defaultTonnageInputs.roof);
   const [ceiling, setCeiling] = useState<string>(defaultTonnageInputs.ceilingHeightFt);
   const [sun, setSun] = useState<SunExposureLevel>(defaultTonnageInputs.sunExposure);
+  const [hasCalculated, setHasCalculated] = useState(false);
 
   const result = useMemo(
     () =>
@@ -263,137 +264,149 @@ export function TonnageCalculator() {
               options={SUN_OPTIONS}
             />
           </div>
+
+          <div className="tonnage-calculator__actions">
+            <button
+              type="button"
+              className="tonnage-calculator__calculate-button"
+              onClick={() => setHasCalculated(true)}
+            >
+              Calculate
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="tonnage-calculator__results-notch">
-        <div className="tonnage-calculator__results">
-          <div className="tonnage-calculator__results-bg" aria-hidden />
-          <div className="tonnage-calculator__results-content">
-            <div className="tonnage-calculator__results-header">
-              <div className="tonnage-calculator__results-headline">
-                <span className="tonnage-calculator__results-headline-primary">
-                  Recommended capacity{" "}
-                </span>
-                <span className="tonnage-calculator__results-headline-secondary">
-                  for this room
-                </span>
-              </div>
-              <div className="tonnage-calculator__results-total">
-                {result.needsSeparateCalculation ? (
-                  <p className="tonnage-calculator__results-amount">
-                    Site survey
-                  </p>
-                ) : (
-                  <p className="tonnage-calculator__results-amount">
-                    {formatTons(result.standardSize)}{" "}
-                    <span style={{ opacity: 0.75, fontSize: "0.55em" }}>Ton</span>
-                  </p>
-                )}
-                <div className="tonnage-calculator__results-meta">
-                  <span className="tonnage-calculator__results-meta-label">
-                    {result.needsSeparateCalculation ? "Area over 450 sq ft:" : "Calculated load:"}
+      {hasCalculated ? (
+        <div className="tonnage-calculator__results-notch">
+          <div className="tonnage-calculator__results">
+            <div className="tonnage-calculator__results-bg" aria-hidden />
+            <div className="tonnage-calculator__results-content">
+              <div className="tonnage-calculator__results-header">
+                <div className="tonnage-calculator__results-headline">
+                  <span className="tonnage-calculator__results-headline-primary">
+                    Recommended capacity{" "}
                   </span>
-                  <span className="tonnage-calculator__results-meta-value">
-                    {result.needsSeparateCalculation
-                      ? "Calculate separately"
-                      : `${formatTons(result.recommendedTons)} Ton`}
+                  <span className="tonnage-calculator__results-headline-secondary">
+                    for this room
                   </span>
                 </div>
-              </div>
-            </div>
-
-            <div className="tonnage-calculator__results-breakdown">
-              <p className="tonnage-calculator__results-breakdown-title">
-                {result.needsSeparateCalculation
-                  ? "Rooms above 450 sq ft need an engineer assessment."
-                  : "Load breakdown:"}
-              </p>
-              {!result.needsSeparateCalculation ? (
-                <div className="tonnage-calculator__results-items">
-                  <div className="tonnage-calculator__results-item">
-                    <p className="tonnage-calculator__results-item-label">
-                      Base capacity{" "}
-                      <span className="tonnage-calculator__results-item-detail">
-                        (from area)
-                      </span>
+                <div className="tonnage-calculator__results-total">
+                  {result.needsSeparateCalculation ? (
+                    <p className="tonnage-calculator__results-amount">Site survey</p>
+                  ) : (
+                    <p className="tonnage-calculator__results-amount">
+                      {formatTons(result.standardSize)}{" "}
+                      <span style={{ opacity: 0.75, fontSize: "0.55em" }}>Ton</span>
                     </p>
-                    <div className="tonnage-calculator__results-item-value">
-                      {formatTons(breakdown.baseTons)} Ton
-                    </div>
-                  </div>
-                  <div className="tonnage-calculator__results-item">
-                    <p className="tonnage-calculator__results-item-label">Direction</p>
-                    <div className="tonnage-calculator__results-item-value">
-                      {formatAdj(breakdown.directionAdd)}
-                    </div>
-                  </div>
-                  <div className="tonnage-calculator__results-item">
-                    <p className="tonnage-calculator__results-item-label">Floor</p>
-                    <div className="tonnage-calculator__results-item-value">
-                      {formatAdj(breakdown.floorAdd)}
-                    </div>
-                  </div>
-                  <div className="tonnage-calculator__results-item">
-                    <p className="tonnage-calculator__results-item-label">Temperature</p>
-                    <div className="tonnage-calculator__results-item-value">
-                      {formatAdj(breakdown.temperatureAdd)}
-                    </div>
-                  </div>
-                  <div className="tonnage-calculator__results-item">
-                    <p className="tonnage-calculator__results-item-label">Occupants</p>
-                    <div className="tonnage-calculator__results-item-value">
-                      {formatAdj(breakdown.occupantsAdd)}
-                    </div>
-                  </div>
-                  <div className="tonnage-calculator__results-item">
-                    <p className="tonnage-calculator__results-item-label">Windows</p>
-                    <div className="tonnage-calculator__results-item-value">
-                      {formatAdj(breakdown.windowsAdd)}
-                    </div>
-                  </div>
-                  <div className="tonnage-calculator__results-item">
-                    <p className="tonnage-calculator__results-item-label">Roof</p>
-                    <div className="tonnage-calculator__results-item-value">
-                      {formatAdj(breakdown.roofAdd)}
-                    </div>
-                  </div>
-                  <div className="tonnage-calculator__results-item">
-                    <p className="tonnage-calculator__results-item-label">Ceiling height</p>
-                    <div className="tonnage-calculator__results-item-value">
-                      {formatAdj(breakdown.ceilingAdd)}
-                    </div>
-                  </div>
-                  <div className="tonnage-calculator__results-item">
-                    <p className="tonnage-calculator__results-item-label">Sun exposure</p>
-                    <div className="tonnage-calculator__results-item-value">
-                      {formatAdj(breakdown.sunAdd)}
-                    </div>
+                  )}
+                  <div className="tonnage-calculator__results-meta">
+                    <span className="tonnage-calculator__results-meta-label">
+                      {result.needsSeparateCalculation
+                        ? "Area over 450 sq ft:"
+                        : "Calculated load:"}
+                    </span>
+                    <span className="tonnage-calculator__results-meta-value">
+                      {result.needsSeparateCalculation
+                        ? "Calculate separately"
+                        : `${formatTons(result.recommendedTons)} Ton`}
+                    </span>
                   </div>
                 </div>
-              ) : null}
-            </div>
-
-            <div className="tonnage-calculator__cta">
-              <div className="tonnage-calculator__cta-header">
-                <p className="tonnage-calculator__cta-title">Want a precise design?</p>
-                <p className="tonnage-calculator__cta-description">
-                  This is a room-level estimate. For multi-room homes and commercial loads,
-                  our engineers size systems from a site survey.
-                </p>
               </div>
-              <div className="tonnage-calculator__cta-form">
-                <Link
-                  href={siteContact.contactHref}
-                  className="tonnage-calculator__cta-button"
-                >
-                  BOOK ASSESSMENT
-                </Link>
+
+              <div className="tonnage-calculator__results-breakdown">
+                <p className="tonnage-calculator__results-breakdown-title">
+                  {result.needsSeparateCalculation
+                    ? "Rooms above 450 sq ft need an engineer assessment."
+                    : "Load breakdown:"}
+                </p>
+                {!result.needsSeparateCalculation ? (
+                  <div className="tonnage-calculator__results-items">
+                    <div className="tonnage-calculator__results-item">
+                      <p className="tonnage-calculator__results-item-label">
+                        Base capacity{" "}
+                        <span className="tonnage-calculator__results-item-detail">
+                          (from area)
+                        </span>
+                      </p>
+                      <div className="tonnage-calculator__results-item-value">
+                        {formatTons(breakdown.baseTons)} Ton
+                      </div>
+                    </div>
+                    <div className="tonnage-calculator__results-item">
+                      <p className="tonnage-calculator__results-item-label">Direction</p>
+                      <div className="tonnage-calculator__results-item-value">
+                        {formatAdj(breakdown.directionAdd)}
+                      </div>
+                    </div>
+                    <div className="tonnage-calculator__results-item">
+                      <p className="tonnage-calculator__results-item-label">Floor</p>
+                      <div className="tonnage-calculator__results-item-value">
+                        {formatAdj(breakdown.floorAdd)}
+                      </div>
+                    </div>
+                    <div className="tonnage-calculator__results-item">
+                      <p className="tonnage-calculator__results-item-label">Temperature</p>
+                      <div className="tonnage-calculator__results-item-value">
+                        {formatAdj(breakdown.temperatureAdd)}
+                      </div>
+                    </div>
+                    <div className="tonnage-calculator__results-item">
+                      <p className="tonnage-calculator__results-item-label">Occupants</p>
+                      <div className="tonnage-calculator__results-item-value">
+                        {formatAdj(breakdown.occupantsAdd)}
+                      </div>
+                    </div>
+                    <div className="tonnage-calculator__results-item">
+                      <p className="tonnage-calculator__results-item-label">Windows</p>
+                      <div className="tonnage-calculator__results-item-value">
+                        {formatAdj(breakdown.windowsAdd)}
+                      </div>
+                    </div>
+                    <div className="tonnage-calculator__results-item">
+                      <p className="tonnage-calculator__results-item-label">Roof</p>
+                      <div className="tonnage-calculator__results-item-value">
+                        {formatAdj(breakdown.roofAdd)}
+                      </div>
+                    </div>
+                    <div className="tonnage-calculator__results-item">
+                      <p className="tonnage-calculator__results-item-label">Ceiling height</p>
+                      <div className="tonnage-calculator__results-item-value">
+                        {formatAdj(breakdown.ceilingAdd)}
+                      </div>
+                    </div>
+                    <div className="tonnage-calculator__results-item">
+                      <p className="tonnage-calculator__results-item-label">Sun exposure</p>
+                      <div className="tonnage-calculator__results-item-value">
+                        {formatAdj(breakdown.sunAdd)}
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="tonnage-calculator__cta">
+                <div className="tonnage-calculator__cta-header">
+                  <p className="tonnage-calculator__cta-title">Want a precise design?</p>
+                  <p className="tonnage-calculator__cta-description">
+                    This is a room-level estimate. For multi-room homes and commercial loads,
+                    our engineers size systems from a site survey.
+                  </p>
+                </div>
+                <div className="tonnage-calculator__cta-form">
+                  <Link
+                    href={siteContact.contactHref}
+                    className="tonnage-calculator__cta-button"
+                  >
+                    BOOK ASSESSMENT
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </div>
   );
 }

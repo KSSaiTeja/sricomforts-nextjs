@@ -10,6 +10,14 @@
   padding-block: var(--section-band-pad-y);
 }
 
+.sections-grid--dark {
+  padding-block: clamp(2.75rem, 7svh, 4.25rem) clamp(1.75rem, 4svh, 2.75rem);
+}
+
+.sections-grid--dark.sections-grid--gradient:after {
+  height: clamp(4rem, 8svh, 6.5rem);
+}
+
 .sections-grid__content-wrapper {
   display: flex;
   flex: initial;

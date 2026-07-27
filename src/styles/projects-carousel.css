@@ -40,7 +40,7 @@
 
 .projects-carousel__viewport {
   overflow: hidden;
-  touch-action: pan-x;
+  touch-action: pan-x pan-y;
   width: 100%;
 }
 
