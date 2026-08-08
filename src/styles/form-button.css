@@ -1,10 +1,17 @@
 .label-4 {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
-  line-height: 0.81;
+  letter-spacing: 0.14em;
+  line-height: 1;
   text-transform: uppercase;
+}
+
+@media (min-width: 1024px) {
+  .label-4 {
+    font-size: 0.875rem;
+    letter-spacing: 0.15em;
+  }
 }
 
 .form-wrapper .button {

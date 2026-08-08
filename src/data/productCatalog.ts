@@ -32,6 +32,8 @@ export type ProductCatalogItem = {
   categories: ProductCategory[];
   specs: ProductSpec[];
   isNewLaunch?: boolean;
+  /** Product hero image for the showroom stage. */
+  image: string;
   imageAlt: string;
   href: string;
 };
@@ -47,10 +49,11 @@ export const productCatalogFilters: ProductCatalogFilterOption[] = [
   { id: "residential", label: "Residential" },
 ];
 
+/** Homepage catalog order — showroom index + stage. */
 export const productCatalogItems: ProductCatalogItem[] = [
   {
-    id: "vrv-iv-plus",
-    name: "VRV IV+ Series",
+    id: "vrv-vrf",
+    name: "VRV & VRF",
     tagline: "Variable refrigerant flow for large campuses",
     categories: ["vrv-vrf", "commercial"],
     specs: [
@@ -60,41 +63,13 @@ export const productCatalogItems: ProductCatalogItem[] = [
       { label: "Pipe run", value: "165 m" },
     ],
     isNewLaunch: true,
-    imageAlt: "VRV IV+ system",
-    href: "/contact",
-  },
-  {
-    id: "split-inverter",
-    name: "Split Inverter",
-    tagline: "Quiet comfort for homes and offices",
-    categories: ["split-ac", "residential"],
-    specs: [
-      { label: "Capacity", value: "1–2 Ton" },
-      { label: "Noise", value: "19 dB(A)" },
-      { label: "Star", value: "5 Star" },
-      { label: "Airflow", value: "12.5 m³/min" },
-    ],
-    isNewLaunch: true,
-    imageAlt: "Split inverter unit",
-    href: "/solutions/residential",
-  },
-  {
-    id: "cassette-round-flow",
-    name: "Round Flow Cassette",
-    tagline: "360° distribution for open floor plates",
-    categories: ["commercial", "vrv-vrf"],
-    specs: [
-      { label: "Coverage", value: "360°" },
-      { label: "Capacity", value: "2–5 Ton" },
-      { label: "Draft", value: "Auto swing" },
-      { label: "Panel", value: "Flush fit" },
-    ],
-    imageAlt: "Round flow cassette unit",
+    image: "/images/products/vrv-vrf.jpg",
+    imageAlt: "VRV and VRF outdoor system",
     href: "/solutions/commercial",
   },
   {
-    id: "vrv-s-series",
-    name: "VRV S Series",
+    id: "vrv-s",
+    name: "VRV S",
     tagline: "Compact VRF for boutique commercial spaces",
     categories: ["vrv-vrf", "commercial", "residential"],
     specs: [
@@ -104,26 +79,13 @@ export const productCatalogItems: ProductCatalogItem[] = [
       { label: "Install", value: "Single phase" },
     ],
     isNewLaunch: true,
-    imageAlt: "VRV S series system",
+    image: "/images/products/vrv-s.jpg",
+    imageAlt: "VRV S series outdoor unit",
     href: "/solutions/commercial",
   },
   {
-    id: "ducted-concealed",
-    name: "Ducted Concealed",
-    tagline: "Invisible cooling with even airflow",
-    categories: ["ducted", "residential", "commercial"],
-    specs: [
-      { label: "Capacity", value: "1.5–5 Ton" },
-      { label: "ESP", value: "High static" },
-      { label: "Profile", value: "Slim body" },
-      { label: "Control", value: "Zone ready" },
-    ],
-    imageAlt: "Ducted concealed system",
-    href: "/solutions/residential",
-  },
-  {
     id: "air-cooled-chiller",
-    name: "Air-Cooled Chiller",
+    name: "Air cooled chiller",
     tagline: "Central plant cooling for industrial sites",
     categories: ["chillers", "commercial"],
     specs: [
@@ -132,27 +94,43 @@ export const productCatalogItems: ProductCatalogItem[] = [
       { label: "COP", value: "Up to 3.2" },
       { label: "Plant", value: "Modular" },
     ],
-    imageAlt: "Air-cooled chiller",
+    image: "/images/products/air-cooled-chiller.jpg",
+    imageAlt: "Air cooled chiller plant",
     href: "/solutions/industrial-pharma",
   },
   {
-    id: "fresh-air-handler",
-    name: "Fresh Air Handler",
-    tagline: "Ventilation with heat recovery",
-    categories: ["commercial"],
+    id: "ducted-concealed",
+    name: "Ducted concealed",
+    tagline: "Invisible cooling with even airflow",
+    categories: ["ducted", "residential", "commercial"],
     specs: [
-      { label: "Airflow", value: "500–2000 CFM" },
-      { label: "Recovery", value: "Up to 70%" },
-      { label: "Filter", value: "MERV 13" },
-      { label: "Mode", value: "ERV / HRV" },
+      { label: "Capacity", value: "1.5–5 Ton" },
+      { label: "ESP", value: "High static" },
+      { label: "Profile", value: "Slim body" },
+      { label: "Control", value: "Zone ready" },
     ],
-    isNewLaunch: true,
-    imageAlt: "Fresh air handling unit",
+    image: "/images/products/ducted-concealed.jpg",
+    imageAlt: "Ducted concealed indoor unit",
+    href: "/solutions/residential",
+  },
+  {
+    id: "cassette",
+    name: "Cassette",
+    tagline: "360° distribution for open floor plates",
+    categories: ["commercial", "vrv-vrf"],
+    specs: [
+      { label: "Coverage", value: "360°" },
+      { label: "Capacity", value: "2–5 Ton" },
+      { label: "Draft", value: "Auto swing" },
+      { label: "Panel", value: "Flush fit" },
+    ],
+    image: "/images/products/cassette.jpg",
+    imageAlt: "Ceiling cassette air conditioner",
     href: "/solutions/commercial",
   },
   {
     id: "floor-standing",
-    name: "Floor Standing",
+    name: "Floor standing",
     tagline: "High-capacity cooling without ductwork",
     categories: ["split-ac", "commercial"],
     specs: [
@@ -161,8 +139,25 @@ export const productCatalogItems: ProductCatalogItem[] = [
       { label: "Install", value: "Floor mount" },
       { label: "Duty", value: "Retail / hall" },
     ],
-    imageAlt: "Floor standing unit",
+    image: "/images/products/floor-standing.jpg",
+    imageAlt: "Floor standing air conditioner",
     href: "/solutions/commercial",
+  },
+  {
+    id: "split-inverter",
+    name: "Split inverter",
+    tagline: "Quiet comfort for homes and offices",
+    categories: ["split-ac", "residential"],
+    specs: [
+      { label: "Capacity", value: "1–2 Ton" },
+      { label: "Noise", value: "19 dB(A)" },
+      { label: "Star", value: "5 Star" },
+      { label: "Airflow", value: "12.5 m³/min" },
+    ],
+    isNewLaunch: true,
+    image: "/images/products/split-inverter.jpg",
+    imageAlt: "Split inverter wall-mounted unit",
+    href: "/solutions/residential",
   },
 ];
 

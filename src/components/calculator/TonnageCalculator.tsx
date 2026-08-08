@@ -6,9 +6,6 @@ import {
   calculateTonnage,
   defaultTonnageInputs,
   parseNumericInput,
-  type FloorType,
-  type RoofType,
-  type RoomDirection,
   type SunExposureLevel,
 } from "@/lib/tonnage";
 import { siteContact } from "@/data/navigation";
@@ -108,25 +105,6 @@ function SelectField<T extends string>({
   );
 }
 
-const DIRECTION_OPTIONS: { value: RoomDirection; label: string }[] = [
-  { value: "north", label: "North (+0.00)" },
-  { value: "south", label: "South (+0.05)" },
-  { value: "east", label: "East (+0.10)" },
-  { value: "west", label: "West (+0.20)" },
-];
-
-const FLOOR_OPTIONS: { value: FloorType; label: string }[] = [
-  { value: "ground", label: "Ground (+0.00)" },
-  { value: "middle", label: "Middle (+0.05)" },
-  { value: "top", label: "Top (+0.20)" },
-];
-
-const ROOF_OPTIONS: { value: RoofType; label: string }[] = [
-  { value: "insulated_rcc", label: "Insulated RCC (+0.00)" },
-  { value: "normal_rcc", label: "Normal RCC (+0.10)" },
-  { value: "metal_asbestos", label: "Metal / Asbestos (+0.30)" },
-];
-
 const SUN_OPTIONS: { value: SunExposureLevel; label: string }[] = [
   { value: "low", label: "Low (+0.00)" },
   { value: "medium", label: "Medium (+0.10)" },
@@ -135,35 +113,21 @@ const SUN_OPTIONS: { value: SunExposureLevel; label: string }[] = [
 
 export function TonnageCalculator() {
   const uid = useId();
-  const [area, setArea] = useState<string>(defaultTonnageInputs.areaSqFt);
-  const [direction, setDirection] = useState<RoomDirection>(
-    defaultTonnageInputs.direction,
-  );
-  const [floor, setFloor] = useState<FloorType>(defaultTonnageInputs.floor);
-  const [temperature, setTemperature] = useState<string>(
-    defaultTonnageInputs.temperatureC,
-  );
+  const [length, setLength] = useState<string>(defaultTonnageInputs.lengthFt);
+  const [width, setWidth] = useState<string>(defaultTonnageInputs.widthFt);
   const [occupants, setOccupants] = useState<string>(defaultTonnageInputs.occupants);
-  const [windows, setWindows] = useState<string>(defaultTonnageInputs.windows);
-  const [roof, setRoof] = useState<RoofType>(defaultTonnageInputs.roof);
-  const [ceiling, setCeiling] = useState<string>(defaultTonnageInputs.ceilingHeightFt);
   const [sun, setSun] = useState<SunExposureLevel>(defaultTonnageInputs.sunExposure);
   const [hasCalculated, setHasCalculated] = useState(false);
 
   const result = useMemo(
     () =>
       calculateTonnage({
-        areaSqFt: parseNumericInput(area),
-        direction,
-        floor,
-        temperatureC: parseNumericInput(temperature),
+        lengthFt: parseNumericInput(length),
+        widthFt: parseNumericInput(width),
         occupants: parseNumericInput(occupants),
-        windows: parseNumericInput(windows),
-        roof,
-        ceilingHeightFt: parseNumericInput(ceiling),
         sunExposure: sun,
       }),
-    [area, direction, floor, temperature, occupants, windows, roof, ceiling, sun],
+    [length, width, occupants, sun],
   );
 
   const { breakdown } = result;
@@ -179,21 +143,22 @@ export function TonnageCalculator() {
         <div className="tonnage-calculator__fields">
           <div className="tonnage-calculator__row">
             <Field
-              id={`${uid}-area`}
-              label="Room area"
-              value={area}
-              onChange={setArea}
-              placeholder="e.g. 180"
+              id={`${uid}-length`}
+              label="Length"
+              value={length}
+              onChange={setLength}
+              placeholder="e.g. 15"
               maxLength={5}
-              suffix="sq ft"
+              inputMode="decimal"
+              suffix="ft"
             />
             <Field
-              id={`${uid}-ceiling`}
-              label="Ceiling height"
-              value={ceiling}
-              onChange={setCeiling}
-              placeholder="e.g. 10"
-              maxLength={4}
+              id={`${uid}-width`}
+              label="Width"
+              value={width}
+              onChange={setWidth}
+              placeholder="e.g. 12"
+              maxLength={5}
               inputMode="decimal"
               suffix="ft"
             />
@@ -201,64 +166,16 @@ export function TonnageCalculator() {
 
           <div className="tonnage-calculator__row">
             <Field
-              id={`${uid}-temp`}
-              label="Outdoor temperature"
-              value={temperature}
-              onChange={setTemperature}
-              placeholder="e.g. 35"
-              maxLength={4}
-              inputMode="decimal"
-              suffix="°C"
-            />
-            <Field
               id={`${uid}-occupants`}
-              label="Occupants"
+              label="Occupancy"
               value={occupants}
               onChange={setOccupants}
               placeholder="e.g. 3"
               maxLength={2}
             />
-          </div>
-
-          <div className="tonnage-calculator__row">
-            <Field
-              id={`${uid}-windows`}
-              label="Windows / glass doors"
-              value={windows}
-              onChange={setWindows}
-              placeholder="e.g. 2"
-              maxLength={2}
-            />
-            <SelectField
-              id={`${uid}-direction`}
-              label="Room direction"
-              value={direction}
-              onChange={setDirection}
-              options={DIRECTION_OPTIONS}
-            />
-          </div>
-
-          <div className="tonnage-calculator__row">
-            <SelectField
-              id={`${uid}-floor`}
-              label="Floor"
-              value={floor}
-              onChange={setFloor}
-              options={FLOOR_OPTIONS}
-            />
-            <SelectField
-              id={`${uid}-roof`}
-              label="Roof type"
-              value={roof}
-              onChange={setRoof}
-              options={ROOF_OPTIONS}
-            />
-          </div>
-
-          <div className="tonnage-calculator__row">
             <SelectField
               id={`${uid}-sun`}
-              label="Sun exposure"
+              label="Exposure"
               value={sun}
               onChange={setSun}
               options={SUN_OPTIONS}
@@ -327,7 +244,7 @@ export function TonnageCalculator() {
                       <p className="tonnage-calculator__results-item-label">
                         Base capacity{" "}
                         <span className="tonnage-calculator__results-item-detail">
-                          (from area)
+                          ({formatTons(breakdown.areaSqFt)} sq ft)
                         </span>
                       </p>
                       <div className="tonnage-calculator__results-item-value">
@@ -335,49 +252,13 @@ export function TonnageCalculator() {
                       </div>
                     </div>
                     <div className="tonnage-calculator__results-item">
-                      <p className="tonnage-calculator__results-item-label">Direction</p>
-                      <div className="tonnage-calculator__results-item-value">
-                        {formatAdj(breakdown.directionAdd)}
-                      </div>
-                    </div>
-                    <div className="tonnage-calculator__results-item">
-                      <p className="tonnage-calculator__results-item-label">Floor</p>
-                      <div className="tonnage-calculator__results-item-value">
-                        {formatAdj(breakdown.floorAdd)}
-                      </div>
-                    </div>
-                    <div className="tonnage-calculator__results-item">
-                      <p className="tonnage-calculator__results-item-label">Temperature</p>
-                      <div className="tonnage-calculator__results-item-value">
-                        {formatAdj(breakdown.temperatureAdd)}
-                      </div>
-                    </div>
-                    <div className="tonnage-calculator__results-item">
-                      <p className="tonnage-calculator__results-item-label">Occupants</p>
+                      <p className="tonnage-calculator__results-item-label">Occupancy</p>
                       <div className="tonnage-calculator__results-item-value">
                         {formatAdj(breakdown.occupantsAdd)}
                       </div>
                     </div>
                     <div className="tonnage-calculator__results-item">
-                      <p className="tonnage-calculator__results-item-label">Windows</p>
-                      <div className="tonnage-calculator__results-item-value">
-                        {formatAdj(breakdown.windowsAdd)}
-                      </div>
-                    </div>
-                    <div className="tonnage-calculator__results-item">
-                      <p className="tonnage-calculator__results-item-label">Roof</p>
-                      <div className="tonnage-calculator__results-item-value">
-                        {formatAdj(breakdown.roofAdd)}
-                      </div>
-                    </div>
-                    <div className="tonnage-calculator__results-item">
-                      <p className="tonnage-calculator__results-item-label">Ceiling height</p>
-                      <div className="tonnage-calculator__results-item-value">
-                        {formatAdj(breakdown.ceilingAdd)}
-                      </div>
-                    </div>
-                    <div className="tonnage-calculator__results-item">
-                      <p className="tonnage-calculator__results-item-label">Sun exposure</p>
+                      <p className="tonnage-calculator__results-item-label">Exposure</p>
                       <div className="tonnage-calculator__results-item-value">
                         {formatAdj(breakdown.sunAdd)}
                       </div>

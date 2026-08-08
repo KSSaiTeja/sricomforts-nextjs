@@ -91,15 +91,24 @@
   color: #fff;
   display: inline-flex;
   font-family: var(--font-mono);
+  font-size: 0.875rem;
   font-weight: 600;
   justify-content: center;
+  letter-spacing: 0.14em;
   max-width: 100%;
-  padding: clamp(1rem, 3.5vw, 1.5625rem) clamp(1.25rem, 5vw, 3.125rem);
+  padding: clamp(1.125rem, 3.5vw, 1.75rem) clamp(1.5rem, 5vw, 3.5rem);
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   transition: background-color 0.25s ease, color 0.25s ease;
   z-index: 1;
+}
+
+@media (min-width: 1024px) {
+  .site-footer .footer-context-cta {
+    font-size: 0.9375rem;
+    letter-spacing: 0.15em;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useRef, useState } from "react";
 import {
   awardsSection,
@@ -143,15 +144,15 @@ export function AwardsAchievements({ id }: AwardsAchievementsProps) {
         <div className={styles.experienceInner}>
           <div className={styles.yearsCard} data-motion-item>
             <div className={styles.yearsFrame}>
-              <span
-                className={styles.yearsNumber}
-                style={{ backgroundImage: `url(${experienceSection.yearsImage})` }}
-              >
-                {experienceSection.years}
-              </span>
-              <p className={`body-4 ${styles.yearsLabel}`}>
-                {experienceSection.yearsLabel}
-              </p>
+              <Image
+                src={experienceSection.yearsImage}
+                alt="25 years since 2001"
+                width={1024}
+                height={933}
+                className={styles.yearsBadge}
+                sizes="(max-width: 960px) 70vw, 22rem"
+                priority={false}
+              />
             </div>
           </div>
 

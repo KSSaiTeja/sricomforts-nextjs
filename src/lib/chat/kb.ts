@@ -126,6 +126,41 @@ export function retrieveKnowledge(query: string, limit = 6): {
   const contact = chunks.find((c) => c.source.startsWith("02-"));
   if (contact && !seen.has(contact.id)) {
     selected.push(contact);
+    seen.add(contact.id);
+  }
+
+  // Always surface office hours + location chunks when those topics are asked
+  const q = query.toLowerCase();
+  const asksHours =
+    /\b(hour|hours|timing|timings|open|opening|walk-?in|when are you)\b/.test(
+      q,
+    );
+  const asksLocation =
+    /\b(location|address|where|office|find you|based|map|directions?)\b/.test(
+      q,
+    );
+  if (asksHours || asksLocation) {
+    for (const chunk of chunks) {
+      if (!chunk.source.startsWith("02-") && !chunk.source.startsWith("05-")) {
+        continue;
+      }
+      const hay = `${chunk.title}\n${chunk.text}`.toLowerCase();
+      const isHoursChunk =
+        hay.includes("office timing") ||
+        hay.includes("office hours") ||
+        hay.includes("8:00");
+      const isLocationChunk =
+        hay.includes("head office") ||
+        hay.includes("vijayapuri") ||
+        hay.includes("where is your office");
+      if (
+        ((asksHours && isHoursChunk) || (asksLocation && isLocationChunk)) &&
+        !seen.has(chunk.id)
+      ) {
+        selected.push(chunk);
+        seen.add(chunk.id);
+      }
+    }
   }
 
   if (selected.length === 0) {

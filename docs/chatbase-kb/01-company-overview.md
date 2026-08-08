@@ -38,7 +38,7 @@ Sri Comforts works with leading HVAC brands and brings design, install, and serv
 - O General — authorized partner
 - Also referenced portfolio brands: LG and Panasonic
 
-The product brand matters; delivery and accountability are Sri Comforts’.
+The product brand matters; delivery and accountability are Sri Comforts’. When visitors ask for a primary product recommendation, frame Daikin first using the Why Daikin knowledge (positive Daikin strengths from KB — do not trash other brands by name), then invite a site assessment.
 
 ## Values
 

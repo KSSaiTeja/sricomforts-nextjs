@@ -128,6 +128,7 @@ export function FeaturesSteps() {
   const { isLoaded } = usePreloader();
   const { ready: scrollReady } = useSmoothScroll();
   const isDesktop = useIsLargeViewport();
+  const sectionRef = useRef<HTMLElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const scrollItemsRef = useRef<HTMLDivElement>(null);
@@ -141,6 +142,9 @@ export function FeaturesSteps() {
   const snapPointsRef = useRef<number[]>([]);
   const odometerTweenRef = useRef<gsap.core.Tween | null>(null);
   const odometerProgressRef = useRef({ value: 0 });
+  const sectionInViewRef = useRef(false);
+  const activeIndexRef = useRef(0);
+  const lastPlayedIndexRef = useRef<number | null>(null);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const charProgressRef = useRef(0);
@@ -176,11 +180,35 @@ export function FeaturesSteps() {
     }
   }, []);
 
-  const restartVideo = useCallback((index: number) => {
-    const video = videoRefs.current[index];
-    if (!video) return;
-    video.currentTime = 0;
-    void video.play().catch(() => undefined);
+  /**
+   * Section-in-view drives playback. Hover / pointer leave must never pause
+   * the active step while the featured section remains on screen.
+   */
+  const syncVideoPlayback = useCallback((options?: { restartActive?: boolean }) => {
+    const inView = sectionInViewRef.current;
+    const active = activeIndexRef.current;
+
+    videoRefs.current.forEach((video, index) => {
+      if (!video) return;
+
+      if (!inView || index !== active) {
+        if (!video.paused) video.pause();
+        return;
+      }
+
+      if (options?.restartActive || lastPlayedIndexRef.current !== active) {
+        try {
+          video.currentTime = 0;
+        } catch {
+          // Ignore seek errors while metadata is still loading.
+        }
+        lastPlayedIndexRef.current = active;
+      }
+
+      if (video.paused) {
+        void video.play().catch(() => undefined);
+      }
+    });
   }, []);
 
   const animateOdometerTo = useCallback((value: number) => {
@@ -210,8 +238,45 @@ export function FeaturesSteps() {
   );
 
   useEffect(() => {
-    if (isLoaded) restartVideo(activeIndex);
-  }, [activeIndex, isLoaded, restartVideo]);
+    activeIndexRef.current = activeIndex;
+  }, [activeIndex]);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || typeof IntersectionObserver === "undefined") return;
+
+    const seedInView = () => {
+      const rect = section.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      return rect.top < vh * 0.92 && rect.bottom > vh * 0.08;
+    };
+
+    sectionInViewRef.current = seedInView();
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        sectionInViewRef.current = entry.isIntersecting;
+        if (!entry.isIntersecting) {
+          lastPlayedIndexRef.current = null;
+        }
+        syncVideoPlayback();
+      },
+      {
+        threshold: [0, 0.15, 0.35],
+        rootMargin: "0px 0px -6% 0px",
+      },
+    );
+
+    observer.observe(section);
+    syncVideoPlayback();
+
+    return () => observer.disconnect();
+  }, [syncVideoPlayback]);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+    syncVideoPlayback({ restartActive: true });
+  }, [activeIndex, isLoaded, syncVideoPlayback]);
 
   useEffect(() => {
     animateOdometerTo(activeIndex);
@@ -395,6 +460,7 @@ export function FeaturesSteps() {
 
   return (
     <section
+      ref={sectionRef}
       className="features-steps"
       data-motion-ignore
       style={{ "--314863dd": ITEM_COUNT, "--current-item": activeIndex } as CSSProperties}
@@ -468,14 +534,16 @@ export function FeaturesSteps() {
                   <video
                     ref={(node) => {
                       videoRefs.current[index] = node;
+                      if (node && isLoaded && sectionInViewRef.current && index === activeIndexRef.current) {
+                        syncVideoPlayback();
+                      }
                     }}
                     className="video"
                     src={item.media}
-                    preload={isLoaded && index === activeIndex ? "auto" : "none"}
+                    preload={isLoaded && Math.abs(index - activeIndex) <= 1 ? "auto" : "metadata"}
                     muted
                     playsInline
                     loop
-                    autoPlay={isLoaded && index === activeIndex}
                     aria-hidden
                   />
                 </div>

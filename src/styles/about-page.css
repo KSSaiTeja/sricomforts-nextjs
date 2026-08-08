@@ -47,6 +47,22 @@
   gap: 0;
 }
 
+.about-page .features-grid .feature:last-child {
+  padding-bottom: clamp(0.5rem, 1.5svh, 1rem);
+}
+
+.about-page .section-introduction .button--underlined {
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  padding: 1.125rem 0;
+}
+
+@media (min-width: 1024px) {
+  .about-page .section-introduction .button--underlined {
+    font-size: 1.0625rem;
+  }
+}
+
 .about-page .features-grid .feature {
   box-sizing: border-box;
   display: flex;

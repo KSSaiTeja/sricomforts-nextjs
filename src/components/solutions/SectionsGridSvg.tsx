@@ -5,7 +5,7 @@ import { pathFromPoints, type PathPoint } from "@/lib/svg/roundedPath";
 import { AnimatedPathLine } from "@/components/solutions/AnimatedPathLine";
 import type { PathLineRefs } from "@/lib/svg/pathFollower";
 import { useAnimatedPathLines } from "@/hooks/useAnimatedPathLines";
-import { useIsLargeViewport } from "@/hooks/useMediaQuery";
+import { breakpoints, useMediaQuery } from "@/hooks/useMediaQuery";
 
 type SectionsGridSvgProps = {
   itemCount: number;
@@ -14,6 +14,7 @@ type SectionsGridSvgProps = {
   sectionRef?: React.RefObject<HTMLElement | null>;
 };
 
+/** Desktop four-column dividers — coordinates use container height, not SVG height. */
 function buildFourItemPaths(
   width: number,
   height: number,
@@ -59,13 +60,30 @@ function buildFourItemPaths(
   return [left, center, right];
 }
 
+/** Mobile stacked layout — horizontal separators between items. */
+function buildStackedPaths(width: number, height: number, itemCount: number): PathPoint[][] {
+  if (itemCount < 2 || height <= 0 || width <= 0) return [];
+
+  const paths: PathPoint[][] = [];
+  for (let i = 1; i < itemCount; i++) {
+    const y = (height / itemCount) * i;
+    paths.push([
+      { x: width * 0.06, y, radius: 0 },
+      { x: width * 0.5, y, radius: 18 },
+      { x: width * 0.94, y, radius: 0 },
+    ]);
+  }
+  return paths;
+}
+
 export function SectionsGridSvg({
   itemCount,
   showBottomExtensions = false,
   isDark = true,
   sectionRef,
 }: SectionsGridSvgProps) {
-  const isDesktop = useIsLargeViewport();
+  // Match sections-grid.css four-column breakpoint (1280px), not lg (1024).
+  const isFourColumn = useMediaQuery(`(min-width: ${breakpoints.xl}px)`, false);
   const containerRef = useRef<HTMLDivElement>(null);
   const pathsRef = useRef<PathLineRefs[]>([]);
   const [dimensions, setDimensions] = useState({ width: 1, height: 1 });
@@ -74,15 +92,18 @@ export function SectionsGridSvg({
   const strokeBright = isDark ? "var(--color-brand-neon)" : "var(--color-brand-ink)";
   const blobFill = isDark ? "var(--color-brand-neon)" : "var(--color-brand-accent-on-dark)";
 
-  const svgHeight = dimensions.height * (showBottomExtensions ? 1.8 : 1.25);
+  const containerHeight = dimensions.height;
+  const containerWidth = dimensions.width;
+  const svgHeight =
+    isFourColumn && showBottomExtensions ? containerHeight * 1.8 : containerHeight * 1.25;
 
   const pathPoints =
-    itemCount === 4 && isDesktop
-      ? buildFourItemPaths(dimensions.width, svgHeight, showBottomExtensions)
-      : [];
+    itemCount === 4 && isFourColumn
+      ? buildFourItemPaths(containerWidth, containerHeight, showBottomExtensions)
+      : buildStackedPaths(containerWidth, containerHeight, itemCount);
 
   const paths = pathPoints.map((points) =>
-    pathFromPoints(points, { width: dimensions.width, height: svgHeight }),
+    pathFromPoints(points, { width: containerWidth, height: svgHeight }),
   );
 
   const triggerRef = sectionRef ?? containerRef;
@@ -122,9 +143,9 @@ export function SectionsGridSvg({
   return (
     <div ref={containerRef} style={{ display: "contents" }}>
       <svg
-        width={dimensions.width}
+        width={containerWidth}
         height={svgHeight}
-        viewBox={`0 0 ${dimensions.width} ${svgHeight}`}
+        viewBox={`0 0 ${containerWidth} ${svgHeight}`}
         className="sections-grid__svg"
         aria-hidden
       >
@@ -143,7 +164,7 @@ export function SectionsGridSvg({
         </defs>
         {paths.map((path, index) => (
           <AnimatedPathLine
-            key={index}
+            key={`${isFourColumn ? "desktop" : "mobile"}-${index}`}
             d={path}
             index={index}
             pathsRef={pathsRef}

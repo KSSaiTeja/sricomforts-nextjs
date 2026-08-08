@@ -22,7 +22,7 @@ export const contactMap = {
   eyebrow: "Visit our office",
   title: "Find us in Hyderabad",
   address:
-    "12-5-21/1, Vijayapuri Colony, Tarnaka, Secunderabad, Telangana 500017, India",
+    "12-5-21/1, Vijayapuri Colony, South Lalaguda, Tarnaka, Secunderabad, Telangana 500017, India",
   directionsLabel: "Open in Google Maps",
   mapsUrl: "https://share.google/1wWT1mM7pfIvlNPNV",
   iframeTitle: "Sri Comforts head office on Google Maps",

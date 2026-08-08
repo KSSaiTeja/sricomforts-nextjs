@@ -20,7 +20,6 @@ import {
   aboutFeaturesGrid,
   aboutHero,
   aboutLeadersIntro,
-  aboutPartnersBackingIntro,
   aboutPartnersIntro,
   aboutSectionAnchors,
   aboutStoryValues,
@@ -47,7 +46,6 @@ export function AboutPage() {
             <AboutLeaders data={aboutExecutiveLeaders} />
             <AboutSectionIntro data={aboutPartnersIntro} />
             <AboutLeaders data={aboutBrandPartners} />
-            <AboutSectionIntro data={aboutPartnersBackingIntro} />
             <AboutLogoGrid data={aboutBrandLogos} />
             <AboutSectionIntro data={aboutAdvisoryIntro} />
             <AboutLeaders data={aboutAdvisors} />

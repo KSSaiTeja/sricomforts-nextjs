@@ -7,12 +7,20 @@
 
 Use this for speaking with HVAC experts about systems, AMC plans, project timelines, and urgent needs.
 
-## Head office (Hyderabad)
+## Head office (Hyderabad) — ALWAYS answer when asked location / address / where we are
 
-Sri Comfort Air Products & Services  
-12-5-21/1, Vijayapuri Colony, Tarnaka, Secunderabad, Telangana 500017, India
+Legal / trading name: Sri Comfort Air Products & Services  
+Head office address: 12-5-21/1, Vijayapuri Colony, South Lalaguda, Tarnaka, Secunderabad, Telangana 500017, India
 
-Google Maps: available from the website Contact page (/contact).
+When visitors ask where the office is, the address, location, or “where are you based”, reply with this full address clearly. Google Maps directions are on the website Contact page (/contact).
+
+## Office timing — ALWAYS answer when asked hours / timings / open times
+
+Head office (Tarnaka / Secunderabad) walk-in / office hours:
+- Monday to Saturday: 8:00 AM – 6:00 PM
+- Sunday: Closed
+
+Always share these hours when asked about office timing, opening hours, walk-in times, or when the office is open. You may also note that service response on complaints and queries is within 24 hours (service promise — not the same as walk-in hours). For the latest confirmation before a visit, call +91 40 2700 1342.
 
 ## Website contact paths
 

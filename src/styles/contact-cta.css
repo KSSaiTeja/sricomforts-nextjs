@@ -27,8 +27,16 @@
 
 .contact-cta__button {
   display: inline-flex !important;
+  font-size: 0.875rem;
+  letter-spacing: 0.14em;
   text-decoration: none;
   width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .contact-cta__button {
+    font-size: 0.9375rem;
+  }
 }
 
 @media (min-width: 1024px) {

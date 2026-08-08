@@ -1,5 +1,3 @@
-import { aboutWorkImage } from "@/lib/assets/localPaths";
-
 export type AwardItem = {
   id: string;
   year: string;
@@ -19,7 +17,7 @@ export type AchievementStat = {
 export const experienceSection = {
   years: "25",
   yearsLabel: "Years of Experience",
-  yearsImage: aboutWorkImage(0),
+  yearsImage: "/assets/brand/25-years-badge.png",
   titleLead: "Delivering cooling",
   titleAccent: "you can trust.",
   body: "Sri\u00A0Comforts has been an authorized Daikin dealer and service provider since 2001 — design, installation, and responsive service across South India.",

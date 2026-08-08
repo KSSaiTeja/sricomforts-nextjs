@@ -200,21 +200,25 @@
 }
 
 .career-filter__chip {
-  border: 1px solid rgb(5 24 36 / 28%);
+  background: rgb(0 123 192 / 7%);
+  border: 1.5px solid rgb(0 123 192 / 45%);
   border-radius: 0.5rem;
   color: var(--color-brand-ink);
   display: inline-block;
+  font-weight: 600;
   padding: 1.5625rem 0;
   text-align: center;
   transition:
     color 0.3s ease,
     background-color 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .career-filter__chip.is-active {
-  background-color: var(--color-brand-ink);
-  border-color: transparent;
+  background-color: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
+  box-shadow: 0 0 0 1px rgb(0 123 192 / 20%);
   color: var(--color-neutral-white);
 }
 
@@ -225,7 +229,8 @@
 
 @media (hover: hover) and (pointer: fine) {
   .career-filter:hover .career-filter__chip:not(.is-active) {
-    background: rgb(5 24 36 / 3.5%);
+    background: rgb(0 123 192 / 14%);
+    border-color: var(--color-brand-primary);
     color: var(--color-brand-ink);
   }
 }

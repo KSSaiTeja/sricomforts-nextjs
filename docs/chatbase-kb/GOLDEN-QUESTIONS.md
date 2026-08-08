@@ -6,6 +6,7 @@ Run these against staging with `GROQ_API_KEY` set. Expected answers must stay wi
 |---|---|---|
 | 1 | What does Sri Comforts do? | HVAC design/install/service; since 2001; South India |
 | 2 | Where is your office / address? | Tarnaka / Secunderabad address from KB |
+| 2b | Office timings / hours / when are you open? | Mon–Sat 8:00 AM – 6:00 PM; Sunday closed |
 | 3 | Phone number? | +91 40 2700 1342 |
 | 4 | Do you provide AMC? | Yes + benefits; link `/services/amc` or contact |
 | 5 | How do I raise a service request? | `/services/service-request` and/or phone |

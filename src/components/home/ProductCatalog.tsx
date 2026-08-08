@@ -252,7 +252,7 @@ export function ProductCatalog() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     className={styles.stageImage}
-                    src={PRODUCT_BENTO_IMAGE}
+                    src={activeProduct.image || PRODUCT_BENTO_IMAGE}
                     alt={activeProduct.imageAlt}
                     loading="lazy"
                     decoding="async"

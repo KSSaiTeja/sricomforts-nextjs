@@ -107,14 +107,15 @@
 
 .section-introduction .label {
   color: var(--color-eyebrow);
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: var(--section-stack-gap);
 }
 
 .section-introduction .label.label-5 {
-  font-size: 1.0625rem;
-  letter-spacing: 0.04em;
-  line-height: 1.2;
+  font-size: clamp(0.9375rem, 2.4vw, 1.125rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
 }
 
 .section-introduction .buttons {
@@ -133,9 +134,9 @@
 .section-introduction .button--underlined {
   display: inline-flex;
   height: fit-content;
-  padding: 0.75rem 0;
+  padding: 1rem 0;
   color: var(--color-brand-ink);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-decoration: none;
@@ -199,8 +200,9 @@
   }
 
   .section-introduction .label.label-5 {
-    font-size: 1.125rem;
-    letter-spacing: 0.06em;
+    font-size: 1.1875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
   }
 
   .section-content {
@@ -234,6 +236,8 @@
 
   .section-introduction .button--underlined {
     width: fit-content;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
   }
 }
 

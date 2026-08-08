@@ -20,6 +20,12 @@ A 24-hour response on complaints and queries.
 **Are you an authorized Daikin dealer?**  
 Yes. Sri Comforts is positioned as an authorized Daikin dealer / top-tier authorized partner since 2001 for VRV, central air, ductable systems, and AHUs. Sri Comforts also partners with brands such as O General, and works with LG and Panasonic in its portfolio messaging.
 
+**What are your office hours / walk-in timings?**  
+Head office (Tarnaka / Secunderabad): Monday to Saturday, 8:00 AM – 6:00 PM. Sunday closed. Service promise (separate from walk-in hours): 24-hour response on complaints and queries. For the latest confirmation before a visit, call +91 40 2700 1342.
+
+**Why Daikin? / Why recommend Daikin over other AC brands?**  
+Sri Comforts recommends Daikin as a primary choice based on Daikin strengths in the knowledge base: AC specialist focus, pioneer of VRV (1982; India from 2002), inverter efficiency / lower running-cost positioning, India manufacturing and spare-parts support (Neemrana), and broad residential-to-VRV range. Stay positive about Daikin; do not attack other brands by name. For a site-specific recommendation, call +91 40 2700 1342 or use /contact. See also the Why Daikin knowledge doc.
+
 ---
 
 ## Getting help / contacting
@@ -28,7 +34,7 @@ Yes. Sri Comforts is positioned as an authorized Daikin dealer / top-tier author
 Call +91 40 2700 1342 or use the contact page: /contact.
 
 **Where is your office?**  
-12-5-21/1, Vijayapuri Colony, Tarnaka, Secunderabad, Telangana 500017, India.
+Sri Comfort Air Products & Services — 12-5-21/1, Vijayapuri Colony, South Lalaguda, Tarnaka, Secunderabad, Telangana 500017, India. Directions: /contact.
 
 **Can I get a same-day response?**  
 Contact CTAs on the website state same-day response and site assessment calls. For fastest help, call +91 40 2700 1342.

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { BRAND_NAME } from "@/lib/brand";
+import { LOGO_LOCKUP } from "@/components/brand/logoDimensions";
 
 type FullLogoProps = {
   className?: string;
@@ -11,10 +12,10 @@ type FullLogoProps = {
 export function FullLogo({ className, style, priority }: FullLogoProps) {
   return (
     <Image
-      src="/logo/full-logo.svg"
+      src="/assets/brand/sricomforts-logo.png"
       alt={BRAND_NAME}
-      width={240}
-      height={43}
+      width={LOGO_LOCKUP.full.width}
+      height={LOGO_LOCKUP.full.height}
       className={className}
       style={style}
       priority={priority}
