@@ -224,7 +224,7 @@ export function SiteHeader() {
           <Link
             ref={logoRef}
             href="/"
-            className="logo-link brand-logo-highlight"
+            className="logo-link"
             aria-label="Go to homepage"
           >
             <FullLogo className="logo" priority />
@@ -340,7 +340,7 @@ export function SiteHeader() {
         />
         <aside className="mobile-menu-panel">
           <div className="mobile-drawer-logo">
-            <Link href="/" className="mobile-drawer-logo-link brand-logo-highlight" onClick={closeMenu}>
+            <Link href="/" className="mobile-drawer-logo-link" onClick={closeMenu}>
               <FullLogo className="mobile-drawer-logo-icon" />
             </Link>
           </div>

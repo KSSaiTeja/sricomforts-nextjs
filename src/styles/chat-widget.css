@@ -87,32 +87,29 @@
   min-width: 0;
 }
 
-.chat-widget__logo.brand-logo-highlight {
+.chat-widget__logo {
+  display: grid;
+  place-items: center;
   flex-shrink: 0;
-  padding: 0.28rem 0.55rem;
-  border-radius: 8px;
-  box-shadow:
-    0 0 0 1px rgb(255 255 255 / 55%),
-    0 4px 12px rgb(0 0 0 / 16%);
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: #fff;
+  line-height: 0;
 }
 
 .chat-widget__logo-img {
   display: block;
-  width: 7.25rem;
+  width: 1.35rem;
   height: auto;
-  max-width: none;
 }
 
 .chat-widget__title {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  color: var(--color-neutral-white);
 }
 
 .chat-widget__icon-btn {

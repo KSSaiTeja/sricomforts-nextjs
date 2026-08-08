@@ -15,7 +15,7 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
-import { FullLogo } from "@/components/brand/FullLogo";
+import { LogoIcon } from "@/components/brand/LogoIcon";
 import {
   CHAT_GREETING,
   CHAT_HIDDEN_PREFIXES,
@@ -300,8 +300,8 @@ export function ChatWidget() {
         >
           <header className="chat-widget__header">
             <div className="chat-widget__brand">
-              <span className="chat-widget__logo brand-logo-highlight" aria-hidden>
-                <FullLogo className="chat-widget__logo-img" />
+              <span className="chat-widget__logo" aria-hidden>
+                <LogoIcon className="chat-widget__logo-img" />
               </span>
               <p id={titleId} className="chat-widget__title">
                 Sri&nbsp;Comforts

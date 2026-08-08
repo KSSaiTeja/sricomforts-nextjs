@@ -1,57 +1,66 @@
 /*
- * Lifts the full-color Sri Comforts lockup off dark surfaces (nav glass, footer)
- * without recoloring the asset or changing parent background tokens.
+ * Cyan lockup on a clean white pill (nav / footer / drawer).
+ * Overflow visible so the final s + ® are not clipped.
  */
-.brand-logo-highlight {
-  align-items: center;
-  background: rgb(255 255 255 / 96%);
-  border-radius: 10px;
-  box-shadow:
-    0 0 0 1px rgb(255 255 255 / 45%),
-    0 6px 20px rgb(0 0 0 / 18%);
+
+.site-header .logo-link,
+.mobile-drawer-logo-link,
+.site-footer .logo-section .brand-logo-frame {
   display: inline-flex;
+  align-items: center;
   justify-content: center;
   line-height: 0;
-  padding: 0.4rem 0.8rem;
+  overflow: visible;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 55%),
+    0 6px 18px rgb(0 0 0 / 16%);
+  padding: 0.45rem 0.75rem;
 }
 
-.brand-logo-highlight img,
-.brand-logo-highlight .logo,
-.brand-logo-highlight .brand-logo,
-.brand-logo-highlight .mobile-drawer-logo-icon,
-.brand-logo-highlight .chat-widget__logo-img {
+.site-header .logo-link .logo {
   display: block;
-  filter: drop-shadow(0 1px 0 rgb(255 255 255 / 85%));
+  width: 12.5rem;
   height: auto;
   max-width: none;
+  overflow: visible;
 }
 
-.site-header .logo-link.brand-logo-highlight {
-  flex-shrink: 0;
+.mobile-drawer-logo-link .mobile-drawer-logo-icon {
+  display: block;
+  width: 11rem;
+  height: auto;
+  max-width: none;
+  overflow: visible;
 }
 
-.site-header .logo-link.brand-logo-highlight .logo {
-  width: 8.5rem;
+.site-footer .logo-section {
+  overflow: visible;
 }
 
-.mobile-drawer-logo-link.brand-logo-highlight .mobile-drawer-logo-icon {
-  width: 7.5rem;
-}
-
-.site-footer .brand-logo-highlight {
+.site-footer .logo-section .brand-logo-frame {
   margin-bottom: 3.75rem;
 }
 
-.site-footer .brand-logo-highlight .brand-logo {
-  width: 9.5rem;
+.site-footer .logo-section .brand-logo {
+  display: block;
+  width: 14rem;
+  height: auto;
+  max-width: none;
+  overflow: visible;
 }
 
 @media (min-width: 1024px) {
-  .site-header .logo-link.brand-logo-highlight .logo {
-    width: 10.5rem;
+  .site-header .logo-link .logo {
+    width: 16rem;
   }
 
-  .site-footer .brand-logo-highlight .brand-logo {
-    width: 11.5rem;
+  .mobile-drawer-logo-link .mobile-drawer-logo-icon {
+    width: 13rem;
+  }
+
+  .site-footer .logo-section .brand-logo {
+    width: 18rem;
   }
 }

@@ -128,7 +128,7 @@ export function SiteFooter({ static: isStatic = true }: SiteFooterProps) {
 
               <div className="content-wrapper">
                 <div className="logo-section">
-                  <span className="brand-logo-highlight">
+                  <span className="brand-logo-frame">
                     <FullLogo className="brand-logo" />
                   </span>
                   <div className="credentials-section">

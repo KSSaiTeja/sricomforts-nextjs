@@ -170,7 +170,7 @@ main,
 .site-header .logo-link .logo,
 .site-header .logo-link svg {
   display: block;
-  width: 6rem;
+  width: 12.5rem;
   height: auto;
   max-width: none;
   flex: none;
@@ -180,7 +180,7 @@ main,
 @media (min-width: 1024px) {
   .site-header .logo-link .logo,
   .site-header .logo-link svg {
-    width: 7rem;
+    width: 16rem;
   }
 }
 
