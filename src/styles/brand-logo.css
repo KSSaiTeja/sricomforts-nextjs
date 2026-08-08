@@ -18,7 +18,8 @@
 .brand-logo-highlight img,
 .brand-logo-highlight .logo,
 .brand-logo-highlight .brand-logo,
-.brand-logo-highlight .mobile-drawer-logo-icon {
+.brand-logo-highlight .mobile-drawer-logo-icon,
+.brand-logo-highlight .chat-widget__logo-img {
   display: block;
   filter: drop-shadow(0 1px 0 rgb(255 255 255 / 85%));
   height: auto;
