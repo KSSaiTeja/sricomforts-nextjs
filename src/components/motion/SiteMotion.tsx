@@ -51,13 +51,6 @@ export function SiteMotion() {
       if (!isLoaded) return;
 
       registerGsap();
-      // Homepage already owns its own scroll/pin/canvas — extra SplitText
-      // reveals on leftover sections fight Lenis and flash white.
-      if (pathname === "/") {
-        requestAnimationFrame(() => ScrollTrigger.refresh());
-        return;
-      }
-
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
       const isNarrow = window.matchMedia("(max-width: 1023px)").matches;
@@ -89,25 +82,24 @@ export function SiteMotion() {
           const titleInView =
             sectionInView || title.getBoundingClientRect().top < viewportHeight * 0.92;
 
-          // Transform-only reveals — never autoAlpha/blur to 0 over white page bg
-          // (that combination is the site-wide “white flash” while scrolling).
+          // Mobile: skip SplitText/blur — cheaper fade only so scroll stays smooth.
           if (lightMotion) {
             gsap.fromTo(
               title,
-              { y: 18 },
+              { autoAlpha: 0, y: 18 },
               {
+                autoAlpha: 1,
                 y: 0,
                 duration: 0.55,
                 ease: "power2.out",
                 delay: titleInView ? 0.04 : 0,
-                clearProps: "transform",
-                immediateRender: titleInView,
+                clearProps: "transform,opacity,visibility",
                 ...(titleInView
                   ? {}
                   : {
                       scrollTrigger: {
                         trigger: title,
-                        start: "clamp(top 92%)",
+                        start: "clamp(top 90%)",
                         once: true,
                         refreshPriority: index,
                       },
@@ -124,25 +116,27 @@ export function SiteMotion() {
                 return gsap.fromTo(
                   self.chars,
                   {
-                    yPercent: 48,
-                    rotateX: -18,
+                    autoAlpha: 0,
+                    yPercent: 72,
+                    rotateX: -38,
+                    filter: "blur(8px)",
                   },
                   {
+                    autoAlpha: 1,
                     yPercent: 0,
                     rotateX: 0,
+                    filter: "blur(0px)",
                     duration: 0.72,
                     stagger: { each: 0.018, from: "start" },
                     ease: "power3.out",
                     delay: titleInView ? 0.04 : 0,
-                    clearProps: "transform",
-                    immediateRender: titleInView,
-                    transformOrigin: "50% 100%",
+                    clearProps: "transform,filter,opacity,visibility",
                     ...(titleInView
                       ? {}
                       : {
                           scrollTrigger: {
                             trigger: title,
-                            start: "clamp(top 92%)",
+                            start: "clamp(top 88%)",
                             once: true,
                             refreshPriority: index,
                           },
@@ -157,21 +151,26 @@ export function SiteMotion() {
         if (items.length) {
           gsap.fromTo(
             items,
-            { y: lightMotion ? 16 : 24 },
+            lightMotion
+              ? { autoAlpha: 0, y: 16 }
+              : { autoAlpha: 0, y: 28, filter: "blur(7px)" },
             {
+              autoAlpha: 1,
               y: 0,
+              ...(lightMotion ? {} : { filter: "blur(0px)" }),
               duration: lightMotion ? 0.55 : 0.78,
               stagger: lightMotion ? 0.04 : 0.075,
               ease: "power3.out",
               delay: sectionInView ? 0.08 : 0,
-              clearProps: "transform",
-              immediateRender: sectionInView,
+              clearProps: lightMotion
+                ? "transform,opacity,visibility"
+                : "transform,filter,opacity,visibility",
               ...(sectionInView
                 ? {}
                 : {
                     scrollTrigger: {
                       trigger: section,
-                      start: "clamp(top 90%)",
+                      start: "clamp(top 84%)",
                       once: true,
                       refreshPriority: index,
                     },

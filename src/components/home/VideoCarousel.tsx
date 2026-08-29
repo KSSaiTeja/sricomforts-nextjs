@@ -42,6 +42,23 @@ export function VideoCarousel() {
       }),
     );
 
+    if (sectionRef.current && backgroundWrapperRef.current) {
+      triggers.push(
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: "bottom bottom",
+          end: "bottom top",
+          scrub: true,
+          invalidateOnRefresh: true,
+          animation: gsap.fromTo(
+            backgroundWrapperRef.current,
+            { yPercent: 0 },
+            { yPercent: 50, ease: "none", duration: 1 },
+          ),
+        }),
+      );
+    }
+
     requestAnimationFrame(() => ScrollTrigger.refresh());
 
     return () => {
@@ -204,8 +221,8 @@ function ScrollIndicatorMobile() {
     if (!containerRef.current) return;
 
     const onScroll = () => {
-      const y = lenis?.scroll ?? window.scrollY;
-      const visible = y <= 50;
+      const scrollY = lenis?.scroll ?? window.scrollY;
+      const visible = scrollY <= 50;
       gsap.to(containerRef.current, {
         opacity: visible ? 1 : 0,
         duration: 0.4,

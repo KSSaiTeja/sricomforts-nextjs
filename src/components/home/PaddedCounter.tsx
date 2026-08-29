@@ -25,10 +25,15 @@ export function PaddedCounter({
   const rootRef = useRef<HTMLDivElement>(null);
   const stackRefs = useRef<(HTMLDivElement | null)[]>([]);
   const digitHeightRef = useRef(1);
-  const progressRef = useRef(progress);
-  progressRef.current = progress;
 
-  const applyTransform = (digitHeight = digitHeightRef.current) => {
+  useEffect(() => {
+    if (rootRef.current) {
+      digitHeightRef.current = rootRef.current.offsetHeight || 1;
+    }
+  }, []);
+
+  useEffect(() => {
+    const digitHeight = digitHeightRef.current;
     const fromDigits = getDigits(startValue, padLength);
     const toDigits = getDigits(endValue, padLength);
 
@@ -38,31 +43,9 @@ export function PaddedCounter({
 
       const toDigit = toDigits[columnIndex] ?? 0;
       const delta = (toDigit - fromDigit + 10) % 10;
-      const value = (fromDigit + delta * progressRef.current) % 10;
+      const value = (fromDigit + delta * progress) % 10;
       stack.style.transform = `translate3d(0, ${-value * digitHeight}px, 0)`;
     });
-  };
-
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-
-    const measure = () => {
-      digitHeightRef.current = root.offsetHeight || 1;
-      applyTransform();
-    };
-
-    measure();
-    const observer = new ResizeObserver(measure);
-    observer.observe(root);
-    return () => observer.disconnect();
-    // applyTransform reads latest props via refs / closure of start/end/pad.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startValue, endValue, padLength]);
-
-  useEffect(() => {
-    applyTransform();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endValue, padLength, progress, startValue]);
 
   return (

@@ -3,6 +3,27 @@ import { fitAndPosition, type FitMode } from "@/lib/canvas/fitImage";
 /** Steady batches — avoids saturating CPU/network while scrolling. */
 const BATCH_SIZE = 16;
 const BATCH_DELAY_MS = 20;
+const MAX_FRAME_FALLBACK = 4;
+
+let scrollActive = false;
+let scrollIdleTimer: ReturnType<typeof setTimeout> | null = null;
+let loadListenersAttached = false;
+
+function markUserScrolling() {
+  scrollActive = true;
+  if (scrollIdleTimer) clearTimeout(scrollIdleTimer);
+  scrollIdleTimer = setTimeout(() => {
+    scrollActive = false;
+    scrollIdleTimer = null;
+  }, 180);
+}
+
+function attachScrollListeners() {
+  if (loadListenersAttached || typeof window === "undefined") return;
+  loadListenersAttached = true;
+  window.addEventListener("wheel", markUserScrolling, { passive: true });
+  window.addEventListener("touchmove", markUserScrolling, { passive: true });
+}
 
 type FitPosition = { top: number; left: number };
 
@@ -108,11 +129,16 @@ function getOrCreateSharedState(
 function requestSharedLoad(state: SharedState) {
   if (state.loadStarted || state.frames.length === 0) return;
   state.loadStarted = true;
+  attachScrollListeners();
 
   const remaining = state.frames.slice(1);
 
   const sendNext = () => {
     if (remaining.length === 0) return;
+    if (scrollActive) {
+      setTimeout(sendNext, 80);
+      return;
+    }
     const batch = remaining.splice(0, BATCH_SIZE);
     state.worker.postMessage({ type: "frames", payload: { frames: batch } });
     if (remaining.length > 0) {
@@ -141,19 +167,15 @@ function resolveBitmap(state: SharedState, targetIndex: number) {
   const exact = state.bitmapCache.get(state.frames[targetIndex]!);
   if (exact) return exact;
 
-  let nearest: ImageBitmap | null = null;
-  let nearestDistance = Number.POSITIVE_INFINITY;
-  for (let index = 0; index < state.frames.length; index += 1) {
-    const bitmap = state.bitmapCache.get(state.frames[index]!);
-    if (!bitmap) continue;
-    const distance = Math.abs(index - targetIndex);
-    if (distance < nearestDistance) {
-      nearest = bitmap;
-      nearestDistance = distance;
-    }
+  for (let offset = 1; offset <= MAX_FRAME_FALLBACK; offset += 1) {
+    const forward = state.bitmapCache.get(state.frames[targetIndex + offset]!);
+    if (forward) return forward;
+
+    const backward = state.bitmapCache.get(state.frames[targetIndex - offset]!);
+    if (backward) return backward;
   }
 
-  return nearest;
+  return null;
 }
 
 export function preloadVideoSequence(frames: string[]) {
@@ -230,7 +252,7 @@ export function createVideoSequence({
   let lastDrawnIndex = -1;
 
   const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d", { alpha: false });
+  const ctx = canvas.getContext("2d");
 
   if (!ctx) {
     throw new Error("Canvas 2D context unavailable");
@@ -259,27 +281,19 @@ export function createVideoSequence({
       `${fit.top}%`,
     );
 
-    ctx.fillStyle = "#000000";
-    ctx.fillRect(0, 0, displayWidth, displayHeight);
+    ctx.clearRect(0, 0, displayWidth, displayHeight);
     ctx.drawImage(bitmap, fitted.x, fitted.y, fitted.width, fitted.height);
   };
 
   const resize = () => {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = window.devicePixelRatio || 1;
     const displayWidth = canvas.offsetWidth;
     const displayHeight = canvas.offsetHeight;
 
     if (displayWidth === 0 || displayHeight === 0) return;
 
-    const nextWidth = Math.round(displayWidth * dpr);
-    const nextHeight = Math.round(displayHeight * dpr);
-    if (canvas.width === nextWidth && canvas.height === nextHeight) {
-      onUpdate(true);
-      return;
-    }
-
-    canvas.width = nextWidth;
-    canvas.height = nextHeight;
+    canvas.width = displayWidth * dpr;
+    canvas.height = displayHeight * dpr;
     canvas.style.width = `${displayWidth}px`;
     canvas.style.height = `${displayHeight}px`;
 

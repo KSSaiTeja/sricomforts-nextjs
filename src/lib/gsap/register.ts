@@ -11,13 +11,7 @@ export function registerGsap() {
 
   if (!pluginsRegistered) {
     gsap.registerPlugin(CustomEase, ScrollTrigger, Flip, SplitText);
-    // Default when Lenis is off. SmoothScrollProvider sets lagSmoothing(0)
-    // while Lenis is active (required for single-ticker sync).
-    gsap.ticker.lagSmoothing(500, 33);
-    ScrollTrigger.config({
-      ignoreMobileResize: true,
-      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
-    });
+    gsap.ticker.lagSmoothing(0);
     pluginsRegistered = true;
   }
 

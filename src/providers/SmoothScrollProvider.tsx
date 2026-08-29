@@ -1,7 +1,6 @@
 "use client";
 
 import Lenis from "lenis";
-import "lenis/dist/lenis.css";
 import {
   createContext,
   useContext,
@@ -17,7 +16,7 @@ import { registerGsap } from "@/lib/gsap/register";
 
 type SmoothScrollContextValue = {
   lenis: Lenis | null;
-  /** True once scroll mode (Lenis or native) has been decided. */
+  /** True once the scroll system has decided Lenis vs native. */
   ready: boolean;
 };
 
@@ -30,34 +29,12 @@ export function useSmoothScroll() {
   return useContext(SmoothScrollContext);
 }
 
-/**
- * Desktop + fine pointer only.
- * Phones / tablets keep native momentum — Lenis + touch feels glitchy.
- */
+/** Desktop + fine pointer only — Lenis fights native touch scroll on phones. */
 function shouldUseLenis() {
-  if (typeof window === "undefined") return false;
-
-  const wideEnough = window.matchMedia(
-    `(min-width: ${breakpoints.md}px)`,
-  ).matches;
-  const finePointer = window.matchMedia(
-    "(hover: hover) and (pointer: fine)",
-  ).matches;
-  const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-  const coarseTouch = window.matchMedia("(pointer: coarse)").matches;
-
-  return wideEnough && finePointer && !coarseTouch && !reduceMotion;
-}
-
-function clearLenisDomState() {
-  const root = document.documentElement;
-  root.classList.remove(
-    "lenis",
-    "lenis-smooth",
-    "lenis-scrolling",
-    "lenis-stopped",
+  return (
+    window.matchMedia(`(min-width: ${breakpoints.lg}px)`).matches &&
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
 }
 
@@ -66,123 +43,102 @@ type SmoothScrollProviderProps = {
   enabled?: boolean;
 };
 
-/**
- * Lenis + GSAP ScrollTrigger — official single-ticker wiring.
- *
- * Critical rules (from Lenis / GSAP guidance):
- * 1. `autoRaf: false` — Lenis must NOT run its own rAF loop
- * 2. Drive `lenis.raf` from `gsap.ticker` so both share one clock
- * 3. `lenis.on("scroll", ScrollTrigger.update)` keeps scrub/pin in sync
- * 4. `gsap.ticker.lagSmoothing(0)` while Lenis is active
- * 5. NO `ScrollTrigger.scrollerProxy` for document-root Lenis
- *    (proxy was the prior fight: double scroll authority → sticky/jank)
- */
 export function SmoothScrollProvider({
   children,
   enabled = true,
 }: SmoothScrollProviderProps) {
   const lenisRef = useRef<Lenis | null>(null);
-  const tickerRef = useRef<((time: number) => void) | null>(null);
   const [lenis, setLenis] = useState<Lenis | null>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     registerGsap();
 
-    const destroyLenis = () => {
-      if (tickerRef.current) {
-        gsap.ticker.remove(tickerRef.current);
-        tickerRef.current = null;
-      }
+    const root = document.documentElement;
+    const useLenis = shouldUseLenis();
 
-      if (lenisRef.current) {
-        lenisRef.current.destroy();
-        lenisRef.current = null;
-      }
-
+    if (!useLenis) {
+      root.classList.remove("lenis", "lenis-smooth");
       setLenis(null);
-      clearLenisDomState();
-      // Restore default lag smoothing when not using Lenis.
-      gsap.ticker.lagSmoothing(500, 33);
+      setReady(true);
       requestAnimationFrame(() => ScrollTrigger.refresh());
-    };
-
-    const setupLenis = () => {
-      if (lenisRef.current || !shouldUseLenis()) return;
-
-      const instance = new Lenis({
-        // Snappier than 0.1 — low lerp on this canvas/pin page feels “stuck”.
-        lerp: 0.22,
-        wheelMultiplier: 1,
-        smoothWheel: true,
-        autoRaf: false,
-        syncTouch: false,
-        touchMultiplier: 1,
-        // Prevent Lenis from stealing focus inside overlays / drawers.
-        prevent: (node) => {
-          if (!(node instanceof HTMLElement)) return false;
-          return (
-            node.hasAttribute("data-lenis-prevent") ||
-            Boolean(node.closest("[data-lenis-prevent]"))
-          );
-        },
-      });
-
-      lenisRef.current = instance;
-      setLenis(instance);
-
-      // ScrollTrigger reads Lenis scroll each frame of motion.
-      instance.on("scroll", ScrollTrigger.update);
-
-      // One shared RAF clock — do not also enable Lenis autoRaf.
-      const ticker = (time: number) => {
-        lenisRef.current?.raf(time * 1000);
-      };
-      tickerRef.current = ticker;
-      gsap.ticker.add(ticker);
-      gsap.ticker.lagSmoothing(0);
-
-      if (!enabled) {
-        instance.stop();
-      }
-
-      requestAnimationFrame(() => ScrollTrigger.refresh());
-    };
-
-    if (shouldUseLenis()) {
-      setupLenis();
-    } else {
-      destroyLenis();
+      return;
     }
 
+    root.classList.add("lenis", "lenis-smooth");
+
+    const instance = new Lenis({
+      lerp: 0.1,
+      smoothWheel: true,
+      autoRaf: false,
+      // Never virtualize touch — phones keep native momentum scrolling.
+      syncTouch: false,
+    });
+
+    lenisRef.current = instance;
+    setLenis(instance);
     setReady(true);
 
-    const syncForViewport = () => {
-      if (shouldUseLenis()) {
-        if (!lenisRef.current) setupLenis();
-      } else if (lenisRef.current) {
-        destroyLenis();
+    instance.on("scroll", ScrollTrigger.update);
+
+    const ticker = (time: number) => {
+      lenisRef.current?.raf(time * 1000);
+    };
+
+    gsap.ticker.add(ticker);
+
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value) {
+        if (arguments.length && value !== undefined) {
+          instance.scrollTo(value, { immediate: true });
+        }
+        return instance.scroll;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+    });
+
+    ScrollTrigger.defaults({ scroller: document.documentElement });
+
+    if (!enabled) {
+      instance.stop();
+    }
+
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+
+    const onBreakpointChange = () => {
+      // Hard reload path avoided — destroy Lenis if viewport becomes touch/small.
+      if (!shouldUseLenis() && lenisRef.current) {
+        gsap.ticker.remove(ticker);
+        lenisRef.current.destroy();
+        lenisRef.current = null;
+        setLenis(null);
+        root.classList.remove("lenis", "lenis-smooth");
+        ScrollTrigger.scrollerProxy(document.documentElement, {});
+        ScrollTrigger.refresh();
       }
     };
 
-    const desktopMq = window.matchMedia(`(min-width: ${breakpoints.md}px)`);
-    const pointerMq = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const coarseMq = window.matchMedia("(pointer: coarse)");
-    const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    desktopMq.addEventListener("change", syncForViewport);
-    pointerMq.addEventListener("change", syncForViewport);
-    coarseMq.addEventListener("change", syncForViewport);
-    motionMq.addEventListener("change", syncForViewport);
+    const desktopMq = window.matchMedia(`(min-width: ${breakpoints.lg}px)`);
+    desktopMq.addEventListener("change", onBreakpointChange);
 
     return () => {
-      desktopMq.removeEventListener("change", syncForViewport);
-      pointerMq.removeEventListener("change", syncForViewport);
-      coarseMq.removeEventListener("change", syncForViewport);
-      motionMq.removeEventListener("change", syncForViewport);
-      destroyLenis();
+      desktopMq.removeEventListener("change", onBreakpointChange);
+      gsap.ticker.remove(ticker);
+      instance.destroy();
+      lenisRef.current = null;
+      setLenis(null);
       setReady(false);
+      root.classList.remove("lenis", "lenis-smooth");
+      ScrollTrigger.scrollerProxy(document.documentElement, {});
     };
+    // Lenis instance lives for the full session — enabled toggles start/stop only.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

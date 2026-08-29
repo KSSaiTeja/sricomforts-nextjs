@@ -64,8 +64,28 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
-  height: 100%;
-  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Native mobile scroll — never leave Lenis height/overflow locks behind. */
+@media (max-width: 767px), (pointer: coarse) {
+  html.lenis,
+  html.lenis body {
+    height: auto !important;
+  }
+
+  html.lenis,
+  html.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
 }
 
 body {
@@ -150,9 +170,18 @@ main,
 .site-header .logo-link .logo,
 .site-header .logo-link svg {
   display: block;
+  width: 6rem;
   height: auto;
+  max-width: none;
   flex: none;
   flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .site-header .logo-link .logo,
+  .site-header .logo-link svg {
+    width: 7rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

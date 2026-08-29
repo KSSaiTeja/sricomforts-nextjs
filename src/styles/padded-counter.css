@@ -5,8 +5,6 @@
   --digit-height: calc(var(--padding) * 2 + var(--font-size) * var(--line-height));
   --digit-height: round(calc(var(--padding) * 2 + var(--font-size) * var(--line-height)), 1px);
   display: flex;
-  overflow: hidden;
-  height: var(--digit-height);
   color: var(--color-neutral-soft);
   font-family: var(--font-mono);
   font-size: var(--font-size);
@@ -19,12 +17,11 @@
   position: relative;
   height: var(--digit-height);
   overflow: hidden;
-  contain: paint;
 }
 
 .digit-stack,
 .digit {
-  will-change: auto;
+  will-change: transform;
 }
 
 .digit {
@@ -41,7 +38,4 @@
   top: 1.28rem;
   justify-content: flex-end;
   margin-bottom: 1.29rem;
-  overflow: hidden;
-  height: var(--digit-height);
-  contain: paint;
 }
