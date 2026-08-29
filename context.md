@@ -1,6 +1,6 @@
 # Project Context — sricomforts-nextjs
 
-> **Last updated:** July 6, 2026  
+> **Last updated:** August 29, 2026  
 > **Purpose:** Living record of the Sri Comforts marketing site. Use at the start of new chats to avoid re-explaining project history.
 
 ---
@@ -36,11 +36,12 @@
 | `/contact` | ✅ | `src/app/contact/page.tsx` |
 | `/solutions/[slug]` | ✅ | 6 slugs (commercial, it-services, industrial-pharma, healthcare, hospitality-retail, residential) |
 | `/services/[slug]` | ✅ | 3 slugs (how-we-work, amc, service-request) |
+| `/career` | ✅ | `src/app/career/page.tsx` |
+| `/blog` | ✅ | `src/app/blog/page.tsx` |
+| `/blog/[slug]` | ✅ | `src/app/blog/[slug]/page.tsx` |
+| `/blog/category/[slug]` | ✅ | `src/app/blog/category/[slug]/page.tsx` |
+| `/resources/ac-tonnage-calculator` | ✅ | `src/app/resources/ac-tonnage-calculator/page.tsx` |
 | `/*` (404) | ✅ | `src/app/not-found.tsx` |
-
-### Nav links not yet built
-
-`/career`, `/blog`, `/blog/category/*`, `/resources/product-overview`
 
 ---
 
@@ -73,7 +74,9 @@ src/
 | Service images | `serviceFeatureImagePath()` → `public/images/services/` |
 | Team portraits | `public/images/team/` |
 | Placeholder logos | `public/logos/placeholder/` (Logoipsum — Phase 2: real client logos) |
-| Brand logos | `public/logo/full-logo.svg`, `logo-icon.svg`, `logo-wordmark.svg` |
+| Brand lockup (nav / footer) | `public/assets/brand/sricomforts-logo.png` via `FullLogo` |
+| Display sizes | Navbar **200–240px** wide · Footer **220–280px** wide (`src/styles/brand-logo.css`) |
+| Source export | **960 × 203 px** transparent PNG (4× largest nav size). Current file is 1957×413 and is fine. |
 
 ---
 
@@ -110,6 +113,17 @@ src/
 - `images.remotePatterns`: `*.supabase.co` only (optional CDN)
 - Cache headers on `/static/frames/:path*`
 
+### Graphify (tracked in git)
+
+Live graph at `graphify-out/` (`graph.json`, `GRAPH_REPORT.md`, `graph.html`, `manifest.json`). Cursor rule: `.cursor/rules/graphify.mdc`.
+
+```bash
+graphify update .          # after code changes (AST only, no API cost)
+graphify query "<question>"
+```
+
+Dated snapshot folders and `graphify-out/cache/` stay gitignored. Vercel still ignores `graphify-out/` (`.vercelignore`) so it is not deployed.
+
 ### Local-only folders (gitignored + vercelignored)
 
 | Folder | Purpose |
@@ -136,7 +150,7 @@ See `docs/sricomforts-asset-checklist.md` for the full Phase 2 list.
 ## 9. How to Run
 
 ```bash
-cd /Users/kssaiteja/Downloads/sricomforts-nextjs
+cd sricomforts-nextjs   # repo root
 npm install
 npm run dev
 # → http://localhost:3000
@@ -168,8 +182,8 @@ npm run start   # serve production build
 ## Context for new chat
 - Project: sricomforts-nextjs (Sri Comforts HVAC marketing site)
 - Full history: context.md in repo root
-- Done: All pages live, self-hosted media, Phase 1 complete
-- Checklist: docs/sricomforts-asset-checklist.md
-- Next (Phase 2): Real client logos, team photos, project photography, product PDF
-- Key files: src/data/, src/lib/assets/localPaths.ts, src/components/home/
+- Graph: graphify-out/graph.json (run `graphify query` before exploring)
+- Done: Pages live; nav/footer logo clamped 200–240 / 220–280 px
+- Next: New logo assets if provided (export 960×203, replace public/assets/brand/sricomforts-logo.png)
+- Key files: src/styles/brand-logo.css, src/components/brand/FullLogo.tsx, src/data/
 ```
