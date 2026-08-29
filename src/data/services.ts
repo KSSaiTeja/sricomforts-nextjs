@@ -128,7 +128,7 @@ function buildHowWeWork(): ServicePageData {
           label: "System Design",
           title: "Engineered With Precision",
           description:
-            "VRF and split specifications, duct layouts, and electrical load plans — engineered for your building's unique zones and peak demands.",
+            "VRVs and split specifications, duct layouts, and electrical load plans — engineered for your building's unique zones and peak demands.",
           image: {
             src: serviceFeatureImage(slug, 1),
             alt: "HVAC system design",
@@ -333,7 +333,7 @@ function buildAmc(): ServicePageData {
           label: "Flexible Plans",
           title: "Coverage That Matches Your Portfolio",
           description:
-            "From single-site residential splits to multi-building commercial VRF networks — AMC tiers scale with unit count, criticality, and response requirements.",
+            "From single-site residential splits to multi-building commercial VRVs — AMC tiers scale with unit count, criticality, and response requirements.",
           image: { src: serviceFeatureImage(slug, 5), alt: "Flexible AMC plans" },
           cta: { label: "Learn More", href: "/contact" },
         },

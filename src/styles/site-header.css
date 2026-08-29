@@ -147,9 +147,9 @@
 }
 
 .site-header .cta-button--secondary {
-  background-color: transparent;
-  color: var(--color-neutral-white);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 45%);
+  background-color: rgb(255 255 255 / 92%);
+  color: var(--color-brand-ink);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 70%);
 }
 
 .site-header .cta-button--primary {
@@ -229,9 +229,9 @@
 
 @media (hover: hover) and (pointer: fine) {
   .site-header .cta-button--secondary:hover {
-    color: var(--color-brand-accent-on-dark) !important;
-    box-shadow: inset 0 0 0 1px var(--color-brand-accent-on-dark);
-    background-color: transparent !important;
+    color: var(--color-brand-ink) !important;
+    background-color: var(--color-neutral-white) !important;
+    box-shadow: inset 0 0 0 1px var(--color-brand-primary);
   }
 
   .site-header .cta-button--secondary:hover:before {

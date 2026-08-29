@@ -1,7 +1,15 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
 import { AppPreloader } from "@/components/preloader/AppPreloader";
 import { HeroPreloadStarter } from "@/components/preloader/HeroPreloadStarter";
 
@@ -15,41 +23,75 @@ const PreloaderContext = createContext<PreloaderContextValue>({
   isAnimating: false,
 });
 
+const SESSION_KEY = "sc-preloader-ready";
+
+function readSessionReady() {
+  if (typeof window === "undefined") return false;
+  try {
+    return window.sessionStorage.getItem(SESSION_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function writeSessionReady() {
+  try {
+    window.sessionStorage.setItem(SESSION_KEY, "1");
+  } catch {
+    // Ignore private-mode / blocked storage.
+  }
+}
+
 export function usePreloader() {
   return useContext(PreloaderContext);
 }
 
+/**
+ * Show the branded splash once per browser tab session.
+ * After that, hard reloads and route changes resolve immediately.
+ */
 export function PreloaderProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [loadedPath, setLoadedPath] = useState<string | null>(null);
-  const [animatingPath, setAnimatingPath] = useState<string | null>(null);
+  const [sessionReady, setSessionReady] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [bootChecked, setBootChecked] = useState(false);
 
-  const isLoaded = loadedPath === pathname;
-  const isAnimating = animatingPath === pathname;
+  useLayoutEffect(() => {
+    if (readSessionReady()) {
+      setSessionReady(true);
+      setIsAnimating(false);
+    }
+    setBootChecked(true);
+  }, []);
+
+  useEffect(() => {
+    if (sessionReady) setIsAnimating(false);
+  }, [pathname, sessionReady]);
 
   const handleLoaded = useCallback(() => {
-    setLoadedPath(pathname);
-  }, [pathname]);
+    writeSessionReady();
+    setIsAnimating(false);
+    setSessionReady(true);
+  }, []);
 
   const handleAnimate = useCallback(() => {
-    setAnimatingPath(pathname);
-  }, [pathname]);
+    setIsAnimating(true);
+  }, []);
 
   const value = useMemo(
     () => ({
-      isLoaded,
-      isAnimating,
+      isLoaded: sessionReady,
+      isAnimating: !sessionReady && isAnimating,
     }),
-    [isAnimating, isLoaded],
+    [isAnimating, sessionReady],
   );
 
   return (
     <PreloaderContext.Provider value={value}>
       <HeroPreloadStarter />
       {children}
-      {!isLoaded ? (
+      {bootChecked && !sessionReady ? (
         <AppPreloader
-          key={pathname}
           waitForHeroFrames={pathname === "/"}
           onLoaded={handleLoaded}
           onAnimate={handleAnimate}

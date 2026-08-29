@@ -174,6 +174,7 @@ export function StatsBento() {
       ref={sectionRef}
       className={styles.section}
       aria-label={`${BRAND_NAME} at a glance`}
+      data-motion-ignore
     >
       <div ref={gridRef} className={styles.grid}>
         {statsBento.items.map((item, index) => (

@@ -115,7 +115,7 @@ function buildCommercial(): SolutionPageData {
         {
           title: "Diverse Facility Types",
           description:
-            "Corporate towers, co-working hubs, and mixed-use campuses each require tailored ducting, VRF layouts, and maintenance plans.",
+            "Corporate towers, co-working hubs, and mixed-use campuses each require tailored ducting, VRVs, and maintenance plans.",
           image: { src: mesh(2), alt: "Diverse facility types illustration" },
         },
         {
@@ -166,10 +166,10 @@ function buildCommercial(): SolutionPageData {
       title: "Sri\u00A0Comforts Solutions That Drive Results for Commercial Operations",
       items: [
         {
-          title: "VRF System Design",
+          title: "VRVs Design",
           description:
-            "AutoCAD-based layouts and VRF specifications tailored to your floor plate, occupancy, and budget from day one.",
-          image: { src: featureImage("commercial", 0), alt: "VRF system design" },
+            "AutoCAD-based layouts and VRVs specifications tailored to your floor plate, occupancy, and budget from day one.",
+          image: { src: featureImage("commercial", 0), alt: "VRVs system design" },
           metrics: [{ value: "30%↓", label: "in Energy Waste" }],
         },
         {
@@ -207,7 +207,7 @@ function buildCommercial(): SolutionPageData {
         {
           title: "Office Tower Retrofit",
           description:
-            "Replace aging split systems with centralized VRF, improving comfort per floor while cutting energy bills.",
+            "Replace aging split systems with centralized VRVs, improving comfort per floor while cutting energy bills.",
           image: { src: mesh(0), alt: "Office tower retrofit" },
         },
         {
@@ -234,7 +234,7 @@ function buildCommercial(): SolutionPageData {
       label: "Case Study",
       title: "Leading commercial tower reduces cooling downtime",
       description:
-        "Legacy chillers and reactive maintenance led to frequent comfort complaints and emergency costs. Sri\u00A0Comforts deployed a phased VRF upgrade with structured AMC, cutting breakdowns and stabilizing temperatures across 12 floors.",
+        "Legacy chillers and reactive maintenance led to frequent comfort complaints and emergency costs. Sri\u00A0Comforts deployed a phased VRVs upgrade with structured AMC, cutting breakdowns and stabilizing temperatures across 12 floors.",
       quote:
         "We have not seen this kind of consistency from an HVAC partner before — this is a significant milestone in how we manage comfort across our campus.",
       stats: [
@@ -682,9 +682,9 @@ export const solutionPages: Record<string, SolutionPageData> = {
       title: "Solutions That Drive Results for Hospitality & Retail",
       items: [
         {
-          title: "Quiet VRF Systems",
-          description: "Low-noise VRF units for guest rooms, suites, and premium retail floors.",
-          image: { src: featureImage("hospitality-retail", 0), alt: "Quiet VRF" },
+          title: "Quiet VRVs",
+          description: "Low-noise VRVs for guest rooms, suites, and premium retail floors.",
+          image: { src: featureImage("hospitality-retail", 0), alt: "Quiet VRVs" },
         },
         {
           title: "Kitchen & Back-of-House",
@@ -740,7 +740,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
       label: "Case Study",
       title: "Hotel group cuts guest comfort complaints",
       description:
-        "Inconsistent room temperatures drove negative reviews across a three-property portfolio. Sri\u00A0Comforts standardized VRF installs and AMC — improving ratings within two seasons.",
+        "Inconsistent room temperatures drove negative reviews across a three-property portfolio. Sri\u00A0Comforts standardized VRVs and AMC — improving ratings within two seasons.",
       quote:
         "Guest reviews turned around once room temperatures stabilized — invisible comfort is exactly what hospitality needs.",
       stats: [
@@ -813,9 +813,9 @@ export const solutionPages: Record<string, SolutionPageData> = {
           image: { src: featureImage("residential", 1), alt: "Authorized installation" },
         },
         {
-          title: "VRF for Large Homes",
+          title: "VRVs for Large Homes",
           description: "Multi-zone comfort for villas and duplexes with a single efficient outdoor unit.",
-          image: { src: featureImage("residential", 2), alt: "VRF for large homes" },
+          image: { src: featureImage("residential", 2), alt: "VRVs for large homes" },
         },
         {
           title: "AMC & Seasonal Service",
@@ -837,7 +837,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
       items: [
         {
           title: "New Villa Build",
-          description: "Whole-home VRF design integrated with your architect's plans from the start.",
+          description: "Whole-home VRVs design integrated with your architect's plans from the start.",
           image: { src: mesh(0), alt: "New villa build" },
         },
         {
@@ -859,11 +859,11 @@ export const solutionPages: Record<string, SolutionPageData> = {
     },
     caseStudy: {
       label: "Case Study",
-      title: "Villa owner cuts electricity bills with right-sized VRF",
+      title: "Villa owner cuts electricity bills with right-sized VRVs",
       description:
-        "Oversized splits cycled constantly and never dehumidified properly. Sri\u00A0Comforts resized with VRF and seasonal AMC — delivering even comfort at lower monthly cost.",
+        "Oversized splits cycled constantly and never dehumidified properly. Sri\u00A0Comforts resized with VRVs and seasonal AMC — delivering even comfort at lower monthly cost.",
       quote:
-        "Right-sized VRF finally gave us even comfort in every room — and the bills dropped noticeably the first summer.",
+        "Right-sized VRVs finally gave us even comfort in every room — and the bills dropped noticeably the first summer.",
       stats: [
         { value: "32%↓", label: "Electricity Bill" },
         { value: "100%", label: "Room Comfort Coverage" },

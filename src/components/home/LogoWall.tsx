@@ -160,6 +160,7 @@ export function LogoWall() {
       ref={sectionRef}
       className={`logo-grid-wrapper logo-wall--pt-sm logo-wall--pb-sm ${styles.fullBleed}${logoWallIntro ? " has-intro" : ""}`}
       aria-label="Brand logos"
+      data-motion-ignore
     >
       <div className={`logo-grid-window ${styles.window}`}>
         {logoWallIntro ? (

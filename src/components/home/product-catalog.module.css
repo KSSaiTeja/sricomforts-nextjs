@@ -253,7 +253,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  min-height: 0;
+  min-height: clamp(22rem, 58svh, 36rem);
   padding: 1.1rem 1.1rem 1.25rem;
   border-radius: 1.35rem;
   background:
@@ -267,7 +267,6 @@
   color: var(--color-neutral-white);
   overflow: hidden;
   isolation: isolate;
-  animation: stage-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .stageGlow {
@@ -382,33 +381,141 @@
   position: relative;
   z-index: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  min-height: clamp(6rem, 18svh, 9.5rem);
-  max-height: clamp(7rem, 22svh, 11rem);
-  padding: 0.35rem 0 0.15rem;
+  min-height: clamp(11rem, 32svh, 16rem);
+  max-height: none;
+  overflow: hidden;
+  padding: 0.5rem 2.6rem 0.35rem;
 }
 
-.stageVisualLink {
-  display: flex;
+.zoomFrame {
+  --zx: 50%;
+  --zy: 50%;
+  position: relative;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-  text-decoration: none;
-  color: inherit;
+  max-width: min(92%, 22rem);
+  max-height: 14.5rem;
+  isolation: isolate;
+  cursor: zoom-in;
 }
 
 .stageImage {
   display: block;
   width: auto;
-  max-width: min(78%, 15rem);
-  max-height: 9.75rem;
+  max-width: 100%;
+  max-height: 14.5rem;
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 1rem 2rem rgb(0 0 0 / 42%));
-  animation: float-in 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+  transition: opacity 0.18s ease;
+}
+
+.zoomFrame[data-swap="out"] .stageImage {
+  /* Keep prior frame fully opaque until the next src commits — no empty stage */
+  opacity: 1;
+}
+
+.zoomLens {
+  display: none;
+  position: absolute;
+  z-index: 2;
+  width: 7rem;
+  height: 7rem;
+  left: var(--zx);
+  top: var(--zy);
+  transform: translate(-50%, -50%);
+  border: 1.5px solid rgb(255 255 255 / 88%);
+  border-radius: 0.35rem;
+  background-image: var(--zoom-image);
+  background-repeat: no-repeat;
+  background-size: 250%;
+  background-position: var(--zx) var(--zy);
+  pointer-events: none;
+}
+
+.zoomPane {
+  display: none;
+  position: absolute;
+  z-index: 4;
+  top: 4.25rem;
+  right: 1.1rem;
+  width: min(48%, 22rem);
+  aspect-ratio: 1;
+  border-radius: 1rem;
+  border: 1px solid rgb(255 255 255 / 18%);
+  background-color: #0b1f2e;
+  background-image: var(--zoom-image);
+  background-repeat: no-repeat;
+  background-size: 240%;
+  background-position: var(--zx) var(--zy);
+  box-shadow: 0 1.25rem 2.75rem rgb(0 0 0 / 48%);
+  pointer-events: none;
+}
+
+.variantBtn {
+  position: absolute;
+  top: 46%;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  transform: translateY(-50%);
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 999px;
+  background: rgb(8 23 34 / 62%);
+  color: var(--color-neutral-white);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.variantBtnPrev {
+  left: 0.15rem;
+}
+
+.variantBtnNext {
+  right: 0.15rem;
+}
+
+.variantBtn:hover,
+.variantBtn:focus-visible {
+  background: rgb(0 123 192 / 55%);
+  border-color: rgb(154 216 245 / 55%);
+  outline: none;
+}
+
+.variantLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0.45rem 0 0;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 8%);
+  color: rgb(255 255 255 / 82%);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.variantCount {
+  color: rgb(154 216 245 / 85%);
+  letter-spacing: 0.08rem;
 }
 
 .stageCopy {
@@ -420,6 +527,7 @@
   gap: 0.75rem;
   width: 100%;
   max-width: 36rem;
+  transition: opacity 0.2s ease;
 }
 
 .stageTags {
@@ -565,30 +673,6 @@
   text-align: center;
 }
 
-@keyframes stage-in {
-  from {
-    opacity: 0.55;
-    transform: translateY(0.5rem);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes float-in {
-  from {
-    opacity: 0;
-    transform: translateY(1rem) scale(0.96);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 @media (min-width: 768px) {
   .header {
     max-width: 70%;
@@ -597,7 +681,7 @@
   .showroom {
     grid-template-columns: minmax(15rem, 0.9fr) minmax(0, 1.6fr);
     gap: 1.25rem;
-    min-height: clamp(18rem, 52svh, 32rem);
+    min-height: clamp(22rem, 58svh, 38rem);
   }
 
   .specs {
@@ -674,15 +758,31 @@
   }
 
   .stageVisual {
-    min-height: 13rem;
+    min-height: 18rem;
     max-height: none;
-    padding: 0.75rem 0;
+    padding: 0.85rem 3rem 0.5rem;
   }
 
   .stageImage {
-    max-width: min(68%, 22rem);
-    max-height: 15rem;
+    max-width: 100%;
+    max-height: 20.5rem;
     filter: drop-shadow(0 1.25rem 2.5rem rgb(0 0 0 / 45%));
+  }
+
+  .zoomFrame {
+    max-width: min(86%, 30rem);
+    max-height: 20.5rem;
+  }
+
+  .zoomLens {
+    width: 8.5rem;
+    height: 8.5rem;
+  }
+
+  .zoomPane {
+    top: 4.5rem;
+    right: 1.5rem;
+    width: min(46%, 24rem);
   }
 }
 
@@ -708,7 +808,7 @@
   .showroom {
     grid-template-columns: minmax(17rem, 0.85fr) minmax(0, 1.7fr);
     gap: 1.5rem;
-    min-height: clamp(20rem, 55svh, 36rem);
+    min-height: clamp(24rem, 62svh, 42rem);
   }
 
   .index {
@@ -730,13 +830,27 @@
   }
 
   .stageVisual {
-    min-height: 15rem;
+    min-height: 22rem;
     max-height: none;
   }
 
   .stageImage {
-    max-width: min(62%, 24rem);
-    max-height: 17rem;
+    max-width: 100%;
+    max-height: 24.5rem;
+  }
+
+  .zoomFrame {
+    max-width: min(82%, 36rem);
+    max-height: 24.5rem;
+  }
+
+  .zoomLens {
+    width: 9.5rem;
+    height: 9.5rem;
+  }
+
+  .zoomPane {
+    width: min(44%, 26rem);
   }
 
   .stageCopy {
@@ -771,6 +885,20 @@
     border-color: rgb(5 24 36 / 25%);
     color: var(--color-brand-ink);
   }
+
+  .zoomFrame[data-zoom="on"] .zoomLens {
+    display: block;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+  .stage[data-zooming="true"] .zoomPane {
+    display: block;
+  }
+
+  .stage[data-zooming="true"] .stageCopy {
+    opacity: 0.22;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -779,8 +907,22 @@
   .indexItem,
   .filter,
   .navBtn,
+  .variantBtn,
   .stageCta {
     transition: none;
     animation: none;
+  }
+
+  .zoomFrame[data-swap="out"] .stageImage {
+    opacity: 1;
+  }
+
+  .zoomLens,
+  .zoomPane {
+    display: none !important;
+  }
+
+  .zoomFrame {
+    cursor: default;
   }
 }

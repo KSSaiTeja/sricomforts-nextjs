@@ -64,28 +64,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
-}
-
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-/* Native mobile scroll — never leave Lenis height/overflow locks behind. */
-@media (max-width: 767px), (pointer: coarse) {
-  html.lenis,
-  html.lenis body {
-    height: auto !important;
-  }
-
-  html.lenis,
-  html.lenis-smooth {
-    scroll-behavior: auto !important;
-  }
+  height: 100%;
+  scroll-behavior: auto;
 }
 
 body {

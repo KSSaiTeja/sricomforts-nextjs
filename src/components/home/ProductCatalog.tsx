@@ -9,6 +9,7 @@ import {
   useState,
   type KeyboardEvent,
 } from "react";
+import { ProductImageZoom } from "@/components/home/ProductImageZoom";
 import {
   filterProductCatalogItems,
   PRODUCT_BENTO_IMAGE,
@@ -51,8 +52,10 @@ function categoryLabel(id: string) {
 export function ProductCatalog() {
   const [activeFilter, setActiveFilter] = useState<ProductCatalogFilter>("all");
   const [activeId, setActiveId] = useState(productCatalogItems[0]?.id ?? "");
+  const [variantIndex, setVariantIndex] = useState(0);
   const activeIndexButtonRef = useRef<HTMLButtonElement | null>(null);
   const indexListRef = useRef<HTMLUListElement | null>(null);
+  const stageRef = useRef<HTMLDivElement | null>(null);
   const isDesktop = useIsLargeViewport();
   const { headerRef, sectionRef } =
     useAnimatedStrong<HTMLHeadingElement, HTMLElement>();
@@ -74,6 +77,16 @@ export function ProductCatalog() {
   const activeProduct: ProductCatalogItem | undefined =
     visibleProducts[activeIndex] ?? visibleProducts[0];
 
+  const variants = activeProduct?.variants ?? [];
+  const activeVariant = variants[variantIndex];
+  const displayImage =
+    activeVariant?.image ?? activeProduct?.image ?? PRODUCT_BENTO_IMAGE;
+  const displayAlt =
+    activeVariant?.imageAlt ?? activeProduct?.imageAlt ?? "";
+  const displayTagline =
+    activeVariant?.tagline ?? activeProduct?.tagline ?? "";
+  const displaySpecs = activeVariant?.specs ?? activeProduct?.specs ?? [];
+
   useEffect(() => {
     if (!visibleProducts.length) {
       setActiveId("");
@@ -84,6 +97,10 @@ export function ProductCatalog() {
       setActiveId(visibleProducts[0].id);
     }
   }, [activeId, visibleProducts]);
+
+  useEffect(() => {
+    setVariantIndex(0);
+  }, [activeId]);
 
   useEffect(() => {
     const list = indexListRef.current;
@@ -110,14 +127,34 @@ export function ProductCatalog() {
     [activeIndex, visibleProducts],
   );
 
+  const cycleVariant = useCallback(
+    (offset: number) => {
+      if (variants.length < 2) return;
+      setVariantIndex(
+        (current) => (current + offset + variants.length) % variants.length,
+      );
+    },
+    [variants.length],
+  );
+
   const onStageKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+    if (event.key === "ArrowDown") {
       event.preventDefault();
       selectByOffset(1);
     }
-    if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+    if (event.key === "ArrowUp") {
       event.preventDefault();
       selectByOffset(-1);
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      if (variants.length > 1) cycleVariant(1);
+      else selectByOffset(1);
+    }
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      if (variants.length > 1) cycleVariant(-1);
+      else selectByOffset(-1);
     }
   };
 
@@ -126,6 +163,7 @@ export function ProductCatalog() {
       ref={sectionRef}
       className={styles.section}
       aria-labelledby="product-catalog-title"
+      data-motion-ignore
     >
       <div className={styles.contentWindow}>
         <header className={styles.header}>
@@ -216,10 +254,15 @@ export function ProductCatalog() {
 
             <div
               className={styles.stage}
-              key={activeProduct.id}
+              ref={stageRef}
               data-tone={activeProduct.categories[0]}
             >
               <div className={styles.stageGlow} aria-hidden="true" />
+              <div
+                className={styles.zoomPane}
+                aria-hidden="true"
+                role="presentation"
+              />
 
               <div className={styles.stageTop}>
                 {activeProduct.isNewLaunch ? (
@@ -248,16 +291,42 @@ export function ProductCatalog() {
               </div>
 
               <div className={styles.stageVisual}>
-                <Link href={activeProduct.href} className={styles.stageVisualLink}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    className={styles.stageImage}
-                    src={activeProduct.image || PRODUCT_BENTO_IMAGE}
-                    alt={activeProduct.imageAlt}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </Link>
+                {variants.length > 1 ? (
+                  <button
+                    type="button"
+                    className={`${styles.variantBtn} ${styles.variantBtnPrev}`}
+                    aria-label={`Previous, ${variants[(variantIndex - 1 + variants.length) % variants.length].name}`}
+                    onClick={() => cycleVariant(-1)}
+                  >
+                    ‹
+                  </button>
+                ) : null}
+
+                <ProductImageZoom
+                  src={displayImage}
+                  alt={displayAlt}
+                  stageRef={stageRef}
+                />
+
+                {variants.length > 1 ? (
+                  <button
+                    type="button"
+                    className={`${styles.variantBtn} ${styles.variantBtnNext}`}
+                    aria-label={`Next, ${variants[(variantIndex + 1) % variants.length].name}`}
+                    onClick={() => cycleVariant(1)}
+                  >
+                    ›
+                  </button>
+                ) : null}
+
+                {activeVariant ? (
+                  <p className={styles.variantLabel}>
+                    {activeVariant.name}
+                    <span className={styles.variantCount}>
+                      {formatIndex(variantIndex + 1)}/{formatIndex(variants.length)}
+                    </span>
+                  </p>
+                ) : null}
               </div>
 
               <div className={styles.stageCopy}>
@@ -269,10 +338,10 @@ export function ProductCatalog() {
                   ))}
                 </div>
                 <h3 className={styles.stageTitle}>{activeProduct.name}</h3>
-                <p className={styles.stageTagline}>{activeProduct.tagline}</p>
+                <p className={styles.stageTagline}>{displayTagline}</p>
 
                 <dl className={styles.specs} aria-label={`${activeProduct.name} specifications`}>
-                  {activeProduct.specs.map((spec, index) => (
+                  {displaySpecs.map((spec, index) => (
                     <div
                       key={spec.label}
                       className={[

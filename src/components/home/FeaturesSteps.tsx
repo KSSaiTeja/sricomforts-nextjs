@@ -147,6 +147,9 @@ export function FeaturesSteps() {
   const lastPlayedIndexRef = useRef<number | null>(null);
 
   const [activeIndex, setActiveIndex] = useState(0);
+  /** Painted media index — lags activeIndex until the next video can show a frame. */
+  const [displayIndex, setDisplayIndex] = useState(0);
+  const [heldIndex, setHeldIndex] = useState<number | null>(null);
   const charProgressRef = useRef(0);
   const [odometerProgress, setOdometerProgress] = useState(0);
   const [notchPosition, setNotchPosition] = useState(notchPositionForIndex(0));
@@ -171,12 +174,6 @@ export function FeaturesSteps() {
 
     if (listRef.current) {
       snapPointsRef.current = getSnapPoints(listRef.current);
-    }
-
-    const odometer = headerRef.current?.querySelector(".odometer");
-    const lastItem = itemRefs.current[ITEM_COUNT - 1];
-    if (odometer instanceof HTMLElement && lastItem) {
-      odometer.style.marginBottom = `calc(${lastItem.offsetHeight}px - var(--font-size) - min(2.396vw, 61.3333333333px) * 0.45)`;
     }
   }, []);
 
@@ -240,6 +237,62 @@ export function FeaturesSteps() {
   useEffect(() => {
     activeIndexRef.current = activeIndex;
   }, [activeIndex]);
+
+  // Hold the previous frame until the newly active video has a paintable frame.
+  // Avoids the white-flash gap where outgoing media was hidden instantly while
+  // the incoming layer faded from opacity 0 over a white underlay.
+  useEffect(() => {
+    if (activeIndex === displayIndex) {
+      setHeldIndex(null);
+      return;
+    }
+
+    setHeldIndex(displayIndex);
+    const video = videoRefs.current[activeIndex];
+    let cancelled = false;
+    let fallbackTimer = 0;
+
+    const commit = () => {
+      if (cancelled) return;
+      setDisplayIndex(activeIndex);
+      setHeldIndex(null);
+    };
+
+    if (!video) {
+      commit();
+      return;
+    }
+
+    // Warm decode for neighbors so the next step rarely waits.
+    // Never call load() on the held/painted frame — that blanks the element mid-hold.
+    [activeIndex - 1, activeIndex + 1].forEach((index) => {
+      if (index < 0 || index >= ITEM_COUNT) return;
+      const neighbor = videoRefs.current[index];
+      if (!neighbor || neighbor.readyState >= 2) return;
+      neighbor.preload = "auto";
+    });
+    if (video.readyState < 2) {
+      video.preload = "auto";
+    }
+
+    if (video.readyState >= 2) {
+      // Double-raf so the new layer is composited before we drop the hold.
+      requestAnimationFrame(() => requestAnimationFrame(commit));
+      return;
+    }
+
+    const onReady = () => commit();
+    video.addEventListener("loadeddata", onReady);
+    video.addEventListener("canplay", onReady);
+    fallbackTimer = window.setTimeout(commit, 450);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(fallbackTimer);
+      video.removeEventListener("loadeddata", onReady);
+      video.removeEventListener("canplay", onReady);
+    };
+  }, [activeIndex, displayIndex]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -316,11 +369,21 @@ export function FeaturesSteps() {
     const triggers: ScrollTrigger[] = [];
     let refreshTimer = 0;
 
-    const resizeObserver = new ResizeObserver(() => {
+    let lastWidth = 0;
+    let lastHeight = 0;
+    const resizeObserver = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (!entry) return;
+      const { width, height } = entry.contentRect;
+      if (Math.abs(width - lastWidth) < 2 && Math.abs(height - lastHeight) < 2) {
+        return;
+      }
+      lastWidth = width;
+      lastHeight = height;
       measureItemPositions();
       // Debounce — mobile chrome / soft keyboard resize storms reset scroll feel.
       window.clearTimeout(refreshTimer);
-      refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 120);
+      refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 280);
     });
 
     if (listRef.current) resizeObserver.observe(listRef.current);
@@ -337,6 +400,7 @@ export function FeaturesSteps() {
         updateNotchPosition(notchPositionRef.current);
 
         if (innerRef.current && headerRef.current) {
+          const odometer = headerRef.current.querySelector<HTMLElement>(".odometer");
           triggers.push(
             ScrollTrigger.create({
               trigger: innerRef.current,
@@ -344,13 +408,14 @@ export function FeaturesSteps() {
               end: "top 15%",
               scrub: true,
               onUpdate: ({ progress }) => {
-                if (!headerRef.current) return;
-                // Clear transform when done — leftover translateY(0) breaks sticky.
+                if (!odometer) return;
+                // Transform the counter, not the sticky header — leftover
+                // translateY on a sticky ancestor blanks the pin.
                 if (progress >= 1) {
-                  headerRef.current.style.transform = "";
+                  odometer.style.transform = "";
                   return;
                 }
-                headerRef.current.style.transform = `translateY(${lerp(-10, 0, easePow2Out(progress))}rem)`;
+                odometer.style.transform = `translateY(${lerp(-10, 0, easePow2Out(progress))}rem)`;
               },
             }),
           );
@@ -380,7 +445,10 @@ export function FeaturesSteps() {
                 let index = positions.findIndex((item) => item.y > scrollY + lead);
                 index =
                   index === -1 ? positions.length - 1 : Math.max(0, index - 1);
-                setActiveIndex(index);
+                if (index !== activeIndexRef.current) {
+                  activeIndexRef.current = index;
+                  setActiveIndex(index);
+                }
 
                 const item = positions[index];
                 const itemProgress = interpolateProgress(
@@ -528,7 +596,13 @@ export function FeaturesSteps() {
             {featuresSteps.items.map((item, index) => (
               <div
                 key={item.label}
-                className={`media-el image${Math.max(activeIndex, 0) >= index ? " is-visible" : ""}`}
+                className={`media-el image${
+                  index === displayIndex
+                    ? " is-visible"
+                    : index === heldIndex
+                      ? " is-held"
+                      : ""
+                }`}
               >
                 <div className="media-wrapper lg">
                   <video

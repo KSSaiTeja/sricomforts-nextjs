@@ -96,9 +96,9 @@
     "semantic_hash": "9ab92ca2d4005980997e121348c17c04"
   },
   "src/components/brand/FullLogo.tsx": {
-    "mtime": 1787981379.517747,
-    "seen": 1787982512.380086,
-    "ast_hash": "6af52a14f55f2a892969322b22eb6f36",
+    "mtime": 1787983550.7747276,
+    "seen": 1787984558.451936,
+    "ast_hash": "24680a4e32097c141b93baf6f534bc40",
     "semantic_hash": ""
   },
   "src/components/brand/LogoIcon.tsx": {
@@ -120,9 +120,9 @@
     "semantic_hash": "45de8b172a47569a0efd91be8dbef689"
   },
   "src/components/brand/logoDimensions.ts": {
-    "mtime": 1787981379.517747,
-    "seen": 1787982512.380127,
-    "ast_hash": "da64e0c0b5b61e1e1c4f666f65324d2f",
+    "mtime": 1787983549.6888885,
+    "seen": 1787984558.451951,
+    "ast_hash": "e5fba7d6c1c578432937a9afc337f891",
     "semantic_hash": ""
   },
   "src/components/brand/wordmarkSlices.ts": {
@@ -480,10 +480,10 @@
     "semantic_hash": "e6af5670278c33196db77dee1aced88b"
   },
   "src/data/homepage.ts": {
-    "mtime": 1785145150.3980408,
-    "seen": 1787629489.597064,
-    "ast_hash": "ab4ca0ac2f39aaa50b38df858df589aa",
-    "semantic_hash": "ab4ca0ac2f39aaa50b38df858df589aa"
+    "mtime": 1787984478.6957145,
+    "seen": 1787984558.452607,
+    "ast_hash": "87de767a53234478ec6495151f7daaa0",
+    "semantic_hash": ""
   },
   "src/data/navigation.ts": {
     "mtime": 1784077583.8584096,
@@ -684,9 +684,9 @@
     "semantic_hash": ""
   },
   "context.md": {
-    "mtime": 1783336336.6005247,
-    "seen": 1787982512.381956,
-    "ast_hash": "6c8112f82eb1e247c756304cd53448ba",
+    "mtime": 1787983557.51336,
+    "seen": 1787984558.452682,
+    "ast_hash": "01265fffeb0558ece398e21adbabf91a",
     "semantic_hash": ""
   },
   "public/docs/sri-comforts-product-overview.pdf": {
@@ -12234,9 +12234,9 @@
     "semantic_hash": ""
   },
   "public/assets/brand/sricomforts-logo.png": {
-    "mtime": 1786219280.4841852,
-    "seen": 1787982512.382018,
-    "ast_hash": "9ae56d5fd15e45c7322de623a7e49512",
+    "mtime": 1787983534.7235622,
+    "seen": 1787984558.452831,
+    "ast_hash": "e1c0a8cd6b0c4d275c3926f8c50e010c",
     "semantic_hash": ""
   },
   "public/logo/full-logo.png": {
@@ -12303,6 +12303,744 @@
     "mtime": 1786218929.2942824,
     "seen": 1787982512.382016,
     "ast_hash": "67bf690adced37e5db8e2c15360fa84c",
+    "semantic_hash": ""
+  },
+  ".cursor/settings.json": {
+    "mtime": 1783841541.475872,
+    "seen": 1787984558.451071,
+    "ast_hash": "c79bd86b195886f54cebbdb3ad3d561d",
+    "semantic_hash": ""
+  },
+  "docs/kling-asset-manifest.json": {
+    "mtime": 1783333306.7064312,
+    "seen": 1787984558.4513102,
+    "ast_hash": "c8eb3da7334c955abe9c84495573e616",
+    "semantic_hash": ""
+  },
+  "docs/kling-generation-queue.json": {
+    "mtime": 1783334003.3457508,
+    "seen": 1787984558.451424,
+    "ast_hash": "7b0310f01cb524e7489a88a043a69e80",
+    "semantic_hash": ""
+  },
+  "docs/PRD-sri-comforts-ai-chatbot.md": {
+    "mtime": 1784079392.5573533,
+    "seen": 1787984558.452683,
+    "ast_hash": "58cea1183aa023ea1fc1f9b6c409b7c3",
+    "semantic_hash": ""
+  },
+  "docs/about-sricomforts.md": {
+    "mtime": 1783053811.993542,
+    "seen": 1787984558.452684,
+    "ast_hash": "7efb1c38b75a822cd26c50cf7d193455",
+    "semantic_hash": ""
+  },
+  "docs/hero-hybrid-higgsfield-prompts.md": {
+    "mtime": 1784077583.8688009,
+    "seen": 1787984558.4527218,
+    "ast_hash": "1af75ad93539fe2eda59d4f3b80c75ce",
+    "semantic_hash": ""
+  },
+  "docs/hero-solutions-story-v2.md": {
+    "mtime": 1784077583.872799,
+    "seen": 1787984558.4527218,
+    "ast_hash": "a90401655bccc0ef5b5a3bf8ba45b79b",
+    "semantic_hash": ""
+  },
+  "docs/hero-storyboard-v3-approval.md": {
+    "mtime": 1784077583.8726244,
+    "seen": 1787984558.452756,
+    "ast_hash": "bef4c07f91a1db53fb0517d67a491ff6",
+    "semantic_hash": ""
+  },
+  "docs/hero-the-line-final.md": {
+    "mtime": 1784077583.8725076,
+    "seen": 1787984558.452758,
+    "ast_hash": "92bb669a85defed7e12950ce0cc33e15",
+    "semantic_hash": ""
+  },
+  "docs/hero-video-omni-prompts.md": {
+    "mtime": 1784077583.8726366,
+    "seen": 1787984558.4527628,
+    "ast_hash": "a8ff0b0d80a44d5cccd42ce8d5ddf81c",
+    "semantic_hash": ""
+  },
+  "docs/kling-video-prompts.md": {
+    "mtime": 1784077583.8583884,
+    "seen": 1787984558.4527638,
+    "ast_hash": "295a95febcb6103e3deb888dfb6eb0ce",
+    "semantic_hash": ""
+  },
+  "docs/sricomforts-asset-checklist.md": {
+    "mtime": 1783336299.6586406,
+    "seen": 1787984558.452765,
+    "ast_hash": "faf3340dec3aa392a045330f5a4ec1e8",
+    "semantic_hash": ""
+  },
+  "docs/supabase-assets.md": {
+    "mtime": 1783271257.8434944,
+    "seen": 1787984558.452765,
+    "ast_hash": "1119f89434a3841544d2c04caa1bc0ec",
+    "semantic_hash": ""
+  },
+  "docs/AC_Tonnage_Calculator_Logic.pdf": {
+    "mtime": 1784294412.0444238,
+    "seen": 1787984558.452766,
+    "ast_hash": "d2c788ee3beb47e27e797f54588ae37b",
+    "semantic_hash": ""
+  },
+  "docs/HVAC Website Proposal - Version 3.pdf": {
+    "mtime": 1783053632.636719,
+    "seen": 1787984558.452767,
+    "ast_hash": "f65e437f12db1c89558681590a413533",
+    "semantic_hash": ""
+  },
+  "docs/SRI COM Company Profile - Updated 2026.pdf": {
+    "mtime": 1783842417.2974591,
+    "seen": 1787984558.452768,
+    "ast_hash": "4f373924f3b4aa34ed87dd29159014ab",
+    "semantic_hash": ""
+  },
+  "docs/Sri_Comforts_Basic_AC_Calculator_Guide.pdf": {
+    "mtime": 1784294412.068054,
+    "seen": 1787984558.452769,
+    "ast_hash": "446b02810ac8d2b3a554f025ae13c89f",
+    "semantic_hash": ""
+  },
+  "docs/StruxDigital_Vendor_RFQ_WebsiteBuild.pdf": {
+    "mtime": 1783053628.961864,
+    "seen": 1787984558.452769,
+    "ast_hash": "4e5ac159200b5f21e954c9569835ba7e",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-001.webp": {
+    "mtime": 1787984392.7853532,
+    "seen": 1787984558.4530299,
+    "ast_hash": "b38cb473734bed56780ddaa3011f40db",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-002.webp": {
+    "mtime": 1787984395.0187562,
+    "seen": 1787984558.4530308,
+    "ast_hash": "41f0253c9bac0ad8c1c1525ad6293be6",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-003.webp": {
+    "mtime": 1787984395.0426068,
+    "seen": 1787984558.453032,
+    "ast_hash": "fb32c23d8cf602462141df0f47cc4fa1",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-004.webp": {
+    "mtime": 1787984395.0484023,
+    "seen": 1787984558.453032,
+    "ast_hash": "ac982a068ee84c922c1cc36da13ef0b7",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-005.webp": {
+    "mtime": 1787984398.1608932,
+    "seen": 1787984558.453033,
+    "ast_hash": "ae2e185348d83a822a0ca6419e1f111d",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-006.webp": {
+    "mtime": 1787984398.1837583,
+    "seen": 1787984558.453034,
+    "ast_hash": "03932b30d108a74b0f3cf62966bfde2e",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-007.webp": {
+    "mtime": 1787984398.1922889,
+    "seen": 1787984558.453035,
+    "ast_hash": "50e626a27b176e741a169f8a834a881d",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-008.webp": {
+    "mtime": 1787984398.2137797,
+    "seen": 1787984558.453035,
+    "ast_hash": "bd5ebc040e83e3ba1b266dbcd4f70864",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-009.webp": {
+    "mtime": 1787984398.3353698,
+    "seen": 1787984558.453036,
+    "ast_hash": "acb348da317eac6bacf31d6f9a53372b",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-010.webp": {
+    "mtime": 1787984398.8595405,
+    "seen": 1787984558.453036,
+    "ast_hash": "3352f921d479dd1081f603ccd4e98aee",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-011.webp": {
+    "mtime": 1787984398.8624024,
+    "seen": 1787984558.453037,
+    "ast_hash": "43c854814a354d42b274767c7d9f717e",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-012.webp": {
+    "mtime": 1787984398.865519,
+    "seen": 1787984558.453038,
+    "ast_hash": "8af7fe0ff9d0555a7eb5b99374956da5",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-013.webp": {
+    "mtime": 1787984398.8675683,
+    "seen": 1787984558.453038,
+    "ast_hash": "6e4e3e10b16025577b59783cbe23abb9",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-014.webp": {
+    "mtime": 1787984398.8705876,
+    "seen": 1787984558.4530392,
+    "ast_hash": "2c1941c716614467e7bb991215f3dd62",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-015.webp": {
+    "mtime": 1787984398.8725038,
+    "seen": 1787984558.4530401,
+    "ast_hash": "a814aa4dd639846fc6b91cb10739dfe9",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-016.webp": {
+    "mtime": 1787984398.876896,
+    "seen": 1787984558.4530401,
+    "ast_hash": "edf6b10ff26de89f9aae7da6543f4fc4",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-017.webp": {
+    "mtime": 1787984398.8930063,
+    "seen": 1787984558.4530408,
+    "ast_hash": "6bec81a6e81a3231acf1992507810223",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-018.webp": {
+    "mtime": 1787984398.8962162,
+    "seen": 1787984558.453042,
+    "ast_hash": "b406914e7b0b188a03f11b3bd31da870",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-019.webp": {
+    "mtime": 1787984398.8985648,
+    "seen": 1787984558.453043,
+    "ast_hash": "d1eea7716f994505ba35f70a11a51561",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-020.webp": {
+    "mtime": 1787984398.9003792,
+    "seen": 1787984558.453043,
+    "ast_hash": "6d245b9f4bf92d73cb55c35c0d283791",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-021.webp": {
+    "mtime": 1787984398.9020956,
+    "seen": 1787984558.453044,
+    "ast_hash": "bd1f7d281a438dc6306d6614f6006af3",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-022.webp": {
+    "mtime": 1787984399.782518,
+    "seen": 1787984558.453045,
+    "ast_hash": "1f72b77767fac8d5d174a27c877eb5fb",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-023.webp": {
+    "mtime": 1787984399.7881691,
+    "seen": 1787984558.453045,
+    "ast_hash": "9dca09343c6c8ddf3011e7d7b1b0b2fa",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-024.webp": {
+    "mtime": 1787984399.7919683,
+    "seen": 1787984558.453045,
+    "ast_hash": "e897172f4a3cdefbc03eb74bfbbe11eb",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-025.webp": {
+    "mtime": 1787984399.7980418,
+    "seen": 1787984558.453046,
+    "ast_hash": "026743944bf7b36efada92c5bb0f2757",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-026.webp": {
+    "mtime": 1787984399.8007092,
+    "seen": 1787984558.453047,
+    "ast_hash": "af7ad1b0da1edfa83082b57ce9e3102d",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-027.webp": {
+    "mtime": 1787984402.4488904,
+    "seen": 1787984558.453047,
+    "ast_hash": "ffd52a2366ee83ea4843459e99a0e2e4",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-028.webp": {
+    "mtime": 1787984402.5233128,
+    "seen": 1787984558.453048,
+    "ast_hash": "7935319c0cca0b0ada21495bf3dab76f",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-029.webp": {
+    "mtime": 1787984402.5264077,
+    "seen": 1787984558.4530492,
+    "ast_hash": "893cb5afddf07a1c862ef7ba2f0d78ec",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-030.webp": {
+    "mtime": 1787984402.5280788,
+    "seen": 1787984558.4530492,
+    "ast_hash": "db10c914d3313924cbe3993521f1541a",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-031.webp": {
+    "mtime": 1787984402.6205812,
+    "seen": 1787984558.4530501,
+    "ast_hash": "06030c06055b7f08245c1531f0c4fa0f",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-032.webp": {
+    "mtime": 1787984402.6327803,
+    "seen": 1787984558.4530509,
+    "ast_hash": "d559180f33c55352514b3e9f57384c45",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-033.webp": {
+    "mtime": 1787984402.6347563,
+    "seen": 1787984558.4530509,
+    "ast_hash": "9597ba65e498bf6371633a3ea7a59a36",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-034.webp": {
+    "mtime": 1787984402.638078,
+    "seen": 1787984558.4530518,
+    "ast_hash": "941c7a350b9402e5bffbe80d7e69859b",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-035.webp": {
+    "mtime": 1787984402.6401463,
+    "seen": 1787984558.4530518,
+    "ast_hash": "a97854b7bd7d858c9eed0cd3e7609a12",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-036.webp": {
+    "mtime": 1787984402.6429088,
+    "seen": 1787984558.453053,
+    "ast_hash": "ce227d4f7612b970d1b08efe4621d310",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-037.webp": {
+    "mtime": 1787984402.6462083,
+    "seen": 1787984558.453053,
+    "ast_hash": "17b9a6ee4b78154b7aa542d3e4870469",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-038.webp": {
+    "mtime": 1787984402.6474144,
+    "seen": 1787984558.453054,
+    "ast_hash": "1bed1f414e807367a3f635957b117861",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-039.webp": {
+    "mtime": 1787984402.649533,
+    "seen": 1787984558.453055,
+    "ast_hash": "5f4f1daab071ba7f47237eaa5a271998",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-040.webp": {
+    "mtime": 1787984402.6512814,
+    "seen": 1787984558.453056,
+    "ast_hash": "5f2f1f44548559a93745c79042b2e2da",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-041.webp": {
+    "mtime": 1787984402.655159,
+    "seen": 1787984558.453056,
+    "ast_hash": "88ee16dd37fa461d63606de65430f263",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-042.webp": {
+    "mtime": 1787984402.6566794,
+    "seen": 1787984558.453057,
+    "ast_hash": "8c1b5321ac4350927de0e0e3450d032c",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-043.webp": {
+    "mtime": 1787984402.660691,
+    "seen": 1787984558.453057,
+    "ast_hash": "d3e52fc2055379b686308137ece2d0a0",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-044.webp": {
+    "mtime": 1787984402.6625183,
+    "seen": 1787984558.453058,
+    "ast_hash": "740782702c967f06e5ceb53f9e1400a7",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-045.webp": {
+    "mtime": 1787984402.6642106,
+    "seen": 1787984558.453059,
+    "ast_hash": "d2642882177f654576f2780c0796fb91",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-046.webp": {
+    "mtime": 1787984402.6665683,
+    "seen": 1787984558.4530602,
+    "ast_hash": "ac48f8fa7eb9eaffc51e90a66607ad5d",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-047.webp": {
+    "mtime": 1787984402.6703126,
+    "seen": 1787984558.4530702,
+    "ast_hash": "5bd3d971a84aab0adfd027629c9f9313",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-048.webp": {
+    "mtime": 1787984402.6717658,
+    "seen": 1787984558.453104,
+    "ast_hash": "1cf6ac48b7dce63467578db85da39a05",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-049.webp": {
+    "mtime": 1787984402.67604,
+    "seen": 1787984558.453106,
+    "ast_hash": "01268d14c0e113f77a4cc01e77bc5e8d",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-050.webp": {
+    "mtime": 1787984402.677331,
+    "seen": 1787984558.4531069,
+    "ast_hash": "fe6dbc75607863717eabfbdc19780b75",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-051.webp": {
+    "mtime": 1787984402.6808763,
+    "seen": 1787984558.4531069,
+    "ast_hash": "f8d0b5f711f3fab888bf18a565aa6510",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-052.webp": {
+    "mtime": 1787984402.6831615,
+    "seen": 1787984558.453108,
+    "ast_hash": "3d4909d1c5862c994febd267602abedb",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-053.webp": {
+    "mtime": 1787984402.6923847,
+    "seen": 1787984558.453109,
+    "ast_hash": "770dc677801ce571021003e59d963f52",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-054.webp": {
+    "mtime": 1787984402.6951072,
+    "seen": 1787984558.45311,
+    "ast_hash": "177372ba1c8ad9e018faf95397fef0d1",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-055.webp": {
+    "mtime": 1787984402.6967332,
+    "seen": 1787984558.453111,
+    "ast_hash": "5153822b54a31d9c35b096a0f706972e",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-056.webp": {
+    "mtime": 1787984402.6987474,
+    "seen": 1787984558.453111,
+    "ast_hash": "4295c346bd922978ef46f05313dc82c8",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-057.webp": {
+    "mtime": 1787984402.7012055,
+    "seen": 1787984558.4531121,
+    "ast_hash": "20c26cd5ea166e0e619905681d2fa0d8",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-058.webp": {
+    "mtime": 1787984402.7045102,
+    "seen": 1787984558.453113,
+    "ast_hash": "2033834ffbb2170f549447a72b8abd11",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-059.webp": {
+    "mtime": 1787984402.7063837,
+    "seen": 1787984558.453113,
+    "ast_hash": "2a852c5d71ffe5698d2ef8050611272d",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-060.webp": {
+    "mtime": 1787984402.7086473,
+    "seen": 1787984558.453114,
+    "ast_hash": "aece72df22b9bd5a872a1f3b63b7c5ad",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-061.webp": {
+    "mtime": 1787984402.7111194,
+    "seen": 1787984558.453114,
+    "ast_hash": "ac0cada7170620df4f87899cec14753e",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-062.webp": {
+    "mtime": 1787984402.7137587,
+    "seen": 1787984558.453115,
+    "ast_hash": "2f4338f4df19e103fcb9874358685781",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-063.webp": {
+    "mtime": 1787984402.7162764,
+    "seen": 1787984558.453115,
+    "ast_hash": "2defbde34cf8abdfea474c3ee3f588a4",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-064.webp": {
+    "mtime": 1787984402.7181838,
+    "seen": 1787984558.453116,
+    "ast_hash": "1767a580c5bf04161e91627ed4e2c339",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-065.webp": {
+    "mtime": 1787984402.720124,
+    "seen": 1787984558.453116,
+    "ast_hash": "afab1c60297ddf281099b1682a5428bc",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-066.webp": {
+    "mtime": 1787984403.6085792,
+    "seen": 1787984558.453117,
+    "ast_hash": "3acba619e0fa22a5bc611ce728156076",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-067.webp": {
+    "mtime": 1787984403.6130738,
+    "seen": 1787984558.453117,
+    "ast_hash": "52c3bdfeab7daa36c1b2e6f29352cfc5",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-068.webp": {
+    "mtime": 1787984403.6154325,
+    "seen": 1787984558.4531178,
+    "ast_hash": "bb945058741b99d352785aac39d91b7d",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-069.webp": {
+    "mtime": 1787984403.6251943,
+    "seen": 1787984558.453119,
+    "ast_hash": "f020c754369e83d9372e0cbe85e575e3",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-070.webp": {
+    "mtime": 1787984403.9090033,
+    "seen": 1787984558.45312,
+    "ast_hash": "1347061074fa36cb42a1f02e91bdc637",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-071.webp": {
+    "mtime": 1787984403.9120848,
+    "seen": 1787984558.45312,
+    "ast_hash": "6f58b5c723fda8b2ed0b225e9215fd01",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-072.webp": {
+    "mtime": 1787984403.9185913,
+    "seen": 1787984558.453121,
+    "ast_hash": "d2142bf49dc117e9d57e110c691068e0",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-073.webp": {
+    "mtime": 1787984403.9253457,
+    "seen": 1787984558.453121,
+    "ast_hash": "202a567c16868fef1174054effa538ff",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-074.webp": {
+    "mtime": 1787984403.9277303,
+    "seen": 1787984558.4531221,
+    "ast_hash": "cbc3941f0b98875e082d884a65a0c4a3",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-075.webp": {
+    "mtime": 1787984404.6459136,
+    "seen": 1787984558.453123,
+    "ast_hash": "d60232e9c4d8dfc931b4d874e497f723",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-076.webp": {
+    "mtime": 1787984404.6488955,
+    "seen": 1787984558.453123,
+    "ast_hash": "5058577af38de8b664217dc4dcbec90c",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-077.webp": {
+    "mtime": 1787984404.650464,
+    "seen": 1787984558.453124,
+    "ast_hash": "738b2de905fa7979d94867f1f34fa1a2",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-078.webp": {
+    "mtime": 1787984404.6579623,
+    "seen": 1787984558.4531252,
+    "ast_hash": "8ac6d283bb81d3d7f521677eee4c2b53",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-079.webp": {
+    "mtime": 1787984404.6608748,
+    "seen": 1787984558.4531252,
+    "ast_hash": "cf173a04d6f66148855fe3651aec6826",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-080.webp": {
+    "mtime": 1787984409.1061826,
+    "seen": 1787984558.453126,
+    "ast_hash": "c9439ceba05c6e21f14bb8c6bacac032",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-081.webp": {
+    "mtime": 1787984409.126592,
+    "seen": 1787984558.453127,
+    "ast_hash": "1ce05aea3bfff061fa838677a9721d65",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-082.webp": {
+    "mtime": 1787984409.1323318,
+    "seen": 1787984558.453127,
+    "ast_hash": "5db599d1f3e4761ded6b6a678aa05ad7",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-083.webp": {
+    "mtime": 1787984409.1342328,
+    "seen": 1787984558.4531279,
+    "ast_hash": "6e68a20ceef1ce25313e898ffda17389",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-084.webp": {
+    "mtime": 1787984409.13626,
+    "seen": 1787984558.4531279,
+    "ast_hash": "e9054d7b9862ce2d5e83680013099e33",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-085.webp": {
+    "mtime": 1787984409.138209,
+    "seen": 1787984558.453129,
+    "ast_hash": "b503c1f0576e62458bd2513419fd2267",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-086.webp": {
+    "mtime": 1787984409.1402445,
+    "seen": 1787984558.45313,
+    "ast_hash": "f36d0f92ba17bc178899b972871d8cd9",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-087.webp": {
+    "mtime": 1787984409.8443274,
+    "seen": 1787984558.453131,
+    "ast_hash": "68bb81f8406454cf06386ebd87dcc652",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-088.webp": {
+    "mtime": 1787984409.847018,
+    "seen": 1787984558.453132,
+    "ast_hash": "a2f8693ee1fe485e50064f1d74c4b533",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-089.webp": {
+    "mtime": 1787984409.853773,
+    "seen": 1787984558.453132,
+    "ast_hash": "e091f582435a95aed4c03f19d9b89170",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-090.webp": {
+    "mtime": 1787984409.8554642,
+    "seen": 1787984558.453133,
+    "ast_hash": "2da084bb9520cced5167015400b96434",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-091.webp": {
+    "mtime": 1787984409.8572748,
+    "seen": 1787984558.453133,
+    "ast_hash": "f61b110d1472622a23cbf8e1cad2d1f1",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-092.webp": {
+    "mtime": 1787984409.8586922,
+    "seen": 1787984558.453134,
+    "ast_hash": "7e9741810568a60ab6cf82113486602d",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-093.webp": {
+    "mtime": 1787984409.8606553,
+    "seen": 1787984558.453135,
+    "ast_hash": "a7a4842236d409abf0ce0de4f6ec3a2c",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-094.webp": {
+    "mtime": 1787984409.8625638,
+    "seen": 1787984558.453135,
+    "ast_hash": "8822137282b986b2a905390400aa9274",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-095.webp": {
+    "mtime": 1787984409.8646495,
+    "seen": 1787984558.453136,
+    "ast_hash": "a3432dcce8023833acb2a755717e72a8",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-096.webp": {
+    "mtime": 1787984409.8659368,
+    "seen": 1787984558.453136,
+    "ast_hash": "c4e78e929a412dac1a6c1250a426d93f",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-097.webp": {
+    "mtime": 1787984409.8676155,
+    "seen": 1787984558.453137,
+    "ast_hash": "d16a8e3cbdf822c138b2eb223a89a373",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-098.webp": {
+    "mtime": 1787984409.8700275,
+    "seen": 1787984558.453137,
+    "ast_hash": "40514e52a6f67fcc5515acff77310757",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-099.webp": {
+    "mtime": 1787984410.2617478,
+    "seen": 1787984558.4531379,
+    "ast_hash": "706390a259c7810b904ddcc747054e0f",
+    "semantic_hash": ""
+  },
+  "public/logos/clients/client-100.webp": {
+    "mtime": 1787984410.2640684,
+    "seen": 1787984558.4531379,
+    "ast_hash": "8ff21365dccc8853715e6d92d5e5b5ad",
+    "semantic_hash": ""
+  },
+  "tmp-sheets/all.png": {
+    "mtime": 1787984421.3729768,
+    "seen": 1787984558.455698,
+    "ast_hash": "b0898e42fb035d89f0950172a8c939de",
+    "semantic_hash": ""
+  },
+  "tmp-sheets/q1.png": {
+    "mtime": 1787984421.3965464,
+    "seen": 1787984558.455699,
+    "ast_hash": "ebcc0bf6f918c70d626cc9623406edf5",
+    "semantic_hash": ""
+  },
+  "tmp-sheets/q2.png": {
+    "mtime": 1787984421.4163702,
+    "seen": 1787984558.4557,
+    "ast_hash": "fc3b39ed3fda5490c03fa6533931e71d",
+    "semantic_hash": ""
+  },
+  "tmp-sheets/q3.png": {
+    "mtime": 1787984421.434016,
+    "seen": 1787984558.4557,
+    "ast_hash": "51a648f6f62a64162f58ec87f5dc4fa5",
+    "semantic_hash": ""
+  },
+  "tmp-sheets/q4.png": {
+    "mtime": 1787984421.44803,
+    "seen": 1787984558.4557009,
+    "ast_hash": "5c56c388c418dff447f43e9de95b2de4",
     "semantic_hash": ""
   }
 }

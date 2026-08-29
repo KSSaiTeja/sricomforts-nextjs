@@ -1,39 +1,39 @@
 # Graph Report - sricomforts-nextjs  (2026-08-29)
 
 ## Corpus Check
-- 159 files · ~2,642,846 words
+- 172 files · ~2,772,629 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 916 nodes · 1853 edges · 51 communities (43 shown, 8 thin omitted)
+- 1086 nodes · 2016 edges · 64 communities (57 shown, 7 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `dc5133ec`
+- Built from commit: `c91b95d8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- registerGsap
-- useMediaQuery.ts
-- localPaths.ts
+- useAnimatedStrong
+- SolutionsSectionsGrid.tsx
+- solutions.ts
 - homepage.ts
-- FeaturesSteps.tsx
+- registerGsap
 - ContactPage.tsx
 - dependencies
 - blog.ts
 - ChatWidget.tsx
-- SiteHeader.tsx
+- TonnageCalculator.tsx
 - ProductCatalog.tsx
-- usePreloader
+- FeaturesSteps.tsx
 - compilerOptions
 - createVideoSequence.ts
 - AboutPage.tsx
-- AnimatedLogo.tsx
+- SiteHeader.tsx
 - Project Context — sricomforts-nextjs
 - CareerPage.tsx
-- AboutLeaders.tsx
+- LogoBorderCell.tsx
 - Sri Comforts — Contact, Locations & Escalation
 - Sri Comforts — Notable Projects (public showcase)
 - AboutSectionIntro.tsx
@@ -44,7 +44,7 @@
 - Sri Comforts — Products, Systems & Website Tools
 - Why Daikin — Sri Comforts recommendation framing
 - AboutHero.tsx
-- solutions.ts
+- TestimonialsSection.tsx
 - Chatbase upload guide — Sri Comforts
 - Sri Comforts — Services
 - Year-1 knowledge base update workflow
@@ -61,9 +61,21 @@
 - HomePage.tsx
 - useHorizontalDragScroll
 - AwardsAchievements.tsx
-- LogoWall.tsx
-- VideoCarousel.tsx
-- about/page.tsx
+- PRD — Sri Comforts AI Knowledge Base Chatbot (Custom / Groq)
+- Sri Comforts Hero — Precise Storyboard Prompts (v3.1)
+- Sri Comforts — Asset & Launch Checklist
+- Sri Comforts — Hero Final: The Line
+- Sri Comforts — Hero Hybrid Video (Higgsfield)
+- Sri Comforts — Hero Scroll Video (Omni Prompts)
+- roundedPath.ts
+- Omni prompts (paste-ready)
+- StatsBento.tsx
+- Post-production pipeline
+- Supabase asset CDN
+- AboutLeaders.tsx
+- Style stills (approve before video)
+- Sri Comforts — Hero v2: Solutions Story
+- Master video (after still approval)
 
 ## God Nodes (most connected - your core abstractions)
 1. `registerGsap()` - 64 edges
@@ -78,85 +90,85 @@
 10. `SiteHeader()` - 13 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `QuoteSection()` --calls--> `registerGsap()`  [EXTRACTED]
+  src/components/home/QuoteSection.tsx → src/lib/gsap/register.ts
 - `ScrollIndicatorDesktop()` --calls--> `registerGsap()`  [EXTRACTED]
   src/components/home/VideoCarousel.tsx → src/lib/gsap/register.ts
-- `ContactCta()` --calls--> `useAnimatedStrong()`  [EXTRACTED]
-  src/components/shared/ContactCta.tsx → src/hooks/useAnimatedStrong.ts
 - `GridHeader()` --calls--> `useAnimatedStrong()`  [EXTRACTED]
   src/components/solutions/SolutionsSectionsGrid.tsx → src/hooks/useAnimatedStrong.ts
-- `AboutFeaturesGrid()` --calls--> `useIsLargeViewport()`  [EXTRACTED]
-  src/components/about/AboutFeaturesGrid.tsx → src/hooks/useMediaQuery.ts
-- `AboutFeaturesGrid()` --calls--> `registerGsap()`  [EXTRACTED]
-  src/components/about/AboutFeaturesGrid.tsx → src/lib/gsap/register.ts
+- `AboutHero()` --calls--> `registerGsap()`  [EXTRACTED]
+  src/components/about/AboutHero.tsx → src/lib/gsap/register.ts
+- `AboutLeaders()` --calls--> `useIsLargeViewport()`  [EXTRACTED]
+  src/components/about/AboutLeaders.tsx → src/hooks/useMediaQuery.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (51 total, 8 thin omitted)
+## Communities (64 total, 7 thin omitted)
 
-### Community 0 - "registerGsap"
-Cohesion: 0.07
-Nodes (41): metadata, AboutStoryValues(), AboutStoryValuesProps, CrossFlicker(), buildLogoSlots(), LogoGrid(), lerp(), NotchEdge (+33 more)
-
-### Community 1 - "useMediaQuery.ts"
-Cohesion: 0.06
-Nodes (55): FooterPathBackground(), FooterPathBackgroundProps, getFooterPaths(), AnimatedCardBorder(), AnimatedCardBorderProps, AnimatedPathLine(), AnimatedPathLineProps, registerPathLineRef() (+47 more)
-
-### Community 2 - "localPaths.ts"
+### Community 0 - "useAnimatedStrong"
 Cohesion: 0.09
-Nodes (34): generateMetadata(), Page(), PageProps, ServicesPage(), serviceCarouselImage(), serviceDarkBackground, serviceFeatureImage(), buildAmc() (+26 more)
+Nodes (24): renderTitle(), SectionIntroduction(), SectionIntroductionProps, PathBackground(), ContactCta(), ContactCtaProps, BackgroundCanvas(), BackgroundCanvasProps (+16 more)
+
+### Community 1 - "SolutionsSectionsGrid.tsx"
+Cohesion: 0.09
+Nodes (35): AnimatedCardBorder(), AnimatedCardBorderProps, AnimatedPathLine(), AnimatedPathLineProps, registerPathLineRef(), PathLineFollower(), PathLineFollowerProps, buildFourItemPaths() (+27 more)
+
+### Community 2 - "solutions.ts"
+Cohesion: 0.06
+Nodes (52): generateMetadata(), Page(), PageProps, generateMetadata(), Page(), PageProps, ServicesSectionIntroProps, serviceCarouselImage() (+44 more)
 
 ### Community 3 - "homepage.ts"
-Cohesion: 0.12
-Nodes (19): renderTitle(), SectionIntroduction(), SectionIntroductionProps, HeroPreloadStarter(), brandDifferenceSection, featuresSteps, footerSection, fullscreenFeatures (+11 more)
+Cohesion: 0.11
+Nodes (18): LogoWall(), MarqueeRow(), repeatToFill(), QuoteSection(), brandDifferenceSection, featuresSteps, footerSection, fullscreenFeatures (+10 more)
 
-### Community 4 - "FeaturesSteps.tsx"
-Cohesion: 0.07
-Nodes (50): AboutFeaturesGrid(), AboutFeaturesGridProps, buildFeatureNotches(), formatFeatureIndex(), buildNotches(), clamp(), easePow2Out(), FeaturesSteps() (+42 more)
+### Community 4 - "registerGsap"
+Cohesion: 0.05
+Nodes (66): metadata, metadata, AboutFeaturesGrid(), AboutFeaturesGridProps, buildFeatureNotches(), formatFeatureIndex(), TonnageCalculatorPage(), CrossFlicker() (+58 more)
 
 ### Community 5 - "ContactPage.tsx"
 Cohesion: 0.06
-Nodes (42): metadata, ContactArrowIcon(), ContactMap(), ContactPage(), ContactWaysCardAction(), ContactWaysCardActionProps, ContactWaysCardBase(), ContactWaysCardBaseProps (+34 more)
+Nodes (40): metadata, ContactArrowIcon(), ContactMap(), ContactPage(), ContactWaysCardAction(), ContactWaysCardActionProps, ContactWaysCardBase(), ContactWaysCardBaseProps (+32 more)
 
 ### Community 6 - "dependencies"
 Cohesion: 0.04
 Nodes (48): ai, @ai-sdk/groq, @ai-sdk/react, eslint, eslint-config-next, gsap, @gsap/react, lenis (+40 more)
 
 ### Community 7 - "blog.ts"
-Cohesion: 0.08
-Nodes (33): generateMetadata(), Page(), PageProps, metadata, generateMetadata(), Page(), PageProps, metadata (+25 more)
+Cohesion: 0.09
+Nodes (30): generateMetadata(), Page(), PageProps, metadata, generateMetadata(), Page(), PageProps, BlogArticlePage() (+22 more)
 
 ### Community 8 - "ChatWidget.tsx"
 Cohesion: 0.08
 Nodes (33): lastUserText(), maxDuration, POST(), validateMessages(), ChatWidget(), LINKABLE_PATH_PATTERN, LINKABLE_PATHS, linkify() (+25 more)
 
-### Community 9 - "SiteHeader.tsx"
-Cohesion: 0.08
-Nodes (29): FieldProps, formatAdj(), formatTons(), SelectFieldProps, SUN_OPTIONS, TonnageCalculator(), NavDropdownPanel(), NavDropdownPanelProps (+21 more)
+### Community 9 - "TonnageCalculator.tsx"
+Cohesion: 0.13
+Nodes (20): FieldProps, formatAdj(), formatTons(), SelectFieldProps, SUN_OPTIONS, TonnageCalculator(), baseTonsFromArea(), calculateTonnage() (+12 more)
 
 ### Community 10 - "ProductCatalog.tsx"
 Cohesion: 0.20
 Nodes (15): categoryLabel(), formatIndex(), ProductCatalog(), renderTitle(), filterProductCatalogItems(), PRODUCT_BENTO_IMAGE, PRODUCT_EXPLORE_LABEL, PRODUCT_VIEW_LABEL (+7 more)
 
-### Community 11 - "usePreloader"
-Cohesion: 0.11
-Nodes (27): metadata, suisseIntl, HIDDEN_PREFIXES, TonnageCalculatorWidget(), applyHeroProgress(), HeroScrollContent(), HeroScrollContentProps, pow2In() (+19 more)
+### Community 11 - "FeaturesSteps.tsx"
+Cohesion: 0.07
+Nodes (48): metadata, suisseIntl, HIDDEN_PREFIXES, TonnageCalculatorWidget(), buildNotches(), clamp(), easePow2Out(), FeaturesSteps() (+40 more)
 
 ### Community 12 - "compilerOptions"
 Cohesion: 0.07
 Nodes (28): dom, dom.iterable, esnext, **/*.mts, .next/dev/types/**/*.ts, next-env.d.ts, .next/types/**/*.ts, node_modules (+20 more)
 
 ### Community 13 - "createVideoSequence.ts"
-Cohesion: 0.16
-Nodes (20): UseVideoSequenceOptions, attachScrollListeners(), countDecoded(), createVideoSequence(), CreateVideoSequenceOptions, FitPosition, getHeroFrameLoadRatio(), getOrCreateSharedState() (+12 more)
+Cohesion: 0.09
+Nodes (31): ScrollIndicatorDesktop(), VideoSequence(), VideoSequenceProps, AppPreloader(), getNotchOffset(), HeroPreloadStarter(), getHeroFramePrefix(), getHeroFrameUrls() (+23 more)
 
 ### Community 14 - "AboutPage.tsx"
-Cohesion: 0.18
-Nodes (16): aboutAdvisors, aboutAdvisoryIntro, aboutBrandLogos, aboutBrandPartners, aboutExecutiveLeaders, AboutFeatureItem, aboutFeaturesGrid, aboutHero (+8 more)
-
-### Community 15 - "AnimatedLogo.tsx"
 Cohesion: 0.15
-Nodes (13): BRAND_LOGO_SRC, FullLogo(), FullLogoProps, LOGO_DISPLAY, LOGO_LOCKUP, LOGO_WORDMARK, LogoIcon, LogoWordmark (+5 more)
+Nodes (19): AboutStoryValues(), AboutStoryValuesProps, aboutAdvisors, aboutAdvisoryIntro, aboutBrandLogos, aboutBrandPartners, aboutExecutiveLeaders, AboutFeatureItem (+11 more)
+
+### Community 15 - "SiteHeader.tsx"
+Cohesion: 0.08
+Nodes (22): BRAND_LOGO_SRC, FullLogo(), FullLogoProps, LOGO_DISPLAY, LOGO_LOCKUP, LOGO_WORDMARK, LogoIcon, LogoWordmark (+14 more)
 
 ### Community 16 - "Project Context — sricomforts-nextjs"
 Cohesion: 0.12
@@ -166,9 +178,9 @@ Nodes (16): 10. Conventions, 11. Quick Hand-off (new chats), 1. Project Summary,
 Cohesion: 0.18
 Nodes (9): metadata, CareerPage(), careerCultureIntro, careerDepartments, careerHero, CareerJob, careerJobBoardHeading, careerJobs (+1 more)
 
-### Community 18 - "AboutLeaders.tsx"
-Cohesion: 0.16
-Nodes (9): AboutLeaders(), AboutLeadersProps, LogoBorderCell(), LogoBorderCellProps, ScrollIndicatorMobile(), AboutLeaderItem, AboutLeadersData, useHashScroll() (+1 more)
+### Community 18 - "LogoBorderCell.tsx"
+Cohesion: 0.18
+Nodes (8): metadata, AboutPage(), LogoBorderCell(), LogoBorderCellProps, ScrollIndicatorMobile(), VideoCarousel(), useHashScroll(), useSmoothScroll()
 
 ### Community 19 - "Sri Comforts — Contact, Locations & Escalation"
 Cohesion: 0.20
@@ -210,9 +222,9 @@ Nodes (6): Daikin India snapshot (from same materials), How Sri Comforts talks a
 Cohesion: 0.33
 Nodes (5): AboutHero(), AboutHeroProps, FrameMetrics, readMetrics(), AboutHeroData
 
-### Community 29 - "solutions.ts"
-Cohesion: 0.07
-Nodes (31): generateMetadata(), Page(), PageProps, circularDistance(), LoopedItem, TestimonialsSection(), TestimonialsSectionProps, SolutionsFeaturesCarousel() (+23 more)
+### Community 29 - "TestimonialsSection.tsx"
+Cohesion: 0.29
+Nodes (7): circularDistance(), LoopedItem, TestimonialsSection(), TestimonialsSectionProps, Testimonial, testimonials, testimonialsSection
 
 ### Community 30 - "Chatbase upload guide — Sri Comforts"
 Cohesion: 0.33
@@ -239,8 +251,8 @@ Cohesion: 0.50
 Nodes (3): BitmapsMessage, FramesMessage, queue
 
 ### Community 45 - "HomePage.tsx"
-Cohesion: 0.21
-Nodes (7): HomePage(), SeparatorNotch(), getGatherOffset(), StatsBento(), sectionIntros, statsBento, StatsBentoItem
+Cohesion: 0.38
+Nodes (3): HomePage(), SeparatorNotch(), sectionIntros
 
 ### Community 46 - "useHorizontalDragScroll"
 Cohesion: 0.24
@@ -250,33 +262,85 @@ Nodes (7): ProjectsCarousel(), AwardsAchievements(), projectShowcase, ProjectSho
 Cohesion: 0.27
 Nodes (5): AwardsAchievementsProps, AchievementStat, AwardItem, awardsSection, experienceSection
 
-### Community 48 - "LogoWall.tsx"
-Cohesion: 0.25
-Nodes (6): LogoWall(), MarqueeRow(), repeatToFill(), logoWallIntro, LogoWallItem, logoWallLogos
+### Community 48 - "PRD — Sri Comforts AI Knowledge Base Chatbot (Custom / Groq)"
+Cohesion: 0.04
+Nodes (48): 1. Summary, 2. Contacts, 3. Background, 4. Objective, 5. Market Segment(s), 6. Value Proposition(s), 7.1 UX / user flows, 7.2 Key features (+40 more)
 
-### Community 49 - "VideoCarousel.tsx"
+### Community 49 - "Sri Comforts Hero — Precise Storyboard Prompts (v3.1)"
+Cohesion: 0.06
+Nodes (33): Continuity, FRAME 1 — Every space (home + office solutions), FRAME 2 — Design → install → service, FRAME 3 — Authorized partner · South India (VRV plant), FRAME 4 — Trusted 25+ years (same home, lived-in calm), Quick QA before you approve, Sri Comforts Hero — Precise Storyboard Prompts (v3.1), Style lock (prepend every Gemini prompt) (+25 more)
+
+### Community 50 - "Sri Comforts — Asset & Launch Checklist"
+Cohesion: 0.15
+Nodes (12): 1. Branding & identity, 2. Media & CDN, 3. Homepage, 4. About page, 5. Contact page, 6. Solutions & services, 7. Package & repo, Asset map (+4 more)
+
+### Community 51 - "Sri Comforts — Hero Final: The Line"
+Cohesion: 0.17
+Nodes (12): CLI, Copy sync, END — Beat 4 (quiet room), Keyframe prompts, Locked concept, Master video prompt (Seedance), Negatives, Production (quality path) (+4 more)
+
+### Community 52 - "Sri Comforts — Hero Hybrid Video (Higgsfield)"
+Cohesion: 0.18
+Nodes (8): Copy sync (`heroTitles`), Credit budget (approx, Pro workspace), Extract + wire checklist, Global negatives, Global style lock (prepend to every prompt), Locked direction, Master length, Sri Comforts — Hero Hybrid Video (Higgsfield)
+
+### Community 53 - "Sri Comforts — Hero Scroll Video (Omni Prompts)"
+Cohesion: 0.18
+Nodes (11): Clip breakdown (8 Omni clips), Color palette, File locations (after export), Final video length, Hero copy (must stay in sync), If Omni only allows 4 generations, Quick checklist, Sri Comforts — Hero Scroll Video (Omni Prompts) (+3 more)
+
+### Community 54 - "roundedPath.ts"
+Cohesion: 0.33
+Nodes (8): add(), appendCorner(), CornerCurve, distance(), format(), normalize(), scale(), subtract()
+
+### Community 55 - "Omni prompts (paste-ready)"
+Cohesion: 0.22
+Nodes (9): CLIP 1 — Beat 1 opens · “Every space” begins, CLIP 2 — Beat 1 peaks · “Every space” variety, CLIP 3 — Beat 2 opens · “Design” — scan begins on buildings, CLIP 4 — Beat 2 peaks · “Install and service” — scan deepens, CLIP 5 — Beat 3 opens · “Authorized partner” — precision at scale, CLIP 6 — Beat 3 peaks · “South India” — multi-building digital twin, CLIP 7 — Beat 4 opens · “25+ years” — timeless calm begins, CLIP 8 — Beat 4 ends · “Year after year” — blueprint fade (+1 more)
+
+### Community 56 - "StatsBento.tsx"
 Cohesion: 0.32
-Nodes (6): ScrollIndicatorDesktop(), VideoSequence(), VideoSequenceProps, HERO_FRAMES_VERSION, heroTitles, useVideoSequence()
+Nodes (5): getGatherOffset(), StatsBento(), statsBento, StatsBentoItem, BRAND_NAME
+
+### Community 57 - "Post-production pipeline"
+Cohesion: 0.29
+Nodes (7): 1. Stitch, 2. Export master, 3. Extract WebP frames, 4. Verify frame count, 5. Mobile, 6. Deploy, Post-production pipeline
+
+### Community 58 - "Supabase asset CDN"
+Cohesion: 0.29
+Nodes (6): Bucket layout, Code, Payload CMS (later), Setup, Supabase asset CDN, Upload assets
+
+### Community 59 - "AboutLeaders.tsx"
+Cohesion: 0.29
+Nodes (4): AboutLeaders(), AboutLeadersProps, AboutLeaderItem, AboutLeadersData
+
+### Community 60 - "Style stills (approve before video)"
+Cohesion: 0.33
+Nodes (6): Beat 1 — Every space (cool daylight), Beat 2 — Design → install → service, Beat 3 — Authorized partner, South India, Beat 4 — 25+ years trust, CLI — stills, Style stills (approve before video)
+
+### Community 61 - "Sri Comforts — Hero v2: Solutions Story"
+Cohesion: 0.40
+Nodes (4): Production, Site, Sri Comforts — Hero v2: Solutions Story, Story ↔ copy
+
+### Community 62 - "Master video (after still approval)"
+Cohesion: 0.50
+Nodes (4): CLI — desktop master, Continuous master prompt (single clip), Master video (after still approval), Mobile (9:16)
 
 ## Knowledge Gaps
-- **274 isolated node(s):** `eslintConfig`, `nextConfig`, `name`, `version`, `private` (+269 more)
+- **401 isolated node(s):** `eslintConfig`, `nextConfig`, `name`, `version`, `private` (+396 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `registerGsap()` connect `registerGsap` to `useMediaQuery.ts`, `FeaturesSteps.tsx`, `SiteHeader.tsx`, `usePreloader`, `HomePage.tsx`, `createVideoSequence.ts`, `AnimatedLogo.tsx`, `VideoCarousel.tsx`, `AboutLeaders.tsx`, `AboutLogoGrid.tsx`, `AboutHero.tsx`, `solutions.ts`?**
-  _High betweenness centrality (0.097) - this node is a cross-community bridge._
-- **Why does `useSvh()` connect `blog.ts` to `registerGsap`, `localPaths.ts`, `FeaturesSteps.tsx`, `ContactPage.tsx`, `HomePage.tsx`, `AboutPage.tsx`, `CareerPage.tsx`, `about/page.tsx`, `solutions.ts`?**
-  _High betweenness centrality (0.030) - this node is a cross-community bridge._
-- **Why does `useAnimatedStrong()` connect `registerGsap` to `useMediaQuery.ts`, `homepage.ts`, `ContactPage.tsx`, `ProductCatalog.tsx`, `usePreloader`, `AboutSectionIntro.tsx`, `solutions.ts`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
+- **Why does `registerGsap()` connect `registerGsap` to `useAnimatedStrong`, `SolutionsSectionsGrid.tsx`, `solutions.ts`, `homepage.ts`, `FeaturesSteps.tsx`, `createVideoSequence.ts`, `SiteHeader.tsx`, `LogoBorderCell.tsx`, `StatsBento.tsx`, `AboutLogoGrid.tsx`, `AboutHero.tsx`, `TestimonialsSection.tsx`?**
+  _High betweenness centrality (0.068) - this node is a cross-community bridge._
+- **Why does `useAnimatedStrong()` connect `useAnimatedStrong` to `SolutionsSectionsGrid.tsx`, `solutions.ts`, `registerGsap`, `ContactPage.tsx`, `ProductCatalog.tsx`, `FeaturesSteps.tsx`, `AboutPage.tsx`, `AboutSectionIntro.tsx`?**
+  _High betweenness centrality (0.022) - this node is a cross-community bridge._
+- **Why does `useSvh()` connect `registerGsap` to `ContactPage.tsx`, `blog.ts`, `HomePage.tsx`, `AboutPage.tsx`, `createVideoSequence.ts`, `CareerPage.tsx`, `LogoBorderCell.tsx`?**
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **What connects `eslintConfig`, `nextConfig`, `name` to the rest of the system?**
-  _274 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `registerGsap` be split into smaller, more focused modules?**
-  _Cohesion score 0.073224043715847 - nodes in this community are weakly interconnected._
-- **Should `useMediaQuery.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.05548654244306418 - nodes in this community are weakly interconnected._
-- **Should `localPaths.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.08974358974358974 - nodes in this community are weakly interconnected._
+  _401 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `useAnimatedStrong` be split into smaller, more focused modules?**
+  _Cohesion score 0.08901515151515152 - nodes in this community are weakly interconnected._
+- **Should `SolutionsSectionsGrid.tsx` be split into smaller, more focused modules?**
+  _Cohesion score 0.08787878787878788 - nodes in this community are weakly interconnected._
+- **Should `solutions.ts` be split into smaller, more focused modules?**
+  _Cohesion score 0.05632360471070148 - nodes in this community are weakly interconnected._

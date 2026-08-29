@@ -68,7 +68,7 @@ export const navigation: NavMenuItem[] = [
       },
       {
         title: "Insights",
-        links: [{ label: "Case Studies", href: "/about/our-work" }],
+        links: [{ label: "Case Studies", href: `/about#${aboutSectionAnchors.work}` }],
       },
     ],
   },

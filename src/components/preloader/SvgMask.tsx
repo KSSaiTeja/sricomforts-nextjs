@@ -58,9 +58,10 @@ export const SvgMask = forwardRef<SvgMaskHandle, SvgMaskProps>(function SvgMask(
 
     const update = () => {
       const next = {
-        width: element.offsetWidth || 1,
-        height: element.offsetHeight || 1,
+        width: element.offsetWidth || 0,
+        height: element.offsetHeight || 0,
       };
+      if (next.width < 16 || next.height < 16) return;
       dimensionsRef.current = next;
       setDimensions(next);
       setIsReady(true);

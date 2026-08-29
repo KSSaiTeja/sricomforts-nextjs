@@ -207,28 +207,17 @@ export type LogoWallItem = {
 /** Placeholder logos from https://logoipsum.com/ — stored in public/logos/placeholder/ */
 const PLACEHOLDER_LOGO = "/logos/placeholder";
 
-export const logoWallLogos: LogoWallItem[] = [
-  { src: `${PLACEHOLDER_LOGO}/logo-01.svg`, scale: 70 },
-  { src: `${PLACEHOLDER_LOGO}/logo-02.svg`, scale: 85 },
-  { src: `${PLACEHOLDER_LOGO}/logo-03.svg`, scale: 115 },
-  { src: `${PLACEHOLDER_LOGO}/logo-04.svg`, scale: 85 },
-  { src: `${PLACEHOLDER_LOGO}/logo-05.svg`, scale: 85 },
-  { src: `${PLACEHOLDER_LOGO}/logo-06.svg`, scale: 85 },
-  { src: `${PLACEHOLDER_LOGO}/logo-07.svg`, scale: 85 },
-  { src: `${PLACEHOLDER_LOGO}/logo-08.svg`, scale: 70 },
-  { src: `${PLACEHOLDER_LOGO}/logo-09.svg`, scale: 100 },
-  { src: `${PLACEHOLDER_LOGO}/logo-10.svg`, scale: 100 },
-  { src: `${PLACEHOLDER_LOGO}/logo-11.svg`, scale: 100 },
-  { src: `${PLACEHOLDER_LOGO}/logo-12.svg`, scale: 85 },
-  { src: `${PLACEHOLDER_LOGO}/logo-13.svg`, scale: 175 },
-  { src: `${PLACEHOLDER_LOGO}/logo-14.svg`, scale: 100 },
-  { src: `${PLACEHOLDER_LOGO}/logo-01.svg`, scale: 100 },
-  { src: `${PLACEHOLDER_LOGO}/logo-02.svg`, scale: 100 },
-  { src: `${PLACEHOLDER_LOGO}/logo-03.svg`, scale: 85 },
-  { src: `${PLACEHOLDER_LOGO}/logo-04.svg`, scale: 100 },
-  { src: `${PLACEHOLDER_LOGO}/logo-05.svg`, scale: 100 },
-  { src: `${PLACEHOLDER_LOGO}/logo-06.svg`, scale: 100 },
-];
+/** Client marks from SRI Comforts Company Profile.pptx slides 11–16 */
+const CLIENT_LOGO = "/logos/clients";
+const CLIENT_LOGO_COUNT = 100;
+
+export const logoWallLogos: LogoWallItem[] = Array.from(
+  { length: CLIENT_LOGO_COUNT },
+  (_, index) => ({
+    src: `${CLIENT_LOGO}/client-${String(index + 1).padStart(3, "0")}.webp`,
+    scale: 85,
+  }),
+);
 
 export const logoGridLogos: LogoWallItem[] = [
   { src: `${PLACEHOLDER_LOGO}/logo-01.svg`, scale: 70 },
@@ -380,8 +369,8 @@ export const footerSection = {
   cta: { label: "Start your HVAC journey", href: "/contact" },
   technologyLinks: [
     { label: "Commercial HVAC", href: "/solutions/commercial" },
-    { label: "Central Air Conditioning", href: "/solutions/commercial/central-air" },
-    { label: "VRV Systems", href: "/solutions/residential/vrv" },
+    { label: "Central Air Conditioning", href: "/solutions/commercial" },
+    { label: "VRV Systems", href: "/solutions/residential" },
     { label: "Residential Cooling", href: "/solutions/residential" },
   ],
   companyLinks: [
@@ -416,7 +405,7 @@ export const footerSection = {
     },
   ],
   copyright: "Copyright Sri\u00A0Comforts © 2026 All Rights Reserved ",
-  technicalIndexHref: "/about/awards",
+  technicalIndexHref: `/about#${aboutSectionAnchors.awards}`,
   creditsByline: "by kssaiteja",
   creditsHref: "",
 } as const;

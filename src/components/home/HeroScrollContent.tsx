@@ -7,9 +7,6 @@ import { registerGsap } from "@/lib/gsap/register";
 import { wrapTextWithChars } from "@/lib/text/splitChars";
 import styles from "./video-carousel.module.css";
 
-const FADE_IN_END = 0.5;
-const FADE_IN_START = FADE_IN_END + 0.1;
-const FADE_OUT_MULTIPLIER = 2;
 /** Hold first line in white until the user starts scrolling. */
 const REST_HOLD = 0.008;
 const ACCENT = "var(--color-brand-accent-on-dark)";
@@ -20,29 +17,33 @@ type HeroScrollContentProps = {
   scrollProgressRef: React.RefObject<number>;
 };
 
-function pow2Out(value: number) {
-  return 1 - (1 - value) * (1 - value);
-}
-
-function pow2In(value: number) {
-  return value * value;
+function setTitleLayer(title: HTMLHeadingElement | undefined, active: boolean) {
+  if (!title) return;
+  title.dataset.active = active ? "true" : "false";
+  title.setAttribute("aria-hidden", active ? "false" : "true");
 }
 
 function setInactive(group: HTMLSpanElement[]) {
   group.forEach((char) => {
     char.style.opacity = "0";
+    char.style.visibility = "hidden";
     char.style.color = ACCENT;
   });
 }
 
-function showFirstLineWhite(charGroups: HTMLSpanElement[][]) {
+function showFirstLineWhite(
+  charGroups: HTMLSpanElement[][],
+  titles: HTMLHeadingElement[],
+) {
   charGroups.forEach((group, groupIndex) => {
+    setTitleLayer(titles[groupIndex], groupIndex === 0);
     if (groupIndex !== 0) {
       setInactive(group);
       return;
     }
     group.forEach((char) => {
       char.style.opacity = "1";
+      char.style.visibility = "visible";
       char.style.color = WHITE;
     });
   });
@@ -50,12 +51,13 @@ function showFirstLineWhite(charGroups: HTMLSpanElement[][]) {
 
 function applyHeroProgress(
   charGroups: HTMLSpanElement[][],
+  titles: HTMLHeadingElement[],
   progress: number,
   segmentCount: number,
 ) {
   // At rest: first line visible in white — blue accent waits for scroll.
   if (progress <= REST_HOLD) {
-    showFirstLineWhite(charGroups);
+    showFirstLineWhite(charGroups, titles);
     return;
   }
 
@@ -66,36 +68,28 @@ function applyHeroProgress(
     segmentCount - 1,
   );
   const segmentProgress = value * segmentCount - segment;
-  const chars = charGroups[segment];
-
   charGroups.forEach((group, groupIndex) => {
-    if (groupIndex !== segment) setInactive(group);
-  });
+    const active = groupIndex === segment;
+    setTitleLayer(titles[groupIndex], active);
+    if (!active) {
+      setInactive(group);
+      return;
+    }
 
-  if (!chars?.length) return;
-
-  const fadeIn = Math.min(segmentProgress / FADE_IN_END, 1);
-  let fadeOut = (segmentProgress - FADE_IN_START) / (1 - FADE_IN_START);
-  fadeOut *= FADE_OUT_MULTIPLIER;
-  fadeOut = Math.max(0, Math.min(1, fadeOut));
-
-  const total = chars.length;
-  const isFirstLine = segment === 0;
-
-  chars.forEach((char, index) => {
-    const start = index / total;
-    const end = (index + 1) / total;
-    const inRaw = Math.max(0, Math.min(1, (fadeIn - start) / (end - start)));
-    const outRaw = Math.max(0, Math.min(1, (fadeOut - start) / (end - start)));
-
-    // First line is already on screen: keep opacity up, drive the blue→white wave on scroll,
-    // then fade out. Later lines still fade in from accent blue as before.
-    const opacity = isFirstLine
-      ? 1 - pow2In(outRaw)
-      : pow2Out(inRaw) * (1 - pow2In(outRaw));
-
-    char.style.opacity = String(opacity);
-    char.style.color = inRaw < 1 ? ACCENT : WHITE;
+    // Full line stays painted — only the accent→white wave rides scroll.
+    // Fading chars to 0 between segments was the “gibberish / flash” path.
+    const total = group.length || 1;
+    group.forEach((char, index) => {
+      const start = index / total;
+      const end = (index + 1) / total;
+      const wave = Math.max(
+        0,
+        Math.min(1, (segmentProgress - start) / (end - start)),
+      );
+      char.style.opacity = "1";
+      char.style.visibility = "visible";
+      char.style.color = wave < 1 ? ACCENT : WHITE;
+    });
   });
 }
 
@@ -123,6 +117,9 @@ export function HeroScrollContent({ items, scrollProgressRef }: HeroScrollConten
     }
 
     let introDone = false;
+    titleRefs.current.forEach((title, groupIndex) => {
+      setTitleLayer(title, groupIndex === 0);
+    });
     charGroupsRef.current.forEach((group, groupIndex) => {
       if (groupIndex !== 0) setInactive(group);
     });
@@ -130,6 +127,7 @@ export function HeroScrollContent({ items, scrollProgressRef }: HeroScrollConten
     const firstChars = charGroupsRef.current[0] ?? [];
     firstChars.forEach((char) => {
       char.style.color = WHITE;
+      char.style.visibility = "visible";
     });
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -138,30 +136,21 @@ export function HeroScrollContent({ items, scrollProgressRef }: HeroScrollConten
       firstChars.length > 0
         ? reducedMotion
           ? (() => {
-              showFirstLineWhite(charGroupsRef.current);
+              showFirstLineWhite(charGroupsRef.current, titleRefs.current);
               introDone = true;
               return null;
             })()
           : gsap.fromTo(
               firstChars,
-              {
-                opacity: 0,
-                yPercent: 68,
-                rotateX: -28,
-                filter: "blur(6px)",
-              },
+              { opacity: 0 },
               {
                 opacity: 1,
-                yPercent: 0,
-                rotateX: 0,
-                filter: "blur(0px)",
-                duration: 0.85,
-                stagger: { each: 0.016, from: "start" },
-                ease: "power3.out",
-                transformOrigin: "50% 100%",
+                duration: 0.55,
+                stagger: { each: 0.012, from: "start" },
+                ease: "power2.out",
                 onComplete: () => {
                   introDone = true;
-                  showFirstLineWhite(charGroupsRef.current);
+                  showFirstLineWhite(charGroupsRef.current, titleRefs.current);
                 },
               },
             )
@@ -169,12 +158,20 @@ export function HeroScrollContent({ items, scrollProgressRef }: HeroScrollConten
 
     if (!introTween && firstChars.length === 0) introDone = true;
 
+    let lastScroll = Number.NaN;
     const tick = () => {
       const scroll = scrollProgressRef.current ?? 0;
+      if (scroll === lastScroll && introDone) return;
+      lastScroll = scroll;
       // Don't overwrite the entrance; hand off as soon as the user scrolls.
       if (!introDone && scroll <= REST_HOLD) return;
       introDone = true;
-      applyHeroProgress(charGroupsRef.current, scroll, items.length);
+      applyHeroProgress(
+        charGroupsRef.current,
+        titleRefs.current,
+        scroll,
+        items.length,
+      );
     };
 
     gsap.ticker.add(tick);
@@ -197,6 +194,7 @@ export function HeroScrollContent({ items, scrollProgressRef }: HeroScrollConten
               if (element) titleRefs.current[index] = element;
             }}
             className={`title-sequence title-h1 ${styles.title}`}
+            aria-hidden="true"
           >
             {label}
           </h2>

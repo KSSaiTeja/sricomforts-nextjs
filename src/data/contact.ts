@@ -64,7 +64,7 @@ export const contactWaysCards = [
     title: "Download our product overview",
     description: undefined,
     icon: CONTACT_ICONS.download,
-    href: "/resources/product-overview",
+    href: CONTACT_PRODUCT_OVERVIEW_PDF,
     openInNewTab: true,
   },
   {

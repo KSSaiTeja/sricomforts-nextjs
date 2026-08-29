@@ -171,6 +171,7 @@ export function ProjectsCarousel() {
       className="projects-carousel"
       aria-roledescription="carousel"
       aria-label="Sri Comforts project showcase"
+      data-motion-ignore
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}

@@ -75,8 +75,8 @@ src/
 | Team portraits | `public/images/team/` |
 | Placeholder logos | `public/logos/placeholder/` (Logoipsum — Phase 2: real client logos) |
 | Brand lockup (nav / footer) | `public/assets/brand/sricomforts-logo.png` via `FullLogo` |
-| Display sizes | Navbar **200–240px** wide · Footer **220–280px** wide (`src/styles/brand-logo.css`) |
-| Source export | **960 × 203 px** transparent PNG (4× largest nav size). Current file is 1957×413 and is fine. |
+| Display sizes | Navbar **240–300px** wide · Footer **260–340px** wide (`src/styles/brand-logo.css`) |
+| Source export | **960 × 159 px** transparent PNG (icon + wordmark + 25-year badge, dark backgrounds) |
 
 ---
 
