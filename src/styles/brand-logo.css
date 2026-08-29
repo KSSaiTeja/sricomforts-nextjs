@@ -1,6 +1,7 @@
 /*
  * Cyan lockup on a clean white pill (nav / footer / drawer).
- * Overflow visible so the final s + ® are not clipped.
+ * Width is clamped in CSS px so the lockup stays readable on phones
+ * and never grows past ~240px in the nav on very large screens.
  */
 
 .site-header .logo-link,
@@ -16,23 +17,26 @@
   box-shadow:
     0 0 0 1px rgb(255 255 255 / 55%),
     0 6px 18px rgb(0 0 0 / 16%);
-  padding: 0.45rem 0.75rem;
+  padding: 0.35rem 0.7rem;
 }
 
 .site-header .logo-link .logo {
   display: block;
-  width: 12.5rem;
+  width: clamp(200px, calc(10vw + 80px), 240px);
   height: auto;
-  max-width: none;
+  max-width: min(240px, 58vw);
   overflow: visible;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .mobile-drawer-logo-link .mobile-drawer-logo-icon {
   display: block;
-  width: 11rem;
+  width: clamp(176px, 52vw, 200px);
   height: auto;
-  max-width: none;
+  max-width: 200px;
   overflow: visible;
+  object-fit: contain;
 }
 
 .site-footer .logo-section {
@@ -45,22 +49,10 @@
 
 .site-footer .logo-section .brand-logo {
   display: block;
-  width: 14rem;
+  width: clamp(220px, calc(10vw + 96px), 280px);
   height: auto;
-  max-width: none;
+  max-width: min(280px, 72vw);
   overflow: visible;
-}
-
-@media (min-width: 1024px) {
-  .site-header .logo-link .logo {
-    width: 16rem;
-  }
-
-  .mobile-drawer-logo-link .mobile-drawer-logo-icon {
-    width: 13rem;
-  }
-
-  .site-footer .logo-section .brand-logo {
-    width: 18rem;
-  }
+  object-fit: contain;
+  object-position: left center;
 }
