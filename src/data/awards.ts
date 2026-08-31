@@ -20,9 +20,9 @@ export const experienceSection = {
   yearsImage: "/assets/brand/25-years-badge.png",
   titleLead: "Delivering cooling",
   titleAccent: "you can trust.",
-  body: "Sri\u00A0Comforts has been an authorized Daikin dealer and service provider since 2001 — design, installation, and responsive service across South India.",
+  body: "A 280+ strong team of designers, installers, and service specialists has delivered cooling across South India since 2001 — authorized Daikin partners with award-winning sales and service.",
   stats: [
-    { value: "230+", label: "Engineers & technicians" },
+    { value: "280+", label: "Working people" },
     { value: "9", label: "Cities with local teams" },
     { value: "24 hr", label: "Service promise" },
   ] satisfies AchievementStat[],

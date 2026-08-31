@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { BrandText } from "@/components/brand/BrandText";
 import { type SolutionGridData } from "@/data/solutions";
 import { AnimatedCardBorder } from "@/components/solutions/AnimatedCardBorder";
 import { SectionsGridSvg } from "@/components/solutions/SectionsGridSvg";
@@ -19,7 +20,9 @@ function GridHeader({ data }: { data: SolutionGridData }) {
     <header className="sections-grid__header sections-grid__header--stacked">
       <p className="sections-grid__label label label-5">{data.label}</p>
       <div ref={headerRef} className="sections-grid__title animated-strong title-si">
-        <h2>{data.title}</h2>
+        <h2>
+          <BrandText>{data.title}</BrandText>
+        </h2>
       </div>
     </header>
   );
@@ -46,7 +49,9 @@ function DarkFourGrid({ data }: { data: SolutionGridData }) {
                   <h3 className="sections-grid__heading">{item.title}</h3>
                   <div className="sections-grid__description body-4">
                     <p>
-                      <span style={{ color: "var(--color-neutral-soft)" }}>{item.description}</span>
+                      <span style={{ color: "var(--color-neutral-soft)" }}>
+                        <BrandText>{item.description}</BrandText>
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -86,7 +91,9 @@ function WhiteVariant2Grid({ data }: { data: SolutionGridData }) {
                   <div className="sections-grid-variant2__heading-wrapper">
                     <h3 className="sections-grid-variant2__heading">{item.title}</h3>
                     <div className="sections-grid-variant2__description body-4">
-                      <p>{item.description}</p>
+                      <p>
+                        <BrandText>{item.description}</BrandText>
+                      </p>
                     </div>
                   </div>
                 </AnimatedCardBorder>

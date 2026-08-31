@@ -10,6 +10,7 @@ import {
   useState,
 } from "react";
 import gsap from "gsap";
+import { BrandText } from "@/components/brand/BrandText";
 import { registerGsap } from "@/lib/gsap/register";
 import {
   testimonials as defaultTestimonials,
@@ -334,7 +335,9 @@ export function TestimonialsSection({
           >
             {testimonialsSection.title}
           </h2>
-          <p className={styles.subtitle}>{testimonialsSection.subtitle}</p>
+          <p className={styles.subtitle}>
+            <BrandText>{testimonialsSection.subtitle}</BrandText>
+          </p>
         </header>
 
         <div className={styles.stage} data-motion-item>
@@ -422,7 +425,7 @@ export function TestimonialsSection({
                 {active.headline}
               </h3>
               <p ref={bodyRef} className={styles.body}>
-                {active.body}
+                <BrandText>{active.body}</BrandText>
               </p>
               <footer ref={authorRef} className={styles.footer}>
                 <div className={styles.author}>

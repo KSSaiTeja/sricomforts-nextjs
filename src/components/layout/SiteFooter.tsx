@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { BrandText } from "@/components/brand/BrandText";
 import { FullLogo } from "@/components/brand/FullLogo";
 import { FooterPathBackground } from "@/components/layout/FooterPathBackground";
 import { SvgMask } from "@/components/preloader/SvgMask";
@@ -153,7 +154,21 @@ export function SiteFooter({ static: isStatic = true }: SiteFooterProps) {
                         {footerSection.technologyLinks.map((link) => (
                           <li key={`${link.label}-${link.href}`} className="i-links">
                             <Link href={link.href} className="link link-active">
-                              {link.label}
+                              <BrandText>{link.label}</BrandText>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="links-list service-list">
+                      <p className="label label-4">
+                        <span> Services </span>
+                      </p>
+                      <ul>
+                        {footerSection.serviceLinks.map((link) => (
+                          <li key={`${link.label}-${link.href}`} className="i-links">
+                            <Link href={link.href} className="link link-active">
+                              <BrandText>{link.label}</BrandText>
                             </Link>
                           </li>
                         ))}
@@ -167,7 +182,7 @@ export function SiteFooter({ static: isStatic = true }: SiteFooterProps) {
                         {footerSection.companyLinks.map((link) => (
                           <li key={`${link.label}-${link.href}`} className="i-links">
                             <Link href={link.href} className="link link-active">
-                              {link.label}
+                              <BrandText>{link.label}</BrandText>
                             </Link>
                           </li>
                         ))}
@@ -221,10 +236,9 @@ export function SiteFooter({ static: isStatic = true }: SiteFooterProps) {
               </div>
 
               <div className="copyright">
-                <p>{footerSection.copyright}</p>
-                <Link href={footerSection.technicalIndexHref} className="technical-index-link">
-                  Awards & Recognition
-                </Link>
+                <p>
+                  <BrandText>{footerSection.copyright}</BrandText>
+                </p>
               </div>
 
               <div className="credits label-4">

@@ -115,7 +115,7 @@ function buildCommercial(): SolutionPageData {
         {
           title: "Diverse Facility Types",
           description:
-            "Corporate towers, co-working hubs, and mixed-use campuses each require tailored ducting, VRVs, and maintenance plans.",
+            "Corporate towers, co-working hubs, and mixed-use campuses each require tailored ducting, VRV, and maintenance plans.",
           image: { src: mesh(2), alt: "Diverse facility types illustration" },
         },
         {
@@ -147,7 +147,7 @@ function buildCommercial(): SolutionPageData {
         },
         {
           title: "Scalable Deployment",
-          copy: "Handle new fit-outs, expansions, and retrofits without adding in-house HVAC headcount — we scale with your footprint across South India.",
+          copy: "Handle new fit-outs, expansions, and system upgrades without adding in-house HVAC headcount — we scale with your footprint across South India.",
           image: { src: mesh(2), alt: "Scalable deployment" },
         },
         {
@@ -166,10 +166,10 @@ function buildCommercial(): SolutionPageData {
       title: "Sri\u00A0Comforts Solutions That Drive Results for Commercial Operations",
       items: [
         {
-          title: "VRVs Design",
+          title: "VRV Design",
           description:
-            "AutoCAD-based layouts and VRVs specifications tailored to your floor plate, occupancy, and budget from day one.",
-          image: { src: featureImage("commercial", 0), alt: "VRVs system design" },
+            "AutoCAD-based layouts and VRV specifications tailored to your floor plate, occupancy, and budget from day one.",
+          image: { src: featureImage("commercial", 0), alt: "VRV system design" },
           metrics: [{ value: "30%↓", label: "in Energy Waste" }],
         },
         {
@@ -194,7 +194,7 @@ function buildCommercial(): SolutionPageData {
         {
           title: "Lifecycle Support",
           description:
-            "From warranty management to retrofit planning, our post-sales team protects your investment across the full equipment lifecycle.",
+            "From warranty management to planned upgrades, our post-sales team protects your investment across the full equipment lifecycle.",
           image: { src: featureImage("commercial", 4), alt: "Lifecycle support" },
         },
       ],
@@ -205,10 +205,10 @@ function buildCommercial(): SolutionPageData {
       variant: "white-variant2",
       items: [
         {
-          title: "Office Tower Retrofit",
+          title: "Office Tower Upgrade",
           description:
-            "Replace aging split systems with centralized VRVs, improving comfort per floor while cutting energy bills.",
-          image: { src: mesh(0), alt: "Office tower retrofit" },
+            "Replace aging split systems with centralized VRV, improving comfort per floor while cutting energy bills.",
+          image: { src: mesh(0), alt: "Office tower HVAC upgrade" },
         },
         {
           title: "Multi-Tenant Campuses",
@@ -234,7 +234,7 @@ function buildCommercial(): SolutionPageData {
       label: "Case Study",
       title: "Leading commercial tower reduces cooling downtime",
       description:
-        "Legacy chillers and reactive maintenance led to frequent comfort complaints and emergency costs. Sri\u00A0Comforts deployed a phased VRVs upgrade with structured AMC, cutting breakdowns and stabilizing temperatures across 12 floors.",
+        "Legacy chillers and reactive maintenance led to frequent comfort complaints and emergency costs. Sri\u00A0Comforts deployed a phased VRV upgrade with structured AMC, cutting breakdowns and stabilizing temperatures across 12 floors.",
       quote:
         "We have not seen this kind of consistency from an HVAC partner before — this is a significant milestone in how we manage comfort across our campus.",
       stats: [
@@ -360,9 +360,9 @@ export const solutionPages: Record<string, SolutionPageData> = {
           image: { src: mesh(0), alt: "Server room build-out" },
         },
         {
-          title: "Data Hall Retrofit",
+          title: "Data Hall Upgrade",
           description: "Upgrade legacy comfort cooling to precision systems without halting operations.",
-          image: { src: mesh(1), alt: "Data hall retrofit" },
+          image: { src: mesh(1), alt: "Data hall cooling upgrade" },
         },
         {
           title: "NOC & Operations Centers",
@@ -463,9 +463,9 @@ export const solutionPages: Record<string, SolutionPageData> = {
           image: { src: featureImage("industrial-pharma", 3), alt: "Audit-ready AMC" },
         },
         {
-          title: "Retrofit & Expansion",
+          title: "Upgrade & Expansion",
           description: "Phased upgrades that keep production running while improving compliance and efficiency.",
-          image: { src: featureImage("industrial-pharma", 4), alt: "Retrofit and expansion" },
+          image: { src: featureImage("industrial-pharma", 4), alt: "Plant upgrade and expansion" },
         },
       ],
     },
@@ -500,9 +500,9 @@ export const solutionPages: Record<string, SolutionPageData> = {
       label: "Case Study",
       title: "Pharma facility passes audit with upgraded HVAC",
       description:
-        "Aging clean room units risked non-compliance during annual inspections. Sri\u00A0Comforts executed a validated retrofit with full documentation — passing audit on first review.",
+        "Aging clean room units risked non-compliance during annual inspections. Sri\u00A0Comforts executed a validated system upgrade with full documentation — passing audit on first review.",
       quote:
-        "Audit-ready documentation and validated commissioning gave our QA team confidence from day one of the retrofit.",
+        "Audit-ready documentation and validated commissioning gave our QA team confidence from day one of the upgrade.",
       stats: [
         { value: "100%", label: "Audit Compliance" },
         { value: "20%", label: "Energy Reduction" },
@@ -682,9 +682,9 @@ export const solutionPages: Record<string, SolutionPageData> = {
       title: "Solutions That Drive Results for Hospitality & Retail",
       items: [
         {
-          title: "Quiet VRVs",
-          description: "Low-noise VRVs for guest rooms, suites, and premium retail floors.",
-          image: { src: featureImage("hospitality-retail", 0), alt: "Quiet VRVs" },
+          title: "Quiet VRV",
+          description: "Low-noise VRV for guest rooms, suites, and premium retail floors.",
+          image: { src: featureImage("hospitality-retail", 0), alt: "Quiet VRV" },
         },
         {
           title: "Kitchen & Back-of-House",
@@ -740,7 +740,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
       label: "Case Study",
       title: "Hotel group cuts guest comfort complaints",
       description:
-        "Inconsistent room temperatures drove negative reviews across a three-property portfolio. Sri\u00A0Comforts standardized VRVs and AMC — improving ratings within two seasons.",
+        "Inconsistent room temperatures drove negative reviews across a three-property portfolio. Sri\u00A0Comforts standardized VRV and AMC — improving ratings within two seasons.",
       quote:
         "Guest reviews turned around once room temperatures stabilized — invisible comfort is exactly what hospitality needs.",
       stats: [
@@ -813,9 +813,9 @@ export const solutionPages: Record<string, SolutionPageData> = {
           image: { src: featureImage("residential", 1), alt: "Authorized installation" },
         },
         {
-          title: "VRVs for Large Homes",
+          title: "VRV for Large Homes",
           description: "Multi-zone comfort for villas and duplexes with a single efficient outdoor unit.",
-          image: { src: featureImage("residential", 2), alt: "VRVs for large homes" },
+          image: { src: featureImage("residential", 2), alt: "VRV for large homes" },
         },
         {
           title: "AMC & Seasonal Service",
@@ -837,7 +837,7 @@ export const solutionPages: Record<string, SolutionPageData> = {
       items: [
         {
           title: "New Villa Build",
-          description: "Whole-home VRVs design integrated with your architect's plans from the start.",
+          description: "Whole-home VRV design integrated with your architect's plans from the start.",
           image: { src: mesh(0), alt: "New villa build" },
         },
         {
@@ -859,11 +859,11 @@ export const solutionPages: Record<string, SolutionPageData> = {
     },
     caseStudy: {
       label: "Case Study",
-      title: "Villa owner cuts electricity bills with right-sized VRVs",
+      title: "Villa owner cuts electricity bills with right-sized VRV",
       description:
-        "Oversized splits cycled constantly and never dehumidified properly. Sri\u00A0Comforts resized with VRVs and seasonal AMC — delivering even comfort at lower monthly cost.",
+        "Oversized splits cycled constantly and never dehumidified properly. Sri\u00A0Comforts resized with VRV and seasonal AMC — delivering even comfort at lower monthly cost.",
       quote:
-        "Right-sized VRVs finally gave us even comfort in every room — and the bills dropped noticeably the first summer.",
+        "Right-sized VRV finally gave us even comfort in every room — and the bills dropped noticeably the first summer.",
       stats: [
         { value: "32%↓", label: "Electricity Bill" },
         { value: "100%", label: "Room Comfort Coverage" },

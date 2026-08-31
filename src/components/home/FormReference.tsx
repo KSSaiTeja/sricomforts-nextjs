@@ -1,6 +1,7 @@
 "use client";
 
 import { type CSSProperties, type FormEvent, useCallback, useRef, useState } from "react";
+import { BrandText } from "@/components/brand/BrandText";
 import { formSection } from "@/data/homepage";
 import { useAnimatedStrong } from "@/hooks/useAnimatedStrong";
 
@@ -32,7 +33,7 @@ const fields: FieldConfig[] = [
     name: "role_or_position",
     label: "Role or position",
     placeholder: "Project manager",
-    required: true,
+    required: false,
     autoComplete: "organization-title",
     width: "half",
   },
@@ -137,7 +138,9 @@ export function FormReference({ paddingTop = "none" }: FormReferenceProps) {
             <div className="form-info-column">
               <div className="form-info animated-strong">
                 <p>
-                  <span>{formSection.subtitle}</span>
+                  <span>
+                    <BrandText>{formSection.subtitle}</BrandText>
+                  </span>
                 </p>
                 <ul className="unordered-list">
                   {formSection.bullets.map((bullet) => (

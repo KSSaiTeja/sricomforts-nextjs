@@ -1,4 +1,4 @@
-import { keepBrandTogether } from "@/lib/brand";
+import { BRAND_NAME, keepBrandTogether } from "@/lib/brand";
 
 /** Breaking whitespace only — excludes NBSP so "Sri Comforts" stays one word. */
 const BREAKING_WHITESPACE = /([ \t\r\n\f\v]+)/;
@@ -36,7 +36,8 @@ export function wrapTextWithChars(
     }
 
     const wordWrapper = document.createElement("span");
-    wordWrapper.className = wordClassName;
+    wordWrapper.className =
+      token === BRAND_NAME ? `${wordClassName} brand-nowrap` : wordClassName;
     wordWrapper.setAttribute("aria-hidden", "true");
 
     for (const character of splitIntoCharSpans(token)) {
@@ -74,7 +75,8 @@ export function wrapElementWithSplitChars(
     }
 
     const wordWrapper = document.createElement("span");
-    wordWrapper.className = wordClassName;
+    wordWrapper.className =
+      token === BRAND_NAME ? `${wordClassName} brand-nowrap` : wordClassName;
     wordWrapper.setAttribute("aria-hidden", "true");
 
     for (const character of splitIntoCharSpans(token)) {

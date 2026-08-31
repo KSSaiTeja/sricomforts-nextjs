@@ -158,7 +158,7 @@ export const blogPosts: BlogPost[] = [
     body: [
       "Lower GWP refrigerants help — so does stopping leaks with disciplined install and service.",
       "Heat recovery and right-sized plant beat ornamental dashboards that nobody opens.",
-      "Document energy baselines before retrofit so you can show what improved.",
+      "Document energy baselines before an upgrade so you can show what improved.",
     ],
   },
   {

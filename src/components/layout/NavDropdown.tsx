@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties, type RefObject } from "react";
 import { createPortal } from "react-dom";
+import { BrandText } from "@/components/brand/BrandText";
 import type { NavSection } from "@/data/navigation";
 
 type NavDropdownTriggerProps = {
@@ -211,7 +212,9 @@ export function NavDropdownPanel({
                       className="content-link"
                       onClick={onClose}
                     >
-                      <span className="content-link-text">{link.label}</span>
+                      <span className="content-link-text">
+                        <BrandText>{link.label}</BrandText>
+                      </span>
                       <LinkArrowIcon />
                     </Link>
                   ))}

@@ -42,6 +42,7 @@ export type VideoSequenceController = {
   onUpdate: (force?: boolean) => void;
   resize: () => void;
   requestLoad: () => void;
+  pauseLoad: () => void;
   attach: (container: HTMLElement) => void;
   detach: () => void;
 };
@@ -55,6 +56,8 @@ type SharedState = {
   refCount: number;
   onLoad?: (ratio: number) => void;
   loadListeners: Set<(ratio: number) => void>;
+  paused: boolean;
+  pump?: () => void;
 };
 
 const sharedByKey = new Map<string, SharedState>();
@@ -100,6 +103,7 @@ function getOrCreateSharedState(
     refCount: 1,
     onLoad,
     loadListeners: new Set(),
+    paused: false,
   };
 
   worker.addEventListener("message", (event: MessageEvent) => {
@@ -135,6 +139,7 @@ function requestSharedLoad(state: SharedState) {
 
   const sendNext = () => {
     if (remaining.length === 0) return;
+    if (state.paused) return;
     if (scrollActive) {
       setTimeout(sendNext, 80);
       return;
@@ -146,6 +151,7 @@ function requestSharedLoad(state: SharedState) {
     }
   };
 
+  state.pump = sendNext;
   sendNext();
 }
 
@@ -281,12 +287,11 @@ export function createVideoSequence({
       `${fit.top}%`,
     );
 
-    ctx.clearRect(0, 0, displayWidth, displayHeight);
     ctx.drawImage(bitmap, fitted.x, fitted.y, fitted.width, fitted.height);
   };
 
   const resize = () => {
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const displayWidth = canvas.offsetWidth;
     const displayHeight = canvas.offsetHeight;
 
@@ -313,7 +318,14 @@ export function createVideoSequence({
     },
     onUpdate,
     resize,
-    requestLoad: () => requestSharedLoad(state),
+    requestLoad: () => {
+      state.paused = false;
+      requestSharedLoad(state);
+      state.pump?.();
+    },
+    pauseLoad: () => {
+      state.paused = true;
+    },
     attach: (nextContainer: HTMLElement) => {
       if (!nextContainer.contains(canvas)) {
         nextContainer.appendChild(canvas);

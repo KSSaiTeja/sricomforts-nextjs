@@ -22,7 +22,11 @@ self.addEventListener("message", (event: MessageEvent<FramesMessage>) => {
           const response = await fetch(frame);
           if (!response.ok) return null;
           const blob = await response.blob();
-          const bitmap = await createImageBitmap(blob);
+          const bitmap = await createImageBitmap(blob, {
+            resizeWidth: 1280,
+            resizeHeight: 720,
+            resizeQuality: "medium",
+          });
           return { frame, bitmap };
         } catch {
           return null;

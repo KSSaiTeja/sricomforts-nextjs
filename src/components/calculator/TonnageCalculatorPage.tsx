@@ -16,9 +16,8 @@ export function TonnageCalculatorPage() {
           <p className="tonnage-calculator__intro-eyebrow">Resources</p>
           <h1 className="tonnage-calculator__intro-title">AC Tonnage Calculator</h1>
           <p className="tonnage-calculator__intro-body">
-            Size cooling for a room in seconds. Enter area, direction, floor, outdoor
-            temperature, occupants, windows, roof, ceiling height, and sun exposure.
-            The estimate updates live from our residential split-AC rules.
+            Size cooling for your room in seconds. Enter the room length and width in
+            feet to calculate the area and match the ideal AC capacity (1 TR to 2 TR).
           </p>
         </header>
         <TonnageCalculator />

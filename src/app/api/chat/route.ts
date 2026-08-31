@@ -9,7 +9,7 @@ import {
 import {
   CHAT_LIMITS,
   CHAT_PHONE_DISPLAY,
-  DEFAULT_GROQ_MODEL,
+  resolveGroqModel,
 } from "@/lib/chat/config";
 import { retrieveKnowledge } from "@/lib/chat/kb";
 import { buildChatInstructions } from "@/lib/chat/prompt";
@@ -112,7 +112,7 @@ export async function POST(request: Request) {
   }
 
   const groq = createGroq({ apiKey });
-  const modelId = process.env.GROQ_MODEL?.trim() || DEFAULT_GROQ_MODEL;
+  const modelId = resolveGroqModel();
 
   const result = streamText({
     model: groq(modelId),
@@ -121,8 +121,8 @@ export async function POST(request: Request) {
       retrieval.context,
     ),
     messages: await convertToModelMessages(history),
-    temperature: 0.45,
-    maxOutputTokens: 280,
+    temperature: 0.4,
+    maxOutputTokens: 420,
   });
 
   return createUIMessageStreamResponse({

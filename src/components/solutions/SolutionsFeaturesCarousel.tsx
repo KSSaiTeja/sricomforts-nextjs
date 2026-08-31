@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useRef, useState } from "react";
+import { BrandText } from "@/components/brand/BrandText";
 import { type SolutionFeaturesCarouselData } from "@/data/solutions";
 import { FEATURE_CARD_COLORS } from "@/lib/svg/solutionsBorderPaths";
 import { useAnimatedStrong } from "@/hooks/useAnimatedStrong";
@@ -140,7 +141,9 @@ export function SolutionsFeaturesCarousel({ data }: SolutionsFeaturesCarouselPro
         <div className="wrapper">
           <div ref={headerRef} className="heading__wrapper animated-strong">
             <div className="title title-h2">
-              <p>{data.title}</p>
+              <p>
+                <BrandText>{data.title}</BrandText>
+              </p>
             </div>
             {renderControls("slider-button__wrapper slider-button__wrapper--desktop")}
           </div>

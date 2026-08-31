@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { type FormEvent, useId, useState } from "react";
+import { BrandText } from "@/components/brand/BrandText";
 import { promoBannerDownload } from "@/data/contact";
 
 function isValidEmail(value: string) {
@@ -70,7 +71,9 @@ export function PromoBannerDownload() {
       <div className="promo-banner-card__inner">
         <div className="promo-banner-card__content">
           <p className="body-4">{promoBannerDownload.eyebrow}</p>
-          <h3 className="title-h2">{promoBannerDownload.title}</h3>
+          <h3 className="title-h2">
+            <BrandText>{promoBannerDownload.title}</BrandText>
+          </h3>
 
           {isSubmitted ? (
             <div className="promo-banner-card__success" role="status">

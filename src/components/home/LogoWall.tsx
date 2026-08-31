@@ -8,37 +8,12 @@ import {
   useRef,
   useState,
 } from "react";
-import { CrossFlicker } from "@/components/home/CrossFlicker";
 import { LogoBorderCell } from "@/components/home/LogoBorderCell";
 import { logoWallIntro, logoWallLogos, type LogoWallItem } from "@/data/homepage";
 import styles from "./logo-wall.module.css";
 
 /** Target travel speed — keeps both rows feeling even as content length changes */
 const MARQUEE_PX_PER_SEC = 36;
-
-function LogoCellDecorators() {
-  return (
-    <>
-      <div className="crosses__wrapper">
-        <div className="cross__wrapper top-left">
-          <CrossFlicker />
-        </div>
-        <div className="cross__wrapper top-right">
-          <CrossFlicker />
-        </div>
-        <div className="cross__wrapper bottom-right">
-          <CrossFlicker />
-        </div>
-        <div className="cross__wrapper bottom-left">
-          <CrossFlicker />
-        </div>
-      </div>
-      <div className="block__visual-divider horizontal" />
-      <div className="block__visual-divider vertical-top" />
-      <div className="block__visual-divider vertical-bottom" />
-    </>
-  );
-}
 
 function LogoImage({ logo }: { logo: LogoWallItem }) {
   return (
@@ -117,7 +92,6 @@ function MarqueeRow({
                 key={`${copy}-${logo.src}-${index}`}
                 className={`logo ${styles.logo}`}
               >
-                <LogoCellDecorators />
                 <LogoBorderCell>
                   <LogoImage logo={logo} />
                 </LogoBorderCell>

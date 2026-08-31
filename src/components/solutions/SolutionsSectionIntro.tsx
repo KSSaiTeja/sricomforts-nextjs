@@ -1,5 +1,6 @@
 "use client";
 
+import { BrandText } from "@/components/brand/BrandText";
 import { type SolutionIntroData } from "@/data/solutions";
 import { BackgroundCanvas } from "@/components/solutions/BackgroundCanvas";
 import { PathBackground } from "@/components/preloader/PathBackground";
@@ -34,7 +35,9 @@ export function SolutionsSectionIntro({ data }: SolutionsSectionIntroProps) {
               .join(" ")}
           >
             <h2 className="title-si">
-              <strong>{data.title}</strong>
+              <strong>
+                <BrandText>{data.title}</BrandText>
+              </strong>
             </h2>
           </header>
 
@@ -42,7 +45,7 @@ export function SolutionsSectionIntro({ data }: SolutionsSectionIntroProps) {
             <div className="wide paragraphs-wrapper">
               {data.paragraphs.map((paragraph, index) => (
                 <p key={`${paragraph}-${index}`} className="paragraph body-4">
-                  {paragraph}
+                  <BrandText>{paragraph}</BrandText>
                 </p>
               ))}
               <p className="paragraph body-4" aria-hidden>

@@ -42,23 +42,6 @@ export function VideoCarousel() {
       }),
     );
 
-    if (sectionRef.current && backgroundWrapperRef.current) {
-      triggers.push(
-        ScrollTrigger.create({
-          trigger: sectionRef.current,
-          start: "bottom bottom",
-          end: "bottom top",
-          scrub: true,
-          invalidateOnRefresh: true,
-          animation: gsap.fromTo(
-            backgroundWrapperRef.current,
-            { yPercent: 0 },
-            { yPercent: 50, ease: "none", duration: 1 },
-          ),
-        }),
-      );
-    }
-
     requestAnimationFrame(() => ScrollTrigger.refresh());
 
     return () => {

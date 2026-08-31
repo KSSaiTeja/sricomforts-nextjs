@@ -52,7 +52,7 @@ export type ProductCatalogItem = {
 export const productCatalogFilters: ProductCatalogFilterOption[] = [
   { id: "all", label: "All" },
   { id: "new-launches", label: "New Launches" },
-  { id: "vrv-vrf", label: "VRVs" },
+  { id: "vrv-vrf", label: "VRV" },
   { id: "split-ac", label: "Split AC" },
   { id: "ducted", label: "Ductable" },
   { id: "chillers", label: "Chillers" },
@@ -64,7 +64,7 @@ export const productCatalogFilters: ProductCatalogFilterOption[] = [
 export const productCatalogItems: ProductCatalogItem[] = [
   {
     id: "vrv-vrf",
-    name: "Daikin VRVs",
+    name: "Daikin VRV",
     tagline: "Variable refrigerant volume for large campuses",
     categories: ["vrv-vrf", "commercial"],
     specs: [
@@ -75,13 +75,13 @@ export const productCatalogItems: ProductCatalogItem[] = [
     ],
     isNewLaunch: true,
     image: "/images/products/vrv-vrf.png",
-    imageAlt: "Daikin VRVs outdoor system",
+    imageAlt: "Daikin VRV outdoor system",
     href: "/solutions/commercial",
   },
   {
     id: "vrv-s",
     name: "Daikin VRV S",
-    tagline: "Compact VRVs for boutique commercial spaces",
+    tagline: "Compact VRV for boutique commercial spaces",
     categories: ["vrv-vrf", "commercial", "residential"],
     specs: [
       { label: "Capacity", value: "4–12 HP" },

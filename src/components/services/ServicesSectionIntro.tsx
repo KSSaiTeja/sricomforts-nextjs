@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { type ServiceIntroData } from "@/data/services";
 import { serviceDarkBackground } from "@/data/serviceImages";
 import { type SolutionIntroData } from "@/data/solutions";
+import { BrandText } from "@/components/brand/BrandText";
 import { BackgroundCanvas } from "@/components/solutions/BackgroundCanvas";
 import { useAnimatedStrong } from "@/hooks/useAnimatedStrong";
 import { useIsLargeViewport } from "@/hooks/useMediaQuery";
@@ -86,13 +87,19 @@ export function ServicesSectionIntro({ data }: ServicesSectionIntroProps) {
               .join(" ")}
           >
             {isDark ? (
-              <h3 className="title-h3">{data.title}</h3>
+              <h3 className="title-h3">
+                <BrandText>{data.title}</BrandText>
+              </h3>
             ) : data.fullscreen ? (
               <h2 className="title-si">
-                <strong>{data.title}</strong>
+                <strong>
+                  <BrandText>{data.title}</BrandText>
+                </strong>
               </h2>
             ) : (
-              <h2 className="title-si">{data.title}</h2>
+              <h2 className="title-si">
+                <BrandText>{data.title}</BrandText>
+              </h2>
             )}
           </header>
 
@@ -105,7 +112,13 @@ export function ServicesSectionIntro({ data }: ServicesSectionIntroProps) {
                     .filter(Boolean)
                     .join(" ")}
                 >
-                  {isDark ? <span className="paragraph--dark-copy">{paragraph}</span> : paragraph}
+                  {isDark ? (
+                    <span className="paragraph--dark-copy">
+                      <BrandText>{paragraph}</BrandText>
+                    </span>
+                  ) : (
+                    <BrandText>{paragraph}</BrandText>
+                  )}
                 </p>
               ))}
             </div>

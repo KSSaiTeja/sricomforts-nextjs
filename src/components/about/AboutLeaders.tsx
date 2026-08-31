@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { type AboutLeaderItem, type AboutLeadersData } from "@/data/about";
+import { BrandText } from "@/components/brand/BrandText";
 import { CrossFlicker } from "@/components/home/CrossFlicker";
 import { LogoBorderCell } from "@/components/home/LogoBorderCell";
 import { useIsLargeViewport } from "@/hooks/useMediaQuery";
@@ -78,7 +79,9 @@ function LeaderCard({
               data-lenis-prevent
             >
               {leader.bio?.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph}>
+                  <BrandText>{paragraph}</BrandText>
+                </p>
               ))}
             </div>
           ) : null}

@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SvgMask } from "@/components/preloader/SvgMask";
 import { registerGsap } from "@/lib/gsap/register";
+import { BrandText } from "@/components/brand/BrandText";
 import { fullscreenFeatures } from "@/data/homepage";
 import { createNotch, NotchDirection } from "@/types/notch";
 import styles from "./fullscreen-features.module.css";
@@ -100,7 +101,9 @@ export function FullscreenFeatures() {
             </div>
 
             <div className={styles.contentWrapper}>
-              <p className={styles.panelDescription}>{activeItem.description}</p>
+              <p className={styles.panelDescription}>
+                <BrandText>{activeItem.description}</BrandText>
+              </p>
             </div>
           </div>
         </div>

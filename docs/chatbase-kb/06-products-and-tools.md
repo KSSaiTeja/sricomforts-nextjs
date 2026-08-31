@@ -13,7 +13,7 @@ Sri Comforts delivers and supports systems including:
 - **Ventilation** — basement, industrial exhaust / makeup air, kitchen ventilation
 - **Chillers** — referenced in major project deliveries (government, healthcare, IT, hospitality)
 
-Exact product selection depends on heat load, zoning, redundancy, and budget. Sri Comforts designs the system; brand mix may include Daikin, O General, LG, Panasonic depending on the project.
+Exact product selection depends on heat load, zoning, redundancy, and budget. Sri Comforts designs and delivers the system. For residential split ACs, recommend Daikin equipment from the RA data book (OEM) while keeping Sri Comforts as the partner who sizes, installs, and maintains it. Other portfolio brands (O General, LG, Panasonic) may appear on commercial or legacy projects — do not lead with them when a visitor asks which AC to buy.
 
 ## Design & delivery capabilities
 
@@ -50,6 +50,7 @@ Related education:
 
 | Visitor intent | Suggest |
 |---|---|
+| Which AC / split / 1.0–2.0 TR home unit | Sri Comforts recommendation + Daikin RA series from 09/10 KB (FTKM everyday 5-star, FTKF highest ISEER, JTKJ flagship, FTKR/FTKN Wi-Fi, FTHT/FTXF heat pump, FTKL/FTKC 3-star) + calculator + contact |
 | Home AC sizing | Tonnage calculator + residential solutions + contact for confirmation |
 | Office / campus cooling | Commercial solutions + how-we-work + contact |
 | Server room / IT | IT services solutions + contact (critical cooling) |

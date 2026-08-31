@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { BrandText } from "@/components/brand/BrandText";
 import { type SolutionValueData } from "@/data/solutions";
 import { AnimatedCardBorder } from "@/components/solutions/AnimatedCardBorder";
 import { useAnimatedStrong } from "@/hooks/useAnimatedStrong";
@@ -66,7 +67,9 @@ export function SolutionsValue({ data }: SolutionsValueProps) {
           <header ref={headerRef} className="solutions-value__title animated-strong">
             <h2 className="title-h2">
               <strong>
-                <span style={{ color: "var(--color-neutral-mid)" }}>{data.title}</span>
+                <span style={{ color: "var(--color-neutral-mid)" }}>
+                  <BrandText>{data.title}</BrandText>
+                </span>
               </strong>
             </h2>
           </header>
@@ -102,7 +105,9 @@ export function SolutionsValue({ data }: SolutionsValueProps) {
                       </figure>
                       <div className="solutions-value__card-content">
                         <h3 className="solutions-value__card-title">{card.title}</h3>
-                        <p className="solutions-value__card-copy body-4">{card.copy}</p>
+                        <p className="solutions-value__card-copy body-4">
+                          <BrandText>{card.copy}</BrandText>
+                        </p>
                       </div>
                     </div>
                   </AnimatedCardBorder>

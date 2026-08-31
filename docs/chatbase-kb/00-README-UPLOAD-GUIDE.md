@@ -17,6 +17,10 @@ Markdown sources (same content) are next to this README if you prefer text uploa
 5. `05-faq.md`
 6. `06-products-and-tools.md`
 7. `07-notable-projects.md`
+8. `08-why-daikin.md`
+9. `09-residential-split-ac.md`
+10. `10-daikin-ra-models.md`
+11. `11-daikin-ra-features.md`
 
 ## System prompt (paste into Chatbase “Instructions” / “Base prompt”)
 
@@ -35,4 +39,4 @@ Ask the client to confirm or update:
 
 ## After uploading
 
-Retrain / reindex the bot, then test: AMC, service request, office address, residential tonnage, commercial VRF, healthcare, and “I need a quote.”
+Retrain / reindex the bot, then test: AMC, service request, office address, “which split AC do you recommend?”, FTKR Wi-Fi, FTKM capacity, residential tonnage, commercial VRF, healthcare, and “I need a quote.”

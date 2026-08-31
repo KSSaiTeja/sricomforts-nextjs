@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { registerGsap } from "@/lib/gsap/register";
+import { BrandText } from "@/components/brand/BrandText";
 import { quoteSection } from "@/data/homepage";
 import styles from "./quote-section.module.css";
 
@@ -44,7 +45,9 @@ export function QuoteSection() {
       </div>
       <div className={styles.quoteBlock}>
         <blockquote>
-          <p className={styles.quoteText}>&ldquo;{quoteSection.text}&rdquo;</p>
+          <p className={styles.quoteText}>
+            &ldquo;<BrandText>{quoteSection.text}</BrandText>&rdquo;
+          </p>
         </blockquote>
         <footer className={styles.author}>
           <div className={styles.authorInfo}>

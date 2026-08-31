@@ -92,9 +92,9 @@ export const statsBento = {
       id: "engineers",
       tone: "default",
       from: "center",
-      title: "230+",
-      accent: "engineers",
-      body: "Designing, installing, and maintaining systems",
+      title: "280+",
+      accent: "working people",
+      body: "Designing, installing, and serving every project",
     },
     {
       id: "cities",
@@ -333,12 +333,12 @@ export const projectShowcase = {
     },
     {
       sector: "Hospitality",
-      title: "Golkonda Resorts — chiller retrofit",
+      title: "Golkonda Resorts — chiller upgrade",
       location: "Hyderabad",
       href: "/solutions/hospitality-retail",
       image: {
         src: aboutWorkImage(0),
-        alt: "Chiller retrofit for Golkonda Resorts, Hyderabad",
+        alt: "Chiller upgrade for Golkonda Resorts, Hyderabad",
       },
     },
     {
@@ -365,13 +365,22 @@ export const projectShowcase = {
 } as const;
 
 export const footerSection = {
-  title: "Your trusted comfort partner starts today.",
+  title: "Your trust comfort journey starts today.",
   cta: { label: "Start your HVAC journey", href: "/contact" },
   technologyLinks: [
     { label: "Commercial HVAC", href: "/solutions/commercial" },
-    { label: "Central Air Conditioning", href: "/solutions/commercial" },
-    { label: "VRV Systems", href: "/solutions/residential" },
-    { label: "Residential Cooling", href: "/solutions/residential" },
+    { label: "IT Services HVAC", href: "/solutions/it-services" },
+    { label: "Industrial & Pharma", href: "/solutions/industrial-pharma" },
+    { label: "Healthcare HVAC", href: "/solutions/healthcare" },
+    { label: "Hospitality & Retail", href: "/solutions/hospitality-retail" },
+    { label: "Residential", href: "/solutions/residential" },
+  ],
+  serviceLinks: [
+    { label: "How We Work", href: "/services/how-we-work" },
+    { label: "AMC Plans", href: "/services/amc" },
+    { label: "Service Request", href: "/services/service-request" },
+    { label: "AC Tonnage Calculator", href: "/resources/ac-tonnage-calculator" },
+    { label: "Blog", href: "/blog" },
   ],
   companyLinks: [
     { label: "About Sri\u00A0Comforts", href: `/about#${aboutSectionAnchors.about}` },
@@ -379,6 +388,7 @@ export const footerSection = {
     { label: "Our Work", href: `/about#${aboutSectionAnchors.work}` },
     { label: "Awards & Recognition", href: `/about#${aboutSectionAnchors.awards}` },
     { label: "Careers", href: "/career" },
+    { label: "Contact", href: "/contact" },
   ],
   contact: {
     label: "Ready to upgrade your comfort? ",
@@ -405,7 +415,6 @@ export const footerSection = {
     },
   ],
   copyright: "Copyright Sri\u00A0Comforts © 2026 All Rights Reserved ",
-  technicalIndexHref: `/about#${aboutSectionAnchors.awards}`,
   creditsByline: "by kssaiteja",
   creditsHref: "",
 } as const;

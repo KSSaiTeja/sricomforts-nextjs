@@ -129,6 +129,7 @@ export function FeaturesSteps() {
   const { ready: scrollReady } = useSmoothScroll();
   const isDesktop = useIsLargeViewport();
   const innerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const scrollItemsRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
@@ -143,6 +144,10 @@ export function FeaturesSteps() {
   const odometerProgressRef = useRef({ value: 0 });
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [displayIndex, setDisplayIndex] = useState(0);
+  const [heldIndex, setHeldIndex] = useState<number | null>(null);
+  const activeIndexRef = useRef(0);
+  const sectionInViewRef = useRef(false);
   const charProgressRef = useRef(0);
   const [odometerProgress, setOdometerProgress] = useState(0);
   const [notchPosition, setNotchPosition] = useState(notchPositionForIndex(0));
@@ -170,17 +175,21 @@ export function FeaturesSteps() {
     }
 
     const odometer = headerRef.current?.querySelector(".odometer");
-    const lastItem = itemRefs.current[ITEM_COUNT - 1];
-    if (odometer instanceof HTMLElement && lastItem) {
-      odometer.style.marginBottom = `calc(${lastItem.offsetHeight}px - var(--font-size) - min(2.396vw, 61.3333333333px) * 0.45)`;
+    if (odometer instanceof HTMLElement) {
+      odometer.style.marginBottom = "0px";
     }
   }, []);
 
   const restartVideo = useCallback((index: number) => {
-    const video = videoRefs.current[index];
-    if (!video) return;
-    video.currentTime = 0;
-    void video.play().catch(() => undefined);
+    videoRefs.current.forEach((video, videoIndex) => {
+      if (!video) return;
+      if (!sectionInViewRef.current || videoIndex !== index) {
+        if (!video.paused) video.pause();
+        return;
+      }
+      video.currentTime = 0;
+      void video.play().catch(() => undefined);
+    });
   }, []);
 
   const animateOdometerTo = useCallback((value: number) => {
@@ -196,6 +205,7 @@ export function FeaturesSteps() {
   const goToIndex = useCallback(
     (nextIndex: number) => {
       const clamped = clamp(nextIndex, 0, ITEM_COUNT - 1);
+      activeIndexRef.current = clamped;
       setActiveIndex(clamped);
       setNotchPosition(notchPositionForIndex(clamped));
       updateNotchPosition(notchPositionForIndex(clamped));
@@ -210,8 +220,81 @@ export function FeaturesSteps() {
   );
 
   useEffect(() => {
+    activeIndexRef.current = activeIndex;
+  }, [activeIndex]);
+
+  useEffect(() => {
     if (isLoaded) restartVideo(activeIndex);
   }, [activeIndex, isLoaded, restartVideo]);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        sectionInViewRef.current = Boolean(entry?.isIntersecting);
+        if (sectionInViewRef.current) {
+          restartVideo(activeIndexRef.current);
+        } else {
+          videoRefs.current.forEach((video) => video?.pause());
+        }
+      },
+      { threshold: 0.12 },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [restartVideo]);
+
+  // Keep the previous video painted until the next one has a real frame.
+  useEffect(() => {
+    if (activeIndex === displayIndex) {
+      setHeldIndex(null);
+      return;
+    }
+
+    setHeldIndex(displayIndex);
+    const video = videoRefs.current[activeIndex];
+    let cancelled = false;
+    let fallbackTimer = 0;
+
+    const commit = () => {
+      if (cancelled) return;
+      setDisplayIndex(activeIndex);
+      setHeldIndex(null);
+    };
+
+    if (!video) {
+      commit();
+      return;
+    }
+
+    [activeIndex - 1, activeIndex + 1].forEach((index) => {
+      if (index < 0 || index >= ITEM_COUNT) return;
+      const neighbor = videoRefs.current[index];
+      if (!neighbor || neighbor.readyState >= 2) return;
+      neighbor.preload = "auto";
+    });
+    if (video.readyState < 2) {
+      video.preload = "auto";
+    }
+
+    if (video.readyState >= 2) {
+      requestAnimationFrame(() => requestAnimationFrame(commit));
+      return;
+    }
+
+    const onReady = () => commit();
+    video.addEventListener("loadeddata", onReady);
+    video.addEventListener("canplay", onReady);
+    fallbackTimer = window.setTimeout(commit, 450);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(fallbackTimer);
+      video.removeEventListener("loadeddata", onReady);
+      video.removeEventListener("canplay", onReady);
+    };
+  }, [activeIndex, displayIndex]);
 
   useEffect(() => {
     animateOdometerTo(activeIndex);
@@ -315,7 +398,10 @@ export function FeaturesSteps() {
                 let index = positions.findIndex((item) => item.y > scrollY + lead);
                 index =
                   index === -1 ? positions.length - 1 : Math.max(0, index - 1);
-                setActiveIndex(index);
+                if (activeIndexRef.current !== index) {
+                  activeIndexRef.current = index;
+                  setActiveIndex(index);
+                }
 
                 const item = positions[index];
                 const itemProgress = interpolateProgress(
@@ -395,6 +481,7 @@ export function FeaturesSteps() {
 
   return (
     <section
+      ref={sectionRef}
       className="features-steps"
       data-motion-ignore
       style={{ "--314863dd": ITEM_COUNT, "--current-item": activeIndex } as CSSProperties}
@@ -462,7 +549,13 @@ export function FeaturesSteps() {
             {featuresSteps.items.map((item, index) => (
               <div
                 key={item.label}
-                className={`media-el image${Math.max(activeIndex, 0) >= index ? " is-visible" : ""}`}
+                className={`media-el image${
+                  index === displayIndex
+                    ? " is-visible"
+                    : index === heldIndex
+                      ? " is-held"
+                      : ""
+                }`}
               >
                 <div className="media-wrapper lg">
                   <video
@@ -475,7 +568,7 @@ export function FeaturesSteps() {
                     muted
                     playsInline
                     loop
-                    autoPlay={isLoaded && index === activeIndex}
+                    autoPlay={false}
                     aria-hidden
                   />
                 </div>

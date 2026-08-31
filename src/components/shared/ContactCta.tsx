@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { type CSSProperties } from "react";
+import { BrandText } from "@/components/brand/BrandText";
 import { contactCtaSection } from "@/data/contact";
 import { useAnimatedStrong } from "@/hooks/useAnimatedStrong";
 
@@ -33,7 +34,9 @@ export function ContactCta({ paddingTop = "none" }: ContactCtaProps) {
             <div className="form-info-column">
               <div className="form-info animated-strong">
                 <p>
-                  <span>{subtitle}</span>
+                  <span>
+                    <BrandText>{subtitle}</BrandText>
+                  </span>
                 </p>
                 <ul className="unordered-list">
                   {bullets.map((bullet) => (

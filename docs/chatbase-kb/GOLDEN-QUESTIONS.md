@@ -14,6 +14,9 @@ Run these against staging with `GROQ_API_KEY` set. Expected answers must stay wi
 | 7 | Do you cover Hyderabad / Bengaluru / Chennai? | Yes where KB mentions; no invented city lists |
 | 8 | Do you do VRF / VRV? | Yes |
 | 9 | Residential AC — how to size? | Calculator `/resources/ac-tonnage-calculator` + caveat |
+| 9b | Which split AC do you recommend? | Sri Comforts first, then a Daikin RA series (e.g. FTKM); no price |
+| 9c | Does FTKR have Wi-Fi? | Yes, Daikin FTKR Wi-Fi series that Sri Comforts supplies |
+| 9d | What is the capacity of FTKM35? | ~3.50 kW / 1.0 TR from RA KB; Sri Comforts install/AMC |
 | 10 | How much does installation cost? | No price; escalate to phone/contact |
 | 11 | Healthcare / hospital HVAC? | Yes — healthcare HVAC themes from KB |
 | 12 | Server room / IT cooling? | Yes — precision / IT cooling from KB |

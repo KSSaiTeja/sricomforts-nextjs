@@ -1,6 +1,6 @@
 # Year-1 knowledge base update workflow
 
-Sri Comforts chat answers come from the markdown files in this folder (`01`–`07` + `SYSTEM-PROMPT.md`). There is no client self-serve Chatbase UI in production.
+Sri Comforts chat answers come from the markdown files in this folder (`01`–`11` + `SYSTEM-PROMPT.md`). There is no client self-serve Chatbase UI in production.
 
 ## How the client requests a change
 
@@ -22,6 +22,10 @@ Sri Comforts chat answers come from the markdown files in this folder (`01`–`0
 | FAQ | `05-faq.md` |
 | Products & tools | `06-products-and-tools.md` |
 | Notable projects | `07-notable-projects.md` |
+| Why Daikin (OEM framing) | `08-why-daikin.md` |
+| Residential split voice + series picks | `09-residential-split-ac.md` |
+| Daikin RA model specs | `10-daikin-ra-models.md` |
+| Features, filters, catalogue gaps | `11-daikin-ra-features.md` |
 | Bot behaviour / tone | `SYSTEM-PROMPT.md` |
 
 Do **not** invent prices in the KB. Quote / estimate requests should always escalate to phone or forms.

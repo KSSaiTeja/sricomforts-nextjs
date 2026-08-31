@@ -15,7 +15,9 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
+import { formatBrandCopy } from "@/components/brand/BrandText";
 import { LogoIcon } from "@/components/brand/LogoIcon";
+import { keepBrandTogether } from "@/lib/brand";
 import {
   CHAT_GREETING,
   CHAT_HIDDEN_PREFIXES,
@@ -50,14 +52,16 @@ function messageText(message: UIMessage): string {
 
 /** Soften model output: strip markdown-ish noise, keep short chat paragraphs. */
 function normalizeBotText(text: string): string {
-  return text
-    .replace(/\*\*(.+?)\*\*/g, "$1")
-    .replace(/__(.+?)__/g, "$1")
-    .replace(/^#{1,6}\s+/gm, "")
-    .replace(/^\s*[-*•]\s+/gm, "")
-    .replace(/^\s*\d+\.\s+/gm, "")
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
+  return keepBrandTogether(
+    text
+      .replace(/\*\*(.+?)\*\*/g, "$1")
+      .replace(/__(.+?)__/g, "$1")
+      .replace(/^#{1,6}\s+/gm, "")
+      .replace(/^\s*[-*•]\s+/gm, "")
+      .replace(/^\s*\d+\.\s+/gm, "")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim(),
+  );
 }
 
 function linkify(text: string): ReactNode[] {
@@ -68,7 +72,7 @@ function linkify(text: string): ReactNode[] {
 
   while ((match = pattern.exec(text)) !== null) {
     if (match.index > lastIndex) {
-      nodes.push(text.slice(lastIndex, match.index));
+      nodes.push(formatBrandCopy(text.slice(lastIndex, match.index)));
     }
     const value = match[0];
     if (value.startsWith("/")) {
@@ -92,10 +96,10 @@ function linkify(text: string): ReactNode[] {
   }
 
   if (lastIndex < text.length) {
-    nodes.push(text.slice(lastIndex));
+    nodes.push(formatBrandCopy(text.slice(lastIndex)));
   }
 
-  return nodes.length > 0 ? nodes : [text];
+  return nodes.length > 0 ? nodes : [formatBrandCopy(text)];
 }
 
 function ChatIcon() {
@@ -303,7 +307,7 @@ export function ChatWidget() {
               <span className="chat-widget__logo" aria-hidden>
                 <LogoIcon className="chat-widget__logo-img" />
               </span>
-              <p id={titleId} className="chat-widget__title">
+              <p id={titleId} className="chat-widget__title brand-nowrap">
                 Sri&nbsp;Comforts
               </p>
             </div>
@@ -356,7 +360,7 @@ export function ChatWidget() {
                     key={message.id}
                     className="chat-widget__bubble chat-widget__bubble--user"
                   >
-                    <p>{text}</p>
+                    <p>{formatBrandCopy(text)}</p>
                   </div>
                 );
               }
@@ -447,7 +451,7 @@ export function ChatWidget() {
         }}
         aria-expanded={open}
         aria-controls={open ? panelId : undefined}
-        aria-label={open ? "Close chat" : "Open Sri Comforts chat"}
+        aria-label={open ? "Close chat" : "Open Sri\u00A0Comforts chat"}
       >
         {open ? <CloseIcon /> : <ChatIcon />}
         {!open ? <span className="chat-widget__fab-label">Chat</span> : null}

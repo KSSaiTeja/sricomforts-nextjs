@@ -52,14 +52,39 @@ export function useVideoSequence({
       controller.onUpdate();
     };
 
-    gsap.ticker.add(tick);
+    let ticking = false;
+    const startTick = () => {
+      if (ticking) return;
+      ticking = true;
+      gsap.ticker.add(tick);
+      controller.requestLoad();
+    };
+    const stopTick = () => {
+      if (!ticking) return;
+      ticking = false;
+      gsap.ticker.remove(tick);
+    };
+
+    const visibility = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) startTick();
+        else {
+          stopTick();
+          controller.pauseLoad();
+        }
+      },
+      { rootMargin: "20% 0px" },
+    );
+    visibility.observe(container);
+    startTick();
 
     const observer = new ResizeObserver(() => controller.resize());
     observer.observe(container);
     window.addEventListener("resize", controller.resize);
 
     return () => {
-      gsap.ticker.remove(tick);
+      stopTick();
+      visibility.disconnect();
       observer.disconnect();
       window.removeEventListener("resize", controller.resize);
       controller.detach();

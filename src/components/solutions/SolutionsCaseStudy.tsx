@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
+import { BrandText } from "@/components/brand/BrandText";
 import { FooterPathBackground } from "@/components/layout/FooterPathBackground";
 import { SvgMask } from "@/components/preloader/SvgMask";
 import { type SolutionCaseStudyData } from "@/data/solutions";
@@ -62,11 +63,15 @@ export function SolutionsCaseStudy({ data }: SolutionsCaseStudyProps) {
           ) : null}
 
           <div className="case-study__title">
-            <h2 className="title-si">{data.title}</h2>
+            <h2 className="title-si">
+              <BrandText>{data.title}</BrandText>
+            </h2>
           </div>
 
           <div className="case-study__content-text">
-            <h3 className="title-h3">{data.description}</h3>
+            <h3 className="title-h3">
+              <BrandText>{data.description}</BrandText>
+            </h3>
           </div>
 
           {data.cta ? (
@@ -88,7 +93,9 @@ export function SolutionsCaseStudy({ data }: SolutionsCaseStudyProps) {
                 <div className="case-study__testimonial-text--quote case-study__testimonial-text title-h2">
                   <span className="case-study__quote-mark">“</span>
                   <blockquote>
-                    <p>{data.quote}</p>
+                    <p>
+                      <BrandText>{data.quote}</BrandText>
+                    </p>
                   </blockquote>
                 </div>
 

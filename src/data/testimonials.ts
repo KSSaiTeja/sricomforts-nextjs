@@ -32,7 +32,7 @@ export const testimonials: Testimonial[] = [
     company: "Multi-campus Commercial Group",
     headline:
       "Our cooling finally feels predictable — fewer emergency calls, steadier floors.",
-    body: "Sri\u00A0Comforts redesigned our VRVs and put a disciplined AMC in place. Response times dropped, temperatures stabilized across twelve floors, and our team stopped firefighting every summer.",
+    body: "Sri\u00A0Comforts redesigned our VRV and put a disciplined AMC in place. Response times dropped, temperatures stabilized across twelve floors, and our team stopped firefighting every summer.",
     rating: 5,
     image: "/images/team/testimonial/quote-portrait.webp",
     imageAlt: "Portrait of Ananya Rao",

@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { BrandText } from "@/components/brand/BrandText";
 import { type AboutHeroData } from "@/data/about";
 import { registerGsap } from "@/lib/gsap/register";
 import styles from "./about-hero.module.css";
@@ -261,7 +262,9 @@ export function AboutHero({ data }: AboutHeroProps) {
 
         <div className={styles.container}>
           <div ref={contentRef} className={styles.content}>
-            <p className={styles.tag}>{data.tag}</p>
+            <p className={styles.tag}>
+              <BrandText>{data.tag}</BrandText>
+            </p>
 
             <h2 id="about-hero-title" className={styles.heading}>
               <span className={styles.srOnly}>{fullTitle}</span>
@@ -292,7 +295,9 @@ export function AboutHero({ data }: AboutHeroProps) {
               </span>
             </h2>
 
-            <p className={`body-4 ${styles.body}`}>{data.body}</p>
+            <p className={`body-4 ${styles.body}`}>
+              <BrandText>{data.body}</BrandText>
+            </p>
           </div>
         </div>
 

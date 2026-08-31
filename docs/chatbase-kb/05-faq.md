@@ -18,13 +18,16 @@ Across South India in 8 cities, with local teams and shared standards. Public ma
 A 24-hour response on complaints and queries.
 
 **Are you an authorized Daikin dealer?**  
-Yes. Sri Comforts is positioned as an authorized Daikin dealer / top-tier authorized partner since 2001 for VRV, central air, ductable systems, and AHUs. Sri Comforts also partners with brands such as O General, and works with LG and Panasonic in its portfolio messaging.
+Yes. Sri Comforts is an authorized Daikin dealer / top-tier authorized partner since 2001. Daikin is the OEM for the residential splits and VRV/central systems we specify; Sri Comforts is who designs, installs, and maintains them. Sri Comforts also partners with brands such as O General, and works with LG and Panasonic in its portfolio messaging.
+
+**Why Daikin? / Why recommend Daikin over other AC brands?**  
+Sri Comforts specifies Daikin as our primary OEM: AC specialist focus, pioneer of VRV (1982; India from 2002), inverter efficiency / lower running-cost positioning, India manufacturing and spare-parts support (Neemrana), and a broad residential-to-VRV range. Stay positive about Daikin; do not attack other brands by name. Keep Sri Comforts as the partner. For a site-specific model, call +91 40 2700 1342 or use /contact. See also the Why Daikin knowledge doc and the residential RA product knowledge.
+
+**Which split AC do you recommend? / Which AC should I buy?**  
+Speak as Sri Comforts. For a typical home split, specify a Daikin FTKM Premium 5-star inverter (OEM), with FTKF for highest ISEER, JTKJ Waizu as flagship, FTKR/FTKN for Wi-Fi, FTHT/FTXF for heating+cooling, or FTKL/FTKC for 3-star value. Quote only RA data-book specs. Point to /resources/ac-tonnage-calculator and a Sri Comforts site visit. No prices.
 
 **What are your office hours / walk-in timings?**  
 Head office (Tarnaka / Secunderabad): Monday to Saturday, 8:00 AM – 6:00 PM. Sunday closed. Service promise (separate from walk-in hours): 24-hour response on complaints and queries. For the latest confirmation before a visit, call +91 40 2700 1342.
-
-**Why Daikin? / Why recommend Daikin over other AC brands?**  
-Sri Comforts recommends Daikin as a primary choice based on Daikin strengths in the knowledge base: AC specialist focus, pioneer of VRV (1982; India from 2002), inverter efficiency / lower running-cost positioning, India manufacturing and spare-parts support (Neemrana), and broad residential-to-VRV range. Stay positive about Daikin; do not attack other brands by name. For a site-specific recommendation, call +91 40 2700 1342 or use /contact. See also the Why Daikin knowledge doc.
 
 ---
 
@@ -72,7 +75,10 @@ Yes. Sri Comforts emphasizes single-partner visibility across sites (including H
 Yes. VRF/VRV design and installation is a core offering for commercial, hospitality, and large residential projects. Sri Comforts highlights a dedicated VRV practice.
 
 **Do you do residential AC?**  
-Yes — right-sized systems for homes, villas, and apartments, plus authorized installation and AMC/seasonal service.
+Yes — Sri Comforts supplies, installs, and maintains right-sized Daikin residential splits (OEM) for homes, villas, and apartments, plus AMC/seasonal service. See the RA series knowledge for models.
+
+**Do you sell Daikin split ACs / FTKM / FTKR / Waizu?**  
+Yes. Those are Daikin OEM models in the Sri Comforts residential range. Quote specs from the RA model knowledge. Sri Comforts handles supply, install, and AMC. No published prices.
 
 **Do you cool data centers / server rooms?**  
 Yes — precision cooling, redundancy (e.g. N+1), hot/cold aisle planning, and priority AMC for IT environments.

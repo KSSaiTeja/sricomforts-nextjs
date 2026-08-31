@@ -170,7 +170,7 @@ export function ProjectsCarousel() {
     <section
       className="projects-carousel"
       aria-roledescription="carousel"
-      aria-label="Sri Comforts project showcase"
+      aria-label="Sri\u00A0Comforts project showcase"
       data-motion-ignore
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}

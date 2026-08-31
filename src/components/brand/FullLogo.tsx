@@ -24,7 +24,7 @@ export function FullLogo({ className, style, priority }: FullLogoProps) {
       priority={priority}
       // Avoid Next image optimizer crushing the thin ® strokes
       unoptimized
-      sizes="(min-width: 1600px) 300px, (min-width: 1280px) 260px, 240px"
+      sizes="(min-width: 1600px) 270px, (min-width: 1024px) 240px, 200px"
     />
   );
 }

@@ -6,6 +6,7 @@ import {
   type AboutSectionIntroData,
   type AboutTitlePart,
 } from "@/data/about";
+import { BrandText } from "@/components/brand/BrandText";
 import { NotchSection } from "@/components/home/NotchSection";
 import { useAnimatedStrong } from "@/hooks/useAnimatedStrong";
 
@@ -15,7 +16,7 @@ type AboutSectionIntroProps = {
 
 function renderTitlePart(part: AboutTitlePart, index: number) {
   if (typeof part === "string") {
-    return <span key={`${index}-${part}`}>{part}</span>;
+    return <span key={`${index}-${part}`}><BrandText>{part}</BrandText></span>;
   }
 
   return <strong key={`${index}-${part.strong}`}>{part.strong}</strong>;
@@ -25,7 +26,7 @@ function renderTitle(title: AboutSectionIntroData["title"]) {
   if (!title) return null;
 
   if (typeof title === "string") {
-    return title;
+    return <BrandText>{title}</BrandText>;
   }
 
   return title.map((line, lineIndex) => (
@@ -47,7 +48,15 @@ function renderParagraphPart(part: AboutParagraphPart, index: number) {
           <br />
         </>
       ) : null}
-      {part.strong ? <strong style={style}>{part.text}</strong> : <span style={style}>{part.text}</span>}
+      {part.strong ? (
+        <strong style={style}>
+          <BrandText>{part.text}</BrandText>
+        </strong>
+      ) : (
+        <span style={style}>
+          <BrandText>{part.text}</BrandText>
+        </span>
+      )}
     </span>
   );
 }

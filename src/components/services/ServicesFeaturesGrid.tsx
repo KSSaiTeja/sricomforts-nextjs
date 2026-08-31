@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { BrandText } from "@/components/brand/BrandText";
 import { type ServiceFeatureGridData } from "@/data/services";
 import { SvgMask, type SvgMaskHandle } from "@/components/preloader/SvgMask";
 import { useIsLargeViewport } from "@/hooks/useMediaQuery";
@@ -189,7 +190,9 @@ export function ServicesFeaturesGrid({ data }: ServicesFeaturesGridProps) {
                 {item.title}
               </h3>
               <div itemProp="description">
-                <p>{item.description}</p>
+                <p>
+                  <BrandText>{item.description}</BrandText>
+                </p>
               </div>
               {item.cta ? (
                 <div>

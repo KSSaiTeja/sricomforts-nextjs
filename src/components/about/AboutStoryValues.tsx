@@ -1,5 +1,6 @@
 "use client";
 
+import { BrandText } from "@/components/brand/BrandText";
 import { NotchSection } from "@/components/home/NotchSection";
 import { type AboutStoryValuesData } from "@/data/about";
 import { useAnimatedStrong } from "@/hooks/useAnimatedStrong";
@@ -28,11 +29,13 @@ export function AboutStoryValues({ data }: AboutStoryValuesProps) {
                 <em className={styles.accent}>{data.titleAccent}</em>
               </h2>
             </header>
-            <p className={`body-4 ${styles.lead}`}>{data.lead}</p>
+            <p className={`body-4 ${styles.lead}`}>
+              <BrandText>{data.lead}</BrandText>
+            </p>
             <div className={styles.paragraphs}>
               {data.paragraphs.map((paragraph) => (
                 <p key={paragraph.slice(0, 48)} className={`body-4 ${styles.paragraph}`}>
-                  {paragraph}
+                  <BrandText>{paragraph}</BrandText>
                 </p>
               ))}
             </div>
@@ -50,7 +53,9 @@ export function AboutStoryValues({ data }: AboutStoryValuesProps) {
                   </span>
                   <div className={styles.valueCopy}>
                     <h3 className={`title-h3 ${styles.valueTitle}`}>{value.title}</h3>
-                    <p className={`body-4 ${styles.valueDescription}`}>{value.description}</p>
+                    <p className={`body-4 ${styles.valueDescription}`}>
+                      <BrandText>{value.description}</BrandText>
+                    </p>
                   </div>
                 </li>
               ))}

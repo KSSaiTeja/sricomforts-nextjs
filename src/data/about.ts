@@ -144,7 +144,7 @@ export const aboutStoryValues = {
   label: "Our Story",
   title: "Built for comfort.",
   titleAccent: "Driven by craft.",
-  lead: "Since 2001, Sri\u00A0Comforts has grown from a single-city team into South India's trusted HVAC leader — serving IT parks, hospitals, pharma plants, luxury residences, and commercial developments across eight cities with 230+ engineers and technicians.",
+  lead: "Since 2001, Sri\u00A0Comforts has grown from a single-city team into South India's trusted HVAC leader — serving IT parks, hospitals, pharma plants, luxury residences, and commercial developments across eight cities with 280+ working people.",
   paragraphs: [
     "We are reinventing how cooling gets delivered — on a design-first, service-backed model powered by dedicated AutoCAD teams, award-winning project delivery, and a 24-hour response guarantee on every service call.",
     "From VRV and central air conditioning to clean rooms, cold rooms, and basement ventilation, we deliver systems that are deeply integrated, energy-efficient, and ready for operation from day one.",
@@ -245,7 +245,7 @@ export const aboutExecutiveLeaders = {
       role: "Head of People & HR",
       image: portrait(`${TEAM}/executive/lakshmi-iyer.webp`, "Lakshmi Iyer, Head of People & HR"),
       bio: [
-        "Lakshmi builds and supports the 230+ engineer and technician team that powers Sri\u00A0Comforts' delivery and service promise.",
+        "Lakshmi builds and supports the 280+ working people who power Sri\u00A0Comforts' delivery and service promise.",
         "She oversees hiring, training, and the specialized team structure that keeps design, project, sales, and service operations running in sync.",
       ],
     },
@@ -378,7 +378,7 @@ export const aboutFeaturesGrid = {
     {
       title: "Built on expertise, trusted across South India",
       description:
-        "Sri\u00A0Comforts is not a typical AC contractor. Since 2001, we've delivered complex HVAC across eight cities with 230+ engineers — from government and hospital projects to premium residences.",
+        "Sri\u00A0Comforts is not a typical AC contractor. Since 2001, we've delivered complex HVAC across eight cities with 280+ working people — from government and hospital projects to premium residences.",
       image: {
         src: aboutWorkImage(0),
         alt: "Sri\u00A0Comforts commercial HVAC project site",

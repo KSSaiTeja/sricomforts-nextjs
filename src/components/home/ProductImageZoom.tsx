@@ -11,6 +11,9 @@ import {
 import styles from "@/components/home/product-catalog.module.css";
 
 const SWAP_MS = 180;
+const ZOOM = 2.4;
+const PANE_GAP = 22;
+const PANE_PAD = 12;
 
 type ProductImageZoomProps = {
   src: string;
@@ -24,6 +27,7 @@ export function ProductImageZoom({
   stageRef,
 }: ProductImageZoomProps) {
   const frameRef = useRef<HTMLDivElement | null>(null);
+  const lensRef = useRef<HTMLDivElement | null>(null);
   const [shown, setShown] = useState({ src, alt });
   const [outgoing, setOutgoing] = useState(false);
   const pendingRef = useRef({ src, alt });
@@ -71,7 +75,6 @@ export function ProductImageZoom({
     probe.onerror = () => commit();
     probe.src = src;
 
-    // If already cached, onload can fire sync — also cap wait.
     const timer = window.setTimeout(commit, SWAP_MS + 120);
     setOutgoing(true);
 
@@ -97,26 +100,58 @@ export function ProductImageZoom({
     if (outgoing) return;
     const frame = frameRef.current;
     const stage = stageRef.current;
-    if (!frame || !stage) return;
+    const lens = lensRef.current;
+    if (!frame || !stage || !lens) return;
 
     const rect = frame.getBoundingClientRect();
-    const lens = frame.querySelector<HTMLElement>("[data-zoom-lens]");
-    const half = (lens?.offsetWidth ?? 112) / 2;
-    const x = Math.min(
-      Math.max(event.clientX - rect.left, half),
-      Math.max(half, rect.width - half),
-    );
-    const y = Math.min(
-      Math.max(event.clientY - rect.top, half),
-      Math.max(half, rect.height - half),
-    );
-    const px = `${(x / rect.width) * 100}%`;
-    const py = `${(y / rect.height) * 100}%`;
+    const stageRect = stage.getBoundingClientRect();
+    if (rect.width < 8 || rect.height < 8) return;
 
-    frame.style.setProperty("--zx", px);
-    frame.style.setProperty("--zy", py);
-    stage.style.setProperty("--zx", px);
-    stage.style.setProperty("--zy", py);
+    const lensW = lens.offsetWidth || 112;
+    const lensH = lens.offsetHeight || 112;
+    const halfW = lensW / 2;
+    const halfH = lensH / 2;
+    const cx = Math.min(
+      Math.max(event.clientX - rect.left, halfW),
+      Math.max(halfW, rect.width - halfW),
+    );
+    const cy = Math.min(
+      Math.max(event.clientY - rect.top, halfH),
+      Math.max(halfH, rect.height - halfH),
+    );
+
+    lens.style.left = `${cx}px`;
+    lens.style.top = `${cy}px`;
+
+    const bgW = `${rect.width * ZOOM}px`;
+    const bgH = `${rect.height * ZOOM}px`;
+    const bgPos = `${-cx * ZOOM + halfW}px ${-cy * ZOOM + halfH}px`;
+    lens.style.backgroundSize = `${bgW} ${bgH}`;
+    lens.style.backgroundPosition = bgPos;
+
+    const pane = stage.querySelector<HTMLElement>(`.${styles.zoomPane}`);
+    if (pane) {
+      pane.style.backgroundSize = `${bgW} ${bgH}`;
+      pane.style.backgroundPosition = bgPos;
+
+      const paneW = pane.offsetWidth || 280;
+      const paneH = pane.offsetHeight || 280;
+      const localX = event.clientX - stageRect.left;
+      const localY = event.clientY - stageRect.top;
+      const preferRight = localX < stageRect.width * 0.5;
+      let paneX = preferRight ? localX + PANE_GAP : localX - PANE_GAP - paneW;
+      let paneY = localY - paneH / 2;
+      paneX = Math.min(
+        Math.max(PANE_PAD, paneX),
+        Math.max(PANE_PAD, stageRect.width - paneW - PANE_PAD),
+      );
+      paneY = Math.min(
+        Math.max(PANE_PAD, paneY),
+        Math.max(PANE_PAD, stageRect.height - paneH - PANE_PAD),
+      );
+      stage.style.setProperty("--pane-x", `${Math.round(paneX)}px`);
+      stage.style.setProperty("--pane-y", `${Math.round(paneY)}px`);
+    }
   };
 
   return (
@@ -125,8 +160,10 @@ export function ProductImageZoom({
       className={styles.zoomFrame}
       data-swap={outgoing ? "out" : "in"}
       style={{ ["--zoom-image" as string]: `url("${shown.src}")` }}
-      onMouseEnter={() => {
-        if (!outgoing) setZooming(true);
+      onMouseEnter={(event) => {
+        if (outgoing) return;
+        setZooming(true);
+        onMove(event);
       }}
       onMouseMove={onMove}
       onMouseLeave={() => setZooming(false)}
@@ -139,7 +176,12 @@ export function ProductImageZoom({
         loading="eager"
         decoding="async"
       />
-      <div className={styles.zoomLens} data-zoom-lens aria-hidden="true" />
+      <div
+        ref={lensRef}
+        className={styles.zoomLens}
+        data-zoom-lens
+        aria-hidden="true"
+      />
     </div>
   );
 }

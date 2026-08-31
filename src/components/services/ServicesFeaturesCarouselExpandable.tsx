@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { BrandText } from "@/components/brand/BrandText";
 import { type ServiceCarouselData } from "@/data/services";
 import { useAnimatedStrong } from "@/hooks/useAnimatedStrong";
 import { registerGsap } from "@/lib/gsap/register";
@@ -394,11 +395,15 @@ export function ServicesFeaturesCarouselExpandable({ data }: ServicesFeaturesCar
             <p className="label label-5">{data.label}</p>
             <header ref={headerRef} className="header animated-strong spacing">
               <h3 className="title-h3">
-                <strong>{data.title}</strong>
+              <strong>
+                <BrandText>{data.title}</BrandText>
+              </strong>
               </h3>
             </header>
             <div className="paragraphs-wrapper wide">
-              <p className="paragraph body-4">{data.copy}</p>
+              <p className="paragraph body-4">
+                <BrandText>{data.copy}</BrandText>
+              </p>
             </div>
           </div>
         </div>

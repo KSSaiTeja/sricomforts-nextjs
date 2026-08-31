@@ -123,10 +123,25 @@ body {
   transform-origin: left center;
 }
 
-.motion-word {
+.brand-nowrap {
+  display: inline;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.--word,
+.split-words {
   display: inline-block;
   white-space: nowrap;
+}
+
+.motion-word {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
   perspective: 700px;
+  vertical-align: bottom;
 }
 
 .motion-char {
@@ -167,22 +182,7 @@ main,
   max-width: none;
 }
 
-.site-header .logo-link .logo,
-.site-header .logo-link svg {
-  display: block;
-  width: 6rem;
-  height: auto;
-  max-width: none;
-  flex: none;
-  flex-shrink: 0;
-}
 
-@media (min-width: 1024px) {
-  .site-header .logo-link .logo,
-  .site-header .logo-link svg {
-    width: 7rem;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .site-scroll-progress {

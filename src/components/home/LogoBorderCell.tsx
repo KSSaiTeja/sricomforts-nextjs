@@ -1,7 +1,6 @@
 "use client";
 
 import { type CSSProperties, useEffect, useRef } from "react";
-import { useSmoothScroll } from "@/providers/SmoothScrollProvider";
 
 type LogoBorderCellProps = {
   children: React.ReactNode;
@@ -17,58 +16,25 @@ export function LogoBorderCell({ children, className, style }: LogoBorderCellPro
   const wrapperRef = useRef<HTMLDivElement>(null);
   const borderRef = useRef<HTMLDivElement>(null);
   const gradientRef = useRef<HTMLDivElement>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const { lenis } = useSmoothScroll();
 
-  const updateTransform = () => {
+  useEffect(() => {
     const wrapper = wrapperRef.current;
     const border = borderRef.current;
     const gradient = gradientRef.current;
     if (!wrapper || !border || !gradient) return;
 
-    const rect = wrapper.getBoundingClientRect();
-    const x = round(mouseRef.current.x - rect.left);
-    const y = round(mouseRef.current.y - rect.top);
-
-    const transform = `translate3d(calc(${x}px - 50%), calc(${y}px - 50%), 0)`;
-    border.style.transform = transform;
-    gradient.style.transform = transform;
-  };
-
-  useEffect(() => {
-    const onPointerMove = (event: PointerEvent) => {
-      mouseRef.current.x = event.clientX;
-      mouseRef.current.y = event.clientY;
-      updateTransform();
+    const move = (event: PointerEvent) => {
+      const rect = wrapper.getBoundingClientRect();
+      const x = round(event.clientX - rect.left);
+      const y = round(event.clientY - rect.top);
+      const transform = `translate3d(calc(${x}px - 50%), calc(${y}px - 50%), 0)`;
+      border.style.transform = transform;
+      gradient.style.transform = transform;
     };
 
-    const observer = new ResizeObserver(updateTransform);
-    if (wrapperRef.current) observer.observe(wrapperRef.current);
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
-    window.addEventListener("resize", updateTransform);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("resize", updateTransform);
-    };
+    wrapper.addEventListener("pointermove", move, { passive: true });
+    return () => wrapper.removeEventListener("pointermove", move);
   }, []);
-
-  useEffect(() => {
-    const onScroll = () => updateTransform();
-
-    if (lenis) {
-      lenis.on("scroll", onScroll);
-      return () => {
-        lenis.off("scroll", onScroll);
-      };
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [lenis]);
 
   return (
     <div ref={wrapperRef} className={`border__wrapper ${className ?? ""}`} style={style}>

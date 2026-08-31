@@ -125,7 +125,6 @@ export function StatsBento() {
       cards.forEach((card, index) => {
         const offset = offsets[index];
         gsap.set(card, {
-          autoAlpha: 0,
           x: offset.x,
           y: offset.y,
           scale: 0.86,
@@ -147,7 +146,6 @@ export function StatsBento() {
         timeline.to(
           card,
           {
-            autoAlpha: 1,
             x: 0,
             y: 0,
             scale: 1,

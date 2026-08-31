@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useRef, useState } from "react";
+import { BrandText } from "@/components/brand/BrandText";
 import {
   awardsSection,
   experienceSection,
@@ -62,7 +63,9 @@ function AwardCard({ item, index }: { item: AwardItem; index: number }) {
       </div>
       <div className={styles.awardCopy}>
         <h3 className={`title-h3 ${styles.awardTitle}`}>{item.title}</h3>
-        <p className={`body-4 ${styles.awardDescription}`}>{item.description}</p>
+        <p className={`body-4 ${styles.awardDescription}`}>
+          <BrandText>{item.description}</BrandText>
+        </p>
       </div>
     </article>
   );
@@ -167,7 +170,7 @@ export function AwardsAchievements({ id }: AwardsAchievementsProps) {
               <em className={styles.accent}>{experienceSection.titleAccent}</em>
             </h2>
             <p className={`body-4 ${styles.experienceBody}`} data-motion-item>
-              {experienceSection.body}
+              <BrandText>{experienceSection.body}</BrandText>
             </p>
 
             <div className={styles.stats} role="list" data-motion-item>

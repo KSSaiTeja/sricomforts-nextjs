@@ -6,19 +6,8 @@ import {
   calculateTonnage,
   defaultTonnageInputs,
   parseNumericInput,
-  type SunExposureLevel,
 } from "@/lib/tonnage";
 import { siteContact } from "@/data/navigation";
-
-function formatTons(n: number) {
-  return Number.isInteger(n) ? String(n) : n.toFixed(1);
-}
-
-function formatAdj(n: number) {
-  if (n === 0) return "—";
-  const sign = n > 0 ? "+" : "";
-  return `${sign}${n.toFixed(2)} Ton`;
-}
 
 type FieldProps = {
   id: string;
@@ -66,57 +55,10 @@ function Field({
   );
 }
 
-type SelectFieldProps<T extends string> = {
-  id: string;
-  label: string;
-  value: T;
-  onChange: (v: T) => void;
-  options: { value: T; label: string }[];
-};
-
-function SelectField<T extends string>({
-  id,
-  label,
-  value,
-  onChange,
-  options,
-}: SelectFieldProps<T>) {
-  return (
-    <div className="tonnage-calculator__field">
-      <label className="tonnage-calculator__field-label" htmlFor={id}>
-        {label}
-      </label>
-      <div className="tonnage-calculator__input-wrapper">
-        <select
-          id={id}
-          value={value}
-          onChange={(e) => onChange(e.target.value as T)}
-          className="tonnage-calculator__input tonnage-calculator__select"
-        >
-          {options.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="tonnage-calculator__field-line" />
-    </div>
-  );
-}
-
-const SUN_OPTIONS: { value: SunExposureLevel; label: string }[] = [
-  { value: "low", label: "Low (+0.00)" },
-  { value: "medium", label: "Medium (+0.10)" },
-  { value: "high", label: "High (+0.20)" },
-];
-
 export function TonnageCalculator() {
   const uid = useId();
   const [length, setLength] = useState<string>(defaultTonnageInputs.lengthFt);
   const [width, setWidth] = useState<string>(defaultTonnageInputs.widthFt);
-  const [occupants, setOccupants] = useState<string>(defaultTonnageInputs.occupants);
-  const [sun, setSun] = useState<SunExposureLevel>(defaultTonnageInputs.sunExposure);
   const [hasCalculated, setHasCalculated] = useState(false);
 
   const result = useMemo(
@@ -124,27 +66,23 @@ export function TonnageCalculator() {
       calculateTonnage({
         lengthFt: parseNumericInput(length),
         widthFt: parseNumericInput(width),
-        occupants: parseNumericInput(occupants),
-        sunExposure: sun,
       }),
-    [length, width, occupants, sun],
+    [length, width],
   );
-
-  const { breakdown } = result;
 
   return (
     <div className="tonnage-calculator">
       <div className="tonnage-calculator__form">
         <div className="tonnage-calculator__header">
           <p className="tonnage-calculator__label">Calculator</p>
-          <h2 className="tonnage-calculator__title">Tell us about your room:</h2>
+          <h2 className="tonnage-calculator__title">Enter room dimensions:</h2>
         </div>
 
         <div className="tonnage-calculator__fields">
           <div className="tonnage-calculator__row">
             <Field
               id={`${uid}-length`}
-              label="Length"
+              label="Room Length"
               value={length}
               onChange={setLength}
               placeholder="e.g. 15"
@@ -154,7 +92,7 @@ export function TonnageCalculator() {
             />
             <Field
               id={`${uid}-width`}
-              label="Width"
+              label="Room Width"
               value={width}
               onChange={setWidth}
               placeholder="e.g. 12"
@@ -164,31 +102,13 @@ export function TonnageCalculator() {
             />
           </div>
 
-          <div className="tonnage-calculator__row">
-            <Field
-              id={`${uid}-occupants`}
-              label="Occupancy"
-              value={occupants}
-              onChange={setOccupants}
-              placeholder="e.g. 3"
-              maxLength={2}
-            />
-            <SelectField
-              id={`${uid}-sun`}
-              label="Exposure"
-              value={sun}
-              onChange={setSun}
-              options={SUN_OPTIONS}
-            />
-          </div>
-
           <div className="tonnage-calculator__actions">
             <button
               type="button"
               className="tonnage-calculator__calculate-button"
               onClick={() => setHasCalculated(true)}
             >
-              Calculate
+              Calculate AC Capacity
             </button>
           </div>
         </div>
@@ -209,24 +129,25 @@ export function TonnageCalculator() {
                   </span>
                 </div>
                 <div className="tonnage-calculator__results-total">
-                  {result.needsSeparateCalculation ? (
-                    <p className="tonnage-calculator__results-amount">Site survey</p>
-                  ) : (
+                  {result.requiresHigherCapacity ? (
+                    <p className="tonnage-calculator__results-amount">Contact Us</p>
+                  ) : result.recommendedCapacity ? (
                     <p className="tonnage-calculator__results-amount">
-                      {formatTons(result.standardSize)}{" "}
-                      <span style={{ opacity: 0.75, fontSize: "0.55em" }}>Ton</span>
+                      {result.recommendedCapacity}
                     </p>
+                  ) : (
+                    <p className="tonnage-calculator__results-amount">—</p>
                   )}
                   <div className="tonnage-calculator__results-meta">
                     <span className="tonnage-calculator__results-meta-label">
-                      {result.needsSeparateCalculation
-                        ? "Area over 450 sq ft:"
-                        : "Calculated load:"}
+                      {result.requiresHigherCapacity
+                        ? "Capacity note:"
+                        : "Calculated room area:"}
                     </span>
                     <span className="tonnage-calculator__results-meta-value">
-                      {result.needsSeparateCalculation
-                        ? "Calculate separately"
-                        : `${formatTons(result.recommendedTons)} Ton`}
+                      {result.requiresHigherCapacity
+                        ? "Higher Capacity Required"
+                        : `${result.areaSqFt} sq.ft`}
                     </span>
                   </div>
                 </div>
@@ -234,33 +155,34 @@ export function TonnageCalculator() {
 
               <div className="tonnage-calculator__results-breakdown">
                 <p className="tonnage-calculator__results-breakdown-title">
-                  {result.needsSeparateCalculation
-                    ? "Rooms above 450 sq ft need an engineer assessment."
-                    : "Load breakdown:"}
+                  {result.requiresHigherCapacity
+                    ? "Rooms above 260 sq.ft need custom engineering assessment."
+                    : "Calculation summary:"}
                 </p>
-                {!result.needsSeparateCalculation ? (
+                {!result.requiresHigherCapacity && result.isValidInput ? (
                   <div className="tonnage-calculator__results-items">
                     <div className="tonnage-calculator__results-item">
                       <p className="tonnage-calculator__results-item-label">
-                        Base capacity{" "}
-                        <span className="tonnage-calculator__results-item-detail">
-                          ({formatTons(breakdown.areaSqFt)} sq ft)
-                        </span>
+                        Room Dimensions
                       </p>
                       <div className="tonnage-calculator__results-item-value">
-                        {formatTons(breakdown.baseTons)} Ton
+                        {length || 0} ft × {width || 0} ft
                       </div>
                     </div>
                     <div className="tonnage-calculator__results-item">
-                      <p className="tonnage-calculator__results-item-label">Occupancy</p>
+                      <p className="tonnage-calculator__results-item-label">
+                        Total Room Area
+                      </p>
                       <div className="tonnage-calculator__results-item-value">
-                        {formatAdj(breakdown.occupantsAdd)}
+                        {result.areaSqFt} sq.ft
                       </div>
                     </div>
                     <div className="tonnage-calculator__results-item">
-                      <p className="tonnage-calculator__results-item-label">Exposure</p>
+                      <p className="tonnage-calculator__results-item-label">
+                        Available Capacity Match
+                      </p>
                       <div className="tonnage-calculator__results-item-value">
-                        {formatAdj(breakdown.sunAdd)}
+                        {result.recommendedCapacity}
                       </div>
                     </div>
                   </div>
@@ -269,10 +191,10 @@ export function TonnageCalculator() {
 
               <div className="tonnage-calculator__cta">
                 <div className="tonnage-calculator__cta-header">
-                  <p className="tonnage-calculator__cta-title">Want a precise design?</p>
+                  <p className="tonnage-calculator__cta-title">Want a site assessment?</p>
                   <p className="tonnage-calculator__cta-description">
-                    This is a room-level estimate. For multi-room homes and commercial loads,
-                    our engineers size systems from a site survey.
+                    For multi-room homes, offices, or specialized commercial spaces,
+                    Sri Comforts engineers verify heat loads on-site.
                   </p>
                 </div>
                 <div className="tonnage-calculator__cta-form">

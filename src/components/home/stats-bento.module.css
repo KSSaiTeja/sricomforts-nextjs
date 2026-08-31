@@ -37,8 +37,8 @@
   text-align: center;
   overflow: visible;
   transform-style: preserve-3d;
-  will-change: transform, opacity;
-  opacity: 0;
+  will-change: transform;
+  opacity: 1;
   cursor: default;
   transition: box-shadow 0.35s var(--ease-out);
 }

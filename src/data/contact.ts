@@ -25,7 +25,7 @@ export const contactMap = {
     "12-5-21/1, Vijayapuri Colony, South Lalaguda, Tarnaka, Secunderabad, Telangana 500017, India",
   directionsLabel: "Open in Google Maps",
   mapsUrl: "https://share.google/1wWT1mM7pfIvlNPNV",
-  iframeTitle: "Sri Comforts head office on Google Maps",
+  iframeTitle: "Sri\u00A0Comforts head office on Google Maps",
   embedUrl:
     "https://www.google.com/maps?q=Sri+Comfort+Air+Products+%26+Services,+12-5-21/1,+Vijayapuri+Colony,+Tarnaka,+Secunderabad,+Telangana+500017&hl=en&z=16&output=embed",
 } as const;

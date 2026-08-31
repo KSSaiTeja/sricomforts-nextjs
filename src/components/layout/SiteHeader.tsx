@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { BrandText } from "@/components/brand/BrandText";
 import { FullLogo } from "@/components/brand/FullLogo";
 import { NavDropdownPanel, NavDropdownTrigger } from "@/components/layout/NavDropdown";
 import { usePreloader } from "@/components/preloader/PreloaderProvider";
@@ -266,7 +267,7 @@ export function SiteHeader() {
                   section.links.map((link) => (
                     <li key={`${item.label}-${section.title}-${link.href}-${link.label}`}>
                       <Link href={link.href} tabIndex={-1}>
-                        {link.label}
+                        <BrandText>{link.label}</BrandText>
                       </Link>
                     </li>
                   )),
@@ -387,7 +388,7 @@ export function SiteHeader() {
                                     className="drawer-sublink"
                                     onClick={closeMenu}
                                   >
-                                    {link.label}
+                                    <BrandText>{link.label}</BrandText>
                                   </Link>
                                 </li>
                               ))}

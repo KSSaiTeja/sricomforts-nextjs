@@ -86,4 +86,5 @@ website-refs/
 .turbo/
 *.swp
 *.swo
+*.ses
 *~

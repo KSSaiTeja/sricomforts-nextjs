@@ -1,134 +1,121 @@
 /**
- * Sri Comforts residential split-AC tonnage calculator.
+ * Sri Comforts AC Tonnage Calculator Logic
  *
- * Simplified inputs: length × width → area, plus occupancy and sun exposure.
- *   Recommended AC = Base(area) + occupancy + exposure adjustments
- *   Round to nearest available size: 1, 1.5, 2, 2.5, 3, 4, 5 Ton
+ * Available AC Capacities: 1 TR, 1.5 TR, 1.8 TR, and 2 TR
  *
- * Area > 450 SFT → needs separate engineering calculation.
+ * Calculation Rules:
+ *  Step 1: Room Area = Length × Width
+ *  Step 2: Recommendation:
+ *    - IF Area <= 120 sq.ft -> Recommend 1 TR
+ *    - ELSE IF Area <= 180 sq.ft -> Recommend 1.5 TR
+ *    - ELSE IF Area <= 220 sq.ft -> Recommend 1.8 TR
+ *    - ELSE IF Area <= 260 sq.ft -> Recommend 2 TR
+ *    - ELSE -> Contact Us / Higher Capacity Required
  */
 
-export type SunExposureLevel = "low" | "medium" | "high";
+export type AvailableCapacity = "1 TR" | "1.5 TR" | "1.8 TR" | "2 TR";
 
 export type TonnageInputs = {
   /** Room length in feet. */
   lengthFt: number;
   /** Room width in feet. */
   widthFt: number;
-  occupants: number;
-  sunExposure: SunExposureLevel;
-};
-
-export type TonnageBreakdown = {
-  areaSqFt: number;
-  baseTons: number;
-  occupantsAdd: number;
-  sunAdd: number;
-  totalAdjustments: number;
 };
 
 export type TonnageResult = {
-  /** Base + all adjustments (before rounding). */
-  rawTons: number;
-  /** Rounded for display (1 decimal). */
-  recommendedTons: number;
-  /** Nearest commonly sold split-AC size. */
-  standardSize: number;
-  standardLabel: string;
-  /** Equivalent BTU for display (1 Ton ≈ 12,000 BTU). */
-  btu: number;
-  breakdown: TonnageBreakdown;
-  /** Area above 450 SFT — calculator not applicable. */
-  needsSeparateCalculation: boolean;
+  /** Calculated room area in sq.ft (length × width). */
+  areaSqFt: number;
+  /** Recommended capacity string (e.g. "1.5 TR") or null when exceeding 260 sq.ft. */
+  recommendedCapacity: AvailableCapacity | null;
+  /** Numeric tonnage value (1, 1.5, 1.8, 2) or null if > 260 sq.ft. */
+  tonnageValue: number | null;
+  /** Display label for the recommendation. */
+  displayLabel: string;
+  /** True when area > 260 sq.ft, requiring higher capacity / custom assessment. */
+  requiresHigherCapacity: boolean;
+  /** True if inputs are valid positive numbers. */
+  isValidInput: boolean;
 };
 
-const STANDARD_SIZES = [1, 1.5, 2, 2.5, 3, 4, 5] as const;
-const BTU_PER_TON = 12_000;
-const MAX_CALCULATOR_AREA = 450;
+export const MAX_CALCULATOR_AREA = 260;
 
-const SUN_ADD: Record<SunExposureLevel, number> = {
-  low: 0,
-  medium: 0.1,
-  high: 0.2,
-};
-
-/** Base AC capacity from area (SFT). Returns null when area > 450. */
-export function baseTonsFromArea(areaSqFt: number): number | null {
-  const area = Math.max(0, areaSqFt);
-  if (area <= 0) return 0;
-  if (area <= 100) return 1.0;
-  if (area <= 150) return 1.5;
-  if (area <= 220) return 2.0;
-  if (area <= 300) return 2.5;
-  if (area <= 380) return 3.0;
-  if (area <= MAX_CALCULATOR_AREA) return 4.0;
-  return null;
-}
-
-function occupantsAdd(occupants: number): number {
-  const n = Math.max(0, Math.floor(occupants));
-  if (n <= 2) return 0;
-  if (n <= 4) return 0.1;
-  return 0.2; // 5–6 (and 7+ capped at documented max)
-}
-
-/** Avoid float noise on 0.05 / 0.10 / 0.20 ton steps. */
-function roundTons(n: number): number {
-  return Math.round(n * 100) / 100;
-}
-
-function nearestStandard(tons: number): number {
-  let best: number = STANDARD_SIZES[0];
-  let bestDist = Math.abs(tons - best);
-  for (const size of STANDARD_SIZES) {
-    const dist = Math.abs(tons - size);
-    // On a tie, prefer the larger size (safer cooling).
-    if (dist < bestDist || (dist === bestDist && size > best)) {
-      best = size;
-      bestDist = dist;
-    }
-  }
-  return best;
-}
-
-function formatSize(tons: number): string {
-  return Number.isInteger(tons) ? `${tons}` : tons.toFixed(1);
-}
-
+/**
+ * Calculates recommended AC capacity according to the standard rules:
+ * - Up to 120 sq.ft  -> 1 TR
+ * - 121–180 sq.ft   -> 1.5 TR
+ * - 181–220 sq.ft   -> 1.8 TR
+ * - 221–260 sq.ft   -> 2 TR
+ * - Above 260 sq.ft -> Contact Us / Higher Capacity Required
+ */
 export function calculateTonnage(inputs: TonnageInputs): TonnageResult {
   const length = Math.max(0, inputs.lengthFt);
   const width = Math.max(0, inputs.widthFt);
-  const area = roundTons(length * width);
-  const base = baseTonsFromArea(area);
-  const needsSeparateCalculation = base === null;
+  const area = Math.round(length * width * 100) / 100;
+  const isValidInput = length > 0 && width > 0;
 
-  const occAdd = occupantsAdd(inputs.occupants);
-  const sunAdd = SUN_ADD[inputs.sunExposure];
-  const totalAdjustments = roundTons(occAdd + sunAdd);
+  if (!isValidInput || area <= 0) {
+    return {
+      areaSqFt: 0,
+      recommendedCapacity: null,
+      tonnageValue: null,
+      displayLabel: "—",
+      requiresHigherCapacity: false,
+      isValidInput: false,
+    };
+  }
 
-  const baseTons = base ?? 0;
-  const rawTons = needsSeparateCalculation ? 0 : roundTons(baseTons + totalAdjustments);
-  const recommendedTons = Math.round(rawTons * 10) / 10;
-  const standardSize = needsSeparateCalculation
-    ? 0
-    : nearestStandard(Math.max(rawTons, STANDARD_SIZES[0]));
-
-  return {
-    rawTons,
-    recommendedTons,
-    standardSize,
-    standardLabel: needsSeparateCalculation
-      ? "Site survey required"
-      : `${formatSize(standardSize)} Ton`,
-    btu: needsSeparateCalculation ? 0 : Math.round(standardSize * BTU_PER_TON),
-    breakdown: {
+  if (area <= 120) {
+    return {
       areaSqFt: area,
-      baseTons,
-      occupantsAdd: occAdd,
-      sunAdd,
-      totalAdjustments,
-    },
-    needsSeparateCalculation,
+      recommendedCapacity: "1 TR",
+      tonnageValue: 1.0,
+      displayLabel: "1 TR",
+      requiresHigherCapacity: false,
+      isValidInput: true,
+    };
+  }
+
+  if (area <= 180) {
+    return {
+      areaSqFt: area,
+      recommendedCapacity: "1.5 TR",
+      tonnageValue: 1.5,
+      displayLabel: "1.5 TR",
+      requiresHigherCapacity: false,
+      isValidInput: true,
+    };
+  }
+
+  if (area <= 220) {
+    return {
+      areaSqFt: area,
+      recommendedCapacity: "1.8 TR",
+      tonnageValue: 1.8,
+      displayLabel: "1.8 TR",
+      requiresHigherCapacity: false,
+      isValidInput: true,
+    };
+  }
+
+  if (area <= 260) {
+    return {
+      areaSqFt: area,
+      recommendedCapacity: "2 TR",
+      tonnageValue: 2.0,
+      displayLabel: "2 TR",
+      requiresHigherCapacity: false,
+      isValidInput: true,
+    };
+  }
+
+  // Above 260 sq.ft
+  return {
+    areaSqFt: area,
+    recommendedCapacity: null,
+    tonnageValue: null,
+    displayLabel: "Contact Us / Higher Capacity Required",
+    requiresHigherCapacity: true,
+    isValidInput: true,
   };
 }
 
@@ -142,6 +129,4 @@ export function parseNumericInput(value: string): number {
 export const defaultTonnageInputs = {
   lengthFt: "15",
   widthFt: "12",
-  occupants: "3",
-  sunExposure: "medium" as SunExposureLevel,
 } as const;

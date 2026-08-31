@@ -13,7 +13,7 @@ export type CareerJob = {
 export const careerHero = {
   image: {
     src: aboutWorkImage(0),
-    alt: "Sri Comforts engineers on a commercial HVAC project site",
+    alt: "Sri\u00A0Comforts engineers on a commercial HVAC project site",
   },
 } as const;
 
